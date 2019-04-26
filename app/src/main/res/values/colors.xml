@@ -7,4 +7,6 @@
     <color name="colorOnBackground">#7E8088</color>
     <color name="colorBackgroundTransparent">#00FFFFFF</color>
     <color name="colorBackgroundGrey1">#f7f7f7</color>
+
+    <color name="colorBackgroundGrey3">#EFF0F1</color>
 </resources>
