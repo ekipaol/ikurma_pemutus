@@ -21,12 +21,12 @@ public class Menu {
         menu.add(new ListViewMenu(R.drawable.ico_pipeline, context.getString(R.string.menu_pipeline)));
         menu.add(new ListViewMenu(R.drawable.ico_hotprospek, context.getString(R.string.menu_hotprospek)));
         menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
-        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
-        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
-        menu.add(new ListViewMenu(R.drawable.ico_pipeline, context.getString(R.string.menu_pipeline)));
-        menu.add(new ListViewMenu(R.drawable.ico_hotprospek, context.getString(R.string.menu_hotprospek)));
-        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
-        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
-        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
+//        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
+//        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
+//        menu.add(new ListViewMenu(R.drawable.ico_pipeline, context.getString(R.string.menu_pipeline)));
+//        menu.add(new ListViewMenu(R.drawable.ico_hotprospek, context.getString(R.string.menu_hotprospek)));
+//        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
+//        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
+//        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
     }
 }

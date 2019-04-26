@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements MenuClickListener
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     private RecyclerView rv_menu;
+//    @BindView(R.id.cl_container)
+//    CoordinatorLayout cl_container;
 //    @BindView(R.id.rv_menu)
 //    RecyclerView rv_menu;
 
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements MenuClickListener
         ButterKnife.bind(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setSupportActionBar(toolbar);
+//        appbar.setActivated(true);
+//        appbar.setExpanded(true, true);
         rv_menu = (RecyclerView) findViewById(R.id.rv_menu);
         rv_menu.setHasFixedSize(true);
         List<ListViewMenu> listMenu = getListMenu();
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements MenuClickListener
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rv_menu.setLayoutManager(layoutManager);
         rv_menu.setAdapter(menuAdapter);
+//        expandToolbar();
 
 //        collapsing_toolbar.setCollapsedTitleTextColor(getApplicationContext().getResources().getColor(R.color.colorWhite));
 //        collapsing_toolbar.setExpandedTitleColor(getApplicationContext().getResources().getColor(R.color.colorPrimary));
@@ -92,6 +99,15 @@ public class MainActivity extends AppCompatActivity implements MenuClickListener
         Menu.mainMenuAO(this, menu);
         return menu;
     }
+
+//    public void expandToolbar(){
+//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appbar.getLayoutParams();
+//        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+//        if (behavior != null){
+//            behavior.setTopAndBottomOffset(100);
+//            behavior.onNestedPreScroll(cl_container, appbar, null, 0, 100, new int[2]);
+//        }
+//    }
 
     @Override
     public void onMenuClick(String menu) {
