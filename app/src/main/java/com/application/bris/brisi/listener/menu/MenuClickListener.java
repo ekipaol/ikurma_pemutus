@@ -1,4 +1,4 @@
-package com.application.bris.brisi.config.menu;
+package com.application.bris.brisi.listener.menu;
 
 /**
  * Created by akbaranjas on 13/01/17.
