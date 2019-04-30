@@ -3,7 +3,7 @@
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         android:layout_marginLeft="12dp"
@@ -11,28 +11,17 @@
         app:cardElevation="0dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp">
+            android:layout_height="172dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    android:elevation="15dp">
-                    <TextView
-                        android:id="@+id/tv_nama"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="{Nama Nasabah}"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:gravity="bottom"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorWhite"/>
+                    android:layout_height="100dp"
+                    android:elevation="15dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_produk"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:text="{Product}"
                         android:textSize="11sp"
@@ -42,14 +31,27 @@
                         android:padding="5dp"
                         android:layout_gravity="right"
                         android:gravity="right"
-                        android:background="@drawable/round"
-                        android:layout_alignParentBottom="true"
-                        android:layout_weight="1"/>
+                        android:background="@drawable/round"/>
+
+                    <TextView
+                        android:id="@+id/tv_nama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="{Nama Nasabah}"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:gravity="bottom"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="45dp"
+                        android:textColor="@color/colorWhite"/>
+
+
                 </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="100dp"
                 android:id="@+id/fr_image">
                     <ImageView
                         android:id="@+id/iv_foto"
@@ -57,7 +59,6 @@
                         android:scaleType="centerCrop"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:alpha=".90"
                         />
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -71,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_below="@+id/fr_image"
-                android:padding="8dp">
+                android:padding="6dp">
                 <TextView
                     android:id="@+id/tv_plafond"
                     android:layout_below="@+id/fr_image"
@@ -79,7 +80,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="#595959"/>
 
                 <TextView
                     android:id="@+id/tv_tenor"
@@ -87,7 +89,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="#595959"/>
 
                 <TextView
                     android:id="@+id/tv_waktu"
@@ -103,9 +106,9 @@
                 android:layout_below="@+id/fr_image"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:layout_height="30dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
                 android:text="Proses Kuy"
                 android:textColor="#595959"
                 android:textAllCaps="false"

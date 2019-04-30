@@ -23,11 +23,11 @@
 
         <ImageView
             android:id="@+id/iv_iconmenu"
-            android:layout_width="55dp"
-            android:layout_height="70dp"
+            android:layout_width="45dp"
+            android:layout_height="60dp"
             android:paddingTop="10dp"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="2dp"
             android:src="@drawable/ico_approved"
             android:layout_centerHorizontal="true"/>
 

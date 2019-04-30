@@ -132,7 +132,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:padding="15dp"
-                        android:background="@color/colorBackgroundGrey1"
+                        android:background="#80ffffff"
                         android:orientation="vertical">
 
                         <android.support.v7.widget.RecyclerView
@@ -164,7 +164,7 @@
                         android:text="Pipeline"
                         android:textSize="18dp"
                         android:paddingLeft="10dp"
-                        android:textColor="#000"
+                        android:textColor="#595959"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -213,7 +213,7 @@
                         android:text="Hotprospek"
                         android:textSize="18dp"
                         android:paddingLeft="10dp"
-                        android:textColor="#000"
+                        android:textColor="#595959"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
