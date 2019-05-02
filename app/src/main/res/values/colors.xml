@@ -8,6 +8,10 @@
     <color name="colorBackgroundTransparent">#00FFFFFF</color>
     <color name="colorBackgroundGrey1">#f7f7f7</color>
 
+    <color name="colorBlackHeader">#414040</color>
+
+    <color name="overlay">#803b3b3b</color>
+
     <color name="colorBackgroundGrey3">#EFF0F1</color>
     <color name="colorBackgroundCore">#ECECEC</color>
     <color name="color1">#424549</color>

@@ -39,20 +39,20 @@ public class AppUtil {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-//    public static void toolbarRegular(final Context context, String title) {
-//
-//        Toolbar toolbar = (Toolbar) ((AppCompatActivity) context).findViewById(R.id.tb_regular);
-//        ImageView btnBack = (ImageView) ((AppCompatActivity) context).findViewById(R.id.btn_back);
-//        TextView tvPageTitle = (TextView) ((AppCompatActivity) context).findViewById(R.id.tv_page_title);
-//        tvPageTitle.setText(title);
-//        ((AppCompatActivity) context).setSupportActionBar(toolbar);
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ((AppCompatActivity) context).onBackPressed();
-//            }
-//        });
-//    }
+    public static void toolbarRegular(final Context context, String title) {
+
+        Toolbar toolbar = (Toolbar) ((AppCompatActivity) context).findViewById(R.id.tb_regular);
+        ImageView btnBack = (ImageView) ((AppCompatActivity) context).findViewById(R.id.btn_back);
+        TextView tvPageTitle = (TextView) ((AppCompatActivity) context).findViewById(R.id.tv_page_title);
+        tvPageTitle.setText(title);
+        ((AppCompatActivity) context).setSupportActionBar(toolbar);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((AppCompatActivity) context).onBackPressed();
+            }
+        });
+    }
 
     public static String getInitials(String label) {
         String initials="";

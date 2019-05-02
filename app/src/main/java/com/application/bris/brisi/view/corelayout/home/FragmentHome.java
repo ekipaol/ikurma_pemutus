@@ -1,6 +1,7 @@
 package com.application.bris.brisi.view.corelayout.home;
 
 import android.animation.ArgbEvaluator;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ import com.application.bris.brisi.model.hotprospek.hotprospek;
 import com.application.bris.brisi.model.menu.ListViewMenu;
 import com.application.bris.brisi.adapter.pipeline.PipelineHomeAdapater;
 import com.application.bris.brisi.model.pipeline.pipeline;
+import com.application.bris.brisi.page_aom.view.PipelineActivity;
 import com.application.bris.brisi.util.AppBarStateChangedListener;
 import com.application.bris.brisi.util.AppUtil;
 
@@ -142,7 +144,14 @@ public class FragmentHome extends Fragment implements MenuClickListener {
 
     @Override
     public void onMenuClick(String menu) {
-        AppUtil.showToastShort(getContext(), menu);
+
+        if (menu.equalsIgnoreCase(getString(R.string.menu_pipeline))){
+            Intent it = new Intent(getContext(), PipelineActivity.class);
+            startActivity(it);
+        }
+        else{
+            AppUtil.showToastShort(getContext(), menu);
+        }
     }
 
     private void checkCollapse(){
@@ -150,7 +159,7 @@ public class FragmentHome extends Fragment implements MenuClickListener {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
                 Log.d(getClass().getCanonicalName(), state.name());
-                if (state.name().equalsIgnoreCase("COLLAPSED")){
+                if (state.name().equalsIgnoreCase("COLLAPSED") || state.name().equalsIgnoreCase("IDLE")){
                     tv_toolbartitle.setText("BRISI");
                     backgroundStatusBar(state.name());
                 }
@@ -168,7 +177,7 @@ public class FragmentHome extends Fragment implements MenuClickListener {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            if (state.equalsIgnoreCase("COLLAPSED")){
+            if (state.equalsIgnoreCase("COLLAPSED") || state.equalsIgnoreCase("IDLE")){
                 window.setStatusBarColor(getActivity().getResources().getColor(R.color.colorWhite));
             }
             else {
