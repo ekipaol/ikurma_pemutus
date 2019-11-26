@@ -1,6 +1,7 @@
 package com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -21,6 +23,11 @@ import com.application.bris.brisi_pemutus.api.model.request.sektor_ekonomi.ReqSe
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_pembiayaan.DataPbySebelumPutusan;
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
+import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
+import com.application.bris.brisi_pemutus.page_putusan.history.HistoryActivity;
+import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
@@ -99,12 +106,16 @@ public class SektorEkonomiActivity extends AppCompatActivity {
     @BindView(R.id.progressbar_loading)
     RelativeLayout loading;
 
+    @BindView(R.id.bt_lanjut_sektor_ekonomi)
+    Button bt_lanjut_sektor_ekonomi;
+
     private int idAplikasi;
     private int cifLas;
     private int idTujuan;
     private String namaTujuan;
     private ApiClientAdapter apiClientAdapter;
     private AppPreferences appPreferences;
+    AllDataFront superData;
 
     private DataPbySebelumPutusan dataPbySebelumPutusan;
 
@@ -119,13 +130,41 @@ public class SektorEkonomiActivity extends AppCompatActivity {
         setContentView(R.layout.ao_activity_sektor_ekonomi);
         ButterKnife.bind(this);
         apiClientAdapter = new ApiClientAdapter(this);
+
+        //set sektor ekonomi as already read
         appPreferences = new AppPreferences(this);
+        appPreferences.setReadSektorEkonomi("yes");
+
         idAplikasi = getIntent().getIntExtra("idAplikasi", 0);
         cifLas = getIntent().getIntExtra("cifLas", 0);
         idTujuan = getIntent().getIntExtra("idTujuan", 0);
         namaTujuan = getIntent().getStringExtra("tujuanPembiayaan");
+        superData= (AllDataFront)getIntent().getSerializableExtra("superData");
+
         backgroundStatusBar();
         AppUtil.toolbarRegular(this, "Sektor Ekonomi");
+        ImageView backToolbar = findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SektorEkonomiActivity.this, PutusanFrontMenu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+        bt_lanjut_sektor_ekonomi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SektorEkonomiActivity.this, LknActivity.class);
+                intent.putExtra("cif", superData.getCif());
+                intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
+                intent.putExtra("jw", Integer.parseInt(superData.getJw()));
+                intent.putExtra("plafond", superData.getPlafond());
+                intent.putExtra("superData",superData);
+                startActivity(intent);
+            }
+        });
 
         //TUJUAN PENGGUNAAN
 

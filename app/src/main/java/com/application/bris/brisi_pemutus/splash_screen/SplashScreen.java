@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +30,12 @@ import com.application.bris.brisi_pemutus.api.model.request.firebase.ReqFirebase
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.baseapp.RouteApp;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
+import com.application.bris.brisi_pemutus.model.detail_slik.DetailSlik;
 import com.application.bris.brisi_pemutus.page_aktivasi.ActivityWelcome;
 import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
+import com.application.bris.brisi_pemutus.page_putusan.detail_slik.DetailSlikActivity;
+import com.application.bris.brisi_pemutus.page_putusan.detail_slik.DetailSlikAdapter;
+import com.application.bris.brisi_pemutus.page_ranking.RankingActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.Constants;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -83,6 +88,16 @@ public class SplashScreen extends AppCompatActivity {
                 updateFirebaseId();
             }
         }
+
+        tv_version.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent=new Intent(SplashScreen.this, LoginActivity.class);
+//                startActivity(intent);
+                return false;
+            }
+        });
+
     }
     private void checkAvailableUpdate() {
         Call<ParseResponse> call = apiClientAdapter.getApiInterface().checkUpdate(new CheckUpdate("BRISI_PEMUTUS"));
@@ -93,10 +108,10 @@ public class SplashScreen extends AppCompatActivity {
                     if (response.isSuccessful()){
                         installedVersionName = packageInfo.versionName;
                         //real if
-//                        if (response.body().getData().get("versionName").getAsString().equalsIgnoreCase(installedVersionName)){
+                        if (response.body().getData().get("versionName").getAsString().equalsIgnoreCase(installedVersionName)){
 
                         //pantekan
-                        if (response.body().getData().get("versionName").getAsString().equalsIgnoreCase("1.0.0")){
+//                        if (response.body().getData().get("versionName").getAsString().equalsIgnoreCase("1.0.0")){
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -107,7 +122,7 @@ public class SplashScreen extends AppCompatActivity {
                         else{
                             SweetAlertDialog dialog=new SweetAlertDialog(SplashScreen.this,SweetAlertDialog.WARNING_TYPE);
                             dialog.setTitleText("Versi lama");
-                            dialog.setContentText("Aplikasi anda masih dalam versi yang lama, silahkan lakukan update melalui Play Store untuk kembali dapat menggunakan BRISI.");
+                            dialog.setContentText("Aplikasi anda masih dalam versi yang lama, silahkan lakukan update melalui Play Store untuk kembali dapat menggunakan i-Kurma.");
 
                             dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override

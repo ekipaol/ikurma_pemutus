@@ -60,32 +60,51 @@ public class SampleFragmentStepAdapter extends AbstractFragmentStepAdapter{
     @NonNull
     @Override
     public StepViewModel getViewModel(@IntRange(from = 0) int position) {
-        switch (position){
+        if(status==1){
+            switch (position){
             case 0:
-                title = "Identifikasi Tanah";
+                title = "Data Pribadi";
                 break;
             case 1:
-                title = "Identifikasi Surat Tanah";
+                title = "Data Alamat";
                 break;
             case 2:
-                title = "Uraian Bangunan";
-                break;
-            case 3:
-                title = "Spesifikasi Bangunan";
-                break;
-            case 4:
-                title = "Data Lingkungan";
-                break;
-            case 5:
-                title = "Hasil Penilaian";
-                break;
-            case 6:
-                title = "Lain-lain";
+                title = "Data Usaha";
                 break;
 
-            default:
-                title = "Default Tab";
+                default:
+                    title = "Default Tab";
         }
+        }
+        else if(status==2){
+            switch (position){
+                case 0:
+                    title = "Identifikasi Tanah";
+                    break;
+                case 1:
+                    title = "Identifikasi Surat Tanah";
+                    break;
+                case 2:
+                    title = "Uraian Bangunan";
+                    break;
+                case 3:
+                    title = "Spesifikasi Bangunan";
+                    break;
+                case 4:
+                    title = "Data Lingkungan";
+                    break;
+                case 5:
+                    title = "Hasil Penilaian";
+                    break;
+                case 6:
+                    title = "Lain-lain";
+                    break;
+
+                default:
+                    title = "Default Tab";
+            }
+        }
+
         return new StepViewModel.Builder(context)
                 .setTitle(title)
                 .create();

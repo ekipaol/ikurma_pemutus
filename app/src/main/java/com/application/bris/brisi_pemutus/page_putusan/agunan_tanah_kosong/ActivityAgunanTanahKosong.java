@@ -45,6 +45,7 @@ import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.agunan_tanah_kosong.AgunanTanahKosong;
 import com.application.bris.brisi_pemutus.model.keyvalue.keyvalue;
 import com.application.bris.brisi_pemutus.page_putusan.agunan.DialogKeyValue;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_kios.AgunanKiosActivity;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.ImageHandler;
@@ -245,6 +246,10 @@ public class ActivityAgunanTanahKosong extends FragmentActivity implements KeyVa
 
     @BindView(R.id.view_content_tanah_kosong)
     ScrollView content;
+
+    //button lokasi
+    @BindView(R.id.btn_set_loc)
+    Button btn_set_loc;
 
     private DatePickerDialog dpTanggalTerbit;
     private Calendar calTerbit;
@@ -495,6 +500,10 @@ public class ActivityAgunanTanahKosong extends FragmentActivity implements KeyVa
 //                saveTanahKosong();
             }
         });
+
+        //lihat map listener
+
+
 
 
 
@@ -1049,6 +1058,44 @@ catch(Exception e){
                         et_lebar_jalan_didepan_tanah_kosong.setText(dataTanahKosong.getLebarJalan());
                         et_pendapat_pemeriksa.setText(dataTanahKosong.getPendapatPemeriksa());
                        et_alamat_jaminan_tanah_kosong.setText(dataTanahKosong.getAlamatJaminan());
+
+                        AppUtil.tutorialOverlay(ActivityAgunanTanahKosong.this,btn_set_loc,"Klik di tombol lokasi untuk melihat lokasi agunan di google map","tutorial_lokasi_tanah_kosong");
+                        btn_set_loc.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //nampilin google maps berdasar kordinat
+                                //un-comment kalau sudah ada koordinat di inquiry agunan
+
+//
+                                if(dataTanahKosong.getKoordinat()!=null){
+
+                                    //pake google maps tidak bisa, kalo pake yang dibawah, gak tampil titik tujuannya, di aplikasi lain kayak waze, grab dll bisa
+//                    String uri = String.format(Locale.ENGLISH, "geo:"+dataLengkap.getKoordinat());
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                    startActivity(intent);
+
+                                    Uri gmmIntentUri = Uri.parse("google.navigation:q="+dataTanahKosong.getKoordinat());
+                                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                    mapIntent.setPackage("com.google.android.apps.maps");
+                                    startActivity(mapIntent);
+                                }
+
+                                else if(dataTanahKosong.getKoordinat()==null){
+                                    Toast.makeText(ActivityAgunanTanahKosong.this, "Koordinat tidak ditemukan untuk aplikasi ini", Toast.LENGTH_SHORT).show();
+
+                                    //pantekan testing
+//                    String uri = String.format(Locale.ENGLISH, "geo:-6.2348961333010955,106.82217959314586");
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                    startActivity(intent);
+                                }
+                                else {
+                                    Toast.makeText(ActivityAgunanTanahKosong.this, "Belum ada data koordinat untuk agunan ini", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+
+
 
 
 

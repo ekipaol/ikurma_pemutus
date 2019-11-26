@@ -75,9 +75,6 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
         setContentView(R.layout.activity_status_user);
         main();
         initializeUser();
-
-
-
     }
 
     public void main(){
@@ -108,15 +105,15 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
         }
         else if(apppref.getFidRole().equalsIgnoreCase("71")){
             call = apiClientAdapter.getApiInterface().dataAo(req);
-            req.setKodeCabang(apppref.getKodeCabang());
+            req.setKodeCabang(apppref.getKodeSkk());
         }
         else if(apppref.getFidRole().equalsIgnoreCase("76")){
-            call = apiClientAdapter.getApiInterface().dataPinca(req);
-            req.setKodeCabang(apppref.getKodeKanwil());
+            call = apiClientAdapter.getApiInterface().dataPincaLengkap(req);
+            req.setKodeCabang(apppref.getKodeSkk());
         }
         else if(apppref.getFidRole().equalsIgnoreCase("72")){
             call = apiClientAdapter.getApiInterface().dataMmm(req);
-            req.setKodeCabang(apppref.getKodeKanwil());
+            req.setKodeCabang(apppref.getKodeSkk());
         }
         else{
             Toast.makeText(this, "Anda belum dapat mengakses halaman ini", Toast.LENGTH_SHORT).show();
@@ -130,15 +127,12 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
                 shimmer.setVisibility(View.GONE);
                 if(response.isSuccessful()){
                     if(response.body().getStatus().equalsIgnoreCase("00")){
-
-
-
                         if(apppref.getFidRole().equalsIgnoreCase("79")){
                             String listDataString = response.body().getData().get("listUh").toString();
+                            String datalistDataString = response.body().getData().get("listUh").toString();
                             Gson gson = new Gson();
                             Type type = new TypeToken<List<Ao>>() {}.getType();
                             dataUser = gson.fromJson(listDataString, type);
-
                         }
                         else if(apppref.getFidRole().equalsIgnoreCase("71")){
                             String listDataStringAo = response.body().getData().get("listAom").toString();
@@ -147,7 +141,7 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
                             dataUser = gson.fromJson(listDataStringAo, type);
                         }
                         else if(apppref.getFidRole().equalsIgnoreCase("76")){
-                            String listDataStringAo = response.body().getData().get("listAom").toString();
+                            String listDataStringAo = response.body().getData().get("listBawahanLangsung").toString();
                             Gson gson = new Gson();
                             Type type = new TypeToken<List<Ao>>() {}.getType();
                             dataUser = gson.fromJson(listDataStringAo, type);
@@ -159,8 +153,6 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
                             dataUser = gson.fromJson(listDataStringAo, type);
                             adapterUser = new AdapterStatusUser(ActivityStatusUser.this, dataUser);
                         }
-
-
                         adapterUser = new AdapterStatusUser(ActivityStatusUser.this, dataUser);
                         rv_listuser.setLayoutManager(new LinearLayoutManager(ActivityStatusUser.this));
                         rv_listuser.setItemAnimator(new DefaultItemAnimator());
@@ -182,9 +174,6 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
                 Log.d("LOG D", t.getMessage());
             }
         });
-
-
-
     }
 
     private List<User> getListUser(){

@@ -154,7 +154,7 @@ public class HistoryActivity extends AppCompatActivity{
                     fr.setArguments(bdl);
                     return fr;
                 case 2:
-                    fr = new FragmentHistoryCatatan();
+                    fr = new FragmentHistoryCatatanNonPutusan();
                     bdl.putString("dataCatatan", dataCatatan);
                     fr.setArguments(bdl);
                     return fr;

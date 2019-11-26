@@ -1,6 +1,7 @@
 package com.application.bris.brisi_pemutus.page_aktivasi;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.page_performance.PerformanceActivity;
+import com.application.bris.brisi_pemutus.page_putusan.detail_slik.DetailSlikActivity;
+import com.application.bris.brisi_pemutus.page_ranking.RankingActivity;
+import com.application.bris.brisi_pemutus.splash_screen.SplashScreen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -49,6 +54,15 @@ public class FragmentWelcome extends Fragment implements Step{
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(iv_welcome);
+
+        iv_welcome.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent=new Intent(getActivity(), PerformanceActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
         tv_welcome_title.setText("Simple dan Mudah");
         tv_welcome_desc.setText("Preview putusan dari pemrakarsa, dan lakukan putusan dari mana saja.");

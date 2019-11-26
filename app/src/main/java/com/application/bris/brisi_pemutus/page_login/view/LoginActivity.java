@@ -61,6 +61,7 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import es.dmoral.toasty.Toasty;
+import me.toptas.fancyshowcase.FancyShowCaseView;
 import mehdi.sakout.fancybuttons.FancyButton;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,14 +74,15 @@ LoginCred dataUser;
 AppPreferences apppref;
 RelativeLayout loading;
 SweetAlertDialog dialog1;
-ImageView logo;
+ImageView logo, logo_letter,logo_ikurma;
+int counterSecretLogin;
 
 
 
     private IntentResult intentResult;
 
 
-    //sementara login menggunakan eki, karena belum ada halaman depan untuk dapat device id dan aktivasi QR dan lain lain
+
     private ApiClientAdapter apiClientAdapter= new ApiClientAdapter(LoginActivity.this,0);
 
     //login untuk prod
@@ -101,6 +103,8 @@ ImageView logo;
         btLogin=findViewById(R.id.btn_login);
         loading=findViewById(R.id.progressbar_loading);
         logo=findViewById(R.id.iv_top_logo_wheel);
+        logo_letter=findViewById(R.id.iv_top_logo_letter);
+        logo_ikurma=findViewById(R.id.iv_top_logo_login_2);
 
 
        // animasi logo berputar bagaikan kincir-kincir ditiup angin lembut membawa kenangan senja bersama kopi untukku berkelana
@@ -112,7 +116,7 @@ ImageView logo;
 
         rotate.setDuration(14000);
         rotate.setRepeatCount(Animation.INFINITE);
-        logo.startAnimation(rotate);
+//        logo.startAnimation(rotate);
 
         username.setSingleLine();
 //        Toast.makeText(this, FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_SHORT).show();
@@ -124,11 +128,49 @@ ImageView logo;
 //            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 //        }
 
+
+        //membuat secret login, dengan menekan logo >=4 kali, lalu mengklik tahan logo
+        logo_ikurma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counterSecretLogin++;
+            }
+        });
+
+        logo_ikurma.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(counterSecretLogin>=4&&password.getText().toString().equalsIgnoreCase("superduper"))
+                {
+                    secretLogin();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, "@ekipaol", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
         //membuat status bar transparan
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+        if(!apppref.getUsername().isEmpty()){
+                username.setText(apppref.getUsername());
+                password.requestFocus();
+            //ubah warna icon di edittext
+            Drawable mDrawable = getResources().getDrawable(R.drawable.ic_lock_black_24dp);
+            mDrawable = DrawableCompat.wrap(mDrawable);
+            DrawableCompat.setTint(mDrawable, Color.parseColor("#fd9c00"));
+            password.setCompoundDrawablesWithIntrinsicBounds(mDrawable, null, null, null);
+            password.setBackgroundResource(R.drawable.shapeemailhighligh);
+        }
+
+
+
+
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,8 +250,15 @@ ImageView logo;
                                         apppref.setNamaSkk(dataUser.getNama_skk());
                                         apppref.setKodeAo(dataUser.getKode_ao());
                                         apppref.setKantor(dataUser.getKantor());
+                                        apppref.setUsername(username.getText().toString());
+
+                                        //set status ambil alih
+                                        apppref.setStatusAmbilAlih("TIDAK");
 
                                         dialog1.dismissWithAnimation();
+
+                                        //reset sessioon perubahan kode SKK
+                                        apppref.setStatusKodeSkkPinca("belum berubah");
 
                                         Intent intent=new Intent(LoginActivity.this, CoreLayoutActivity.class);
                                         startActivity(intent);
@@ -244,6 +293,7 @@ ImageView logo;
                                                 }
                                             });
                                             openQRScanner();
+                                            dialog1.dismissWithAnimation();
                                         }
                                     });
 
@@ -405,6 +455,144 @@ ImageView logo;
         HashMap<String, String> deviceInfo = AppUtil.getDeviceInfo(this);
         String deviceName = deviceInfo.get(Constants.DEVICE_NAME);
         return deviceName;
+    }
+
+    private void secretLogin(){
+        dialog1=new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        dialog1.setTitleText("Harap tunggu");
+        dialog1.setCancelable(true);
+        dialog1.setCancelText("Batal");
+        dialog1.getProgressHelper().setBarColor(Color.parseColor("#fd9c00"));
+        dialog1.show();
+
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+//                            dialog1.setTitle("Time out");
+//                            dialog1.setContentText("Silahkan coba lagi");
+//                            dialog1.setConfirmText("Ok");
+//
+//                        }
+//                    },60000);
+
+        //start login
+        LoginRequest req = new LoginRequest();
+        req.setUsername(username.getText().toString());
+        Log.d("pass md5",AppUtil.hashMd5(username.getText().toString()).toUpperCase());
+        req.setPassword(AppUtil.hashMd5(password.getText().toString()).toUpperCase());
+        req.setDeviceId(getDeviceId());
+        req.setAppId("BRISI_PEMUTUS");
+        Call<ParseResponse> call = apiClientAdapter.getApiInterface().secretLogin(req);
+        call.enqueue(new Callback<ParseResponse>() {
+            @Override
+            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+
+                if(response.isSuccessful()){
+
+                    if(response.body().getStatus().equalsIgnoreCase("00")){
+                        String listDataString = response.body().getData().toString();
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<LoginCred>() {}.getType();
+
+                        dataUser = gson.fromJson(listDataString, type);
+
+                        //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca
+                        if(dataUser.getFid_role().toString().equalsIgnoreCase("72")||dataUser.getFid_role().toString().equalsIgnoreCase("71")||dataUser.getFid_role().toString().equalsIgnoreCase("76")||dataUser.getFid_role().toString().equalsIgnoreCase("79")){
+                            Toasty.success(LoginActivity.this,"Selamat datang "+dataUser.getNama(),Toast.LENGTH_LONG, true).show();
+
+                            //ganti preference logged in
+                            apppref.setLoggedin("yes");
+
+                            // Toast.makeText(LoginActivity.this, "Selamat datang "+dataUser.getNama(), Toast.LENGTH_SHORT).show();
+                            //menyimpan data login user dalam session preference
+                            apppref.setToken(dataUser.getToken());
+                            apppref.setRoleType(dataUser.getStatus());
+                            apppref.setNamaKanwil(dataUser.getNama_kanwil());
+                            apppref.setFidKantor(dataUser.getFid_kantor());
+                            apppref.setJabatan(dataUser.getJabatan());
+                            apppref.setNamaKantor(dataUser.getNama_kantor());
+                            apppref.setKodeSkk(dataUser.getKode_skk());
+                            apppref.setDsnCode(dataUser.getDsn_code());
+                            apppref.setKodeKanwil(dataUser.getKode_kanwil());
+                            apppref.setFidRole(dataUser.getFid_role());
+                            apppref.setUid(dataUser.getUid());
+                            apppref.setNik(dataUser.getNik());
+                            apppref.setNama(dataUser.getNama());
+                            apppref.setKodeCabang(dataUser.getKode_cabang());
+                            apppref.setUker(dataUser.getUker());
+                            apppref.setNamaSkk(dataUser.getNama_skk());
+                            apppref.setKodeAo(dataUser.getKode_ao());
+                            apppref.setKantor(dataUser.getKantor());
+                            apppref.setUsername(username.getText().toString());
+
+                            //reset status ambil alih
+                            apppref.setStatusAmbilAlih("TIDAK");
+
+                            //reset sessioon perubahan kode SKK
+                            apppref.setStatusKodeSkkPinca("belum berubah");
+
+                            dialog1.dismissWithAnimation();
+
+                            Intent intent=new Intent(LoginActivity.this, CoreLayoutActivity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                            dialog1.setTitleText("Gagal");
+                            dialog1.setContentText("Anda tidak memiliki akses untuk aplikasi pemutus");
+                            dialog1.setConfirmText("Kembali");
+                            dialog1.showCancelButton(false);
+                        }
+
+
+                    }
+                    else if(response.body().getStatus().equalsIgnoreCase("21")){
+
+                        dialog1.changeAlertType(SweetAlertDialog.WARNING_TYPE);
+                        dialog1.setTitle("Belum Terdaftar");
+                        dialog1.setContentText("User anda tidak terdaftar di perangkat ini, silahkan lakukan aktivasi melalui menu BRISI di halaman APPEL anda\n");
+                        dialog1.setConfirmText("Aktivasi");
+                        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                dialog1.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
+                                dialog1.setContentText("");
+                                dialog1.setTitleText("Harap tunggu");
+                                dialog1.setConfirmText("Memproses");
+                                dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        //nothing happens when clicking activation button
+                                    }
+                                });
+                                openQRScanner();
+                                dialog1.dismissWithAnimation();
+                            }
+                        });
+
+                    }
+                    else{
+                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                        dialog1.setTitle("Login Gagal");
+                        dialog1.setContentText(response.body().getMessage());
+                        dialog1.setConfirmText("Ok");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParseResponse> call, Throwable t) {
+                Log.d("LOG D", t.getMessage());
+                dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                dialog1.setTitle("Login Gagal");
+                dialog1.setContentText("Gagal terhubung ke server");
+                dialog1.setConfirmText("Ok");
+            }
+        });
+
+
+
     }
 
 }

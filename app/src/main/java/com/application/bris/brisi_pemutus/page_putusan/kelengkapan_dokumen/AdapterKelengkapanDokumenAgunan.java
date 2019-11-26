@@ -61,7 +61,7 @@ public class AdapterKelengkapanDokumenAgunan extends RecyclerView.Adapter<Adapte
         holder.bt_agunan_kelengkapan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(holder.bt_agunan_kelengkapan.getContext(),ActivityFotoKelengkapanDokumen.class);
+                Intent intent=new Intent(holder.bt_agunan_kelengkapan.getContext(),ActivityPreviewFotoSecondary.class);
                 intent.putExtra("id_foto",Integer.parseInt(datas.getID()));
                 holder.bt_agunan_kelengkapan.getContext().startActivity(intent);
             }

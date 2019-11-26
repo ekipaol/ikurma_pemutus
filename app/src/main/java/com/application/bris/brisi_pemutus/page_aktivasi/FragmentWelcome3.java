@@ -1,6 +1,7 @@
 package com.application.bris.brisi_pemutus.page_aktivasi;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.page_ranking.RankingActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -50,7 +52,9 @@ public class FragmentWelcome3 extends Fragment implements Step{
                 .into(iv_welcome);
 
         tv_welcome_title.setText("Saatnya Memulai");
-        tv_welcome_desc.setText("Aktivasi dengan melakukan scan QR code yang dapat diakses di menu QR di halaman APPEL anda.");
+        tv_welcome_desc.setText("Aktivasi dengan melakukan scan QR code yang dapat diakses di halaman APPEL anda.");
+
+
         return view;
     }
 

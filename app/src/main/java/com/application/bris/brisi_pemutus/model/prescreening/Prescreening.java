@@ -22,6 +22,16 @@ public class Prescreening {
     @Nullable
     @SerializedName("FID_APLIKASI")
     private String fid_aplikasi;
+    @SerializedName("RESULT")
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public String getId_prescreening() {
         return id_prescreening;

@@ -38,6 +38,36 @@ public class PutusanAkad implements Serializable {
     private String tujuan_penggunaan;
     @SerializedName("NO_AKAD")
     private String NO_AKAD;
+    @SerializedName("LOAN_TYPE")
+    private String LOAN_TYPE;
+    @SerializedName("KODE_PRODUK")
+    private String KODE_PRODUK;
+    @SerializedName("NAMA_PRODUK")
+    private String NAMA_PRODUK;
+
+    public String getNAMA_PRODUK() {
+        return NAMA_PRODUK;
+    }
+
+    public void setNAMA_PRODUK(String NAMA_PRODUK) {
+        this.NAMA_PRODUK = NAMA_PRODUK;
+    }
+
+    public String getKODE_PRODUK() {
+        return KODE_PRODUK;
+    }
+
+    public void setKODE_PRODUK(String KODE_PRODUK) {
+        this.KODE_PRODUK = KODE_PRODUK;
+    }
+
+    public String getLOAN_TYPE() {
+        return LOAN_TYPE;
+    }
+
+    public void setLOAN_TYPE(String LOAN_TYPE) {
+        this.LOAN_TYPE = LOAN_TYPE;
+    }
 
     public String getNama_nasabah() {
         return nama_nasabah;

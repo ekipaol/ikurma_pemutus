@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.page_aom.view.PutusanActivity;
+import com.application.bris.brisi_pemutus.page_riwayat.ActivityMenuRiwayat;
 import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 
 public class MenuDaftarPutusanActivity extends AppCompatActivity {
     ImageView putusanPembiayaan, putusanDeviasi, putusanKoreksi;
@@ -39,6 +41,21 @@ public class MenuDaftarPutusanActivity extends AppCompatActivity {
         cvPutusanKoreksi.setVisibility(View.GONE);
 
         AppUtil.toolbarRegular(this, "Menu Putusan");
+
+        //toolbar back configuration, hard to explain, just ask to mr eki. In short, this is needed so the activity flows as eki wants
+        ImageView backToolbar=findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent=new Intent(MenuDaftarPutusanActivity.this, CoreLayoutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                startActivity(intent);
+
+
+            }
+        });
 
         int notifPembiayaan=getIntent().getIntExtra("notifPembiayaan",0);
 
@@ -80,5 +97,15 @@ public class MenuDaftarPutusanActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(MenuDaftarPutusanActivity.this, CoreLayoutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+        startActivity(intent);
+    }
+
+
 }
 

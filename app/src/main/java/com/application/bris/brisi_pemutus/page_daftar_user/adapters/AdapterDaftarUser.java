@@ -85,6 +85,7 @@ public class AdapterDaftarUser extends RecyclerView.Adapter<AdapterDaftarUser.Us
                 intent.putExtra("username",datas.getUsername());
                 intent.putExtra("nik",datas.getNik());
                 intent.putExtra("sk",datas.getSk());
+                intent.putExtra("fidRole",Integer.parseInt(datas.getFid_role()));
                 holder.tv_jabatan.getContext().startActivity(intent);
             }
         });

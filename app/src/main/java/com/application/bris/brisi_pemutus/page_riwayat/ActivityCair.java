@@ -1,4 +1,5 @@
-package com.application.bris.brisi_pemutus.page_akad;
+package com.application.bris.brisi_pemutus.page_riwayat;
+
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -26,7 +27,7 @@ import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqP
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
-import com.application.bris.brisi_pemutus.page_akad.adapters.AdapterAkad;
+import com.application.bris.brisi_pemutus.page_riwayat.adapters.AdapterAkad;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
@@ -42,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ActivityCair extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tb_regular)
     Toolbar tb_regular;
@@ -76,7 +77,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
         main();
         backgroundStatusBar();
         String kodePutusan=getIntent().getStringExtra("kodePutusan");
-       initializeUser();
+        initializeUser();
 
 
     }
@@ -103,7 +104,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     protected void onRestart() {
         super.onRestart();
-       ActivityAkad.this.recreate();
+        ActivityCair.this.recreate();
     }
 
     @Override
@@ -129,8 +130,8 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
     public void main(){
         ButterKnife.bind(this);
         setSupportActionBar(tb_regular);
-        apiClientAdapter=new ApiClientAdapter(ActivityAkad.this);
-        AppUtil.toolbarRegular(this, "Daftar Pembiayaan Disetujui");
+        apiClientAdapter=new ApiClientAdapter(ActivityCair.this);
+        AppUtil.toolbarRegular(this, "Daftar Pembiayaan Cair");
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setDistanceToTriggerSync(220);
     }
@@ -148,7 +149,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
         //progressbar_loading.setVisibility(View.VISIBLE);
         shimmer.setVisibility(View.VISIBLE);
         ReqPutusan req = new ReqPutusan();
-        AppPreferences appPreferences=new AppPreferences(ActivityAkad.this);
+        AppPreferences appPreferences=new AppPreferences(ActivityCair.this);
 
         //pantekan
 //        req.setUid("19230");
@@ -158,7 +159,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
 
 
 
-        Call<ParseResponseArr> call = apiClientAdapter.getApiInterface().listPutusanAkad(req);
+        Call<ParseResponseArr> call = apiClientAdapter.getApiInterface().listPutusanCair(req);
         call.enqueue(new Callback<ParseResponseArr>() {
             @Override
             public void onResponse(Call<ParseResponseArr> call, Response<ParseResponseArr> response) {
@@ -173,8 +174,8 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
 
                         dataAkad = gson.fromJson(listDataString, type);
                         Log.d("akadActivity",listDataString);
-                        adapterAkad = new AdapterAkad(ActivityAkad.this, dataAkad);
-                        rv_listpipeline.setLayoutManager(new LinearLayoutManager(ActivityAkad.this));
+                        adapterAkad = new AdapterAkad(ActivityCair.this, dataAkad);
+                        rv_listpipeline.setLayoutManager(new LinearLayoutManager(ActivityCair.this));
                         rv_listpipeline.setItemAnimator(new DefaultItemAnimator());
                         rv_listpipeline.setAdapter(adapterAkad);
 
@@ -192,7 +193,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
                         tvWhale.setVisibility(View.VISIBLE);
                     }
                     else{
-                        Toasty.error(ActivityAkad.this,"Terjadi kesalahan");
+                        Toasty.error(ActivityCair.this,"Terjadi kesalahan");
                     }
                 }
             }
@@ -231,6 +232,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        ActivityAkad.this.recreate();
+        ActivityCair.this.recreate();
     }
 }
+

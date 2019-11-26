@@ -3,6 +3,8 @@ package com.application.bris.brisi_pemutus.page_putusan.lkn;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,14 +15,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.lkn.DataLkn;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
@@ -30,6 +39,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 /**
@@ -68,7 +78,7 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
     @BindView(R.id.tf_lamausaha)
     TextFieldBoxes tf_lamausaha;
     @BindView(R.id.et_lamausaha)
-    EditText et_lamausaha;
+    ExtendedEditText et_lamausaha;
     @BindView(R.id.tf_nomortelponusaha)
     TextFieldBoxes tf_nomortelponusaha;
     @BindView(R.id.et_nomortelponusaha)
@@ -102,6 +112,15 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
     TextFieldBoxes tf_jaraklokasiusahakeums;
     @BindView(R.id.et_jaraklokasiusahakeums)
     EditText et_jaraklokasiusahakeums;
+
+    @BindView(R.id.iv_foto_usaha_1)
+    ImageView iv_foto_usaha_1;
+    @BindView(R.id.iv_foto_usaha_2)
+    ImageView iv_foto_usaha_2;
+    @BindView(R.id.iv_foto_usaha_3)
+    ImageView iv_foto_usaha_3;
+
+    String labelLamaUsaha="";
 
     private Calendar cal;
 
@@ -148,6 +167,7 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
         et_bidangusaha.setText(KeyValue.getKeyUsahaorJob(data.getbIDANGUSAHA()));
         et_namausaha.setText(data.nAMAUSAHA);
         et_lamausaha.setText(String.valueOf(parseLamaUsaha()));
+        et_lamausaha.setSuffix(labelLamaUsaha);
         et_nomortelponusaha.setText(data.gettELPKANTOR());
         et_alamatusaha.setText(data.getaLAMATTEMPATKERJA1());
         et_lokasiusaha.setText(data.getlOKASIUSAHA());
@@ -156,6 +176,84 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
         et_aspekpemasaran.setText(data.getaSPEKPEMASARAN());
         et_jenisusaha.setText(data.getjENISUSAHA());
         et_jaraklokasiusahakeums.setText(String.valueOf(data.getjARAKLOKASI()));
+
+
+        //glide for foto usaha
+
+        RequestOptions options = new RequestOptions();
+//                                .centerCrop()
+//                                .placeholder(R.mipmap.ico_img_for_upload)
+//                                .diskCacheStrategy(DiskCacheStrategy.ALL);
+
+
+        Glide.with(getActivity())
+                .asBitmap()
+                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_DEPAN())
+                .apply(options)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        iv_foto_usaha_1.setImageBitmap(resource);
+
+                    }
+                });
+
+        Glide.with(getActivity())
+                .asBitmap()
+                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_DALAM())
+                .apply(options)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        iv_foto_usaha_2.setImageBitmap(resource);
+
+                    }
+                });
+
+        Glide.with(getActivity())
+                .asBitmap()
+                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_LINGKUNGAN())
+                .apply(options)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        iv_foto_usaha_3.setImageBitmap(resource);
+
+                    }
+                });
+
+        //end of glide
+
+        //on click for photos
+
+
+        iv_foto_usaha_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(data.getFID_PHOTO_DEPAN()));
+                startActivity(intent);
+            }
+        });
+
+
+        iv_foto_usaha_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(data.FID_PHOTO_DALAM));
+                startActivity(intent);
+            }
+        });
+
+        iv_foto_usaha_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(data.FID_PHOTO_LINGKUNGAN));
+                startActivity(intent);
+            }
+        });
     }
 
     private void disableTextfield(){
@@ -207,9 +305,12 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
             String d2 = val.substring(2,4);
 
             if (!d2.equalsIgnoreCase("00")){
+
+                labelLamaUsaha="Tahun";
                 return AppUtil.parseLongWithDefault(d2, 0);
             }
             else if (d2.equalsIgnoreCase("00") && !d1.equalsIgnoreCase("00")){
+                labelLamaUsaha="Bulan";
                 return AppUtil.parseLongWithDefault(d1, 0);
             }
             else {

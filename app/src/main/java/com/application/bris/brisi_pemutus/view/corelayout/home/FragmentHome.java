@@ -2,6 +2,7 @@ package com.application.bris.brisi_pemutus.view.corelayout.home;
 
 import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,12 +32,11 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.adapter.disposisi.AdapterDisposisiFront;
-import com.application.bris.brisi_pemutus.adapter.eform.EformHomeAdapter;
-import com.application.bris.brisi_pemutus.adapter.hotprospek.HotprospekHomeAdapater;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.request.dashboard.RequestDashboard;
 import com.application.bris.brisi_pemutus.api.model.request.list_disposisi.ReqListDisposisi;
+import com.application.bris.brisi_pemutus.api.model.request.login.LoginRequest;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.config.eformhome.EformHome;
 import com.application.bris.brisi_pemutus.config.hotprospekhome.Hotprospekhome;
@@ -49,18 +50,24 @@ import com.application.bris.brisi_pemutus.model.disposisi.Disposisi;
 import com.application.bris.brisi_pemutus.model.eform.Eform;
 import com.application.bris.brisi_pemutus.model.hotprospek.HotProspek;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
+import com.application.bris.brisi_pemutus.model.login_cred.LoginCred;
 import com.application.bris.brisi_pemutus.model.menu.ListViewMenu;
 import com.application.bris.brisi_pemutus.adapter.pipeline.PipelineHomeAdapater;
 import com.application.bris.brisi_pemutus.model.pipeline.pipeline;
-import com.application.bris.brisi_pemutus.page_akad.ActivityAkad;
+import com.application.bris.brisi_pemutus.page_ambil_alih.AmbilAlihActivity;
+import com.application.bris.brisi_pemutus.page_performance.MenuPerformanceActivity;
+import com.application.bris.brisi_pemutus.page_performance.PerformanceAoActivity;
+import com.application.bris.brisi_pemutus.page_riwayat.ActivityAkad;
 import com.application.bris.brisi_pemutus.page_aom.view.PutusanActivity;
 import com.application.bris.brisi_pemutus.page_daftar_user.view.MenuDaftarUser;
-import com.application.bris.brisi_pemutus.page_disposisi.adapter.AdapterDaftarDisposisi;
 import com.application.bris.brisi_pemutus.page_disposisi.view.DaftarDisposisiActivity;
 import com.application.bris.brisi_pemutus.page_disposisi.view.MenuDisposisiActivity;
+import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
 import com.application.bris.brisi_pemutus.page_putusan.menu.MenuDaftarPutusanActivity;
+import com.application.bris.brisi_pemutus.page_riwayat.ActivityMenuRiwayat;
 import com.application.bris.brisi_pemutus.util.AppBarStateChangedListener;
 import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -76,6 +83,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -99,6 +107,8 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     RecyclerView rv_menu;
     @BindView(R.id.rv_pipeline)
     RecyclerView rv_pipeline;
+    @BindView(R.id.rv_deviasi)
+    RecyclerView rv_deviasi;
     @BindView(R.id.rv_disposisi)
     RecyclerView rv_disposisi;
     @BindView(R.id.imageViewava)
@@ -107,9 +117,13 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     ImageView iv_moreputusan;
     @BindView(R.id.iv_moredisposisi)
     ImageView iv_moredisposisi;
+    @BindView(R.id.iv_moredeviasi)
+    ImageView iv_moredeviasi;
 
     @BindView(R.id.cl_disposisi)
     ConstraintLayout cl_disposisi;
+    @BindView(R.id.cl_deviasi)
+    ConstraintLayout cl_deviasi;
 
 
     @BindView(R.id.animWhale)
@@ -117,6 +131,9 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @BindView(R.id.tvWhale)
     TextView textWhale;
+
+    @BindView(R.id.tvWhaledeviasi)
+    TextView textWhaleDeviasi;
 
     @BindView(R.id.animWhaleDisposisi)
     LottieAnimationView whaleDisposisi;
@@ -130,6 +147,12 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     @BindView(R.id.progressbar_front_disposisi)
     ProgressBar progressBar_daftar_disposisi;
 
+    @BindView(R.id.progressbar_front_deviasi)
+    ProgressBar progressbar_daftar_deviasi;
+
+    @BindView(R.id.ll_menu_container)
+    LinearLayout ll_menu_container;
+
 //    @BindView(R.id.rv_eform)
 //    RecyclerView rv_eform;
 //    @BindView(R.id.rv_hotprospek)
@@ -142,23 +165,31 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
     List<ListViewMenu> dataMenu;
     List<Putusan> dataPutusan;
+    List<Putusan> dataDeviasi;
     List<Disposisi> dataDisposisi;
     DashboardCred dataNotif=new DashboardCred();
     Putusan testing;
     MenuAdapter adapterMenu;
     PipelineHomeAdapater adapaterPipeline;
+    PipelineHomeAdapater adapterDeviasi;
     AdapterDisposisiFront adapterDisposisiFront;
     GridLayoutManager layoutMenu;
     int coloumMenu = 4;
     LinearLayoutManager layoutPipelineHome;
     LinearLayoutManager layoutDisposisiHome;
+    LinearLayoutManager layoutdeviasiHome;
     LinearLayoutManager layoutEformHome;
     BroadcastReceiver mMessageReceiver;
     TextView judul_1;
     DashboardCred dataDashboard;
     ApiClientAdapter apiClientAdapter;
+    SweetAlertDialog dialog1;
+    LoginCred dataUser;
+
     int notifPutusan=0;
     int notifDisposisi=0;
+
+    boolean indikatorSelesaiLoading=false;
 
     public FragmentHome() {
     }
@@ -188,33 +219,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         swipeRefreshLayout.setOnRefreshListener(this);
 
 
-
-
-
-//        dataPutusan=new ArrayList<>();
-//       dataPutusan=adapterMenu.sendListPutusan();
-
-        //menerima broadcast dari adapterMenu untuk mendapatkan objek dashboard dalam 1 kali tembakan ke server.
-       // receiveBroadcastObject();
-//        LocalBroadcastManager.getInstance(view.getContext()).registerReceiver(mMessageReceiver,
-//                new IntentFilter("from_adapter"));
-       // testing=adapterMenu.getPutusanSingle();
-    //    Log.d("testing ekipaol",testing.getNama_nasabah());
-
-        checkCollapse();
-        initializePipelineHome();
-
-        //disposisi tidak perlu di initialize sendiri, karena data disposisi sudah didapatkan di initialize pipeline dengan 1 request ke server
-//        initializeDisposisi();
-        initializeMenu();
-        onclickStuff();
-        //initializeHotprospekHome();
-       // initializeEformHome();
-        return view;
-    }
-
-    public void initializeMenu(){
-
 //get profile pic
         RequestOptions options = new RequestOptions()
                 .centerCrop()
@@ -233,6 +237,51 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         //end of profile pic
 
 
+
+
+
+
+//        dataPutusan=new ArrayList<>();
+//       dataPutusan=adapterMenu.sendListPutusan();
+
+        //menerima broadcast dari adapterMenu untuk mendapatkan objek dashboard dalam 1 kali tembakan ke server.
+       // receiveBroadcastObject();
+//        LocalBroadcastManager.getInstance(view.getContext()).registerReceiver(mMessageReceiver,
+//                new IntentFilter("from_adapter"));
+       // testing=adapterMenu.getPutusanSingle();
+    //    Log.d("testing ekipaol",testing.getNama_nasabah());
+
+        checkCollapse();
+        initializePipelineHome();
+
+        //disposisi tidak perlu di initialize sendiri, karena data disposisi sudah didapatkan di initialize pipeline dengan 1 request ke server
+
+        initializeMenu();
+        onclickStuff();
+        //initializeHotprospekHome();
+       // initializeEformHome();
+        return view;
+    }
+
+    public void initializeMenu(){
+//
+////get profile pic
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
+//
+//
+//        Glide.with(this)
+//                .load(UriApi.Baseurl.URL + UriApi.fotoProfil.urlFotoProfil+appPreferences.getNik())
+//                .apply(options)
+//                .into(iv_fotoProfil);
+//
+//
+//        //end of profile pic
+
         rv_menu.setHasFixedSize(true);
         dataMenu = getListMenu();
         adapterMenu = new MenuAdapter(getContext(), dataMenu, this,dataNotif);
@@ -240,6 +289,12 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         rv_menu.setLayoutManager(layoutMenu);
         rv_menu.setAdapter(adapterMenu);
         ViewCompat.setNestedScrollingEnabled(rv_menu, false);
+
+        //tutorial overlay menu baru : performance
+        if(!appPreferences.getFidRole().equalsIgnoreCase("71")){
+//            AppUtil.tutorialOverlay(getActivity(),ll_menu_container,"Sekarang ada menu performance untuk melihat performa cabang ataupun AO/AOM","tutorial_menu_performance_v3");
+        }
+
 
     }
 
@@ -275,7 +330,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
             apiClientAdapter= new ApiClientAdapter(getContext());
             RequestDashboard req = new RequestDashboard();
-            AppPreferences appPreferences =new AppPreferences(getContext());
+            final AppPreferences appPreferences =new AppPreferences(getContext());
 
 
 
@@ -286,6 +341,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
             progressBar_daftar_pembiayaan.setVisibility(View.VISIBLE);
         progressBar_daftar_disposisi.setVisibility(View.VISIBLE);
+        progressbar_daftar_deviasi.setVisibility(View.VISIBLE);
 
             Call<ParseResponse> call = apiClientAdapter.getApiInterface().dashboardRequest(req);
             call.enqueue(new Callback<ParseResponse>() {
@@ -296,7 +352,37 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
                         if(response.body().getStatus().equalsIgnoreCase("00")){
                             String listDataPutusanString = response.body().getData().get("listPutusan").toString();
-                            String listDataDisposisiString = response.body().getData().get("listDisposisi").toString();
+
+                            String listDataPutusanDeviasiString ="";
+                            if(response.body().getData().get("listPutusanDeviasi")!=null){
+                                 listDataPutusanDeviasiString = response.body().getData().get("listPutusanDeviasi").toString();
+                            }
+                            else{
+                                 listDataPutusanDeviasiString ="[]";
+                            }
+
+
+                            //diberi if, karena kembalian dari middletier itu null kalau appprefnya sudah dirubah setelah login
+                            if (appPreferences.getFidRole().equalsIgnoreCase("76")) {
+                                if( response.body().getData().get("kodeKc")!=null && response.body().getData().get("namaKc")!=null){
+                                    String kodeKc = response.body().getData().get("kodeKc").toString().replace("\"", "");
+                                    String namaKc = response.body().getData().get("namaKc").toString().replace("\"", "");
+                                    appPreferences.setKodeSkk(kodeKc);
+                                    appPreferences.setNamaKantor(namaKc);
+
+                                    //reset sessioon perubahan kode SKK
+                                    appPreferences.setStatusKodeSkkPinca("berubah");
+                                    indikatorSelesaiLoading=true;
+                                }
+                            }
+                            String listDataDisposisiString="";
+
+                            //hanya mengambil listdisposisi jika yang login pinca, pincapem, atau mmm (kecuali UH role 71)
+
+                            if(!appPreferences.getFidRole().equalsIgnoreCase("71")){
+                                 listDataDisposisiString = response.body().getData().get("listDisposisi").toString();
+                            }
+
                             String listDataNotifikasi = response.body().getData().toString();
                             Gson gson = new Gson();
                             Type type1 = new TypeToken<DashboardCred>() {}.getType();
@@ -307,7 +393,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
                             //initialize menu, memang 2 kali di initialize, di oncreate dan di method ini
-                            initializeMenu();
+//                            initializeMenu();
 //                            adapterMenu = new MenuAdapter(getContext(), dataMenu,  ,dataNotif.getNotifDashboard());
 //                            layoutMenu = new GridLayoutManager(getContext(), coloumMenu);
 //                            rv_menu.setLayoutManager(layoutMenu);
@@ -315,37 +401,61 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
                             dataPutusan=gson.fromJson(listDataPutusanString, type2);
+                            dataDeviasi=gson.fromJson(listDataPutusanDeviasiString, type2);
                             dataDisposisi=gson.fromJson(listDataDisposisiString, type3);
                             if(dataPutusan.size()==0){
 //                                whale.setVisibility(View.VISIBLE);
                                 textWhale.setVisibility(View.VISIBLE);
 
                             }
-
-                            //delete below biar disposisi keluar di dashboard , di clear untuk persiapan UAT tanpa disposisi
-                            dataDisposisi.clear();
-                            if(dataDisposisi.size()==0){
+                            if(dataDeviasi.size()==0){
 //                                whale.setVisibility(View.VISIBLE);
-                                textWhaleDisposisi.setVisibility(View.VISIBLE);
+                                textWhaleDeviasi.setVisibility(View.VISIBLE);
 
                             }
 
+                            if(dataDisposisi!=null){
+                                if(dataDisposisi.size()==0){
+//                                whale.setVisibility(View.VISIBLE);
+                                    progressBar_daftar_disposisi.setVisibility(View.GONE);
+                                    textWhaleDisposisi.setVisibility(View.VISIBLE);
+
+                                }
+                                else{
+                                    //delete below biar disposisi keluar di dashboard , di clear untuk persiapan UAT tanpa disposisi
+//                                dataDisposisi.clear();
+
+                                    //adapter disposisi settings
+                                    progressBar_daftar_disposisi.setVisibility(View.GONE);
+                                    adapterDisposisiFront = new AdapterDisposisiFront(getContext(), dataDisposisi);
+                                    layoutDisposisiHome = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                                    rv_disposisi.setLayoutManager(new LinearLayoutManager(getContext()));
+                                    rv_disposisi.setItemAnimator(new DefaultItemAnimator());
+                                    rv_disposisi.setAdapter(adapterDisposisiFront);
+                                    ViewCompat.setNestedScrollingEnabled(rv_disposisi, false);
+                                }
+                            }
+                            else{
+                                progressBar_daftar_disposisi.setVisibility(View.GONE);
+                                textWhaleDisposisi.setVisibility(View.VISIBLE);
+                            }
+
+
                             //adapter putusan settings
                             adapaterPipeline = new PipelineHomeAdapater(getContext(),dataPutusan);
+                            adapterDeviasi = new PipelineHomeAdapater(getContext(),dataDeviasi);
                             layoutPipelineHome = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                            layoutdeviasiHome = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                             progressBar_daftar_pembiayaan.setVisibility(View.GONE);
+                            progressbar_daftar_deviasi.setVisibility(View.GONE);
                             rv_pipeline.setLayoutManager(layoutPipelineHome);
                             rv_pipeline.setAdapter(adapaterPipeline);
+                            rv_deviasi.setLayoutManager(layoutdeviasiHome);
+                            rv_deviasi.setAdapter(adapterDeviasi);
                             ViewCompat.setNestedScrollingEnabled(rv_pipeline, false);
+                            ViewCompat.setNestedScrollingEnabled(rv_deviasi, false);
 
-                            //adapter disposisi settings
-                            progressBar_daftar_disposisi.setVisibility(View.GONE);
-                            adapterDisposisiFront = new AdapterDisposisiFront(getContext(), dataDisposisi);
-                            layoutDisposisiHome = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                            rv_disposisi.setLayoutManager(new LinearLayoutManager(getContext()));
-                            rv_disposisi.setItemAnimator(new DefaultItemAnimator());
-                            rv_disposisi.setAdapter(adapterDisposisiFront);
-                            ViewCompat.setNestedScrollingEnabled(rv_disposisi, false);
+
                             try{
                                 Log.d("pipeline adp ekipaol ",dataPutusan.get(0).getNama_nasabah());
                             }
@@ -452,59 +562,107 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onMenuClick(String menu) {
 
-        if (menu.equalsIgnoreCase(getString(R.string.menu_pengajuan))){
-            Intent it = new Intent(getContext(), MenuDaftarPutusanActivity.class);
-            it.putExtra("notifPembiayaan",dataNotif.getNotifDashboard());
-            startActivity(it);
+        //cek apakah user dalam status ambil alih atau tidak
+        if(appPreferences.getStatusAmbilAlih().equalsIgnoreCase("Ya")){
+            if (menu.equalsIgnoreCase(getString(R.string.menu_pengajuan))){
+                Intent it = new Intent(getContext(), MenuDaftarPutusanActivity.class);
+                it.putExtra("notifPembiayaan",dataNotif.getNotifDashboard());
+                startActivity(it);
+            }
+            else  if (menu.equalsIgnoreCase("Keluar Ambil Alih")){
+               keluarAmbilAlih();
+            }
+            else{
+                Toasty.info(getContext(),"Anda tidak dapet mengakses menu ini ketika ambil alih user", Toast.LENGTH_LONG).show();
+            }
         }
-        else if(menu.equalsIgnoreCase(getString(R.string.menu_disetujui))){
+        else{
+            if (menu.equalsIgnoreCase(getString(R.string.menu_pengajuan))){
+                Intent it = new Intent(getContext(), MenuDaftarPutusanActivity.class);
+                it.putExtra("notifPembiayaan",dataNotif.getNotifDashboard());
+                startActivity(it);
+            }
+            else if(menu.equalsIgnoreCase(getString(R.string.menu_disetujui))){
 
-            //DELETE THIS AFTER TESTING MANAGEMENT USER PINCA
+                //DELETE THIS AFTER TESTING MANAGEMENT USER PINCA
 //            Intent intent2 = new Intent(getContext(), MenuDaftarUser.class);
 //            startActivity(intent2);
 
-            if(appPreferences.getFidRole().equalsIgnoreCase("72")||appPreferences.getFidRole().equalsIgnoreCase("72")){
-                Intent intent2 = new Intent(getContext(), MenuDaftarUser.class);
-                startActivity(intent2);
+                if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
+                    Intent intent2 = new Intent(getContext(), MenuDaftarUser.class);
+                    startActivity(intent2);
 //                Toast.makeText(getActivity(), "Fitur ini belum dapat digunakan", Toast.LENGTH_SHORT).show();
+                }
+                else{
+//                Intent intent = new Intent(getContext(), MenuDaftarUser.class);
+//                startActivity(intent);
+                    Toast.makeText(getActivity(), "Fitur ini hanya dapat digunakan oleh Pinca dan Pincapem", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else if(menu.equalsIgnoreCase("Disposisi")){
+                Intent intent = new Intent(getContext(), MenuDisposisiActivity.class);
+                intent.putExtra("notifDisposisi",dataNotif.getNotifDashboardDisposisi());
+                startActivity(intent);
+//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+            }
+            else if(menu.equalsIgnoreCase("riwayat")){
+                Intent intent = new Intent(getContext(), ActivityMenuRiwayat.class);
+                startActivity(intent);
+//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+            }
+            else if(menu.equalsIgnoreCase("performance")){
+
+                Intent intent = new Intent(getContext(), MenuPerformanceActivity .class);
+                startActivity(intent);
+//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+            }
+            else if(menu.equalsIgnoreCase("ambil alih")){
+                if(indikatorSelesaiLoading==false&&!appPreferences.getFidRole().equalsIgnoreCase("76")){//ini untuk akses tombol setelah login khusus non pinca
+                    Intent intent = new Intent(getContext(), AmbilAlihActivity.class);
+                    startActivity(intent);
+                }
+                else if(appPreferences.getStatusKodeSkkPinca().equalsIgnoreCase("berubah")){ //ini untuk akses tombol setelah akses menu menu lain, tapi kembali ke dashboard lagi untuk akses menu ambil alih khusus pinca
+                    Intent intent = new Intent(getContext(), AmbilAlihActivity.class);
+                    startActivity(intent);
+                }
+                else if(indikatorSelesaiLoading==false&&appPreferences.getFidRole().equalsIgnoreCase("76")){//ini untuk akses tombol setelah login khusus pinca
+                    Toasty.info(getContext(),"Tunggu hingga loading selesai, sebelum mengakses menu ambil alih putusan",Toast.LENGTH_LONG).show();
+                }
+
+                else{
+                    Toasty.info(getContext(),"Tunggu hingga loading selesai, sebelum mengakses menu ambil alih putusan",Toast.LENGTH_LONG).show();
+                }
+
+//            Intent intent = new Intent(getContext(), AmbilAlihActivity.class);
+//            startActivity(intent);
+//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+            }
+            else if(menu.equalsIgnoreCase("logout")){
+                final SweetAlertDialog logout=new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE);
+                logout.setTitleText("Keluar");
+                logout.setContentText("Apakah anda yakin ingin log out dari aplikasi?");
+                logout.setConfirmText("Ya");
+                logout.setCancelText("Batal");
+                logout.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        logout.dismissWithAnimation();
+//                    getActivity().finish();
+                        Intent intent=new Intent(getContext(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+                logout.show();
+//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
             else{
-                Intent intent = new Intent(getContext(), MenuDaftarUser.class);
-                startActivity(intent);
-//                Toast.makeText(getActivity(), "Fitur ini belum dapat digunakan", Toast.LENGTH_SHORT).show();
+                AppUtil.showToastShort(getContext(), menu);
             }
+        }
 
-        }
-        else if(menu.equalsIgnoreCase("Disposisi")){
-            Intent intent = new Intent(getContext(), MenuDisposisiActivity.class);
-            intent.putExtra("notifDisposisi",dataNotif.getNotifDashboardDisposisi());
-            startActivity(intent);
-//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
-        }
-        else if(menu.equalsIgnoreCase("approved")){
-            Intent intent = new Intent(getContext(), ActivityAkad.class);
-            startActivity(intent);
-//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
-        }
-        else if(menu.equalsIgnoreCase("logout")){
-            final SweetAlertDialog logout=new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE);
-            logout.setTitleText("Keluar");
-            logout.setContentText("Apakah anda yakin ingin log out dari aplikasi?");
-            logout.setConfirmText("Ya");
-            logout.setCancelText("Batal");
-            logout.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                    logout.dismissWithAnimation();
-                    getActivity().finish();
-                }
-            });
-            logout.show();
-//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            AppUtil.showToastShort(getContext(), menu);
-        }
+
     }
 
     private void checkCollapse(){
@@ -513,7 +671,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
                 Log.d(getClass().getCanonicalName(), state.name());
                 if (state.name().equalsIgnoreCase("COLLAPSED") || state.name().equalsIgnoreCase("IDLE")){
-                    tv_toolbartitle.setText("BRISI");
+                    tv_toolbartitle.setText("i-Kurma");
                     backgroundStatusBar(state.name());
                     swipeRefreshLayout.setEnabled(false);
 
@@ -544,6 +702,131 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         }
     }
 
+    public void keluarAmbilAlih(){
+        dialog1=new SweetAlertDialog(getContext(), SweetAlertDialog.NORMAL_TYPE);
+        dialog1.setTitleText("Konfirmasi");
+        dialog1.setContentText("Anda yakin ingin keluar dari ambil alih user?");
+        dialog1.setConfirmText("Ya");
+        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                //start login ulang ke user yang mengambil alih, usernamenya masih tersimpan di preferences
+                dialog1.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
+                dialog1.setTitleText("Harap Tunggu");
+                dialog1.showContentText(false);
+                dialog1.showCancelButton(true);
+                dialog1.setCancelText("Batal");
+                LoginRequest req = new LoginRequest();
+                req.setUsername(appPreferences.getUsername());
+                req.setPassword(AppUtil.hashMd5("-"));
+                req.setDeviceId("-");
+                req.setAppId("BRISI_PEMUTUS");
+                Call<ParseResponse> call = apiClientAdapter.getApiInterface().secretLogin(req);
+                call.enqueue(new Callback<ParseResponse>() {
+                    @Override
+                    public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+
+                        if(response.isSuccessful()){
+
+                            if(response.body().getStatus().equalsIgnoreCase("00")){
+                                String listDataString = response.body().getData().toString();
+                                Gson gson = new Gson();
+                                Type type = new TypeToken<LoginCred>() {}.getType();
+
+                                dataUser = gson.fromJson(listDataString, type);
+
+                                //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca
+                                if(dataUser.getFid_role().toString().equalsIgnoreCase("72")||dataUser.getFid_role().toString().equalsIgnoreCase("71")||dataUser.getFid_role().toString().equalsIgnoreCase("76")||dataUser.getFid_role().toString().equalsIgnoreCase("79")){
+                                    Toasty.success(getContext(),"Selamat Datang Kembali "+dataUser.getNama(),Toast.LENGTH_LONG, true).show();
+
+                                    //ganti preference logged in
+                                    appPreferences.setLoggedin("yes");
+
+                                    // Toast.makeText(LoginActivity.this, "Selamat datang "+dataUser.getNama(), Toast.LENGTH_SHORT).show();
+                                    //menyimpan data login user dalam session preference
+                                    appPreferences.setToken(dataUser.getToken());
+                                    appPreferences.setRoleType(dataUser.getStatus());
+                                    appPreferences.setNamaKanwil(dataUser.getNama_kanwil());
+                                    appPreferences.setFidKantor(dataUser.getFid_kantor());
+                                    appPreferences.setJabatan(dataUser.getJabatan());
+                                    appPreferences.setNamaKantor(dataUser.getNama_kantor());
+                                    appPreferences.setKodeSkk(dataUser.getKode_skk());
+                                    appPreferences.setDsnCode(dataUser.getDsn_code());
+                                    appPreferences.setKodeKanwil(dataUser.getKode_kanwil());
+                                    appPreferences.setFidRole(dataUser.getFid_role());
+                                    appPreferences.setUid(dataUser.getUid());
+                                    appPreferences.setNik(dataUser.getNik());
+                                    appPreferences.setNama(dataUser.getNama());
+                                    appPreferences.setKodeCabang(dataUser.getKode_cabang());
+                                    appPreferences.setUker(dataUser.getUker());
+                                    appPreferences.setNamaSkk(dataUser.getNama_skk());
+                                    appPreferences.setKodeAo(dataUser.getKode_ao());
+                                    appPreferences.setKantor(dataUser.getKantor());
+                                    appPreferences.setUsername(appPreferences.getUsername());
+
+                                    //reset status ambil alih
+                                    appPreferences.setStatusAmbilAlih("TIDAK");
+
+                                    //reset sessioon perubahan kode SKK
+                                    appPreferences.setStatusKodeSkkPinca("belum berubah");
+
+                                    dialog1.dismissWithAnimation();
+
+                                    Intent intent=new Intent(getContext(), CoreLayoutActivity.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                    dialog1.setTitleText("Gagal");
+                                    dialog1.setContentText("Anda tidak memiliki akses untuk aplikasi pemutus");
+                                    dialog1.setConfirmText("Kembali");
+                                    dialog1.showCancelButton(false);
+                                }
+
+
+                            }
+
+                            else{
+                                dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                dialog1.setTitle("Gagal Keluar Ambil Alih");
+                                dialog1.setContentText(response.body().getMessage());
+                                dialog1.setConfirmText("Ok");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ParseResponse> call, Throwable t) {
+                        Log.d("LOG D", t.getMessage());
+                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                        dialog1.setTitle("Gagal");
+                        dialog1.setContentText("Gagal terhubung ke server");
+                        dialog1.setConfirmText("Ok");
+                    }
+                });
+
+            }
+        });
+        dialog1.setCancelable(true);
+        dialog1.setCancelText("Batal");
+//        dialog1.getProgressHelper().setBarColor(Color.parseColor("#fd9c00"));
+        dialog1.show();
+
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+//                            dialog1.setTitle("Time out");
+//                            dialog1.setContentText("Silahkan coba lagi");
+//                            dialog1.setConfirmText("Ok");
+//
+//                        }
+//                    },60000);
+
+
+    }
+
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
@@ -560,6 +843,25 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
 
+        iv_moredeviasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), PutusanActivity.class);
+                intent.putExtra("kodePutusan","putusanDeviasi");
+                startActivity(intent);
+            }
+        });
+
+//        iv_moreputusan.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                Intent intent=new Intent(getContext(), PerformanceAoActivity.class);
+////                intent.putExtra("kodePutusan","putusanKredit");
+//                startActivity(intent);
+//        return true;
+//    }
+//});
+
         iv_moredisposisi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -567,7 +869,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 intent.putExtra("menuAsal","daftarDisposisi");
 
                 //delete the comment below to enable clicking more in disposisi list
-//                startActivity(intent);
+                startActivity(intent);
             }
         });
     }

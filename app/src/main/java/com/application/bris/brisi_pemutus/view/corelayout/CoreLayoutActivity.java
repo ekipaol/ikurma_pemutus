@@ -22,6 +22,8 @@ import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.dashboard.DashboardCred;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
+import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
+import com.application.bris.brisi_pemutus.page_performance.PerformanceActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.BackStackFragment;
 import com.application.bris.brisi_pemutus.view.corelayout.dashboard.FragmentDashboard;
@@ -40,6 +42,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -151,7 +154,10 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
         if (!BackStackFragment.handleBackPressed(getSupportFragmentManager())) {{
 
             if(doubleBackToExitPressedOnce){
-                finish();
+//                finish();
+                Intent intent=new Intent(CoreLayoutActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 return;
             }
             doubleBackToExitPressedOnce = true;
@@ -175,9 +181,15 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
                 fragment = new FragmentHome();
                 break;
             case R.id.navigation_dashboard:
-                AppUtil.showToastShort(getApplicationContext(), "dashboard");
+//                AppUtil.showToastShort(getApplicationContext(), "Dashboard dalam pengembangan");
                 //hide dashboard for a while
 //                fragment = new FragmentDashboard();
+
+                AppPreferences appPreferences=new AppPreferences(CoreLayoutActivity.this);
+//                Intent intent=new Intent(CoreLayoutActivity.this, PerformanceActivity.class);
+//                intent.putExtra("kodeKanwil",appPreferences.getKodeKanwil());
+//                startActivity(intent);
+                Toasty.info(CoreLayoutActivity.this,"Masih dalam pengembangan").show();
                 break;
             case R.id.navigation_notifications:
 //                AppUtil.showToastShort(getApplicationContext(), "user");

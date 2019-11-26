@@ -139,14 +139,14 @@ public class PipelineHomeAdapater extends RecyclerView.Adapter<PipelineHomeAdapa
         });
 
         //for testing only
-        holder.iv_foto.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intent=new Intent(context, DaftarDisposisiActivity.class);
-                context.startActivity(intent);
-                return true;
-            }
-        });
+//        holder.iv_foto.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                Intent intent=new Intent(context, DaftarDisposisiActivity.class);
+//                context.startActivity(intent);
+//                return true;
+//            }
+//        });
         holder.bt_proses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

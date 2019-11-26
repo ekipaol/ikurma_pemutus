@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,6 +128,7 @@ public class PutusanAdapter extends RecyclerView.Adapter<PutusanAdapter.Pipeline
 
                 Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
                 intent.putExtra("data_putusan",datas);
+//                Log.d("datasdeviasi",datas.getFid_photo());
                 holder.iv_foto.getContext().startActivity(intent);
             }
         });

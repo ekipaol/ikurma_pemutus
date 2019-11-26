@@ -168,6 +168,71 @@ public class AppPreferences {
         return sharedPref.getString(Constants.Preferences.IS_LOGGED_IN, "no");
     }
 
+    public void setReadPreScreening(String status){
+        spEditor.putString(Constants.Preferences.READ_PRESCREENING,status);
+        spEditor.commit();
+    }
+    public String getReadPreScreening(){
+        return sharedPref.getString(Constants.Preferences.READ_PRESCREENING ,"no");
+    }
+
+    public void setReadDataLengkap(String status){
+        spEditor.putString(Constants.Preferences.READ_DATA_LENGKAP,status);
+        spEditor.commit();
+    }
+    public String getReadDataLengkap(){
+        return sharedPref.getString(Constants.Preferences.READ_DATA_LENGKAP, "no");
+    }
+    public void setReadSektorEkonomi(String status){
+        spEditor.putString(Constants.Preferences.READ_SEKTOR_EKONOMI,status);
+        spEditor.commit();
+    }
+    public String getReadSektorEkonomi(){
+        return sharedPref.getString(Constants.Preferences.READ_SEKTOR_EKONOMI, "no");
+    }
+    public void setReadLkn(String status){
+        spEditor.putString(Constants.Preferences.READ_LKN,status);
+        spEditor.commit();
+    }
+    public String getReadLkn(){
+        return sharedPref.getString(Constants.Preferences.READ_LKN, "no");
+    }
+    public void setReadRpc(String status){
+        spEditor.putString(Constants.Preferences.READ_RPC,status);
+        spEditor.commit();
+    }
+    public String getReadRpc(){
+        return sharedPref.getString(Constants.Preferences.READ_RPC, "no");
+    }
+    public void setReadAgunan(String status){
+        spEditor.putString(Constants.Preferences.READ_AGUNAN,status);
+        spEditor.commit();
+    }
+    public String getReadAgunan(){
+        return sharedPref.getString(Constants.Preferences.READ_AGUNAN, "no");
+    }
+    public void setReadScoring(String status){
+        spEditor.putString(Constants.Preferences.READ_SCORING,status);
+        spEditor.commit();
+    }
+    public String getReadScoring(){
+        return sharedPref.getString(Constants.Preferences.READ_SCORING, "no");
+    }
+    public void setReadKelengkapan(String status){
+        spEditor.putString(Constants.Preferences.READ_KELENGKAPAN,status);
+        spEditor.commit();
+    }
+    public String getReadKelengkapan(){
+        return sharedPref.getString(Constants.Preferences.READ_KELENGKAPAN, "no");
+    }
+    public void setIdFotoFormulir(String status){
+        spEditor.putString(Constants.Preferences.ID_FOTO_FORMULIR,status);
+        spEditor.commit();
+    }
+    public String getIdFotoFormulir(){
+        return sharedPref.getString(Constants.Preferences.ID_FOTO_FORMULIR, "0");
+    }
+
 
 
 
@@ -187,7 +252,7 @@ public class AppPreferences {
     }
 
     public String getUsername(){
-        return magicCrypt.decrypt(sharedPref.getString(Constants.Preferences.USERNAME, ""));
+        return (sharedPref.getString(Constants.Preferences.USERNAME, ""));
     }
 
     public void setNamaPengguna(String nama){
@@ -234,6 +299,21 @@ public class AppPreferences {
         return sharedPref.getString(Constants.Preferences.IS_ACTIVATED, "");
     }
 
+    public void setStatusKodeSkkPinca(String flag){
+        spEditor.putString(Constants.Preferences.STATUS_KODE_SKK_PINCA, flag);
+        spEditor.commit();
+    }
+    public String getStatusKodeSkkPinca(){
+        return sharedPref.getString(Constants.Preferences.STATUS_KODE_SKK_PINCA, "");
+    }
+
+    public void setStatusAmbilAlih(String flag){
+        spEditor.putString(Constants.Preferences.STATUS_AMBIL_ALIH, flag);
+        spEditor.commit();
+    }
+    public String getStatusAmbilAlih(){
+        return sharedPref.getString(Constants.Preferences.STATUS_AMBIL_ALIH, "TIDAK");
+    }
 
 
     public static void clearAll(Context context) {

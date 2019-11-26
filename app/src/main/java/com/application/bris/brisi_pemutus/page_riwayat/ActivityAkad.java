@@ -1,13 +1,11 @@
-package com.application.bris.brisi_pemutus.page_putusan.agunan_retry;
+package com.application.bris.brisi_pemutus.page_riwayat;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,28 +16,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import android.widget.TextView;
-
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.request.agunan.ReqAgunan;
-import com.application.bris.brisi_pemutus.api.model.request.agunan_terikat.ReqAgunanTerikat;
+import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqPutusan;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.model.agunan.Agunan;
-import com.application.bris.brisi_pemutus.model.agunan_terikat.AgunanTerikat;
-import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
-import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
-import com.application.bris.brisi_pemutus.page_putusan.adapters.AgunanTerikatAdapater;
-import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
-import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
+import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
+import com.application.bris.brisi_pemutus.page_riwayat.adapters.AdapterAkad;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
@@ -50,67 +37,47 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.tb_regular)
     Toolbar tb_regular;
-    @BindView(R.id.rv_listpipeline)
+    @BindView(R.id.rv_listakad)
     RecyclerView rv_listpipeline;
     @BindView(R.id.progressbar_loading)
     RelativeLayout progressbar_loading;
     @BindView(R.id.refresh)
     SwipeRefreshLayout swipeRefreshLayout;
+
     @BindView(R.id.animWhale)
     LottieAnimationView whale;
     @BindView(R.id.tvWhale)
-    TextView textWhale;
-    @BindView(R.id.bt_lanjut_agunan)
-    Button bt_lanjut_agunan;
-
+    TextView tvWhale;
     @BindView(R.id.ll_shimmer)
     ShimmerFrameLayout shimmer;
 
 
     private SearchView searchView;
-    List<AgunanTerikat> dataAgunan;
-
-    AgunanTerikatAdapater adapaterAgunan;
+    List<PutusanAkad> dataAkad;
+    AdapterAkad adapterAkad;
     LinearLayoutManager layoutPipeline;
     ApiClientAdapter apiClientAdapter;
 
-    AllDataFront superData;
-    AppPreferences appPreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agunan_terikat);
-
-        superData=(AllDataFront)getIntent().getSerializableExtra("superData");
+        setContentView(R.layout.activity_daftar_akad);
+        main();
         backgroundStatusBar();
-        initializeUser();
-        //set sektor ekonomi as already read
-        appPreferences = new AppPreferences(this);
-        appPreferences.setReadAgunan("yes");
+        String kodePutusan=getIntent().getStringExtra("kodePutusan");
+       initializeUser();
 
-        bt_lanjut_agunan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(AgunanTerikatActivity.this, ScoringActivity.class);
-                intent.putExtra("cif", Integer.parseInt(superData.getCif()));
-                intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
-                intent.putExtra("superData",superData);
-
-
-                //when back make this thing go to putusan frontmenu
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -125,7 +92,7 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setQueryHint("Cari Agunan");
+        searchView.setQueryHint("Nama Nasabah, Produk, dll ..");
 
         searchPipeline();
 
@@ -136,7 +103,7 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
     @Override
     protected void onRestart() {
         super.onRestart();
-        AgunanTerikatActivity.this.recreate();
+       ActivityAkad.this.recreate();
     }
 
     @Override
@@ -159,76 +126,73 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
         }
     }
 
-
-
-
-    public void initializeUser() {
+    public void main(){
         ButterKnife.bind(this);
         setSupportActionBar(tb_regular);
-        AppUtil.toolbarRegular(this, "Agunan Terikat");
-        ImageView backToolbar = findViewById(R.id.btn_back);
-        backToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AgunanTerikatActivity.this, PutusanFrontMenu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
-        });
+        apiClientAdapter=new ApiClientAdapter(ActivityAkad.this);
+        AppUtil.toolbarRegular(this, "Daftar Pembiayaan Di ADP/CS");
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setDistanceToTriggerSync(220);
-        apiClientAdapter = new ApiClientAdapter(AgunanTerikatActivity.this);
+    }
+
+    public void initializePipelineHome(){
+//        dataPipeline = getListPipelineHome();
+//        adapterAkad = new PutusanAdapter(this, dataPipeline);
+//        rv_listpipeline.setLayoutManager(new LinearLayoutManager(PutusanActivity.this));
+//        rv_listpipeline.setItemAnimator(new DefaultItemAnimator());
+//        rv_listpipeline.setAdapter(adapterAkad);
+    }
+
+    public void initializeUser() {
+        //  dataUser = getListUser();
+        //progressbar_loading.setVisibility(View.VISIBLE);
         shimmer.setVisibility(View.VISIBLE);
-        ReqAgunanTerikat req = new ReqAgunanTerikat();
-        AppPreferences appPreferences = new AppPreferences(AgunanTerikatActivity.this);
-        req.setIdCif(getIntent().getStringExtra("cif"));
-        req.setIdApl(getIntent().getStringExtra("idAplikasi"));
+        ReqPutusan req = new ReqPutusan();
+        AppPreferences appPreferences=new AppPreferences(ActivityAkad.this);
 
         //pantekan
-//        req.setIdCif("261932");
-//        req.setIdApl("206014");
+//        req.setUid("19230");
+
+        //data real
+        req.setUid(appPreferences.getUid());
 
 
 
-        Call<ParseResponseArr> call = apiClientAdapter.getApiInterface().listAgunan(req);
-
-        //kondisi jika dari halaman riwayat, maka agunan ditampilkan lagi dengan middletier khusus -CATATAN, UDAH GAK PAKE MIDDLETIER KHUSUS LAGI COY, udah disamain semua dari list pengikatan bisa
-        if(superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
-           call = apiClientAdapter.getApiInterface().listAgunan(req);
-        }
-
+        Call<ParseResponseArr> call = apiClientAdapter.getApiInterface().listPutusanAkad(req);
         call.enqueue(new Callback<ParseResponseArr>() {
             @Override
             public void onResponse(Call<ParseResponseArr> call, Response<ParseResponseArr> response) {
-                Log.d("status", String.valueOf(response.body().getStatus()));
                 //progressbar_loading.setVisibility(View.GONE);
                 shimmer.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
-                    Log.d("status", String.valueOf(response.body().getStatus()));
-                    Gson gson = new Gson();
                     if (response.body().getStatus().equalsIgnoreCase("00")) {
                         String listDataString = response.body().getData().toString();
-                        Type type = new TypeToken<List<AgunanTerikat>>() {
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<List<PutusanAkad>>() {
                         }.getType();
 
-                        dataAgunan = gson.fromJson(listDataString, type);
-                        adapaterAgunan = new AgunanTerikatAdapater(AgunanTerikatActivity.this, dataAgunan);
-                        rv_listpipeline.setLayoutManager(new LinearLayoutManager(AgunanTerikatActivity.this));
+                        dataAkad = gson.fromJson(listDataString, type);
+                        Log.d("akadActivity",listDataString);
+                        adapterAkad = new AdapterAkad(ActivityAkad.this, dataAkad);
+                        rv_listpipeline.setLayoutManager(new LinearLayoutManager(ActivityAkad.this));
                         rv_listpipeline.setItemAnimator(new DefaultItemAnimator());
-                        rv_listpipeline.setAdapter(adapaterAgunan);
+                        rv_listpipeline.setAdapter(adapterAkad);
 
 
-
-                        if (dataAgunan.size() == 0) {
+                        if (dataAkad.size() == 0) {
                             whale.setVisibility(View.VISIBLE);
-                            textWhale.setVisibility(View.VISIBLE);
+                            tvWhale.setVisibility(View.VISIBLE);
                         } else {
                             whale.setVisibility(View.GONE);
-                            textWhale.setVisibility(View.GONE);
+                            tvWhale.setVisibility(View.INVISIBLE);
                         }
-                    } else if (response.body().getStatus().equalsIgnoreCase("01"))  {
+                    }
+                    else if(response.body().getStatus().equalsIgnoreCase("01")){
                         whale.setVisibility(View.VISIBLE);
-                        textWhale.setVisibility(View.VISIBLE);
+                        tvWhale.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        Toasty.error(ActivityAkad.this,"Terjadi kesalahan");
                     }
                 }
             }
@@ -240,18 +204,20 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
         });
     }
 
+
+
     private void searchPipeline(){
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                adapaterAgunan.getFilter().filter(query);
+                adapterAkad.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
                 try {
-                    adapaterAgunan.getFilter().filter(query);
+                    adapterAkad.getFilter().filter(query);
                     return false;
                 }
                 catch (Exception e){
@@ -265,8 +231,6 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        AgunanTerikatActivity.this.recreate();
+        ActivityAkad.this.recreate();
     }
-
-
-    }
+}

@@ -1,5 +1,6 @@
 package com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,9 +24,16 @@ import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.request.kelengkapan_dokumen.ReqKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
+import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumen;
 import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen_agunan.KelengkapanDokumenAgunan;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
+import com.application.bris.brisi_pemutus.page_putusan.history_catatan.CatatanActivity;
+import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
+import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -159,6 +168,12 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
     @BindView(R.id.rv_agunan_kelengkapan)
     RecyclerView rv_agunan_kelengkapan;
 
+    @BindView(R.id.bt_lanjut_kelengkapan_data)
+    Button bt_lanjut_kelengkapan_data;
+
+    AllDataFront superData;
+
+
 
 
     private SearchView searchView;
@@ -169,6 +184,8 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
     KelengkapanDokumen dataKelengkapan;
     List<KelengkapanDokumenAgunan> dataKelengkapanAgunan;
 
+    AppPreferences appPreferences;
+
 
 
     @Override
@@ -176,9 +193,43 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kelengkapan_data);
 
+
+
         main();
         loadData();
         backgroundStatusBar();
+
+        //set kelengkapan as already read
+        appPreferences = new AppPreferences(this);
+        appPreferences.setReadKelengkapan("yes");
+
+        superData=(AllDataFront)getIntent().getSerializableExtra("superData");
+
+
+        if(superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
+            bt_lanjut_kelengkapan_data.setVisibility(View.GONE);
+        }
+
+        //kalau belum dilihat semua, gak bisa di putus
+        if(appPreferences.getReadKelengkapan().equalsIgnoreCase("no")||appPreferences.getReadPreScreening().equalsIgnoreCase("no")||appPreferences.getReadDataLengkap().equalsIgnoreCase("no")||appPreferences.getReadSektorEkonomi().equalsIgnoreCase("no")||appPreferences.getReadLkn().equalsIgnoreCase("no")||appPreferences.getReadRpc().equalsIgnoreCase("no")||appPreferences.getReadAgunan().equalsIgnoreCase("no")||appPreferences.getReadScoring().equalsIgnoreCase("no")){
+            bt_lanjut_kelengkapan_data.setVisibility(View.GONE);
+        }
+
+        bt_lanjut_kelengkapan_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ActivityKelengkapanDokumen.this, CatatanActivity.class);
+                intent.putExtra("cif", superData.getCif());
+                intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
+                intent.putExtra("fidStatus",superData.getFidStatus());
+                intent.putExtra("superData",superData);
+
+
+                //when back make this thing go to putusan frontmenu
+                startActivity(intent);
+            }
+        });
+
 
 
         //start onclick listeners - HANYA DIGUNAKAN DI AO, NONAKTIFKAN DI PEMUTUS
@@ -371,6 +422,15 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
         ButterKnife.bind(this);
         apiClientAdapter = new ApiClientAdapter(this);
         AppUtil.toolbarRegular(this, "Kelengkapan Dokumen");
+        ImageView backToolbar = findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityKelengkapanDokumen.this, PutusanFrontMenu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
 
         bt_ktp_kelengkapan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -419,6 +479,8 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
                             dataKelengkapanAgunan=gson.fromJson(fotoKategoriString,type2);
 
 
+                            //menyimpan id formulir ke preferences, agar di halaman putusan bisa diakses kembali
+                         appPreferences.setIdFotoFormulir(Integer.toString(dataKelengkapan.getId_foto_dokumen_aplikasi()));
                             //start kondisi checklist
                             if(dataKelengkapan.getSuratPernyataanNasabah()){
                                 cb_daftar_rencana_pembiayaan.setChecked(true);
@@ -584,7 +646,7 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ActivityKelengkapanDokumen.this,ActivityFotoKelengkapanDokumen.class);
+                Intent intent=new Intent(ActivityKelengkapanDokumen.this,ActivityPreviewFotoSecondary.class);
                 intent.putExtra("id_foto",id_foto);
                 startActivity(intent);
             }

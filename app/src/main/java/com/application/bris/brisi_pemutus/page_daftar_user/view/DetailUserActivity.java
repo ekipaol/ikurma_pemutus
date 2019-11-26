@@ -122,6 +122,7 @@ public class DetailUserActivity extends AppCompatActivity  {
         pin.setText(getIntent().getStringExtra("username"));
         uid.setText(getIntent().getStringExtra("uid"));
 
+
         if(getIntent().getStringExtra("sk")!=null){
             sk.setText(getIntent().getStringExtra("sk"));
         }
@@ -170,14 +171,8 @@ public class DetailUserActivity extends AppCompatActivity  {
                         req.setUid(Integer.parseInt(uid.getText().toString())); //UID diisi 0 jika ingin insert, diisi selain 0 jika update
                         req.setNoPegawai(nik.getText().toString());
                         req.setUsername(pin.getText().toString());
+                        req.setFid_role(getIntent().getIntExtra("fidRole",0));
 
-                        //conditioning insert update
-                       if(apppref.getFidRole().equalsIgnoreCase("71")){
-                           req.setFid_role(8);
-                       }
-                        else if(apppref.getFidRole().equalsIgnoreCase("79")){
-                            req.setFid_role(71);
-                        }
 
                         if(password.getText().length()>0){
                             req.setPassword(password.getText().toString());
@@ -358,7 +353,11 @@ public class DetailUserActivity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         //uncheck this when everything is ok
-        getMenuInflater().inflate(R.menu.detail_user_menu, menu);
+        AppPreferences appPreferences=new AppPreferences(this);
+        if (appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
+            getMenuInflater().inflate(R.menu.detail_user_menu, menu);
+        }
+//        getMenuInflater().inflate(R.menu.detail_user_menu, menu);
         return true;
     }
 
@@ -374,7 +373,7 @@ public class DetailUserActivity extends AppCompatActivity  {
 
                 //MEMBUAT FIELD YANG BISA DIEDIT AGAR BISA DIEDIT
                 Tnama.setEnabled(true);
-                Tpin.setEnabled(true);
+                Tpin.setEnabled(false);
                 Tnik.setEnabled(false);
 
                 //MENGHILANGKAN FIELD YANG TAK BISA DIEDIT KECUALI FIELD UID
@@ -403,10 +402,10 @@ public class DetailUserActivity extends AppCompatActivity  {
                     }
                 });
                 return true;
-            case R.id.detail_menu_delete:
-//                Toasty.info(DetailUserActivity.this,"Delete", Toast.LENGTH_LONG).show();
-                deleteAom();
-                return true;
+//            case R.id.detail_menu_delete:
+////                Toasty.info(DetailUserActivity.this,"Delete", Toast.LENGTH_LONG).show();
+//                deleteAom();
+//                return true;
 //            case R.id.detail_menu_maintenance:
 //                Toasty.info(DetailUserActivity.this,"Maintenance", Toast.LENGTH_LONG).show();
 //                Intent intent=new Intent(DetailUserActivity.this,ProsesMaintenanceUser.class);

@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,19 +30,24 @@ import com.application.bris.brisi_pemutus.model.hotprospek.HotProspek;
 import com.application.bris.brisi_pemutus.model.info_cs_pencairan.InfoCs;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.ActivityAgunanRetry;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
 import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
 
 import com.application.bris.brisi_pemutus.page_putusan.history.HistoryActivity;
+import com.application.bris.brisi_pemutus.page_putusan.history_catatan.CatatanActivity;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
+import com.application.bris.brisi_pemutus.page_putusan.menu.MenuDaftarPutusanActivity;
 import com.application.bris.brisi_pemutus.page_putusan.prescreening.PrescreeningActivity;
 import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
 import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
 import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
+import com.application.bris.brisi_pemutus.page_riwayat.ActivityMenuRiwayat;
 import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -71,10 +77,12 @@ import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 public class PutusanFrontMenu extends AppCompatActivity {
     CardView prescreening, datalengkap, lkn, agunan, scoring, history, capsule, rpc, sektor_ekonomi, kelengkapan_dokumen;
     LinearLayout bottom_sheet;
-    ImageView check_prescreening, check_datalengkap, check_lkn, check_agunan, check_scoring, foto;
+    ImageView check_prescreening, check_datalengkap, check_lkn, check_agunan, check_scoring,check_rpc,check_sektor_ekonomi,check_kelengkapan, foto;
     ImageView capsule_close;
     ExtendedEditText catatan;
     Boolean statusPutusan = false;
+
+     AllDataFront superData;
 
     //textviews
     TextView nama, tenor, produk, plafon, id_aplikasi, cif_syiar, tujuan_penggunaan,no_akad;
@@ -107,17 +115,41 @@ public class PutusanFrontMenu extends AppCompatActivity {
     InfoCs dataCs;
     List<CsModel> cekCs;
     String adaCs="belum";
+    AppPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.putusan_front_menu);
         apiClientAdapter = new ApiClientAdapter(PutusanFrontMenu.this);
+        appPreferences=new AppPreferences(this);
+        //membuat kondisi preference dalam kondisi default, tidak ada yang diceklis
+        setFrontPreferenceDefault();
         ButterKnife.bind(this);
         setSupportActionBar(tb_regular);
         AppUtil.toolbarRegular(this, "Putusan Pembiayaan");
 
+        //toolbar back configuration, hard to explain, just ask to mr eki. In short, this is needed so the activity flows as eki wants
+        ImageView backToolbar=findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getIntent().getSerializableExtra("data_putusan_akad")!=null){
+                    Intent intent=new Intent(PutusanFrontMenu.this, ActivityMenuRiwayat.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent=new Intent(PutusanFrontMenu.this, MenuDaftarPutusanActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                    startActivity(intent);
+                }
 
+            }
+        });
+
+        //biar keyboard gak nongol di awal activity kalau ada edittext
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         //instansiasi objeck icon check
         check_prescreening = findViewById(R.id.check_prescreening);
@@ -125,6 +157,12 @@ public class PutusanFrontMenu extends AppCompatActivity {
         check_lkn = findViewById(R.id.check_lkn);
         check_agunan = findViewById(R.id.check_agunan);
         check_scoring = findViewById(R.id.check_scoring);
+        check_rpc=findViewById(R.id.check_rpc);
+        check_sektor_ekonomi=findViewById(R.id.check_sektor_ekonomi);
+        check_kelengkapan=findViewById(R.id.check_kelengkapan_data);
+
+
+
 
         //onclick checklist
         check_prescreening.setOnClickListener(new View.OnClickListener() {
@@ -167,21 +205,34 @@ public class PutusanFrontMenu extends AppCompatActivity {
         //set views dengan data dan kondisi menerima dari putusan atau dari riwayat akad
         if(getIntent().getSerializableExtra("data_putusan")!=null){
             dataPutusan = (Putusan) getIntent().getSerializableExtra("data_putusan");
+//            Log.d("datasdeviasifront",dataPutusan.getFid_photo());
+            initializeDataFront();
+            setSuperData();
             setDataPutusan(dataPutusan);
+
             iv_foto_putusan_front.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(PutusanFrontMenu.this, ActivityFotoKelengkapanDokumen.class);
-                    intent.putExtra("id_foto",dataPutusan.getFid_photo());
+                    intent.putExtra("id_foto",Integer.parseInt(dataPutusan.getFid_photo()));
                     startActivity(intent);
                 }
             });
         }
         else if (getIntent().getSerializableExtra("data_putusan_akad")!=null){
             dataPutusanAkad = (PutusanAkad) getIntent().getSerializableExtra("data_putusan_akad");
+            initializeDataFrontAkad();
+            setSuperDataAkad();
             setDataPutusanAkad(dataPutusanAkad);
+
             cv_nomor_akad.setVisibility(View.VISIBLE);
-            autoTv_no_akad.setText(dataPutusanAkad.getNO_AKAD());
+            if(dataPutusanAkad.getNO_AKAD()==null){
+                cv_nomor_akad.setVisibility(View.GONE);
+            }
+            else{
+                autoTv_no_akad.setText(dataPutusanAkad.getNO_AKAD());
+            }
+
             btPutusan.setVisibility(View.GONE);
 
             iv_foto_putusan_front.setOnClickListener(new View.OnClickListener() {
@@ -243,16 +294,16 @@ public class PutusanFrontMenu extends AppCompatActivity {
         final BottomSheetBehavior behaviorBottomSheet = BottomSheetBehavior.from(bottom_sheet);
 
         //instansiasi textview & foto
-        nama = findViewById(R.id.tv_nama);
-        produk = findViewById(R.id.tv_produk);
-        tenor = findViewById(R.id.tv_tenor);
-        plafon = findViewById(R.id.tv_plafon);
-        status = findViewById(R.id.autoTv_status);
-        id_aplikasi = findViewById(R.id.tv_id_aplikasi);
-        cif_syiar = findViewById(R.id.tv_cif_syiar);
-        tujuan_penggunaan = findViewById(R.id.tv_tujuan_penggunaan);
-        foto = findViewById(R.id.iv_foto_putusan_front);
-        no_akad=findViewById(R.id.tv_no_akad_front_menu);
+//        nama = findViewById(R.id.tv_nama);
+//        produk = findViewById(R.id.tv_produk);
+//        tenor = findViewById(R.id.tv_tenor);
+//        plafon = findViewById(R.id.tv_plafon);
+//        status = findViewById(R.id.autoTv_status);
+//        id_aplikasi = findViewById(R.id.tv_id_aplikasi);
+//        cif_syiar = findViewById(R.id.tv_cif_syiar);
+//        tujuan_penggunaan = findViewById(R.id.tv_tujuan_penggunaan);
+//        foto = findViewById(R.id.iv_foto_putusan_front);
+//        no_akad=findViewById(R.id.tv_no_akad_front_menu);
 
 
         prescreening = findViewById(R.id.cv_prescreening);
@@ -308,6 +359,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 Intent intent = new Intent(PutusanFrontMenu.this, ActivityDataLengkap.class);
                 intent.putExtra("cif", cif_syiar.getText());
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+                intent.putExtra("superData", superData);
                 startActivity(intent);
             }
         });
@@ -323,7 +375,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 intent.putExtra("tujuanPembiayaan", tujuan_penggunaan.getText());
                 intent.putExtra("jw", Integer.parseInt(dataPutusan.getTenor()));
                 intent.putExtra("plafond", dataPutusan.getPlafond_induk());
-
+                intent.putExtra("superData",superData);
                 //pantekan
 //                intent.putExtra("cif", "81857");
 //                intent.putExtra("idAplikasi", "101694");
@@ -342,6 +394,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 Intent intent = new Intent(PutusanFrontMenu.this, HistoryActivity.class);
                 intent.putExtra("cif", cif_syiar.getText());
                 intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
+                intent.putExtra("superData",superData);
                 startActivity(intent);
             }
         });
@@ -373,6 +426,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 intent.putExtra("cif", cif_syiar.getText());
                 intent.putExtra("idAplikasi", id_aplikasi.getText()).toString();
                 intent.putExtra("idAgunan", dataPutusan.getFid_agunan());
+                intent.putExtra("superData",superData);
 
                 //pantekan
 //                intent.putExtra("cif", "81857");
@@ -409,6 +463,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
 
                 //real data
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+                intent.putExtra("superData",superData);
 
                 //pantekan
 //                intent.putExtra("idAplikasi", "101694");
@@ -420,8 +475,9 @@ public class PutusanFrontMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PutusanFrontMenu.this, PrescreeningActivity.class);
-
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+                intent.putExtra("superData",superData);
+                intent.putExtra("dataPutusan",dataPutusan);
                 startActivity(intent);
             }
         });
@@ -436,6 +492,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
                 intent.putExtra("id_tujuan", dataPutusan.getId_tujuan());
                 intent.putExtra("tujuanPembiayaan", tujuan_penggunaan.getText().toString());
+                intent.putExtra("superData",superData);
 
                 //pantekan
 //                intent.putExtra("cif", 81857);
@@ -454,6 +511,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
 
                 //real data
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+                intent.putExtra("superData",superData);
 
                 //pantekan
 //                intent.putExtra("idAplikasi", "101694");
@@ -469,6 +527,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 //real data
                 intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
                 intent.putExtra("cif", Integer.parseInt(cif_syiar.getText().toString()));
+                intent.putExtra("superData",superData);
 
 //                //pantekan
 //                intent.putExtra("cif", 81857);
@@ -483,8 +542,24 @@ public class PutusanFrontMenu extends AppCompatActivity {
         btPutusan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                catatanBox.setEnabled(true);
-                behaviorBottomSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+
+                //kalau belum dilihat semua, gak bisa di putus
+                if(appPreferences.getReadKelengkapan().equalsIgnoreCase("no")||appPreferences.getReadPreScreening().equalsIgnoreCase("no")||appPreferences.getReadDataLengkap().equalsIgnoreCase("no")||appPreferences.getReadSektorEkonomi().equalsIgnoreCase("no")||appPreferences.getReadLkn().equalsIgnoreCase("no")||appPreferences.getReadRpc().equalsIgnoreCase("no")||appPreferences.getReadAgunan().equalsIgnoreCase("no")||appPreferences.getReadScoring().equalsIgnoreCase("no")){
+                   Toasty.info(PutusanFrontMenu.this,"Harus melihat seluruh data nasabah sebelum memutus").show();
+                }
+                else{
+                    Intent intent = new Intent(PutusanFrontMenu.this, CatatanActivity.class);
+                    intent.putExtra("cif", cif_syiar.getText());
+                    intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
+                    intent.putExtra("fidStatus",dataPutusan.getFid_status());
+                    intent.putExtra("superData",superData);
+                    startActivity(intent);
+                }
+                //alih fungsi tombol putusan jadi pindah ke activity catatan dulu
+
+//                catatanBox.setEnabled(true);
+//                behaviorBottomSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
 
@@ -503,12 +578,12 @@ public class PutusanFrontMenu extends AppCompatActivity {
 
 
 
-        nama.setText(dataPutusan.getNama_nasabah());
-        produk.setText(dataPutusan.getNama_produk());
-        plafon.setText(AppUtil.parseRupiah(dataPutusan.getPlafond_induk()));
-        cif_syiar.setText(dataPutusan.getCif_appel());
-        id_aplikasi.setText(dataPutusan.getId_aplikasi());
-        tujuan_penggunaan.setText(dataPutusan.getTujuan_penggunaan());
+//        nama.setText(dataPutusan.getNama_nasabah());
+//        produk.setText(dataPutusan.getNama_produk());
+//        plafon.setText(AppUtil.parseRupiah(dataPutusan.getPlafond_induk()));
+//        cif_syiar.setText(dataPutusan.getCif_appel());
+//        id_aplikasi.setText(dataPutusan.getId_aplikasi());
+//        tujuan_penggunaan.setText(dataPutusan.getTujuan_penggunaan());
 
 
         if (dataPutusan.getTenor().equalsIgnoreCase("0")) {
@@ -523,6 +598,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 tenor.setText("Tenor " + dataPutusan.getTenor() + " bulan");
             }
         }
+        status.setText(dataPutusan.getStatus_aplikasi());
         status.setText(dataPutusan.getStatus_aplikasi());
 
         //glide options for photo
@@ -802,17 +878,17 @@ public class PutusanFrontMenu extends AppCompatActivity {
         bottom_sheet = findViewById(R.id.bottom_sheet);
         final BottomSheetBehavior behaviorBottomSheet = BottomSheetBehavior.from(bottom_sheet);
 
-        //instansiasi textview & foto
-        nama = findViewById(R.id.tv_nama);
-        produk = findViewById(R.id.tv_produk);
-        tenor = findViewById(R.id.tv_tenor);
-        plafon = findViewById(R.id.tv_plafon);
-        status = findViewById(R.id.autoTv_status);
-        id_aplikasi = findViewById(R.id.tv_id_aplikasi);
-        cif_syiar = findViewById(R.id.tv_cif_syiar);
-        tujuan_penggunaan = findViewById(R.id.tv_tujuan_penggunaan);
-        foto = findViewById(R.id.iv_foto_putusan_front);
-        no_akad=findViewById(R.id.tv_no_akad_front_menu);
+//        //instansiasi textview & foto
+//        nama = findViewById(R.id.tv_nama);
+//        produk = findViewById(R.id.tv_produk);
+//        tenor = findViewById(R.id.tv_tenor);
+//        plafon = findViewById(R.id.tv_plafon);
+//        status = findViewById(R.id.autoTv_status);
+//        id_aplikasi = findViewById(R.id.tv_id_aplikasi);
+//        cif_syiar = findViewById(R.id.tv_cif_syiar);
+//        tujuan_penggunaan = findViewById(R.id.tv_tujuan_penggunaan);
+//        foto = findViewById(R.id.iv_foto_putusan_front);
+//        no_akad=findViewById(R.id.tv_no_akad_front_menu);
 
 
         prescreening = findViewById(R.id.cv_prescreening);
@@ -865,6 +941,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 Intent intent = new Intent(PutusanFrontMenu.this, ActivityDataLengkap.class);
                 intent.putExtra("cif", cif_syiar.getText());
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+                intent.putExtra("superData", superData);
                 startActivity(intent);
             }
         });
@@ -878,6 +955,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 intent.putExtra("tujuanPembiayaan", tujuan_penggunaan.getText());
                 intent.putExtra("jw", Integer.parseInt(dataPutusan.getJangka_waktu()));
                 intent.putExtra("plafond", dataPutusan.getPlafond_induk());
+                intent.putExtra("superData",superData);
                 startActivity(intent);
                 // Toast.makeText(PutusanFrontMenu.this, "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
@@ -889,6 +967,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 Intent intent = new Intent(PutusanFrontMenu.this, HistoryActivity.class);
                 intent.putExtra("cif", cif_syiar.getText());
                 intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
+                intent.putExtra("superData",superData);
                 startActivity(intent);
             }
         });
@@ -919,27 +998,11 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 intent.putExtra("idAplikasi", id_aplikasi.getText()).toString();
                 intent.putExtra("idAgunan", dataPutusan.getFid_agunan());
                 intent.putExtra("menuAsal", "riwayat");
+                intent.putExtra("superData",superData);
                 startActivity(intent);
             }
         });
-//        agunan.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                //nampilin google maps berdasar kordinat
-//
-////                String uri = String.format(Locale.ENGLISH, "geo:59,915494,30,409456");
-////                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-////                startActivity(intent);
-//
-//                //ganti activity ke map
-//                Intent intent = new Intent(PutusanFrontMenu.this, MapsActivity.class);
-//              //  startActivity(intent);
-//                startActivityForResult(intent,1);
-//
-//
-//                return true;
-//            }
-//        });
+
 
         kelengkapan_dokumen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -947,6 +1010,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 Intent intent = new Intent(PutusanFrontMenu.this, ActivityKelengkapanDokumen.class);
 //                intent.putExtra("cif",cif_syiar.getText());
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+                intent.putExtra("superData",superData);
                 startActivity(intent);
             }
         });
@@ -956,6 +1020,8 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 Intent intent = new Intent(PutusanFrontMenu.this, PrescreeningActivity.class);
 
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+
+                intent.putExtra("superData",superData);
                 startActivity(intent);
             }
         });
@@ -968,6 +1034,8 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
                 intent.putExtra("id_tujuan", dataPutusan.getId_tujuan());
                 intent.putExtra("tujuanPembiayaan", tujuan_penggunaan.getText().toString());
+                intent.putExtra("superData",superData);
+
                 startActivity(intent);
             }
         });
@@ -977,6 +1045,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PutusanFrontMenu.this, RpcActivity.class);
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
+                intent.putExtra("superData",superData);
                 startActivity(intent);
             }
         });
@@ -986,6 +1055,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
                 Intent intent = new Intent(PutusanFrontMenu.this, ScoringActivity.class);
                 intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
                 intent.putExtra("cif", Integer.parseInt(cif_syiar.getText().toString()));
+                intent.putExtra("superData",superData);
                 startActivity(intent);
                 // Toast.makeText(PutusanFrontMenu.this, "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
@@ -996,8 +1066,15 @@ public class PutusanFrontMenu extends AppCompatActivity {
         btPutusan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                catatanBox.setEnabled(true);
-                behaviorBottomSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+//                catatanBox.setEnabled(true);
+//                behaviorBottomSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+//                Intent intent = new Intent(PutusanFrontMenu.this, CatatanActivity.class);
+//                intent.putExtra("cif", cif_syiar.getText());
+//                intent.putExtra("idAplikasi", Integer.parseInt(id_aplikasi.getText().toString()));
+//                intent.putExtra("fidStatus",dataPutusanAkad.getFid_status());
+//                intent.putExtra("superData",superData);
+//                startActivity(intent);
             }
         });
 
@@ -1015,7 +1092,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
 
 
         nama.setText(dataPutusan.getNama_nasabah());
-        produk.setText(dataPutusan.getTipe_produk());
+        produk.setText(dataPutusan.getNAMA_PRODUK());
         plafon.setText(AppUtil.parseRupiah(dataPutusan.getPlafond_induk()));
         cif_syiar.setText(dataPutusan.getCif_appel());
         id_aplikasi.setText(dataPutusan.getId_aplikasi());
@@ -1566,8 +1643,156 @@ public class PutusanFrontMenu extends AppCompatActivity {
 
     }
 
+    private void setSuperData(){
+         superData=new AllDataFront();
+        superData.setIdAplikasi(id_aplikasi.getText().toString());
+        superData.setCif(cif_syiar.getText().toString());
+        superData.setFidStatus(dataPutusan.getFid_status());
+        superData.setTujuanPembiayaan(tujuan_penggunaan.getText().toString());
+        superData.setJw(dataPutusan.getTenor());
+        superData.setPlafond(dataPutusan.getPlafond_induk());
+        superData.setIdAgunan(dataPutusan.getFid_agunan());
+        superData.setIdTujuan(dataPutusan.getId_tujuan());
+        superData.setNamaNasabah(nama.getText().toString());
+        superData.setNamaProduk(dataPutusan.getNama_produk());
+        if(dataPutusan.getNama_produk()!=null){
+            superData.setNamaProduk(dataPutusan.getNama_produk());
+        }
+        if(dataPutusan.getKODE_PRODUK()!=null){
+            superData.setKodeProduk(dataPutusan.getKODE_PRODUK());
+        }
+        superData.setAsalHalaman("putusan");
+    }
+
+    private void setSuperDataAkad(){
+        superData=new AllDataFront();
+        superData.setIdAplikasi(id_aplikasi.getText().toString());
+        superData.setCif(cif_syiar.getText().toString());
+        superData.setFidStatus(dataPutusanAkad.getFid_status());
+        superData.setTujuanPembiayaan(tujuan_penggunaan.getText().toString());
+        superData.setJw(dataPutusanAkad.getJangka_waktu());
+        superData.setPlafond(dataPutusanAkad.getPlafond_induk());
+        superData.setIdAgunan(dataPutusanAkad.getFid_agunan());
+        superData.setIdTujuan(dataPutusanAkad.getId_tujuan());
+        superData.setNamaNasabah(nama.getText().toString());
+        if(dataPutusanAkad.getNAMA_PRODUK()!=null){
+            superData.setNamaProduk(dataPutusanAkad.getNAMA_PRODUK());
+        }
+
+        if(dataPutusanAkad.getKODE_PRODUK()!=null){
+            superData.setKodeProduk(dataPutusanAkad.getKODE_PRODUK());
+        }
+        superData.setAsalHalaman("riwayat");
+    }
+
+    private void initializeDataFront(){
+        nama = findViewById(R.id.tv_nama);
+        produk = findViewById(R.id.tv_produk);
+        tenor = findViewById(R.id.tv_tenor);
+        plafon = findViewById(R.id.tv_plafon);
+        status = findViewById(R.id.autoTv_status);
+        id_aplikasi = findViewById(R.id.tv_id_aplikasi);
+        cif_syiar = findViewById(R.id.tv_cif_syiar);
+        tujuan_penggunaan = findViewById(R.id.tv_tujuan_penggunaan);
+        foto = findViewById(R.id.iv_foto_putusan_front);
+        no_akad=findViewById(R.id.tv_no_akad_front_menu);
+
+        nama.setText(dataPutusan.getNama_nasabah());
+
+        //coba ambil nama produk bunggg, di prosedurnya tampilin nama produk
+        produk.setText(dataPutusan.getNama_produk());
+        plafon.setText(AppUtil.parseRupiah(dataPutusan.getPlafond_induk()));
+        cif_syiar.setText(dataPutusan.getCif_appel());
+        id_aplikasi.setText(dataPutusan.getId_aplikasi());
+        tujuan_penggunaan.setText(dataPutusan.getTujuan_penggunaan());
+    }
+
+    private void initializeDataFrontAkad(){
+        //instansiasi textview & foto
+        nama = findViewById(R.id.tv_nama);
+        produk = findViewById(R.id.tv_produk);
+        tenor = findViewById(R.id.tv_tenor);
+        plafon = findViewById(R.id.tv_plafon);
+        status = findViewById(R.id.autoTv_status);
+        id_aplikasi = findViewById(R.id.tv_id_aplikasi);
+        cif_syiar = findViewById(R.id.tv_cif_syiar);
+        tujuan_penggunaan = findViewById(R.id.tv_tujuan_penggunaan);
+        foto = findViewById(R.id.iv_foto_putusan_front);
+        no_akad=findViewById(R.id.tv_no_akad_front_menu);
+
+        nama.setText(dataPutusanAkad.getNama_nasabah());
+        produk.setText(dataPutusanAkad.getNAMA_PRODUK());
+        plafon.setText(AppUtil.parseRupiah(dataPutusanAkad.getPlafond_induk()));
+        cif_syiar.setText(dataPutusanAkad.getCif_appel());
+        id_aplikasi.setText(dataPutusanAkad.getId_aplikasi());
+        tujuan_penggunaan.setText(dataPutusanAkad.getTujuan_penggunaan());
+    }
+
+    private void  setFrontPreferenceDefault(){
+        appPreferences.setReadPreScreening("no");
+        appPreferences.setReadDataLengkap("no");
+        appPreferences.setReadSektorEkonomi("no");
+        appPreferences.setReadLkn("no");
+        appPreferences.setReadRpc("no");
+        appPreferences.setReadAgunan("no");
+        appPreferences.setReadScoring("no");
+        appPreferences.setReadKelengkapan("no");
+        appPreferences.setIdFotoFormulir("0");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //memberi ceklis di modul yang sudah dilihat user, berdasarkan preference (hanya di halaman putusan. tidak di halaman riwayat
+        if(!superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
+            if(appPreferences.getReadPreScreening().equalsIgnoreCase("yes")){
+                check_prescreening.setVisibility(View.VISIBLE);
+            }
+
+            if(appPreferences.getReadDataLengkap().equalsIgnoreCase("yes")){
+                check_datalengkap.setVisibility(View.VISIBLE);
+            }
+
+            if(appPreferences.getReadSektorEkonomi().equalsIgnoreCase("yes")){
+                check_sektor_ekonomi.setVisibility(View.VISIBLE);
+            }
+            if(appPreferences.getReadLkn().equalsIgnoreCase("yes")){
+                check_lkn.setVisibility(View.VISIBLE);
+            }
+            if(appPreferences.getReadRpc().equalsIgnoreCase("yes")){
+                check_rpc.setVisibility(View.VISIBLE);
+            }
+            if(appPreferences.getReadAgunan().equalsIgnoreCase("yes")){
+                check_agunan.setVisibility(View.VISIBLE);
+            }
+            if(appPreferences.getReadScoring().equalsIgnoreCase("yes")){
+                check_scoring.setVisibility(View.VISIBLE);
+            }
+            if(appPreferences.getReadKelengkapan().equalsIgnoreCase("yes")){
+                check_kelengkapan.setVisibility(View.VISIBLE);
+            }
+        }
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if(getIntent().getSerializableExtra("data_putusan_akad")!=null){
+            Intent intent=new Intent(PutusanFrontMenu.this, ActivityMenuRiwayat.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+            startActivity(intent);
+        }
+        else{
+            Intent intent=new Intent(PutusanFrontMenu.this, MenuDaftarPutusanActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+            startActivity(intent);
+        }
+    }
+}
 
 

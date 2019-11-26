@@ -1,11 +1,13 @@
 package com.application.bris.brisi_pemutus.page_putusan.scoring;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,8 +22,15 @@ import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.data_pembiayaan.DataPbySebelumPutusan;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumen;
 import com.application.bris.brisi_pemutus.model.rpc.Rpc;
 import com.application.bris.brisi_pemutus.model.scoring.Scoring;
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityKelengkapanDokumen;
+import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
+import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -130,11 +139,15 @@ public class ScoringActivity extends AppCompatActivity  {
     @BindView(R.id.progressbar_loading)
     RelativeLayout loading;
 
+    @BindView(R.id.bt_lanjut_scoring)
+    Button bt_lanjut_scoring;
+
 
     private int idAplikasi;
     private int cif;
     private ApiClientAdapter apiClientAdapter;
     private AppPreferences appPreferences;
+    AllDataFront superData;
 
     private Scoring data;
 
@@ -163,11 +176,38 @@ public class ScoringActivity extends AppCompatActivity  {
         setContentView(R.layout.ao_activity_scoring);
         ButterKnife.bind(this);
         apiClientAdapter = new ApiClientAdapter(this);
+
+        //set scoring as already read
         appPreferences = new AppPreferences(this);
+        appPreferences.setReadScoring("yes");
+
         idAplikasi = getIntent().getIntExtra("idAplikasi", 0);
         cif = getIntent().getIntExtra("cif", 0);
+        superData=(AllDataFront)getIntent().getSerializableExtra("superData");
         backgroundStatusBar();
         AppUtil.toolbarRegular(this, "Scoring");
+        ImageView backToolbar = findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScoringActivity.this, PutusanFrontMenu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+
+        bt_lanjut_scoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ScoringActivity.this, ActivityKelengkapanDokumen.class);
+                intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                intent.putExtra("superData",superData);
+
+
+                //when back make this thing go to putusan frontmenu
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -245,7 +285,12 @@ public class ScoringActivity extends AppCompatActivity  {
 
     public void setData(){
 
-        et_rpcratio.setText(KeyValue.getKeyRpcRatio(String.valueOf(data.getrPCRATIO())));
+        //ini dikasih if karena belum bisa mendapatkan kode produk di putusanfront menu
+        if(superData.getKodeProduk()!=null){
+            et_rpcratio.setText(KeyValue.getKeyRpcRatio(superData.getKodeProduk(),String.valueOf(data.getrPCRATIO())));
+        }
+
+
         et_ratio_agunan.setText(KeyValue.getKeyAgunanRatio(String.valueOf(data.getRatioAgunan())));
         et_reputasiusaha.setText(KeyValue.getKeyReputasiUsaha(String.valueOf(data.getrEPUTASIUSAHA())));
         et_riwayathubunganbank.setText(KeyValue.getKeyRiwayatHubdgnBank(String.valueOf(data.gethUBUNGANBANK())));

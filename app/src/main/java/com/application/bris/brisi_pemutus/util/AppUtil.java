@@ -37,6 +37,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import me.toptas.fancyshowcase.FancyShowCaseView;
+import me.toptas.fancyshowcase.FocusShape;
+
 /**
  * Created by Idong
  */
@@ -265,6 +268,27 @@ public class AppUtil {
         return kursIDN.format(amountDouble);
     }
 
+    public static String parseRupiahLong(Long amount){
+        Double amountDouble = new Double(amount);
+        DecimalFormat kursIDN = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRP = new DecimalFormatSymbols();
+        formatRP.setCurrencySymbol("Rp. ");
+        formatRP.setMonetaryDecimalSeparator(',');
+        formatRP.setGroupingSeparator('.');
+        kursIDN.setDecimalFormatSymbols(formatRP);
+        return kursIDN.format(amountDouble);
+    }
+    public static String parseRupiahDouble(Double amount){
+        Double amountDouble = new Double(amount);
+        DecimalFormat kursIDN = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRP = new DecimalFormatSymbols();
+        formatRP.setCurrencySymbol("Rp. ");
+        formatRP.setMonetaryDecimalSeparator(',');
+        formatRP.setGroupingSeparator('.');
+        kursIDN.setDecimalFormatSymbols(formatRP);
+        return kursIDN.format(amountDouble);
+    }
+
     public static Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -315,6 +339,25 @@ public class AppUtil {
         Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
         img.recycle();
         return rotatedImg;
+    }
+
+    public static void tutorialOverlay(Activity activity,View view,String keterangan,String unique_id){
+        //TUTORIAL OVERLAYY
+        //unique id akan disimpan ke preference otomatis oleh library. Dan tutorial akan ditampilkan sekali aja.
+        new FancyShowCaseView.Builder(activity)
+                .focusOn(view)
+                .title(keterangan)
+                .focusShape(FocusShape.ROUNDED_RECTANGLE)
+                .roundRectRadius(90)
+                .enableAutoTextPosition()
+
+                //hide below to always show the tutorial overlay
+                .showOnce(unique_id)
+                .build()
+                .show();
+
+
+        //END OF TUTORIAL OVERLAYYY
     }
 
 

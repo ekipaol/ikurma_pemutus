@@ -42,6 +42,16 @@ public class Putusan implements Serializable {
     private String tujuan_penggunaan;
     @SerializedName("NAMA_PRODUK")
     private String nama_produk;
+    @SerializedName("KODE_PRODUK")
+    private String KODE_PRODUK;
+
+    public String getKODE_PRODUK() {
+        return KODE_PRODUK;
+    }
+
+    public void setKODE_PRODUK(String KODE_PRODUK) {
+        this.KODE_PRODUK = KODE_PRODUK;
+    }
 
     public String getNama_produk() {
         return nama_produk;

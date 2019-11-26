@@ -9,9 +9,12 @@ public class Ao {
     private String uid;
     @SerializedName("JABATAN")
     private String jabatan;
+    @SerializedName("FID_ROLE")
+    private String fid_role;
+    @SerializedName("KODE_SKK")
+    private String kode_skk;
     @SerializedName("STATUS")
     private String status;
-
     @SerializedName("SBDESC")
     private String sbdesc;
     @SerializedName("FID_JHOOFF")
@@ -57,15 +60,20 @@ public class Ao {
         this.username = username;
     }
 
-
-
-
     public String getUid() {
         return uid;
     }
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getFid_role() {
+        return fid_role;
+    }
+
+    public String getKode_skk () {
+        return kode_skk;
     }
 
     public String getJabatan() {
@@ -83,7 +91,6 @@ public class Ao {
     public void setStatus(String status) {
         this.status = status;
     }
-
 
     public String getSbdesc() {
         return sbdesc;

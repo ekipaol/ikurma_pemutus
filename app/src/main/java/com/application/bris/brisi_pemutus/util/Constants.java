@@ -34,7 +34,22 @@ public class Constants {
 		public static final String KODE_AO = "kode_ao";
 		public static final String KANTOR = "kantor";
 		public static final String IS_ACTIVATED = "is_activated";
-		public static final String IS_LOGGED_IN = "yes";
+		public static final String IS_LOGGED_IN = "logged_in";
+
+		public static final String READ_PRESCREENING = "readprescreening";
+		public static final String READ_DATA_LENGKAP = "readdatalengkap";
+		public static final String READ_SEKTOR_EKONOMI = "readsektorekonomi";
+		public static final String READ_LKN = "readlkn";
+		public static final String READ_RPC = "readrpc";
+		public static final String READ_AGUNAN = "readagunan";
+		public static final String READ_SCORING = "readscoring";
+		public static final String READ_KELENGKAPAN = "readkelengkapan";
+
+		public static final String ID_FOTO_FORMULIR = "idfotoformulir";
+
+		public static final String STATUS_KODE_SKK_PINCA = "statusKodeSkkPinca";
+
+		public static final String STATUS_AMBIL_ALIH = "statusAmbilAlih";
 	}
 
 }

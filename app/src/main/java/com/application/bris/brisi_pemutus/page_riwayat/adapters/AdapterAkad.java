@@ -1,4 +1,4 @@
-package com.application.bris.brisi_pemutus.page_akad.adapters;
+package com.application.bris.brisi_pemutus.page_riwayat.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
-import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
@@ -54,7 +53,7 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
     @Override
     public void onBindViewHolder(final AdapterAkad.PipelineViewHolder holder, final int position) {
         final PutusanAkad datas = datafiltered.get(position);
-        Log.d("adapterAkad",datafiltered.get(position).getNO_AKAD());
+//        Log.d("adapterAkad",datafiltered.get(position).getNO_AKAD());
 
         //  holder.iv_foto.setImageResource(datas.getFoto());
         holder.tv_nama.setText(datas.getNama_nasabah());
@@ -125,7 +124,7 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
             public void onClick(View view) {
 
 
-
+                //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
                 Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
                 intent.putExtra("data_putusan_akad",datas);
                 holder.iv_foto.getContext().startActivity(intent);

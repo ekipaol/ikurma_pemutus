@@ -3,8 +3,10 @@ package com.application.bris.brisi_pemutus.api.config;
 public class UriApi {
 
     public class Baseurl{
-        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI/webresources/"; //DEV tanpa rev proxy
-//       public static final String URL = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //server prod
+//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI/webresources/"; //DEV tanpa rev proxy
+       public static final String URL = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //server prod
+
+//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-EKI/webresources/"; //DEV eki tanpa rev proxy
     }
 
 
@@ -15,8 +17,15 @@ public class UriApi {
         public static final String loginStatus = "generic/login";
     }
 
+    public class SecretLogin {
+        public static final String secretLogin = "generic/loginn";
+    }
+
     public class Dashboard {
         public static final String dashboard = "generic/dashboardPemutus";
+    }
+    public class DashboardPemrakarsa {
+        public static final String dashboardPemrakarsa = "generic/dashboard";
     }
     public class getDataCabang {
         public static final String dataCabang = "generic/getDataCabang";
@@ -30,6 +39,9 @@ public class UriApi {
     public class getUh {
         public static final String dataUh = "generic/mikro/usermanagement/listUh";
     }
+    public class getPincaLengkap {
+        public static final String dataPincaLengkap = "generic/mikro/usermanagement/listPincaLengkap";
+    }
     public class getPinca {
         public static final String dataPinca = "generic/mikro/usermanagement/listPinca";
     }
@@ -42,11 +54,20 @@ public class UriApi {
     public class cekCs {
         public static final String cekCs = "generic/mikro/usermanagement/cekPencairanCs";
     }
+    public class cekAdp {
+        public static final String cekAdp = "generic/mikro/usermanagement/cekPencairanAdp";
+    }
+    public class cekMo {
+        public static final String cekMo = "generic/mikro/usermanagement/cekPencairanMo";
+    }
     public class cekAdaPutusan {
         public static final String cekAdaPutusan = "generic/mikro/usermanagement/cekAdaPutusanPemutus";
     }
     public class cekAdaCs {
         public static final String cekAdaCs = "generic/mikro/usermanagement/cekAdaCs";
+    }
+    public class cekAdaAdp {
+        public static final String cekAdaAdp = "generic/mikro/usermanagement/cekAdaAdp";
     }
     public class insertUpdateAom {
         public static final String insertUpdateAom = "generic/mikro/usermanagement/updateAOM";
@@ -71,6 +92,15 @@ public class UriApi {
     }
     public class listPutusanAkad {
         public static final String listPutusanAkad = "generic/pemutus/listPutusanAkad";
+    }
+    public class listPutusanCair {
+        public static final String listPutusanCair = "generic/pemutus/listPutusanCair";
+    }
+    public class listPutusanDitolak {
+        public static final String listPutusanDitolak = "generic/pemutus/listPutusanDitolak";
+    }
+    public class listPutusanSetuju {
+        public static final String listPutusanSetuju = "generic/pemutus/listPutusanSetuju";
     }
     public class listDeviasi {
         public static final String listDeviasi = "generic/pemutus/listPutusanDeviasi";
@@ -173,7 +203,31 @@ public class UriApi {
     public class updateFirebase {
         public static final String updateFirebase = "generic/aktivasi/updateFirebaseMessagingID";
     }
+    public class downloadSlik {
+        public static final String downloadSlik = "generic/mikro/hotprospek/prescreening/downloadSLIK";
+    }
+    public class downloadSlikPasangan {
+        public static final String downloadSlikPasangan = "generic/mikro/hotprospek/prescreening/downloadSLIKPasangan";
+    }
+    public class inquiryDetailSlik {
+        public static final String inquiryDetailSlik = "generic/mikro/hotprospek/memosales/inquiryMemosales";
+    }
+    public class getRankingTotal {
+        public static final String getRankingTotal = "generic/getRankingTotal";
+    }
 
+    public class getPerformanceCabang {
+        public static final String getPerformanceCabang = "generic/getRankingCabang";
+    }
+    public class performanceAo {
+        public static final String performanceAo = "generic/pemutus/performanceAo";
+    }
+    public class listAmbilAlih {
+        public static final String listAmbilAlih = "generic/pemutus/listAmbilAlih";
+    }
+    public class listUms {
+        public static final String listUms = "generic/mikro/usermanagement/listUms";
+    }
 
 
 

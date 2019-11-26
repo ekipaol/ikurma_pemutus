@@ -159,8 +159,8 @@ public class ActivityWelcome extends AppCompatActivity implements StepperLayout.
 
     public void setPrefActivation(JsonObject data){
         appPreferences.setIsActivated("1");
-        appPreferences.setUsername(AppUtil.encrypt(data.get("username").getAsString()));
-        appPreferences.setNama(AppUtil.encrypt(data.get("namaLengkap").getAsString()));
+        appPreferences.setUsername((data.get("username").getAsString()));
+//        appPreferences.setNama(AppUtil.encrypt(data.get("namaLengkap").getAsString()));
     }
 
     @Override

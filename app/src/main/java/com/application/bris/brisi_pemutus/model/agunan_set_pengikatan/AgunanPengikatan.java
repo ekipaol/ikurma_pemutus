@@ -4,12 +4,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AgunanPengikatan {
+    @SerializedName("Plafond")
+    private String plafond;
     @SerializedName("PlafondCover")
     private String PlafondCover;
     @SerializedName("namaDebitur")
     private String namaDebitur;
     @SerializedName("tipeProduk")
     private String tipeProduk;
+    @SerializedName("PengikatanLain")
+    private String PengikatanLain;
     @SerializedName("KlasifikasiAgunan")
     private String KlasifikasiAgunan;
     @SerializedName("JenisPengikatan")
@@ -23,6 +27,21 @@ public class AgunanPengikatan {
     @SerializedName("DescPengikatan")
     private String DescPengikatan;
 
+    public String getPengikatanLain() {
+        return PengikatanLain;
+    }
+
+    public void setPengikatanLain(String pengikatanLain) {
+        PengikatanLain = pengikatanLain;
+    }
+
+    public String getPlafond() {
+        return plafond;
+    }
+
+    public void setPlafond(String plafond) {
+        this.plafond = plafond;
+    }
 
     public String getPlafondCover() {
         return PlafondCover;

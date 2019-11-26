@@ -1,6 +1,9 @@
 package com.application.bris.brisi_pemutus.model.agunan_tanah_kosong;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import javax.annotation.Nullable;
 
 public class AgunanTanahKosong {
 
@@ -97,6 +100,19 @@ public class AgunanTanahKosong {
     private long idPhotoTKtimur;
     @SerializedName("idPhotoTKbpn")
     private long idPhotoTKbpn;
+    @SerializedName("Koordinat")
+    @Nullable
+    @Expose
+    private String koordinat;
+
+    @Nullable
+    public String getKoordinat() {
+        return koordinat;
+    }
+
+    public void setKoordinat(@Nullable String koordinat) {
+        this.koordinat = koordinat;
+    }
 
     public long getIdPhotoTKbpn() {
         return idPhotoTKbpn;

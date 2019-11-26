@@ -1,5 +1,6 @@
 package com.application.bris.brisi_pemutus.page_putusan.lkn;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -24,7 +25,12 @@ import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.lkn.DataLkn;
 import com.application.bris.brisi_pemutus.model.lkn.DataRekomendasiLkn;
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.LknStepAdapter;
+import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
+import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
+import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
 import com.stepstone.stepper.StepperLayout;
@@ -110,22 +116,38 @@ public class LknActivity extends AppCompatActivity implements StepperLayout.Step
     public static String plafond;
     public static int jw;
 
+    AllDataFront superData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ao_activity_lkn);
         ButterKnife.bind(this);
         apiClientAdapter = new ApiClientAdapter(this);
+       //set sektor ekonomi as already read
         appPreferences = new AppPreferences(this);
+        appPreferences.setReadLkn("yes");
         dataReq = new ReqLkn();
         cif = getIntent().getStringExtra("cif");
         idAplikasi = getIntent().getStringExtra("idAplikasi");
         tujuanPembiayaan=getIntent().getStringExtra("tujuanPembiayaan");
         plafond=getIntent().getStringExtra("plafond");
         jw=getIntent().getIntExtra("jw",0);
+        Log.d("nilaitenor",Integer.toString(jw));
+        superData=(AllDataFront)getIntent().getSerializableExtra("superData");
 
         backgroundStatusBar();
         AppUtil.toolbarRegular(this, "LKN");
+        ImageView backToolbar = findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LknActivity.this, PutusanFrontMenu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+
         startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
         loadDataLengkap();
 
@@ -162,7 +184,7 @@ public class LknActivity extends AppCompatActivity implements StepperLayout.Step
 
 
 
-                            Log.d("rekomendasiString",dataRekomendasiString);
+//                            Log.d("rekomendasiString",dataRekomendasiString);
                             data = gson.fromJson(dataLknString, DataLkn.class);
                             dataRekomendasiLkn=gson.fromJson(dataRekomendasiString, DataRekomendasiLkn.class);
                             stepperlayout.setAdapter(new LknStepAdapter(getSupportFragmentManager(), LknActivity.this, data,dataRekomendasiLkn), startingStepPosition );
@@ -225,6 +247,11 @@ public class LknActivity extends AppCompatActivity implements StepperLayout.Step
     @Override
     public void onCompleted(View view) {
 
+        Intent intent = new Intent(LknActivity.this, RpcActivity.class);
+
+        intent.putExtra("idAplikasi",superData.getIdAplikasi());
+        intent.putExtra("superData",superData);
+        startActivity(intent);
     }
 
     @Override

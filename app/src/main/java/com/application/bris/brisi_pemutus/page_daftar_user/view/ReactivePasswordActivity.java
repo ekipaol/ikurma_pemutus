@@ -96,21 +96,25 @@ public class ReactivePasswordActivity extends AppCompatActivity implements Swipe
         //conditioning list yang ditampilkan
         if(apppref.getFidRole().equalsIgnoreCase("79")){
             call = apiClientAdapter.getApiInterface().dataUh(req);
-            req.setKodeCabang(apppref.getKodeCabang());
+            req.setKodeCabang(apppref.getKodeSkk());
             req.setKodeSkk(apppref.getKodeSkk());
         }
+
+       else if(apppref.getFidRole().equalsIgnoreCase("76")){
+            call = apiClientAdapter.getApiInterface().dataPincaLengkap(req);
+            req.setKodeCabang(apppref.getKodeSkk());
+        }
+
         else if(apppref.getFidRole().equalsIgnoreCase("71")){
             call = apiClientAdapter.getApiInterface().dataAo(req);
-            req.setKodeCabang(apppref.getKodeCabang());
+            req.setKodeCabang(apppref.getKodeSkk());
         }
-       else if(apppref.getFidRole().equalsIgnoreCase("76")){
-            call = apiClientAdapter.getApiInterface().dataPinca(req);
-            req.setKodeCabang(apppref.getKodeKanwil());
-        }
+
         else if(apppref.getFidRole().equalsIgnoreCase("72")){
             call = apiClientAdapter.getApiInterface().dataMmm(req);
-            req.setKodeCabang(apppref.getKodeKanwil());
+            req.setKodeCabang(apppref.getKodeSkk());
         }
+
         call.enqueue(new Callback<ParseResponse>() {
             @Override
             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
@@ -125,25 +129,13 @@ public class ReactivePasswordActivity extends AppCompatActivity implements Swipe
                             dataUser = gson.fromJson(listDataString, type);
 
                         }
-                        else if(apppref.getFidRole().equalsIgnoreCase("71")){
-                            String listDataStringAo = response.body().getData().get("listAom").toString();
-                            Gson gson = new Gson();
-                            Type type = new TypeToken<List<Ao>>() {}.getType();
-                            dataUser = gson.fromJson(listDataStringAo, type);
-                        }
+
                         else if(apppref.getFidRole().equalsIgnoreCase("76")){
-                            String listDataString = response.body().getData().get("listAom").toString();
+                             String listDataString = response.body().getData().get("listBawahanLangsung").toString();
                             Gson gson = new Gson();
                             Type type = new TypeToken<List<Ao>>() {}.getType();
                             dataUser = gson.fromJson(listDataString, type);
 
-                        }
-                        else if(apppref.getFidRole().equalsIgnoreCase("72")){
-                            String listDataStringAo = response.body().getData().get("listUh").toString();
-                            Gson gson = new Gson();
-                            Type type = new TypeToken<List<Ao>>() {}.getType();
-                            dataUser = gson.fromJson(listDataStringAo, type);
-                            adapterUser = new AdapterReactivePassword(ReactivePasswordActivity.this, dataUser);
                         }
                         List<Ao> dataUserAktif=new ArrayList<>();
                         for (int i = 0; i <dataUser.size() ; i++) {

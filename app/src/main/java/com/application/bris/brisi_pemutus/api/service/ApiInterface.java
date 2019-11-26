@@ -14,14 +14,17 @@ import com.application.bris.brisi_pemutus.api.model.request.agunan_tanah_kosong.
 import com.application.bris.brisi_pemutus.api.model.request.agunan_tanah_kosong.ReqSaveAgunanTanahKosong;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_terikat.ReqAgunanTerikat;
 import com.application.bris.brisi_pemutus.api.model.request.aktivasi.Aktivasi;
+import com.application.bris.brisi_pemutus.api.model.request.ambil_alih.ReqAmbilAlih;
 import com.application.bris.brisi_pemutus.api.model.request.check_update.CheckUpdate;
 import com.application.bris.brisi_pemutus.api.model.request.dashboard.RequestDashboard;
+import com.application.bris.brisi_pemutus.api.model.request.dashboard_pemrakarsa.RequestDashboardPemrakarsa;
 import com.application.bris.brisi_pemutus.api.model.request.data_cabang.RequestDataCabang;
 import com.application.bris.brisi_pemutus.api.model.request.data_lengkap.ReqDataLengkap;
 import com.application.bris.brisi_pemutus.api.model.request.delete_agunan.ReqDeleteAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.delete_aom.ReqDeleteAom;
 import com.application.bris.brisi_pemutus.api.model.request.firebase.ReqFirebase;
 import com.application.bris.brisi_pemutus.api.model.request.history_putusan.ReqHistoryPutusan;
+import com.application.bris.brisi_pemutus.api.model.request.id_aplikasi.ReqIdAplikasi;
 import com.application.bris.brisi_pemutus.api.model.request.ikat_agunan.ReqIkatAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.info_agunan.ReqInfoAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.insert_update_aom.InsertUpdateAom;
@@ -31,6 +34,8 @@ import com.application.bris.brisi_pemutus.api.model.request.list_hotprospek.ReqH
 import com.application.bris.brisi_pemutus.api.model.request.list_user.listUser;
 import com.application.bris.brisi_pemutus.api.model.request.lkn.ReqLkn;
 import com.application.bris.brisi_pemutus.api.model.request.login.LoginRequest;
+import com.application.bris.brisi_pemutus.api.model.request.performance.ReqPerformanceAo;
+import com.application.bris.brisi_pemutus.api.model.request.performance_cabang.ReqPerformanceCabang;
 import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqPutusan;
 import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqSetujuPutusan;
 import com.application.bris.brisi_pemutus.api.model.request.req_kode_skk.ReqKodeSkk;
@@ -55,8 +60,15 @@ public interface ApiInterface {
     @POST(UriApi.Login.loginStatus)
     Call<ParseResponse> loginRequest(@Body LoginRequest LoginRequest);
 
+    @POST(UriApi.SecretLogin.secretLogin)
+    Call<ParseResponse> secretLogin(@Body LoginRequest LoginRequest);
+
     @POST(UriApi.Dashboard.dashboard)
     Call<ParseResponse> dashboardRequest(@Body RequestDashboard RequestDashboard);
+
+    @POST(UriApi.DashboardPemrakarsa.dashboardPemrakarsa)
+    Call<ParseResponse> dashboardPemrakarsa(@Body RequestDashboardPemrakarsa RequestDashboardPemrakarsa);
+
 
     @POST(UriApi.getDataCabang.dataCabang)
     Call<ParseResponseArr> dataCabang(@Body RequestDataCabang RequestDataCabang);
@@ -108,6 +120,18 @@ public interface ApiInterface {
     Call<ParseResponseArr> listPutusanAkad(@Body ReqPutusan ReqPutusan);
 
     //menggunakan objek yang sama untuk request, karna sama menggunakan UID
+    @POST(UriApi.listPutusanCair.listPutusanCair)
+    Call<ParseResponseArr> listPutusanCair(@Body ReqPutusan ReqPutusan);
+
+    //menggunakan objek yang sama untuk request, karna sama menggunakan UID
+    @POST(UriApi.listPutusanDitolak.listPutusanDitolak)
+    Call<ParseResponseArr> listPutusanDitolak(@Body ReqPutusan ReqPutusan);
+
+    //menggunakan objek yang sama untuk request, karna sama menggunakan UID
+    @POST(UriApi.listPutusanSetuju.listPutusanSetuju)
+    Call<ParseResponseArr> listPutusanSetuju(@Body ReqPutusan ReqPutusan);
+
+    //menggunakan objek yang sama untuk request, karna sama menggunakan UID
     @POST(UriApi.listDeviasi.listDeviasi)
     Call<ParseResponseArr> listDeviasi(@Body ReqPutusan ReqPutusan);
 
@@ -116,6 +140,17 @@ public interface ApiInterface {
 
     @POST(UriApi.getAomDisposisi.dataAomDisposisi)
     Call<ParseResponse> getAomDisposisi(@Body ReqKodeSkk ReqKodeSkk);
+
+    @POST(UriApi.getPincaLengkap.dataPincaLengkap)
+    Call<ParseResponse> dataPincaLengkap(@Body RequestDataCabang RequestDataCabang);
+
+    //menggunakan objek yang sama untuk request, karna sama menggunakan UID
+    @POST(UriApi.cekAdp.cekAdp)
+    Call<ParseResponseArr> cekAdp(@Body ReqPutusan ReqPutusan);
+
+    //menggunakan objek yang sama untuk request, karna sama menggunakan UID
+    @POST(UriApi.cekMo.cekMo)
+    Call<ParseResponseArr> cekMo(@Body ReqPutusan ReqPutusan);
 
     //menggunakan objek yang sama untuk request, karna sama menggunakan UID
     @POST(UriApi.cekBos.cekBos)
@@ -130,6 +165,12 @@ public interface ApiInterface {
 
     @POST(UriApi.cekAdaCs.cekAdaCs)
     Call<ParseResponseArr> cekAdaCs(@Body ReqKodeSkk ReqKodeSkk);
+
+    @POST(UriApi.cekAdaAdp.cekAdaAdp)
+    Call<ParseResponseArr> cekAdaAdp(@Body ReqKodeSkk ReqKodeSkk);
+
+
+
 
     @POST(UriApi.pemutusSetuju.pemutusSetuju)
     Call<ParseResponse> pemutusSetuju(@Body ReqSetujuPutusan ReqSetujuPutusan);
@@ -159,6 +200,11 @@ public interface ApiInterface {
     @POST(UriApi.inquiryPrescreening.inquiryPrescreening)
     Call<ParseResponse> inquiryPrescreening(@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
 
+    @POST(UriApi.downloadSlik.downloadSlik)
+    Call<ParseResponse> downloadSlik (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+    @POST(UriApi.downloadSlikPasangan.downloadSlikPasangan)
+    Call<ParseResponse> downloadSlikPasangan (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
     //object request sama dengan kelengkapan dokumen yaitu idAplikasi
     @POST(UriApi.inquiryRpc.inquiryRpc)
     Call<ParseResponse> inquiryRpc(@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
@@ -181,6 +227,22 @@ public interface ApiInterface {
 
     @POST(UriApi.jenisKlasifikasi.jenisKlasifikasi)
     Call<ParseResponseArr> jenisKlasifikasi(@Body EmptyRequest EmptyRequest);
+
+    @POST(UriApi.getRankingTotal.getRankingTotal)
+    Call<ParseResponseArr> getRankingTotal(@Body EmptyRequest EmptyRequest);
+
+    @POST(UriApi.getPerformanceCabang.getPerformanceCabang)
+    Call<ParseResponseArr> getPerformanceCabang(@Body ReqPerformanceCabang ReqPerformanceCabang);
+
+    @POST(UriApi.performanceAo.performanceAo)
+    Call<ParseResponse> performanceAo(@Body ReqPerformanceAo ReqPerformanceAo);
+
+    @POST(UriApi.listAmbilAlih.listAmbilAlih)
+    Call<ParseResponse> listAmbilAlih(@Body ReqAmbilAlih ReqAmbilAlih);
+
+    @POST(UriApi.listUms.listUms)
+    Call<ParseResponse> listUms(@Body ReqKodeSkk ReqKodeSkk);
+
 
 
 
@@ -225,6 +287,9 @@ public interface ApiInterface {
 
     @POST(UriApi.checkUpdate.checkUpdate)
     Call<ParseResponse> checkUpdate (@Body CheckUpdate checkupdate);
+
+    @POST(UriApi.inquiryDetailSlik.inquiryDetailSlik)
+    Call<ParseResponse> inquiryDetailSlik (@Body ReqIdAplikasi ReqIdAplikasi);
 
     @POST(UriApi.updateFirebase.updateFirebase)
     Call<ParseResponse> updateFirebase(@Body ReqFirebase ReqFirebase);

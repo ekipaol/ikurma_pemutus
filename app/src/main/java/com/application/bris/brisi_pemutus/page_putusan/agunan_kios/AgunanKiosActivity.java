@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.airbnb.lottie.parser.IntegerParser;
 import com.application.bris.brisi_pemutus.BuildConfig;
@@ -44,6 +45,7 @@ import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.agunan_kios.AgunanKios;
 import com.application.bris.brisi_pemutus.page_putusan.agunan.DialogKeyValue;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_deposito.AgunanDepositoActivity;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_tanah_kosong.ActivityAgunanTanahKosong;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.ImageHandler;
@@ -208,6 +210,9 @@ public class AgunanKiosActivity extends AppCompatActivity implements TextWatcher
     ShimmerFrameLayout sm_placeholder;
     @BindView(R.id.progressbar_loading)
     RelativeLayout loading;
+
+    @BindView(R.id.btn_set_loc)
+    Button btn_set_loc;
 
 
     private Calendar calTanggalPemeriksaan;
@@ -396,6 +401,41 @@ public class AgunanKiosActivity extends AppCompatActivity implements TextWatcher
                             val_idPhotoKselatan = dataAgunan.getIdPhotoKselatan();
                             val_idPhotoKtimur = dataAgunan.getIdPhotoKtimur();
                             val_idPhotoKbarat = dataAgunan.getIdPhotoKbarat();
+
+                            AppUtil.tutorialOverlay(AgunanKiosActivity.this,btn_set_loc,"Klik di tombol lokasi untuk melihat lokasi agunan di google map","tutorial_lokasi_kios");
+                            btn_set_loc.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //nampilin google maps berdasar kordinat
+
+                                    if(dataAgunan.getKoordinat()!=null){
+
+
+                                        //pake google maps tidak bisa, kalo pake yang dibawah, gak tampil titik tujuannya, di aplikasi lain kayak waze, grab dll bisa
+//                    String uri = String.format(Locale.ENGLISH, "geo:"+dataLengkap.getKoordinat());
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                    startActivity(intent);
+
+                                        Uri gmmIntentUri = Uri.parse("google.navigation:q="+dataAgunan.getKoordinat());
+                                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                    mapIntent.setPackage("com.google.android.apps.maps");
+                                        startActivity(mapIntent);
+                                    }
+
+                                    else if(dataAgunan.getKoordinat()==null){
+                                        Toast.makeText(AgunanKiosActivity.this, "Koordinat tidak ditemukan untuk aplikasi ini", Toast.LENGTH_SHORT).show();
+
+                                        //pantekan testing
+//                    String uri = String.format(Locale.ENGLISH, "geo:-6.2348961333010955,106.82217959314586");
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                    startActivity(intent);
+                                    }
+                                    else {
+                                        Toast.makeText(AgunanKiosActivity.this, "Belum ada data koordinat untuk agunan ini", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
                         }
                         else{
                             AppUtil.notiferror(AgunanKiosActivity.this, findViewById(android.R.id.content), response.body().getMessage());

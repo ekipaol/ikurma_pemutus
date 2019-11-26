@@ -59,6 +59,12 @@ public class KeyValue {
 
     private static HashMap<String, String> mapTypeOperasional = new HashMap<>();
 
+    private static HashMap<String, String> mapTypeRpcRatio131 = new HashMap<>();
+    private static HashMap<String, String> mapTypeRpcRatio136 = new HashMap<>();
+    private static HashMap<String, String> mapTypeRpcRatio141 = new HashMap<>();
+    private static HashMap<String, String> mapTypeRpcRatio127 = new HashMap<>();
+    private static HashMap<String, String> mapTypeRpcRatio128 = new HashMap<>();
+
 
 
     static {
@@ -210,9 +216,29 @@ public class KeyValue {
 
 
 
-        mapTypeRpcRatio.put("< 1x", "1");
-        mapTypeRpcRatio.put("1  - 2x", "2");
-        mapTypeRpcRatio.put("> 2x", "3");
+//        mapTypeRpcRatio.put("< 1x", "1");
+//        mapTypeRpcRatio.put("1  - 2x", "2");
+//        mapTypeRpcRatio.put("> 2x", "3");
+
+        mapTypeRpcRatio131.put("< 1x", "1");
+        mapTypeRpcRatio131.put("1  - 2x", "2");
+        mapTypeRpcRatio131.put("> 2x", "3");
+
+        mapTypeRpcRatio136.put("< 2,00 x", "1");
+        mapTypeRpcRatio136.put("2,00 x  - 2,90 x", "2");
+        mapTypeRpcRatio136.put("> 2,90x", "3");
+
+        mapTypeRpcRatio141.put("< 2,00 x", "1");
+        mapTypeRpcRatio141.put("2,00 x  - 2,90 x", "2");
+        mapTypeRpcRatio141.put("> 2,90x", "3");
+
+        mapTypeRpcRatio127.put("< 1x", "1");
+        mapTypeRpcRatio127.put("1  - 2x", "2");
+        mapTypeRpcRatio127.put("> 2x", "3");
+
+        mapTypeRpcRatio128.put("< 2,00 x", "1");
+        mapTypeRpcRatio128.put("2,00 x  - 2,90 x", "2");
+        mapTypeRpcRatio128.put("> 2,90x", "3");
 
 
 
@@ -359,6 +385,70 @@ public class KeyValue {
             }
         }
         return null;
+    }
+
+    public static String getTypeRpcRatio(String kodeProduct, String param){
+        switch (kodeProduct){
+            case "131":
+                return mapTypeRpcRatio131.get(param);
+            case "136":
+                return mapTypeRpcRatio136.get(param);
+            case "141":
+                return mapTypeRpcRatio141.get(param);
+            case "127":
+                return mapTypeRpcRatio127.get(param);
+            case "128":
+                return mapTypeRpcRatio128.get(param);
+            default:
+                return null;
+        }
+    }
+
+    public static String getKeyRpcRatio(String kodeProduct, String value){
+        switch (kodeProduct){
+            case "131" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio131.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+            case "136" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio136.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+            case "141" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio141.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+            case "127" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio127.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+            case "128" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio128.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+            default:
+                return null;
+        }
     }
 
     public static String getTypeJenisKelamin(String param){

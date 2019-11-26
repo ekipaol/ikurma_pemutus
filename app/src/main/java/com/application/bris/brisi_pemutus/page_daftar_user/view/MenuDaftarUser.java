@@ -32,22 +32,22 @@ CardView cv_tambah_user;
 
         AppPreferences appPreferences=new AppPreferences(this);
 
-        //sementara fitur tambah dinonaktifkan sampai fix kode ao dan kode pemutus
-        if(appPreferences.getJabatan().equalsIgnoreCase("pinca")||appPreferences.getJabatan().equalsIgnoreCase("pimpinan cabang")||appPreferences.getJabatan().equalsIgnoreCase("mmm")){
-            cv_tambah_user.setVisibility(View.GONE);
-        }
+
 
 
         //UNTUK HIDE TAMBAH USER
-//        cv_tambah_user.setVisibility(View.GONE);
+        cv_tambah_user.setVisibility(View.GONE);
+
+        //sementara fitur tambah dinonaktifkan sampai fix kode ao dan kode pemutus
+        if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
+            cv_tambah_user.setVisibility(View.VISIBLE);
+        }
 
         daftarUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MenuDaftarUser.this,UserActivity.class);
                 startActivity(intent);
-
-
             }
         });
 

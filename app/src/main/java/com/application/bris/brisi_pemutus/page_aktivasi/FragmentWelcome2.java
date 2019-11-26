@@ -1,5 +1,6 @@
 package com.application.bris.brisi_pemutus.page_aktivasi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
 
+import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -34,6 +37,8 @@ public class FragmentWelcome2 extends Fragment implements Step{
     @BindView(R.id.tv_welcome_desc)
     TextView tv_welcome_desc;
 
+    int counterBypassActivation;
+
     public FragmentWelcome2() {
     }
 
@@ -51,6 +56,29 @@ public class FragmentWelcome2 extends Fragment implements Step{
 
         tv_welcome_title.setText("Cepat dan Digital");
         tv_welcome_desc.setText("Manajemen user dan disposisi putusan dalam sentuhan jari.");
+
+        //bypass aktivasi langsung ke login dengan klik gambar 4 kali, lalu klik tahan gambar
+        iv_welcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counterBypassActivation++;
+            }
+        });
+
+        iv_welcome.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(counterBypassActivation>=4){
+                    Intent intent =new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getActivity(), "@ekipaol", Toast.LENGTH_SHORT).show();
+                }
+
+                return true;
+            }
+        });
         return view;
     }
 

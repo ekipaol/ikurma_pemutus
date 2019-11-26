@@ -1,10 +1,13 @@
 package com.application.bris.brisi_pemutus.page_putusan.rpc;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,7 +19,14 @@ import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.kelengkapan_dokumen.ReqKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
+import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.rpc.Rpc;
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
+import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
+import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
+import com.application.bris.brisi_pemutus.page_putusan.prescreening.PrescreeningActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
@@ -71,11 +81,17 @@ public class RpcActivity extends AppCompatActivity{
     @BindView(R.id.progressbar_loading)
     RelativeLayout loading;
 
+    @BindView(R.id.bt_lanjut_rpc)
+    Button bt_lanjut_rpc;
+
+    AllDataFront superData;
+
     private int idAplikasi;
 
     private ApiClientAdapter apiClientAdapter;
     private String dataString;
     private Rpc data;
+    AppPreferences appPreferences;
 
 
 
@@ -85,11 +101,39 @@ public class RpcActivity extends AppCompatActivity{
         setContentView(R.layout.ao_activity_hotprospek_rpc);
         ButterKnife.bind(this);
         apiClientAdapter = new ApiClientAdapter(this);
+        //set rpc as already read
+        appPreferences = new AppPreferences(this);
+        appPreferences.setReadRpc("yes");
         idAplikasi = getIntent().getIntExtra("idAplikasi", 0);
+        superData=(AllDataFront)getIntent().getSerializableExtra("superData");
         sm_placeholder.setVisibility(View.GONE);
         loading.setVisibility(View.VISIBLE);
         backgroundStatusBar();
         AppUtil.toolbarRegular(this, "Perhitungan RPC");
+        ImageView backToolbar = findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RpcActivity.this, PutusanFrontMenu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+
+        bt_lanjut_rpc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(RpcActivity.this, AgunanTerikatActivity.class);
+                intent.putExtra("cif", superData.getCif());
+                intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                intent.putExtra("idAgunan", superData.getIdAgunan());
+                intent.putExtra("superData",superData);
+
+
+                //when back make this thing go to putusan frontmenu
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -119,6 +163,8 @@ public class RpcActivity extends AppCompatActivity{
         loading.setVisibility(View.VISIBLE);
         ReqKelengkapanDokumen req = new ReqKelengkapanDokumen();
         req.setId_aplikasi(Integer.parseInt(getIntent().getStringExtra("idAplikasi")));
+//        req.setId_aplikasi(101694);
+
         Call<ParseResponse> call = apiClientAdapter.getApiInterface().inquiryRpc(req);
         call.enqueue(new Callback<ParseResponse>() {
             @Override
@@ -134,24 +180,24 @@ public class RpcActivity extends AppCompatActivity{
                             dataString = response.body().getData().get("rpc").toString();
                             data = gson.fromJson(dataString, Rpc.class);
 
-                            tv_pendapatanusaha.setText(AppUtil.parseRupiahInt(data.getPendapatanUsaha()));
+                            tv_pendapatanusaha.setText(AppUtil.parseRupiahLong(data.getPendapatanUsaha()));
 
-                            tv_hargapokokpenjualan.setText(AppUtil.parseRupiahInt(data.getPengeluaranHargaPokokPenjualan()));
-                            tv_sewakontrak.setText(AppUtil.parseRupiahInt(data.getPengeluaranHargaSewa()));
-                            tv_gajipegawai.setText(AppUtil.parseRupiahInt(data.getPengeluaranGajiPegawai()));
-                            tv_telponlistrikair.setText(AppUtil.parseRupiahInt(data.getPengeluaranTelpListrik()));
-                            tv_pajakretribusi.setText(AppUtil.parseRupiahInt(data.getPengeluaranPajak()));
-                            tv_transportasi.setText(AppUtil.parseRupiahInt(data.getPengeluaranTransportasi()));
-                            tv_biayarumahtangga.setText(AppUtil.parseRupiahInt(data.getPengeluaranRumahTangga()));
-                            tv_pengeluaranlainnya.setText(AppUtil.parseRupiahInt(data.getPengeluaranLainnya()));
-                            tv_pengeluaranusaha.setText(AppUtil.parseRupiahInt(data.getPengeluaranUsaha()));
-                            tv_pendapatanbersih.setText(AppUtil.parseRupiahInt(data.getPendapatanBersih()));
-                            tv_penghasilanlainnya.setText(AppUtil.parseRupiahInt(data.getPenghasilanLain()));
-                            tv_labarugi.setText(AppUtil.parseRupiahInt(data.getLabaRugi()));
-                            tv_rpc.setText(AppUtil.parseRupiahInt(data.getRpc()));
-                            tv_angsuranbrisexisting.setText(AppUtil.parseRupiahInt(data.getAngsuranBrisExisting()));
-                            tv_angsuransaatini.setText(AppUtil.parseRupiahInt(data.getAngsuranAplikasi()));
-                            tv_rpcratio.setText(data.getRpcRatio()+"%");
+                            tv_hargapokokpenjualan.setText(AppUtil.parseRupiahLong(data.getPengeluaranHargaPokokPenjualan()));
+                            tv_sewakontrak.setText(AppUtil.parseRupiahLong(data.getPengeluaranHargaSewa()));
+                            tv_gajipegawai.setText(AppUtil.parseRupiahLong(data.getPengeluaranGajiPegawai()));
+                            tv_telponlistrikair.setText(AppUtil.parseRupiahLong(data.getPengeluaranTelpListrik()));
+                            tv_pajakretribusi.setText(AppUtil.parseRupiahLong(data.getPengeluaranPajak()));
+                            tv_transportasi.setText(AppUtil.parseRupiahLong(data.getPengeluaranTransportasi()));
+                            tv_biayarumahtangga.setText(AppUtil.parseRupiahLong(data.getPengeluaranRumahTangga()));
+                            tv_pengeluaranlainnya.setText(AppUtil.parseRupiahLong(data.getPengeluaranLainnya()));
+                            tv_pengeluaranusaha.setText(AppUtil.parseRupiahLong(data.getPengeluaranUsaha()));
+                            tv_pendapatanbersih.setText(AppUtil.parseRupiahLong(data.getPendapatanBersih()));
+                            tv_penghasilanlainnya.setText(AppUtil.parseRupiahLong(data.getPenghasilanLain()));
+                            tv_labarugi.setText(AppUtil.parseRupiahLong(data.getLabaRugi()));
+                            tv_rpc.setText(AppUtil.parseRupiahLong(data.getRpc()));
+                            tv_angsuranbrisexisting.setText(AppUtil.parseRupiahLong(data.getAngsuranBrisExisting()));
+                            tv_angsuransaatini.setText(AppUtil.parseRupiahLong(data.getAngsuranAplikasi()));
+                            tv_rpcratio.setText(data.getRpcRatio().toString()+"x");
                         }
                     }
                     else {

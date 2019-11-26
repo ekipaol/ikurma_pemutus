@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -75,6 +76,8 @@ public class SetPengikatanActivity extends AppCompatActivity{
     TextView tv_nominal_akan_diikat;
     @BindView(R.id.tv_plafon_cover_pengikatan)
     TextView tv_cover_plafon;
+    @BindView(R.id.tv_jenis_pengikatan_agunan)
+    TextView tv_jenis_pengikatan_agunan;
 
 
     @BindView(R.id.tv_no_bukti_pengikatan)
@@ -161,10 +164,10 @@ public class SetPengikatanActivity extends AppCompatActivity{
         ReqSetPengikatan req = new ReqSetPengikatan();
 
         //pantekan dummy, ambil dari intent dalam implementasi sbeleum
-        req.setIdApl("101043");
-        req.setIdCif("81320");
-        req.setIdAgunan("48755");
-        req.setFidjenisAgunan(7);
+        req.setIdApl(getIntent().getStringExtra("idAplikasi"));
+        req.setIdCif(getIntent().getStringExtra("cif"));
+        req.setIdAgunan(getIntent().getStringExtra("idAgunan"));
+        req.setFidjenisAgunan(getIntent().getIntExtra("tipeAgunan",0));
 
 
 
@@ -179,7 +182,13 @@ public class SetPengikatanActivity extends AppCompatActivity{
                     if (response.isSuccessful()){
                         if(response.body().getStatus().equalsIgnoreCase("00")){
 
-                            //REQUEST klasifikasi agunan spinner
+
+                            progressbar_loading.setVisibility(View.GONE);
+                            Gson gson = new Gson();
+                            dataString = response.body().getData().toString();
+                            data = gson.fromJson(dataString, AgunanPengikatan.class);
+
+                            //REQUEST klasifikasi agunan
 
                             Call<ParseResponseArr> call2 = apiClientAdapter.getApiInterface().jenisKlasifikasi(EmptyRequest.INSTANCE);
                             call2.enqueue(new Callback<ParseResponseArr>() {
@@ -198,15 +207,19 @@ public class SetPengikatanActivity extends AppCompatActivity{
                                                 List<String> dataJenisKlasifikasiString=new ArrayList<>();
                                                 List<Integer> dataJenisKlasifikasiInt=new ArrayList<>();
 
-                                                for (int i = 0; i < dataJenisKlasifikasi.size(); i++) {
-                                                    dataJenisKlasifikasi.get(i).getJenisPengikatan();
-                                                    dataJenisKlasifikasiString.add(dataJenisKlasifikasi.get(i).getJenisPengikatan());
-                                                    dataJenisKlasifikasiInt.add(Integer.parseInt(dataJenisKlasifikasi.get(i).getValuePengikatan()));
+//                                                for (int i = 0; i < dataJenisKlasifikasi.size(); i++) {
+//                                                    dataJenisKlasifikasi.get(i).getJenisPengikatan();
+//                                                    dataJenisKlasifikasiString.add(dataJenisKlasifikasi.get(i).getJenisPengikatan());
+//                                                    dataJenisKlasifikasiInt.add(Integer.parseInt(dataJenisKlasifikasi.get(i).getValuePengikatan()));
+//
+//                                                }
 
-                                                }
+
+                                                setData();
+
                                                 adapter = new ArrayAdapter<>(SetPengikatanActivity.this, android.R.layout.simple_list_item_1, dataJenisKlasifikasiString);
                                                 sp_jenis_pengikatan.setAdapter(adapter);
-                                                Toast.makeText(SetPengikatanActivity.this, "Berhasil Mengikat Agunan", Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(SetPengikatanActivity.this, "Berhasil Mengikat Agunan", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                         else {
@@ -223,11 +236,8 @@ public class SetPengikatanActivity extends AppCompatActivity{
                                     AppUtil.notiferror(SetPengikatanActivity.this, findViewById(android.R.id.content), "Terjadi Kesalahan");
                                 }
                             });
-                            progressbar_loading.setVisibility(View.GONE);
-                            Gson gson = new Gson();
-                            dataString = response.body().getData().toString();
-                            data = gson.fromJson(dataString, AgunanPengikatan.class);
-                            setData();
+
+
                         }
                     }
                     else {
@@ -247,7 +257,9 @@ public class SetPengikatanActivity extends AppCompatActivity{
     }
 
     public void setData(){
-        tv_id_plafond_pengajuan_set_pengikatan.setText("not available");
+
+        fidjenisAgunan=Integer.toString(getIntent().getIntExtra("tipeAgunan",0));
+        tv_id_plafond_pengajuan_set_pengikatan.setText(AppUtil.parseRupiah(data.getPlafond()));
 
         if(fidjenisAgunan.equalsIgnoreCase("30")){
             tv_jenis_agunan_set_pengikatan.setText("Tanah Kosong / Sawah");
@@ -268,29 +280,21 @@ public class SetPengikatanActivity extends AppCompatActivity{
             tv_jenis_agunan_set_pengikatan.setText("Mesin-mesin");
         }
         tv_nilai_market.setText(AppUtil.parseRupiah(data.getNilaiMarket()));
-       tv_nominal_pengikatan_aplikasi_lain.setText("not available");
-        tv_nilai_market.setText(AppUtil.parseRupiah(data.getPengikatanAplikasi()));
+       tv_nominal_pengikatan_aplikasi_lain.setText(AppUtil.parseRupiah(data.getPengikatanLain()));
+//        tv_nilai_market.setText(AppUtil.parseRupiah(data.getPengikatanAplikasi()));
         tv_cover_plafon.setText(AppUtil.parseRupiah(data.getPlafondCover()));
+        tv_id_agunan_set_pengikatan.setText(getIntent().getStringExtra("idAgunan"));
+        tv_nominal_akan_diikat.setText(AppUtil.parseRupiah(data.getPengikatanAplikasi()));
 
+        for (int i = 0; i <dataJenisKlasifikasi.size() ; i++) {
+            Log.d("datajenisklasifikasi",dataJenisKlasifikasi.get(i).getValuePengikatan());
 
-
-
-
-
-//        @BindView(R.id.tv_id_plafond_pengajuan_set_pengikatan)
-//        TextView tv_id_plafond_pengajuan_set_pengikatan;
-//        @BindView(R.id.tv_jenis_agunan_set_pengikatan)
-//        TextView tv_jenis_agunan_set_pengikatan;
-//        @BindView(R.id.tv_id_agunan_set_pengikatan)
-//        TextView tv_id_agunan_set_pengikatan;
-//        @BindView(R.id.tv_nilai_market)
-//        TextView tv_nilai_market;
-//        @BindView(R.id.tv_nominal_pengikatan_aplikasi_lain)
-//        TextView tv_nominal_pengikatan_aplikasi_lain;
-//        @BindView(R.id.tv_nominal_akan_diikat)
-//        TextView tv_nominal_akan_diikat;
-//        @BindView(R.id.tv_cover_plafon)
-//        TextView tv_cover_plafon;
+            //NOTE INI DRI SERVICENYA KEBALIK, YANG VALUE MALAH ISINYA KEY, YANG JENISPENGIKATAN ISINYA VALUE
+            if(dataJenisKlasifikasi.get(i).getValuePengikatan().equalsIgnoreCase(data.getJenisPengikatan())){
+                tv_jenis_pengikatan_agunan.setText(dataJenisKlasifikasi.get(i).getJenisPengikatan());
+                break;
+            }
+        }
 
 
 

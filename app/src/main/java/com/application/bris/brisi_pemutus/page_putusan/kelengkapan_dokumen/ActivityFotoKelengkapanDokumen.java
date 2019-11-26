@@ -28,11 +28,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.grantland.widget.AutofitTextView;
+import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
 public class ActivityFotoKelengkapanDokumen extends AppCompatActivity {
 
@@ -82,7 +85,10 @@ public class ActivityFotoKelengkapanDokumen extends AppCompatActivity {
                 Bitmap bmp = iv_foto_kelengkapan.getDrawingCache();
                 File storageLoc = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); //context.getExternalFilesDir(null);
 
-                File file = new File(storageLoc, "foto_kelengkapan_" + "ktp_.jpg");
+
+                Date currentTime = Calendar.getInstance().getTime();
+
+                File file = new File(storageLoc, "foto_kelengkapan_"+currentTime+".jpg");
 
                 try{
                     FileOutputStream fos = new FileOutputStream(file);
