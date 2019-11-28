@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/toolbar_regular" />
+    <include layout="@layout/ao_content_pipeline"/>
+    <include layout="@layout/loading" />
+    <include layout="@layout/item_daftar_disposisi_shimmer" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animWhale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_fileName="empty_whale.json"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"/>
+
+        <TextView
+            android:id="@+id/tvWhale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@id/animWhale"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:text="Belum ada agunan"
+            android:textColor="@android:color/darker_gray"
+            />
+
+        <Button
+            android:id="@+id/bt_lanjut_agunan"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_alignParentBottom="true"
+            android:text="Lanjut ke Scoring"/>
+    </RelativeLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

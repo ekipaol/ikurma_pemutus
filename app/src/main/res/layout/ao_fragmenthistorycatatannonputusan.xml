@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <!--<include layout="@layout/loading"/>-->
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="match_parent"
+        android:background="@color/colorWhite"
+        android:layout_height="match_parent">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="5dp"
+            android:gravity="center_horizontal"
+            android:background="@color/overlay"
+            android:visibility="gone"
+            android:clickable="true"
+            android:id="@+id/progressbar_loading">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:progressDrawable="@drawable/custom_progressbar"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_keterangan_catatan"
+            android:visibility="gone"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto_m"
+            android:textAlignment="center"
+            android:text="Pertimbangkan catatan dari pemrakarsa dan pemutus lain, sebelum melakukan putusan"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/tv_keterangan_catatan"
+            android:layout_marginTop="12dp"
+            android:id="@+id/rv_historycatatan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:padding="16dp"
+            android:clipToPadding="false"/>
+
+
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

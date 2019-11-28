@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackgroundGrey1"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="vertical">
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="3dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:background="@android:color/black" />-->
+
+        <ImageView
+            android:id="@+id/iv_capsule_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_cancel_black_24dp"/>
+
+        <!--<android.support.v7.widget.CardView-->
+        <!--android:id="@+id/cv_capsule_close"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--app:cardCornerRadius="5dp"-->
+        <!--android:layout_width="25dp"-->
+        <!--android:layout_height="15dp"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:backgroundTint="@android:color/darker_gray"-->
+        <!--android:background="@color/colorBlackHeader"></android.support.v7.widget.CardView>-->
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="7dp"
+            >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                app:cardCornerRadius="7dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:orientation="vertical">
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_list_ao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ms_hint="Pilih AOM Disposisi"
+                        app:ms_floatingLabelText="Pilih AOM"
+                        android:entries="@array/kanca_tegal"
+                        >
+
+                    </fr.ganfra.materialspinner.MaterialSpinner>
+
+
+
+                    <LinearLayout
+                        android:layout_marginTop="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="13"
+                        android:orientation="horizontal">
+                        <info.hoang8f.widget.FButton
+                            android:id="@+id/bt_batal_disposisi"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:text="Batal"
+                            app:buttonColor="@color/colorWhite"
+                            android:textColor="@color/red"
+                            android:layout_weight="6"/>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+                        <info.hoang8f.widget.FButton
+                            android:id="@+id/bt_confirm_disposisi"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:text="Lakukan Disposisi"
+                            app:buttonColor="@color/colorPrimary"
+                            android:textColor="@color/colorWhite"
+                            android:layout_weight="6"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_marginTop="0dp"
+                android:paddingTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+
+
+                <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--&gt;-->
+                <!--<info.hoang8f.widget.FButton-->
+                <!--android:layout_marginRight="0dp"-->
+                <!--android:id="@+id/bt_setuju"-->
+                <!--android:text="Setuju"-->
+                <!--app:buttonColor="@color/colorSuccessGreen"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:layout_height="50dp" />-->
+                <!--<info.hoang8f.widget.FButton-->
+                <!--android:layout_marginLeft="50dp"-->
+                <!--android:id="@+id/bt_tolak"-->
+
+                <!--android:text="Tolak"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:layout_toRightOf="@id/bt_setuju"-->
+                <!--android:layout_height="50dp" />-->
+
+                <!--</RelativeLayout>-->
+                <!--<RelativeLayout-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<info.hoang8f.widget.FButton-->
+                <!--android:id="@+id/bt_tunda"-->
+                <!--android:layout_marginRight="0dp"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:text="Tunda"-->
+                <!--android:layout_height="50dp" />-->
+                <!--<info.hoang8f.widget.FButton-->
+                <!--android:layout_marginLeft="50dp"-->
+                <!--android:id="@+id/bt_kembalikan"-->
+                <!--android:layout_toRightOf="@id/bt_tunda"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:text="Kembalikan ke AO"-->
+                <!--android:textSize="12sp"-->
+                <!--android:layout_height="50dp" />-->
+
+                <!--</RelativeLayout>-->
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

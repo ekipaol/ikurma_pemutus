@@ -11,7 +11,7 @@
         app:cardElevation="0dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="172dp">
+            android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -19,6 +19,42 @@
                     android:elevation="15dp"
                     android:orientation="vertical">
 
+
+
+
+
+
+                </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/fr_image">
+                    <ImageView
+                        android:id="@+id/iv_foto"
+                        android:src="@drawable/banner_placeholder"
+                        android:scaleType="centerCrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/blacktransparent_image"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_nama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="{Nama Nasabah}"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:padding="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="45dp"
+                        android:textColor="@color/colorWhite"/>
                     <TextView
                         android:id="@+id/tv_produk"
                         android:layout_width="130dp"
@@ -30,40 +66,9 @@
                         android:textAlignment="center"
                         android:padding="5dp"
                         android:layout_gravity="right"
-                        android:gravity="right"
-                        android:background="@drawable/round"/>
-
-                    <TextView
-                        android:id="@+id/tv_nama"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="{Nama Nasabah}"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:padding="5dp"
-                        android:gravity="bottom"
-                        android:layout_gravity="bottom"
-                        android:layout_marginTop="45dp"
-                        android:textColor="@color/colorWhite"/>
-
-
-                </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/fr_image">
-                    <ImageView
-                        android:id="@+id/iv_foto"
-                        android:src="@drawable/brochure"
-                        android:scaleType="centerCrop"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        />
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/blacktransparent_image"/>
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/round2"/>
+                </RelativeLayout>
             </FrameLayout>
 
             <LinearLayout
@@ -73,6 +78,13 @@
                 android:orientation="vertical"
                 android:layout_below="@+id/fr_image"
                 android:padding="6dp">
+                <TextView
+                    android:id="@+id/tv_id_aplikasi_item_pembiayaan_front"
+                    android:text="{ID aplikasi}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textSize="12sp"/>
                 <TextView
                     android:id="@+id/tv_plafond"
                     android:layout_below="@+id/fr_image"
@@ -109,7 +121,7 @@
                 android:layout_height="30dp"
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
-                android:text="Proses Kuy"
+                android:text="Lihat"
                 android:textColor="#595959"
                 android:textAllCaps="false"
                 android:layout_marginRight="10dp"

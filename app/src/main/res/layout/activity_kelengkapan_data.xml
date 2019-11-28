@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <include layout="@layout/toolbar_nosearch" />
+    <ScrollView
+        android:paddingTop="@dimen/toolbar_height_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="7dp"
+            android:background="@color/colorBackgroundCore">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+              android:layout_marginBottom="10dp"
+                android:textColor="@color/text_color"
+                android:fontFamily="@font/jose_r"
+                android:text="Dokumen Identitas"
+               android:textAlignment="center"
+                />
+
+<android.support.v7.widget.CardView
+    android:id="@+id/cv_ktp"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    app:cardCornerRadius="30dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shapeborderprimary30dpcorner"
+        android:weightSum="10">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingRight="25dp"
+            android:paddingLeft="20dp"
+            android:layout_weight="6"
+
+            >
+            <CheckBox
+                android:id="@+id/cb_ktp"
+                android:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"/>
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/tv_ktp"
+                android:textColor="@color/text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_b"
+                android:layout_toRightOf="@id/cb_ktp"
+                android:layout_centerVertical="true"
+                android:maxLines="2"
+                android:maxWidth="250dp"
+                android:text="KTP Nasabah dan/atau Pasangan"/>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_ktp_kelengkapan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="lihat foto"
+            android:textSize="10sp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:paddingRight="25dp"
+            android:paddingLeft="20dp"
+            android:layout_weight="3"/>
+
+    </LinearLayout>
+
+
+
+
+</android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_kartu_keluarga"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="6"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_kartu_keluarga"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:id="@+id/tv_kartu_keluarga"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                           android:layout_toRightOf="@id/cb_kartu_keluarga"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            android:maxWidth="250dp"
+                            android:text="Kartu Keluarga"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_kartu_keluarga_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_surat_nikah"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_surat_nikah"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:id="@+id/tv_surat_nikah"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                           android:layout_toRightOf="@id/cb_surat_nikah"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            android:maxWidth="250dp"
+                            android:text="Surat Nikah"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_surat_nikah_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
+
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_pas_photo"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="match_parent"
+
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_pas_photo"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:id="@+id/tv_pas_photo"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                           android:layout_toRightOf="@id/cb_pas_photo"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            android:maxWidth="250dp"
+                            android:text="Pas Photo"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_pas_photo_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_npwp"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                       android:layout_weight="6"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_npwp"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:id="@+id/tv_npwp"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                            android:layout_toRightOf="@id/cb_npwp"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            android:maxWidth="250dp"
+                            android:text="NPWP"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_npwp_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/text_color"
+                android:fontFamily="@font/jose_r"
+                android:text="Dokumen Tambahan"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_formulir_aplikasi"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:paddingRight="25dp"
+                       android:layout_weight="6"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_formulir_aplikasi"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:id="@+id/tv_formulir_aplikasi"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                          android:layout_toRightOf="@id/cb_formulir_aplikasi"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            android:maxWidth="250dp"
+                            android:text="Formulir Aplikasi"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_formulir_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_surat_ijin_usaha"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_surat_ijin_usaha"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <TextView
+                            android:id="@+id/tv_surat_ijin_usaha"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                           android:layout_toRightOf="@id/cb_surat_ijin_usaha"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            android:maxWidth="250dp"
+                            android:text="Surat Ijin Usaha"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_surat_ijin_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+
+
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_catatan_keuangan"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_catatan_keuangan"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"/>
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/tv_catatan_keuangan"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                           android:layout_toRightOf="@id/cb_catatan_keuangan"
+                            android:layout_centerVertical="true"
+                            android:maxLines="2"
+                            android:maxWidth="250dp"
+                            android:text="Catatan Keuangan/Copy Rekening Koran/Tabungan"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_catatan_keuangan_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_daftar_rencana_pembiayaan"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_daftar_rencana_pembiayaan"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/tv_daftar_rencana_pembiayaan"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                           android:layout_toRightOf="@id/cb_daftar_rencana_pembiayaan"
+                            android:layout_centerVertical="true"
+                            android:maxLines="1"
+                            android:maxWidth="250dp"
+                            android:text="Daftar Rencana Pembiayaan"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_daftar_rencana_kelengkapan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/text_color"
+                android:fontFamily="@font/jose_r"
+                android:text="Dokumen Agunan"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_agunan_kelengkapan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:textColor="@color/text_color"
+                android:fontFamily="@font/jose_r"
+                android:text="Khusus KUR"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_surat_pernyataan_kur"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_surat_pernyataan_kur"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/tv_surat_pernyataan_kur"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                           android:layout_toRightOf="@id/cb_surat_pernyataan_kur"
+                            android:layout_centerVertical="true"
+                            android:maxLines="2"
+                            android:maxWidth="250dp"
+                            android:text="Surat Pernyataan Tidak Sedang Menikmati KUR"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_pernyataan_kur"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_surat_keterangan_lunas"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                android:layout_marginBottom="12dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shapeborderprimary30dpcorner"
+                    android:weightSum="10">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                       android:layout_weight="6"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        >
+                        <CheckBox
+                            android:id="@+id/cb_surat_keterangan_lunas"
+                            android:clickable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerVertical="true"/>
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/tv_surat_keterangan_lunas"
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_b"
+                          android:layout_toRightOf="@id/cb_surat_keterangan_lunas"
+                            android:layout_centerVertical="true"
+                            android:maxLines="2"
+                            android:maxWidth="250dp"
+                            android:text="Surat Keterangan Lunas/Roya dengan Lampiran Cetakan Pemberi Pembiayaan Bank Sebelumnya"/>
+
+
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/bt_keterangan_lunas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="lihat foto"
+                        android:textSize="10sp"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:paddingRight="25dp"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <Button
+                android:id="@+id/bt_lanjut_kelengkapan_data"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+
+                android:text="Lanjut Ke Putusan"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <include layout="@layout/loading" />
+
+    <include layout="@layout/item_daftar_disposisi_shimmer"/>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

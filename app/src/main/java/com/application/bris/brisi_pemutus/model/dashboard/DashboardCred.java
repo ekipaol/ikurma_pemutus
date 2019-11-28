@@ -11,6 +11,17 @@ public class DashboardCred implements Serializable {
     @SerializedName("jlhDisposisi")
     private int notifDashboardDisposisi;
 
+    @SerializedName("jlhPutusanDeviasi")
+    private int jlhPutusanDeviasi;
+
+    public int getJlhPutusanDeviasi() {
+        return jlhPutusanDeviasi;
+    }
+
+    public void setJlhPutusanDeviasi(int jlhPutusanDeviasi) {
+        this.jlhPutusanDeviasi = jlhPutusanDeviasi;
+    }
+
     public int getNotifDashboardDisposisi() {
         return notifDashboardDisposisi;
     }

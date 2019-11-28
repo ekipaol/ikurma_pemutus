@@ -1,0 +1,690 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.corelayout.CoreLayoutActivity"
+    android:background="@color/colorBackgroundCore"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_nosearch"></include>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="4dp"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                app:cardCornerRadius="10dp"
+
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Top 3 KC Selindo"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/jose_r"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_vertical"
+
+                    />
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="5dp">
+
+
+                        <ImageView
+                            android:id="@+id/iv_1st_place_badge"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/badge_gold_png"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerInParent="true"/>
+
+                        <TextView
+                            android:id="@+id/tv_firstplace_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_1st_place_badge"
+                            android:layout_centerInParent="true"
+                            android:autoSizeMinTextSize="10sp"
+                            android:fontFamily="@font/audiowide"
+                            android:singleLine="true"
+                            android:text="248 M"
+                            android:textColor="@color/main_blue_stroke_color"
+                            android:textAlignment="center"
+                            />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/et_nama_1st_place"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:maxWidth="100dp"
+                            android:maxLines="1"
+                            app:minTextSize="10sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:autoSizeMinTextSize="10sp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/jose_r"
+                            android:text="1. KC Bogor"/>
+
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_2nd_place_badge"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/badge_silver"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerInParent="true"/>
+
+                        <TextView
+                            android:id="@+id/tv_secondplace_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_2nd_place_badge"
+                            android:layout_centerInParent="true"
+                            android:autoSizeMinTextSize="10sp"
+                            android:fontFamily="@font/audiowide"
+                            android:singleLine="true"
+                            android:text="213 M"
+                            android:textColor="@color/main_blue_stroke_color"
+                            android:textAlignment="center"
+                            />
+
+                        <me.grantland.widget.AutofitTextView
+
+                            android:id="@+id/et_nama_2nd_place"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:maxWidth="100dp"
+                            android:maxLines="1"
+                            app:minTextSize="10sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:autoSizeMinTextSize="10sp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/jose_r"
+                            android:text="2. KC Medan"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_3rd_place_badge"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/badge_bronze"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerInParent="true"/>
+
+                        <TextView
+                            android:id="@+id/tv_thirdplace_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_3rd_place_badge"
+                            android:layout_centerInParent="true"
+                            android:autoSizeMinTextSize="10sp"
+                            android:fontFamily="@font/audiowide"
+                            android:singleLine="true"
+                            android:text="182 M"
+                            android:textColor="@color/main_blue_stroke_color"
+                            android:textAlignment="center"
+                            />
+
+                        <me.grantland.widget.AutofitTextView
+
+                            android:id="@+id/et_nama_3rd_place"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:maxWidth="100dp"
+                            android:maxLines="1"
+                            app:minTextSize="10sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:autoSizeMinTextSize="10sp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/jose_r"
+                            android:text="3. KC Aceh"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lihat Semua"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                    />
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+
+                app:cardCornerRadius="10dp"
+
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Top 3 KC Jabodetabek"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_vertical"
+
+                        />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/muli_b"
+                    android:textSize="15sp"
+                    android:text="KC"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/muli_b"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="Total Pencairan"
+
+                    />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="12"
+
+
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="1."/>
+                    <TextView
+                        android:id="@+id/tv_top1_regional_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/jose_r"
+                        android:text="KC Medan"/>
+
+                    <TextView
+                        android:id="@+id/tv_top1_regional_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:text="213 M"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+
+                    android:weightSum="12">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="2."/>
+                    <TextView
+                        android:id="@+id/tv_top2_regional_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/jose_r"
+                        android:text="KC Aceh"/>
+
+                    <TextView
+                        android:id="@+id/tv_top2_regional_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:text="182 M"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+
+
+                    android:weightSum="12">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="3."/>
+                    <TextView
+                        android:id="@+id/tv_top3_regional_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/jose_r"
+                        android:text="KC Padang"/>
+
+                    <TextView
+                        android:id="@+id/tv_top3_regional_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:text="172 M"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lihat Semua"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                app:cardCornerRadius="10dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+
+                >
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Top 3 KC JABODETABEK"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_vertical"
+
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/muli_b"
+                    android:textSize="15sp"
+                    android:text="KC"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/muli_b"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="Total Pencairan"
+
+                    />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+
+                    android:weightSum="12">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="1."/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/jose_r"
+                        android:text="KC Wahid Hasyim"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:text="278 M"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/border_silver"
+                    android:weightSum="12">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="2."/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/jose_r"
+                        android:text="KC Tanjung Priuk"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:text="172 M"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bordertextbox_primary"
+                    android:weightSum="12">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="3."/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/jose_r"
+                        android:text="KC Bogor"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/jose_r"
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:textSize="18sp"
+                        android:text="155 M"/>
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_gravity="right"
+                android:text="Lihat Semua"/>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

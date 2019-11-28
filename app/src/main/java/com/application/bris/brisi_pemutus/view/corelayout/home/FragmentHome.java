@@ -185,6 +185,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     ApiClientAdapter apiClientAdapter;
     SweetAlertDialog dialog1;
     LoginCred dataUser;
+    Call<ParseResponse> call;
 
     int notifPutusan=0;
     int notifDisposisi=0;
@@ -290,6 +291,8 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         rv_menu.setAdapter(adapterMenu);
         ViewCompat.setNestedScrollingEnabled(rv_menu, false);
 
+
+
         //tutorial overlay menu baru : performance
         if(!appPreferences.getFidRole().equalsIgnoreCase("71")){
 //            AppUtil.tutorialOverlay(getActivity(),ll_menu_container,"Sekarang ada menu performance untuk melihat performa cabang ataupun AO/AOM","tutorial_menu_performance_v3");
@@ -342,8 +345,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             progressBar_daftar_pembiayaan.setVisibility(View.VISIBLE);
         progressBar_daftar_disposisi.setVisibility(View.VISIBLE);
         progressbar_daftar_deviasi.setVisibility(View.VISIBLE);
-
-            Call<ParseResponse> call = apiClientAdapter.getApiInterface().dashboardRequest(req);
+        call = apiClientAdapter.getApiInterface().dashboardRequest(req);
             call.enqueue(new Callback<ParseResponse>() {
                 @Override
                 public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
@@ -393,11 +395,8 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
                             //initialize menu, memang 2 kali di initialize, di oncreate dan di method ini
-//                            initializeMenu();
-//                            adapterMenu = new MenuAdapter(getContext(), dataMenu,  ,dataNotif.getNotifDashboard());
-//                            layoutMenu = new GridLayoutManager(getContext(), coloumMenu);
-//                            rv_menu.setLayoutManager(layoutMenu);
-//                            rv_menu.setAdapter(adapterMenu);
+                            initializeMenu();
+
 
 
                             dataPutusan=gson.fromJson(listDataPutusanString, type2);
@@ -580,6 +579,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             if (menu.equalsIgnoreCase(getString(R.string.menu_pengajuan))){
                 Intent it = new Intent(getContext(), MenuDaftarPutusanActivity.class);
                 it.putExtra("notifPembiayaan",dataNotif.getNotifDashboard());
+                it.putExtra("notifPembiayaanDeviasi",dataNotif.getJlhPutusanDeviasi());
                 startActivity(it);
             }
             else if(menu.equalsIgnoreCase(getString(R.string.menu_disetujui))){
@@ -874,8 +874,10 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         });
     }
 
+    @Override
+    public void onDestroy() {
+        call.cancel();
+        super.onDestroy();
 
-
-
-
+    }
 }

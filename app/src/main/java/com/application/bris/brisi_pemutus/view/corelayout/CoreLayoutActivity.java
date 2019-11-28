@@ -56,6 +56,7 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
     ApiClientAdapter apiClientAdapter;
     List<Putusan> dataPutusan;
     DashboardCred dataDashboard;
+    AppPreferences appPreferences;
 
 
     @Override
@@ -65,6 +66,7 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
         ButterKnife.bind(this);
       //  loaddData();
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        appPreferences=new AppPreferences(this);
 
 
         //get firebase instance, only used in splashscreen
@@ -153,22 +155,30 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
     public void onBackPressed() {
         if (!BackStackFragment.handleBackPressed(getSupportFragmentManager())) {{
 
-            if(doubleBackToExitPressedOnce){
-//                finish();
-                Intent intent=new Intent(CoreLayoutActivity.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                return;
-            }
-            doubleBackToExitPressedOnce = true;
-            AppUtil.showToastShort(this, "Tekan sekali lagi untuk keluar aplikasi");
+            if(appPreferences.getStatusAmbilAlih().equalsIgnoreCase("tidak")){
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    doubleBackToExitPressedOnce = false;
+                if(doubleBackToExitPressedOnce){
+//                finish();
+                    Intent intent=new Intent(CoreLayoutActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    return;
                 }
-            }, 2000);
+                doubleBackToExitPressedOnce = true;
+                AppUtil.showToastShort(this, "Tekan sekali lagi untuk keluar aplikasi");
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        doubleBackToExitPressedOnce = false;
+                    }
+                }, 2000);
+            }
+            else{
+                AppUtil.showToastShort(this, "Klik keluar ambil alih untuk kembali ke user awal");
+            }
+
+
         }}
     }
 

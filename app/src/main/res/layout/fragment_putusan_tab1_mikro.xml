@@ -1,0 +1,475 @@
+
+<!-- TODO: Update blank fragment layout -->
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/observablescrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+        <include layout="@layout/material_view_pager_placeholder"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_marginBottom="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:background="@color/colorSecondary">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="1. Informasi Rekening"/>
+                </LinearLayout>
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_cif_syiar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="CIF SYIAR"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_cif_syiar"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="12345"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_norek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Nomor Rekening"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_norek"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="099938819"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_marginBottom="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:background="@color/colorSecondary">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="2. Data Pribadi "/>
+                </LinearLayout>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Nama"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_nama"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="Ahmad Tarmidzi"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_status_perkawinan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Status Perkawinan"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_status_perkawinan"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Belum Menikah dengan 0 Anak"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_pendidikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Pendidikan Terakhir"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_pendidikan"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="SMA"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_gelar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Status/Gelar"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_gelar"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="S.Kom"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_keterangan_gelar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Keterangan Status/Gelar"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_keterangan_gelar"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Lulus dengan memuaskan"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="KTP"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="123456"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_expired_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Expired ID"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_expired_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="5 Mei 2099"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_tempat_lahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Tempat Lahir"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_tempat_lahir"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="Padang"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_tanggal_lahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Tanggal Lahir"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_tanggal_lahir"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="20 Mei 1998"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_nama_gadis_ibu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Nama Gadis Ibu Kandung"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_nama_gadis_ibu"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="Jenniferyati"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_jumlah_tanggungan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Jumlah Tanggungan"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_jumlah_tanggungan"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="1"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_nama_pasangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Nama Pasangan"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_nama_pasangan"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Jennifer Lofez"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_tanggal_lahir_pasangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Tanggal Lahir Pasangan"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_tanggal_lahir_pasangan"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="5 mei 1990"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_ktp_pasangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="No KTP Pasangan"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_ktp_pasangan"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="081818"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
+
+
+
+

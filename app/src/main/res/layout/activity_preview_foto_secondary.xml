@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <include layout="@layout/toolbar_nosearch" />
+
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/toolbar_height_default"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <TextView
+
+            android:elevation="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Klik foto untuk melakukan zoom in / zoom out"
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:textSize="17sp"
+            android:fontFamily="@font/roboto_m"/>
+
+        <!--<com.jsibbold.zoomage.ZoomageView-->
+        <!--android:id="@+id/iv_foto_kelengkapan"-->
+        <!--android:layout_width="750dp"-->
+        <!--android:layout_height="750dp"-->
+
+        <!--android:layout_centerInParent="true"-->
+        <!--app:zoomage_restrictBounds="false"-->
+        <!--app:zoomage_animateOnReset="true"-->
+        <!--android:src="@drawable/banner_placeholder"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--app:zoomage_autoCenter="true"/>-->
+
+
+
+        <!--android:background="@drawable/banner_placeholder"/>-->
+
+        <ozaydin.serkan.com.image_zoom_view.ImageViewZoom
+            android:id="@+id/iv_foto_kelengkapan"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+
+            />
+
+
+
+
+        <LinearLayout
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/bt_kembali_kelengkapan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_dark"
+                android:textColor="@color/colorWhite"
+                android:text="Kembali"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/bt_simpan_kelengkapan"
+                android:layout_width="0dp"
+                android:background="@color/colorPrimary"
+                android:text="simpan"
+                android:textColor="@color/colorWhite"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animWhale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lottie_fileName="empty_whale.json"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"/>
+
+            <TextView
+                android:id="@+id/tvWhale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/animWhale"
+                android:visibility="invisible"
+                android:layout_centerInParent="true"
+                android:text="Belum ada disposisi"
+                android:textColor="@android:color/darker_gray"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/loading" />
+    <include layout="@layout/item_daftar_disposisi_shimmer" />
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

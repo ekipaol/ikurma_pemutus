@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/logo_white"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Data Lengkap"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:layout_marginTop="5dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:text="Mikro Irreguler"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>
+
+
+<!--<ImageView android:layout_width="wrap_content"-->
+    <!--android:layout_height="@dimen/materialviewpager_logoHeight"-->
+    <!--android:src="@drawable/building"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+
+<!--</ImageView>-->

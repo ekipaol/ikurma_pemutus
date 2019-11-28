@@ -1,0 +1,169 @@
+
+<!-- TODO: Update blank fragment layout -->
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/observablescrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+        <include layout="@layout/material_view_pager_placeholder"/>
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_marginBottom="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:background="@color/colorSecondary">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="17dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="Informasi Tambahan"/>
+                </LinearLayout>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_hp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="No HP"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_hp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="081212"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Email"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_email"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="ahmad@tarmidzi.com"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_kepemilikian_tempat_tinggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Kepemilikan Tempat Tinggal"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_kepemilikan_tempat_tinggal"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="Sewa/Kontrak"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_domisili_lama_menetap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Domisili/Lama Menetap"
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_domisili_lama_menetap"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:layout_height="wrap_content"
+                        android:text="2 Tahun"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="30dp"></android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="30dp"></android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="30dp"></android.support.v7.widget.CardView>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
+
+
+
+

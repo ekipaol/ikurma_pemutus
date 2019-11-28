@@ -36,15 +36,35 @@
     <include layout="@layout/ao_content_pipeline"/>
 
     <include layout="@layout/loading" />
+    <include layout="@layout/item_daftar_disposisi_shimmer" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_addpipeline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add_white_24dp"
-        android:backgroundTint="@color/color2"
-        app:borderWidth="0dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animWhale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_fileName="empty_whale.json"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"/>
+
+        <TextView
+            android:id="@+id/tvWhale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@id/animWhale"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:text="Belum ada pembiayaan"
+            android:textColor="@android:color/darker_gray"
+            />
+    </RelativeLayout>
+
+
 
 </android.support.design.widget.CoordinatorLayout>

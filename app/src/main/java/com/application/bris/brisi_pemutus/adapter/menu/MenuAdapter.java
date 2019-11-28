@@ -72,17 +72,20 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         });
 
         //load notifikasi di icon tertentu
+
         if(holder.tv_titlemenu.getText().toString().equalsIgnoreCase("Putusan")) {
 
-            if (dataNotifikasi.getNotifDashboard() != 0) {
-                holder.tv_badgemenu.setText(Integer.toString(dataNotifikasi.getNotifDashboard()));
+            if (dataNotifikasi.getNotifDashboard() != 0||dataNotifikasi.getJlhPutusanDeviasi()!=0) {
+                holder.tv_badgemenu.setText(Integer.toString(dataNotifikasi.getNotifDashboard()+dataNotifikasi.getJlhPutusanDeviasi()));
                 holder.tv_badgemenu.setVisibility(View.VISIBLE);
             }
+
         }
         else if(holder.tv_titlemenu.getText().toString().equalsIgnoreCase("Disposisi")){
             if (dataNotifikasi.getNotifDashboardDisposisi()!=0) {
                 holder.tv_badgemenu.setText(Integer.toString(dataNotifikasi.getNotifDashboardDisposisi()));
                 holder.tv_badgemenu.setVisibility(View.VISIBLE);
+
             }
         }
 

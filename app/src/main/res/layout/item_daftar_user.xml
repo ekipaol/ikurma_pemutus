@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_content_user"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardElevation="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="@color/colorBackgroundGrey1"
+        android:padding="4dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:id="@+id/ll_nama_user">
+
+    <TextView
+        android:id="@+id/tv_namauser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="{Nama User}"/>
+</LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_jabatanuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:text="{Jabatan user}"
+            android:layout_below="@id/ll_nama_user"/>
+
+        <TextView
+            android:id="@+id/tv_kantoruser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:text="{Kantor user}"
+            android:layout_below="@id/tv_jabatanuser"/>
+
+        <TextView
+            android:id="@+id/tv_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="{UID User}"
+            android:layout_below="@id/tv_kantoruser"/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="{Status}"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/round2"/>
+
+        <Button
+            android:id="@+id/btDetail"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Detail"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

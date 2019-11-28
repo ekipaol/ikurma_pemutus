@@ -48,7 +48,7 @@
                     android:scaleType="centerCrop"
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
-                    android:src="@drawable/brochure"/>
+                    android:src="@drawable/banner_placeholder"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

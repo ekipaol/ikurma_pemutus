@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="8dp"
+    android:paddingBottom="4dp"
+    app:cardElevation="3dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_nama_ao_performance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="{Nama AO}"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorBlackHeader"
+            android:background="@drawable/bordertextbox_primary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jabatan"
+                android:layout_weight="1"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_jabatan_performance_ao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{Nama Bank}"
+                android:textSize="13sp"
+                android:textColor="@color/colorBlackHeader"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kantor"
+                android:layout_weight="1"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_kantor_performance_ao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{Kantor}"
+                android:textSize="13sp"
+                android:textColor="@color/colorBlackHeader"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hotprospek :"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_hotprospek_performance_ao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="{Hotprospek}"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_hotprospek_performance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:indeterminate="true"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pipeline :"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_pipeline_performance_ao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="{Pipeline}"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_pipeline_performance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:indeterminate="true"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pembiayaan Disetujui"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_approved_performance_ao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="{Approved}"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_approved_performance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:indeterminate="true"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pembiayaan Ditolak"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_rejected_performance_ao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="{Rejected}"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_rejected_performance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:indeterminate="true"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="@color/colorGreenSoft"
+            android:weightSum="3"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="5dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="NOA: "
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_noa_performance_ao"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="14sp"/>
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_noa_performance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:indeterminate="true"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:weightSum="4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount Cair : "
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_amount_performance_ao"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp.000.000..000.000,00 "
+                    android:textStyle="bold"
+                    android:layout_weight="3"
+                    android:textSize="14sp"/>
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_amount_performance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:paddingRight="10dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:indeterminate="true"
+                    android:layout_weight="3"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

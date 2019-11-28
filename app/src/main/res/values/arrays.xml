@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="role_pinca" >
+        <item>MMM</item>
+        <item>Pincapem</item>
+        <item>ADP</item>
+        <item>MO</item>
+        <item>UH</item>
+        <item>BOS</item>
+        <item>CS</item>
+        <!--<item>AO</item>-->
+        <item>AOM</item>
+    </string-array>
+
+    <string-array name="role_pinca_daftar_user" >
+        <item>All</item>
+        <item>MMM</item>
+        <item>Pincapem</item>
+        <item>ADP</item>
+        <item>MO</item>
+        <item>UH</item>
+        <item>BOS</item>
+        <item>CS</item>
+        <!--<item>AO</item>-->
+        <item>AOM</item>
+    </string-array>
+
+    <string-array name="fid_role_pinca_daftar_user" >
+        <item>All</item>
+        <item>72</item>
+        <item>79</item>
+        <item>22</item>
+        <item>25</item>
+        <item>71</item>
+        <item>26</item>
+        <item>23</item>
+        <!--<item>100</item>-->
+        <item>8</item>
+    </string-array>
+
+    <string-array name="role_pincapem_m3">
+        <item>UH</item>
+        <item>BOS</item>
+        <item>CS</item>
+        <item>AOM</item>
+    </string-array>
+
+    <string-array name="role_pincapem_m3_daftar_user">
+        <item>All</item>
+        <item>UH</item>
+        <item>BOS</item>
+        <item>CS</item>
+        <item>AOM</item>
+    </string-array>
+
+    <string-array name="fid_role_pincapem_m3_daftar_user">
+        <item>All</item>
+        <item>71</item>
+        <item>26</item>
+        <item>23</item>
+        <item>8</item>
+    </string-array>
+
+
+    <string-array name="role_UH">
+        <item>AOM</item>
+
+    </string-array>
+
+    <string-array name="role_mm">
+        <!--<item>AO</item>-->
+
+    </string-array>
+
+    <string-array name="kanca_tegal" >
+
+        <item>KC Tegal</item>
+        <item>KCP Pekalongan</item>
+        <item>KCP Jatibarang</item>
+        <item>KCP Ketanggungan</item>
+        <item>KCP Banjaran Tegal</item>
+        <item>KCP Pemalang</item>
+    </string-array>
+
+    <string-array name="klasifikasi_agunan">
+        <item>POKOK</item>
+        <item>TAMBAHAN</item>
+
+    </string-array>
+
+
+</resources>
+

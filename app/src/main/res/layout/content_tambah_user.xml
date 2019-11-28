@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/toolbar_height_default">
+
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_content_tambah_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="6dp"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/info_tambah_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/roboto_m"
+                android:text="Sebelum melakukan penambahan user, harap terlebih dahulu melakukan pengecekan NIK dengan mengisi kolom dibawah"
+                android:textAlignment="center"/>
+
+            <!--currently not used-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NIK"
+                    android:textStyle="bold" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/evNik"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="NIK" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <!--NEW AND BETTER FIELD-->
+            <!--NEW AND BETTER FIELD-->
+            <!--NEW AND BETTER FIELD-->
+            <!--NEW AND BETTER FIELD-->
+            <LinearLayout
+                android:id="@+id/ll_role_tambah_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_group_black_24dp"
+                    android:tint="#5E5E5E" />
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spMaterial_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:entries="@array/role_pinca"
+                    app:ms_floatingLabelText="Role"
+                    app:ms_hint="Role">
+                </fr.ganfra.materialspinner.MaterialSpinner>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kantor_tambah_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_domain_black_24dp"
+                    android:tint="#5E5E5E" />
+
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spMaterial_kantor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:entries="@array/kanca_tegal"
+                    app:ms_hint="Kantor">
+                </fr.ganfra.materialspinner.MaterialSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kantor_tambah_ums"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_domain_black_24dp"
+                    android:tint="#5E5E5E" />
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spMaterial_ums"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/kanca_tegal"
+                    android:layout_marginLeft="15dp"
+                    app:ms_floatingLabelText="UMS"
+                    app:ms_hint="UMS"></fr.ganfra.materialspinner.MaterialSpinner>
+
+
+            </LinearLayout>
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_nik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasClearButton="true"
+                app:iconSignifier="@drawable/ic_public_black_24dp"
+                app:labelText="NIK">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/extended_nik"
+                    android:maxLength="6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasClearButton="true"
+                app:iconSignifier="@drawable/ic_person_black_24dp"
+                app:labelText="Nama Pegawai">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/extended_nama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasClearButton="true"
+                app:iconSignifier="@drawable/ic_pages_black_24dp"
+                app:labelText="User name">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/extended_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <!--<studio.carbonylgroup.textfieldboxes.TextFieldBoxes-->
+            <!--android:id="@+id/text_limit"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:enabled="true"-->
+            <!--app:iconSignifier="@drawable/ic_local_offer_black_24dp"-->
+            <!--app:labelText="Limit">-->
+
+            <!--<studio.carbonylgroup.textfieldboxes.ExtendedEditText-->
+            <!--android:id="@+id/extended_limit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:prefix="Rp."/>-->
+
+            <!--</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>-->
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/text_no_sk_uh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasClearButton="true"
+                app:iconSignifier="@drawable/ic_group_black_24dp"
+                app:labelText="Nomor SK UH">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/extended_no_sk_uh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <!--NEW AND BETTER FIELD-->
+            <!--NEW AND BETTER FIELD-->
+            <!--NEW AND BETTER FIELD-->
+            <!--NEW AND BETTER FIELD-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/btflatCekUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="Cek NIK"
+                    android:textColor="@color/colorWhite"
+                    app:buttonColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/btflatSimpan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="SIMPAN"
+                    android:textColor="@color/colorWhite"
+                    android:visibility="gone"
+                    app:buttonColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

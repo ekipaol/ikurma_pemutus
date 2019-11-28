@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fitsSystemWindows="true">
+
+        <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorWhite"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Info"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:fontFamily="@font/muli_b"
+                    android:paddingBottom="10dp"/>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/tf_bidangusaha"
+                    app:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSignifier="@drawable/ic_business"
+                   
+                    app:isResponsiveIconColor="true"
+                    app:panelBackgroundColor="@color/colorBgEdittext"
+                    app:secondaryColor="@color/colorPrimary"
+                    app:primaryColor="@color/colorPrimary"
+                    app:labelText="Bidang Usaha"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    app:useDenseSpacing="true">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/et_bidangusaha"
+                        android:textColor="@color/text_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/tf_namausaha"
+                    app:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSignifier="@drawable/ic_business"
+                    app:isResponsiveIconColor="true"
+                    app:panelBackgroundColor="@color/colorBgEdittext"
+                    app:secondaryColor="@color/colorPrimary"
+                    app:primaryColor="@color/colorPrimary"
+                    app:labelText="Nama Usaha"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    app:useDenseSpacing="true">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/et_namausaha"
+                        android:textColor="@color/text_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLength="50"/>
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/tf_tanggalmulaiusaha"
+                    app:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSignifier="@drawable/ic_date"
+                   
+                    app:isResponsiveIconColor="true"
+                    app:panelBackgroundColor="@color/colorBgEdittext"
+                    app:secondaryColor="@color/colorPrimary"
+                    app:primaryColor="@color/colorPrimary"
+                    app:labelText="Tanggal Mulai Usaha"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_marginTop="10dp"
+                    app:useDenseSpacing="true">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/et_tanggalmulaiusaha"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/text_color"
+                        android:layout_height="wrap_content"/>
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/tf_nomortelponusaha"
+                    app:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSignifier="@drawable/ic_phone"
+                    app:isResponsiveIconColor="true"
+                    app:panelBackgroundColor="@color/colorBgEdittext"
+                    app:secondaryColor="@color/colorPrimary"
+                    app:primaryColor="@color/colorPrimary"
+                    app:labelText="Nomor Telpon Usaha"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_marginTop="10dp"
+                    app:useDenseSpacing="true">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/et_nomortelponusaha"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/text_color"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789"
+                        android:maxLength="13"/>
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat Usaha"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:fontFamily="@font/muli_b"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="10dp"/>
+
+                <!--<Switch-->
+                    <!--android:id="@+id/sw_usahaktpsama"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:switchMinWidth="56dp"-->
+                    <!--android:paddingTop="10dp"-->
+                    <!--android:paddingBottom="8dp"-->
+                    <!--android:paddingRight="18dp"-->
+                    <!--android:text="@string/title_usahaequalid"-->
+                    <!--android:textSize="12sp"-->
+                    <!--android:layout_gravity="right"-->
+                    <!--android:textColor="@color/colorTextGrey"/>-->
+
+                <LinearLayout
+                    android:id="@+id/ll_alamatusaha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/tf_alamatusaha"
+                        app:enabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:iconSignifier="@drawable/ic_address"
+                        app:isResponsiveIconColor="true"
+                        app:panelBackgroundColor="@color/colorBgEdittext"
+                        app:secondaryColor="@color/colorPrimary"
+                        app:primaryColor="@color/colorPrimary"
+                        app:labelText="Alamat"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_marginTop="10dp"
+                        app:useDenseSpacing="true">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/et_alamatusaha"
+                            android:textColor="@color/text_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:maxLength="50"
+                            android:minLines="2"/>
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                            android:id="@+id/tf_rtusaha"
+                            app:enabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:iconSignifier="@drawable/ic_district"
+                            app:isResponsiveIconColor="true"
+                            app:panelBackgroundColor="@color/colorBgEdittext"
+                            app:secondaryColor="@color/colorPrimary"
+                            app:primaryColor="@color/colorPrimary"
+                            app:labelText="RT"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="5dp"
+                            android:layout_marginTop="10dp"
+                            app:useDenseSpacing="true"
+                            android:layout_weight="1">
+
+                            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                                android:id="@+id/et_rtusaha"
+                                android:textColor="@color/text_color"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:digits="0123456789"
+                                android:maxLength="3"/>
+                        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                            android:id="@+id/tf_rwusaha"
+                            app:enabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:iconSignifier="@drawable/ic_district"
+                            app:isResponsiveIconColor="true"
+                            app:panelBackgroundColor="@color/colorBgEdittext"
+                            app:secondaryColor="@color/colorPrimary"
+                            app:primaryColor="@color/colorPrimary"
+                            app:labelText="RW"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="20dp"
+                            android:layout_marginTop="10dp"
+                            app:useDenseSpacing="true"
+                            android:layout_weight="1">
+
+                            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                                android:id="@+id/et_rwusaha"
+                                android:textColor="@color/text_color"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:digits="0123456789"
+                                android:maxLength="3"/>
+                        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                    </LinearLayout>
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/tf_provinsiusaha"
+
+                        app:enabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:iconSignifier="@drawable/ic_province"
+                        app:isResponsiveIconColor="true"
+                        app:panelBackgroundColor="@color/colorBgEdittext"
+                        app:secondaryColor="@color/colorPrimary"
+                        app:primaryColor="@color/colorPrimary"
+                        app:labelText="Provinsi"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_marginTop="10dp"
+                        app:useDenseSpacing="true">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/et_provinsiusaha"
+                            android:textColor="@color/text_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLength="50"/>
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/tf_kotausaha"
+                        app:enabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:iconSignifier="@drawable/ic_city"
+                        app:isResponsiveIconColor="true"
+                        app:panelBackgroundColor="@color/colorBgEdittext"
+                        app:secondaryColor="@color/colorPrimary"
+                        app:primaryColor="@color/colorPrimary"
+                        app:labelText="Kota / Kabupaten"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_marginTop="10dp"
+                        app:useDenseSpacing="true">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/et_kotausaha"
+                            android:textColor="@color/text_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLength="50"/>
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/tf_kecamatanusaha"
+                        app:enabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:iconSignifier="@drawable/ic_district"
+                        app:isResponsiveIconColor="true"
+                        app:panelBackgroundColor="@color/colorBgEdittext"
+                        app:secondaryColor="@color/colorPrimary"
+                        app:primaryColor="@color/colorPrimary"
+                        app:labelText="Kecamatan"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_marginTop="10dp"
+                        app:useDenseSpacing="true">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/et_kecamatanusaha"
+                            android:textColor="@color/text_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLength="50"/>
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/tf_kelurahanusaha"
+                        app:enabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:iconSignifier="@drawable/ic_district"
+                        app:isResponsiveIconColor="true"
+                        app:panelBackgroundColor="@color/colorBgEdittext"
+                        app:secondaryColor="@color/colorPrimary"
+                        app:primaryColor="@color/colorPrimary"
+                        app:labelText="Kelurahan"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_marginTop="10dp"
+                        app:useDenseSpacing="true">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/et_kelurahanusaha"
+                            android:textColor="@color/text_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLength="50"/>
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                            android:id="@+id/tf_kodeposusaha"
+                            app:enabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:isResponsiveIconColor="true"
+                            app:iconSignifier="@drawable/ic_postcode"
+                            app:panelBackgroundColor="@color/colorBgEdittext"
+                            app:secondaryColor="@color/colorPrimary"
+                            app:primaryColor="@color/colorPrimary"
+                            app:labelText="Kodepos"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="5dp"
+                            android:layout_marginTop="10dp"
+                            app:useDenseSpacing="true"
+                            android:layout_weight="1">
+
+                            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                                android:id="@+id/et_kodeposusaha"
+                                android:textColor="@color/text_color"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+                        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                        <Button
+                            android:visibility="gone"
+                            android:id="@+id/btn_usaha"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:text="Cari"
+                            android:textColor="@color/colorPrimary"
+                            android:textAllCaps="false"
+                            android:background="@drawable/shapeborderprimary"
+                            android:layout_gravity="bottom"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="5dp"
+                            android:elevation="5dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <include layout="@layout/loading"/>
+            </LinearLayout>
+        </FrameLayout>
+</ScrollView>

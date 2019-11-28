@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_content_user"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardElevation="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="@color/colorBackgroundGrey1"
+        android:padding="4dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:id="@+id/ll_nama_user">
+
+            <TextView
+                android:id="@+id/tv_namauser_ambil_alih"
+                android:layout_width="0dp"
+
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="{Nama User}"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_jabatanuser_ambil_alih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:text="{Jabatan user}"
+            android:layout_below="@id/ll_nama_user"/>
+
+        <TextView
+            android:id="@+id/tv_kantoruser_ambil_alih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:text="{Kantor user}"
+            android:layout_below="@id/tv_jabatanuser_ambil_alih"/>
+
+        <TextView
+            android:id="@+id/tv_uid_ambil_alih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="{UID User}"
+            android:layout_below="@id/tv_kantoruser_ambil_alih"/>
+
+
+
+        <Button
+            android:id="@+id/btDetail_ambil_alih"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:text="Pilih"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="fill_parent"
+            android:layout_alignLeft="@id/btDetail_ambil_alih"
+            android:background="@color/colorBackgroundGrey3"/>
+
+
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

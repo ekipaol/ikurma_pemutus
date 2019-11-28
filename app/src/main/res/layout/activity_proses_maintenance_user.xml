@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <include layout="@layout/toolbar_nosearch" />
+
+
+    <LinearLayout
+        android:layout_marginTop="64dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Data Pegawai"
+            android:layout_marginBottom="10dp"/>
+
+        <!--<studio.carbonylgroup.textfieldboxes.TextFieldBoxes-->
+            <!--android:id="@+id/text_nik"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:hasClearButton="true"-->
+            <!--app:labelText="NIK"-->
+            <!--app:enabled="false"-->
+            <!--app:iconSignifier="@drawable/ic_public_black_24dp"-->
+            <!--&gt;-->
+
+            <!--<studio.carbonylgroup.textfieldboxes.ExtendedEditText-->
+                <!--android:id="@+id/extended_nik"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
+
+        <!--</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>-->
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/text_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hasClearButton="false"
+            app:enabled="false"
+            app:labelText="Nama Pegawai"
+            app:iconSignifier="@drawable/ic_person_black_24dp"
+            >
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/extended_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/text_jabatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hasClearButton="false"
+            app:labelText="Jabatan"
+            app:enabled="false"
+            app:iconSignifier="@drawable/ic_pages_black_24dp"
+            >
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/extended_jabatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/text_kantor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hasClearButton="false"
+            app:labelText="Kantor"
+            app:enabled="false"
+            app:iconSignifier="@drawable/ic_domain_black_24dp"
+            >
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/extended_kantor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/text_old_officer_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hasClearButton="false"
+            app:labelText="Officer Code Sebelumnya"
+            app:enabled="false"
+            app:iconSignifier="@drawable/ic_lock_open_black_24dp"
+            >
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/extended_old_officer_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#c0c0c0"/>
+
+
+
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:layout_marginTop="20dp"
+            android:id="@+id/text_maintenance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hasClearButton="true"
+            app:labelText="Masukkan Officer Code Baru"
+            app:enabled="true"
+            app:iconSignifier="@drawable/ic_lock_black_24dp"
+            >
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/extended_maintenance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btValidasi"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:text="VALIDASI"
+            app:buttonColor="@color/A400red"/>
+
+    </LinearLayout>
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

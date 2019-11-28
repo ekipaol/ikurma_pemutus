@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="64dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_daftar_user">
+
+    <LinearLayout
+        android:id="@+id/ll_cari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp"
+        android:weightSum="10"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_role_tambah_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_group_black_24dp"
+                android:tint="#5E5E5E" />
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spMaterial_role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:entries="@array/role_pinca"
+                app:ms_floatingLabelText="Role"
+                app:ms_hint="Role"></fr.ganfra.materialspinner.MaterialSpinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_kantor_tambah_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_domain_black_24dp"
+                android:tint="#5E5E5E" />
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spMaterial_kantor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:entries="@array/kanca_tegal"
+                app:ms_floatingLabelText="Kantor"
+                app:ms_hint="Kantor"></fr.ganfra.materialspinner.MaterialSpinner>
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/btflatCari"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="Cari"
+                android:textColor="@color/colorWhite"
+                app:buttonColor="@color/colorPrimary" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvWhale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/animWhale"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:text="Belum ada user"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="visible" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animWhale"
+        android:layout_below="@+id/ll_cari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="empty_whale.json"
+        app:lottie_loop="true" />
+
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_below="@+id/ll_filter">-->
+
+    <!--        -->
+    <!--    </RelativeLayout>-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_below="@+id/ll_cari"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_listuser"
+            android:layout_below="@+id/ll_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

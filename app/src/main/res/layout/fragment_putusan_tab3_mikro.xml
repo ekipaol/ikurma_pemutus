@@ -1,0 +1,289 @@
+
+<!-- TODO: Update blank fragment layout -->
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/observablescrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+        <include layout="@layout/material_view_pager_placeholder"/>
+
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_marginBottom="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:background="@color/colorSecondary">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="Data KTP"/>
+                </LinearLayout>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_agama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Agama"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_hp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Hindu"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_alamat_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Alamat KTP"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_alamat_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Menteng Atas"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_rt_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="RT"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_rt_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="01"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_rw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="RW"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_rw"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="09"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_kodepos_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Kodepos"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_kodepos_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="42115"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_kelurahan_tkp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Kelurahan"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_kelurahan_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Pinansia Kel"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_kecamatan_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Kecamatan"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_kecamatan_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Tamansari"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_kota_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="Kota"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_kota_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="Jakarta"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/text_propinsi_ktp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:hasClearButton="false"
+                    app:isResponsiveIconColor="false"
+                    app:enabled="false"
+                    app:labelText="No HP"
+
+
+                    >
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/extended_propinsi_ktp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorBlackHeader"
+                        android:text="DKI Jakarta"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+
+</android.support.v7.widget.CardView>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+
+
+
+

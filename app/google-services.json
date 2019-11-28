@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "205582530442",
+    "firebase_url": "https://brisi-pemutus.firebaseio.com",
+    "project_id": "brisi-pemutus",
+    "storage_bucket": "brisi-pemutus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205582530442:android:15c830eddca1b3f2",
+        "android_client_info": {
+          "package_name": "com.application.bris.brisi_pemutus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205582530442-es9v3cba0afbvk148c63pepg59bcjb4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU4UJYPZvAINRB7QbB1R0gyKvjbLJyQtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205582530442-es9v3cba0afbvk148c63pepg59bcjb4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

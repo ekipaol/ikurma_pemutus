@@ -58,10 +58,15 @@ public class MenuDaftarPutusanActivity extends AppCompatActivity {
         });
 
         int notifPembiayaan=getIntent().getIntExtra("notifPembiayaan",0);
+        int notifPembiayaanDeviasi=getIntent().getIntExtra("notifPembiayaanDeviasi",0);
 
         if(notifPembiayaan!=0){
             tvNotifikasiPembiayaan.setText(Integer.toString(notifPembiayaan));
             tvNotifikasiPembiayaan.setVisibility(View.VISIBLE);
+        }
+        if(notifPembiayaanDeviasi!=0){
+            tvNotifikasiDeviasi.setText(Integer.toString(notifPembiayaanDeviasi));
+            tvNotifikasiDeviasi.setVisibility(View.VISIBLE);
         }
 
 

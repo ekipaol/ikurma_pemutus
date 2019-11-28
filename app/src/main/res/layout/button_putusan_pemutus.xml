@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <info.hoang8f.widget.FButton
+        android:id="@+id/button_putusan"
+        android:layout_marginTop="15dp"
+        app:buttonColor="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:text="Lakukan Putusan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</android.support.constraint.ConstraintLayout>

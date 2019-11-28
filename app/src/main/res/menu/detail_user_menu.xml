@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/detail_menu_edit"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Edit" />
+
+    <!--<item-->
+        <!--android:id="@+id/detail_menu_delete"-->
+        <!--android:icon="@drawable/ic_dashboard_black_24dp"-->
+        <!--android:title="Delete" />-->
+
+    <!--<item-->
+        <!--android:id="@+id/detail_menu_maintenance"-->
+        <!--android:icon="@drawable/ic_person_black_24dp"-->
+        <!--android:title="Maintenance" />-->
+
+</menu>

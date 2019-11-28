@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/iv_iconmenu"
         android:layout_alignRight="@id/iv_iconmenu"
-        android:text="100"
+        android:visibility="gone"
         android:textColor="#fff"
         android:textSize="10sp"
         android:fontFamily="@font/ml"
@@ -45,11 +45,12 @@
         android:padding="4dp"
         android:background="@drawable/roundbadge"/>
 
-        <TextView
+        <me.grantland.widget.AutofitTextView
             android:id="@+id/tv_titlemenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
+            android:maxLines="1"
             android:fontFamily="@font/mm"
             android:layout_below="@+id/iv_iconmenu"
             android:layout_centerHorizontal="true"
