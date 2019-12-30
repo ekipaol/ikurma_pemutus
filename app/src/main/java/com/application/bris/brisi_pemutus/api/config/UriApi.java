@@ -3,8 +3,8 @@ package com.application.bris.brisi_pemutus.api.config;
 public class UriApi {
 
     public class Baseurl{
-//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI/webresources/"; //DEV tanpa rev proxy
-       public static final String URL = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //server prod
+        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI/webresources/"; //DEV tanpa rev proxy
+//       public static final String URL = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //server prod
 
 //        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-EKI/webresources/"; //DEV eki tanpa rev proxy
     }
@@ -228,6 +228,26 @@ public class UriApi {
     public class listUms {
         public static final String listUms = "generic/mikro/usermanagement/listUms";
     }
+
+
+    //KONSUMER KMG
+
+    public class inquiryDataLengkapKonsumerKmg {
+        public static final String inquiryDataLengkapKonsumerKmg = "generic/konsumer/kmg/hotprospek/datalengkap/inquireDataLengkap";
+    }
+    public class inquiryDataFinansialKmg {
+        public static final String inquiryDataFinansialKmg = "generic/konsumer/kmg/hotprospek/datafinansial/inquiryLoadPrescoring";
+    }
+    public class validasiDataFinansial {
+        public static final String validasiDataFinansial = " generic/konsumer/kmg/hotprospek/datafinansial/validasiPlafond";
+
+    }
+
+
+
+
+
+
 
 
 

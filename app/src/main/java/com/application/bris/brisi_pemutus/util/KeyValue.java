@@ -65,6 +65,16 @@ public class KeyValue {
     private static HashMap<String, String> mapTypeRpcRatio127 = new HashMap<>();
     private static HashMap<String, String> mapTypeRpcRatio128 = new HashMap<>();
 
+    //konsumer kmg
+
+    private static HashMap<String, String> mapTypeStatusKepegawaian = new HashMap<>();
+    private static HashMap<String, String> mapTypePosisiJabatan = new HashMap<>();
+    private static HashMap<String, String> mapTypePembayaranGajiMelalui = new HashMap<>();
+    private static HashMap<String, String> mapTypeReferensi = new HashMap<>();
+    private static HashMap<String, String> mapTypeTujuanPenggunaanKmg = new HashMap<>();
+
+
+
 
 
     static {
@@ -73,12 +83,42 @@ public class KeyValue {
 
     public static void init() {
 
+        //konsumer kmg
+        //tujuan penggunaan kmg
+        mapTypeTujuanPenggunaanKmg.put("Pembelian Kendaraan Bermotor Roda Dua", "72");
+        mapTypeTujuanPenggunaanKmg.put("Pembelian Barang Konsumtif Multiguna (non tanah dan/atau bangunan & non kendaraan bermotor roda empat)", "73");
+        mapTypeTujuanPenggunaanKmg.put("Take Over Kredit Multi Guna dari Bank Konvensional", "74");
+
+        //status kepegawaian
+        mapTypeStatusKepegawaian.put("Pegawai Tetap","1");
+        mapTypeStatusKepegawaian.put("Kontrak","2");
+        mapTypeStatusKepegawaian.put("Honorer","3");
+        mapTypeStatusKepegawaian.put("Lainnya","4");
+
+        //posisi jabatan
+        mapTypePosisiJabatan.put("Staff / Gol < 4A / sd Kapten atau Setaranya","01");
+        mapTypePosisiJabatan.put("Middle Management (Dua/Tiga level dibawah Direktur) / Gol >= 4A >= Mayor atau Setaranya","02");
+        mapTypePosisiJabatan.put("Top Management (Direktur, Komisaris & Satu Level Dibawah Direktur","03");
+
+        //pembayaran gaji melalui
+        mapTypePembayaranGajiMelalui.put("BRI","A");
+        mapTypePembayaranGajiMelalui.put("BRI Syariah","B");
+        mapTypePembayaranGajiMelalui.put("Lainnya","C");
+
+        //referensi
+        mapTypeAddressSearch.put("Lain-lain", "1");
+        mapTypeAddressSearch.put("Nasabah", "2");
+        mapTypeAddressSearch.put("Pihak Terkait Bank", "3");
+        mapTypeAddressSearch.put("Prime Customer Bank", "4");
+
         //Data Type Address Search
         mapTypeAddressSearch.put("Provinsi", "PROPINSI");
         mapTypeAddressSearch.put("Kota/Kabupaten", "KOTA");
         mapTypeAddressSearch.put("Kecamatan", "KECAMATAN");
         mapTypeAddressSearch.put("Kelurahan", "KELURAHAN");
         mapTypeAddressSearch.put("Kodepos", "KODE_POS");
+
+
 
         //Data Type Usaha or Job
         //Usaha
@@ -368,6 +408,68 @@ public class KeyValue {
         mapTypeOperasional.put("Radius <= 25 km", "25");
         mapTypeOperasional.put("Radius <= 50 km", "50");
         mapTypeOperasional.put("Radius > 50 km", "55");
+
+
+        //konsumer kmg
+
+    }
+
+
+    //konsumer kmg
+    //konsumer kmg
+
+    public static String getTypeTujuanPenggunaanKmg(String param){
+        return mapTypeTujuanPenggunaanKmg.get(param);
+    }
+
+    public static String getKeyTujuanPenggunaanKmg(String value){
+        for (String o : mapTypeTujuanPenggunaanKmg.keySet()){
+            if(mapTypeTujuanPenggunaanKmg.get(o).equalsIgnoreCase(value)){
+                return o;
+            }
+        }
+        return null;
+    }
+
+    public static String getTypeStatusKepegawaian(String param){
+        return mapTypeStatusKepegawaian.get(param);
+    }
+
+    public static String getKeyStatusKepegawaian(String value){
+        for (String o : mapTypeStatusKepegawaian.keySet()){
+            if(mapTypeStatusKepegawaian.get(o).equalsIgnoreCase(value)){
+                return o;
+            }
+        }
+        return null;
+    }
+
+
+
+    public static String getTypePosisiJabatan(String param){
+        return mapTypePosisiJabatan.get(param);
+    }
+
+    public static String getKeyPosisiJabatan(String value){
+        for (String o : mapTypePosisiJabatan.keySet()){
+            if(mapTypePosisiJabatan.get(o).equalsIgnoreCase(value)){
+                return o;
+            }
+        }
+        return null;
+    }
+
+    public static String getTypePembayaranGaji(String param){
+        return mapTypePembayaranGajiMelalui.get(param);
+    }
+
+    public static String getKeyPembayaranGaji(String value){
+        for (String o : mapTypePembayaranGajiMelalui.keySet()){
+            if(mapTypePembayaranGajiMelalui.get(o).equalsIgnoreCase(value)){
+                return o;
+            }
+        }
+        return null;
     }
 
     public static String getTypeAddressSearch(String param){
@@ -514,6 +616,19 @@ public class KeyValue {
     public static String getKeyPendidikanTerakhir(String value){
         for (String o : mapTypePendidikanTerakhir.keySet()){
             if(mapTypePendidikanTerakhir.get(o).equalsIgnoreCase(value)){
+                return o;
+            }
+        }
+        return null;
+    }
+
+    public static String getTypeReferensi(String param){
+        return mapTypeReferensi.get(param);
+    }
+
+    public static String getKeyReferensi(String value){
+        for (String o : mapTypeReferensi.keySet()){
+            if(mapTypeReferensi.get(o).equalsIgnoreCase(value)){
                 return o;
             }
         }

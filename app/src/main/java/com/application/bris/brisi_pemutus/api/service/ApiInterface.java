@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
+import com.application.bris.brisi_pemutus.api.model.ParseResponseDataInstansi;
 import com.application.bris.brisi_pemutus.api.model.request.EmptyRequest;
 import com.application.bris.brisi_pemutus.api.model.request.ParseResponseListFoto;
 import com.application.bris.brisi_pemutus.api.model.request.agunan.ReqAgunan;
@@ -43,6 +44,7 @@ import com.application.bris.brisi_pemutus.api.model.request.req_nik.ReqNik;
 import com.application.bris.brisi_pemutus.api.model.request.scoring.ReqScoring;
 import com.application.bris.brisi_pemutus.api.model.request.sektor_ekonomi.ReqSektorEkonomi;
 import com.application.bris.brisi_pemutus.api.model.request.simpan_disposisi.ReqSimpanDisposisi;
+import com.application.bris.brisi_pemutus.api.model.request.validasi_data_finansial.ValidasiDataFinansialKmg;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -290,6 +292,20 @@ public interface ApiInterface {
 
     @POST(UriApi.inquiryDetailSlik.inquiryDetailSlik)
     Call<ParseResponse> inquiryDetailSlik (@Body ReqIdAplikasi ReqIdAplikasi);
+
+
+    //KONSUMER KMG
+    @POST(UriApi.inquiryDataLengkapKonsumerKmg.inquiryDataLengkapKonsumerKmg)
+    Call<ParseResponse> inquiryDataLengkapKonsumerKmg(@Body ReqDataLengkap ReqDataLengkap);
+
+    //menggunakan request kelengkapandokumen karena requestnya sama sama id aplikasi
+    @POST(UriApi.inquiryDataFinansialKmg.inquiryDataFinansialKmg)
+    Call<ParseResponseDataInstansi> inquiryDataFinansialKmg(@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
+    @POST(UriApi.validasiDataFinansial.validasiDataFinansial)
+    Call<ParseResponse> validasiDataFinansial (@Body ValidasiDataFinansialKmg ValidasiDataFinansialKmg);
+
+
 
     @POST(UriApi.updateFirebase.updateFirebase)
     Call<ParseResponse> updateFirebase(@Body ReqFirebase ReqFirebase);

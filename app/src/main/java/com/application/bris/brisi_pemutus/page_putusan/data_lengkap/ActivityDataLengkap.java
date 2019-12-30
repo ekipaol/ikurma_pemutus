@@ -128,6 +128,10 @@ public class ActivityDataLengkap extends AppCompatActivity implements StepperLay
             }
         });
         startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
+
+        if(superData.getKodeProduk().equalsIgnoreCase("71")||superData.getKodeProduk().equalsIgnoreCase("72")||superData.getKodeProduk().equalsIgnoreCase("73")){
+
+        }
         loadDataLengkap();
 
     }
@@ -160,6 +164,7 @@ public class ActivityDataLengkap extends AppCompatActivity implements StepperLay
                             Gson gson = new Gson();
                             dataPribadiString = response.body().getData().get("nasabah").toString();
                             dataLengkap = gson.fromJson(dataPribadiString, DataLengkap.class);
+
                             stepperlayout.setAdapter(new SampleFragmentStepAdapter(getSupportFragmentManager(), ActivityDataLengkap.this, dataLengkap, 1), startingStepPosition);
                             stepperlayout.setListener(ActivityDataLengkap.this);
                         }

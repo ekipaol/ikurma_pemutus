@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.data_lengkap.DataLengkapKonsumerKmgActivity;
 import com.application.bris.brisi_pemutus.page_performance.PerformanceActivity;
 import com.application.bris.brisi_pemutus.page_putusan.detail_slik.DetailSlikActivity;
 import com.application.bris.brisi_pemutus.page_ranking.RankingActivity;
@@ -58,7 +59,7 @@ public class FragmentWelcome extends Fragment implements Step{
         iv_welcome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent intent=new Intent(getActivity(), PerformanceActivity.class);
+                Intent intent=new Intent(getActivity(), DataLengkapKonsumerKmgActivity.class);
                 startActivity(intent);
                 return false;
             }

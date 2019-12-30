@@ -38,12 +38,32 @@ public class PutusanAkad implements Serializable {
     private String tujuan_penggunaan;
     @SerializedName("NO_AKAD")
     private String NO_AKAD;
+    @SerializedName("NO_AKAD_QARDH")
+    private String NO_AKAD_QARDH;
+    @SerializedName("JT_QARDH")
+    private String JT_QARDH;
     @SerializedName("LOAN_TYPE")
     private String LOAN_TYPE;
     @SerializedName("KODE_PRODUK")
     private String KODE_PRODUK;
     @SerializedName("NAMA_PRODUK")
     private String NAMA_PRODUK;
+
+    public String getNO_AKAD_QARDH() {
+        return NO_AKAD_QARDH;
+    }
+
+    public void setNO_AKAD_QARDH(String NO_AKAD_QARDH) {
+        this.NO_AKAD_QARDH = NO_AKAD_QARDH;
+    }
+
+    public String getJT_QARDH() {
+        return JT_QARDH;
+    }
+
+    public void setJT_QARDH(String JT_QARDH) {
+        this.JT_QARDH = JT_QARDH;
+    }
 
     public String getNAMA_PRODUK() {
         return NAMA_PRODUK;

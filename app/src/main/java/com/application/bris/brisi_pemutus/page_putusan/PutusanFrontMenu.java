@@ -60,7 +60,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,6 +109,15 @@ public class PutusanFrontMenu extends AppCompatActivity {
     @BindView(R.id.autoTv_no_akad)
     AutofitTextView autoTv_no_akad;
 
+    @BindView(R.id.cv_nomor_akad_qardh)
+    CardView cv_nomor_akad_qardh;
+
+    @BindView(R.id.autoTv_no_akad_qardh)
+    AutofitTextView autoTv_no_akad_qardh;
+
+    @BindView(R.id.autoTv_jatuh_tempo_qardh)
+    AutofitTextView autoTv_jatuh_tempo_qardh;
+
     @BindView(R.id.iv_foto_putusan_front)
     ImageView iv_foto_putusan_front;
 
@@ -123,6 +135,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
         setContentView(R.layout.putusan_front_menu);
         apiClientAdapter = new ApiClientAdapter(PutusanFrontMenu.this);
         appPreferences=new AppPreferences(this);
+
         //membuat kondisi preference dalam kondisi default, tidak ada yang diceklis
         setFrontPreferenceDefault();
         ButterKnife.bind(this);
@@ -232,6 +245,35 @@ public class PutusanFrontMenu extends AppCompatActivity {
             else{
                 autoTv_no_akad.setText(dataPutusanAkad.getNO_AKAD());
             }
+
+
+            if(!dataPutusanAkad.getNO_AKAD_QARDH().isEmpty()){
+                cv_nomor_akad_qardh.setVisibility(View.VISIBLE);
+                autoTv_no_akad_qardh.setText(dataPutusanAkad.getNO_AKAD_QARDH());
+
+                try{
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a", Locale.getDefault());
+                    String originDate = dataPutusanAkad.getJT_QARDH();
+                    SimpleDateFormat formatIn = new SimpleDateFormat("ddMMyyy");
+                    SimpleDateFormat formatOut = new SimpleDateFormat("dd MMM yyy");
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(formatIn.parse(originDate));
+
+                    String newDate = formatOut.format(calendar.getTime());
+                    autoTv_jatuh_tempo_qardh.setText(newDate);
+
+                }
+                catch(Exception e){
+
+                }
+
+
+
+            }
+            else if(dataPutusanAkad.getNO_AKAD_QARDH().isEmpty()){
+                cv_nomor_akad_qardh.setVisibility(View.GONE);
+            }
+
 
             btPutusan.setVisibility(View.GONE);
 

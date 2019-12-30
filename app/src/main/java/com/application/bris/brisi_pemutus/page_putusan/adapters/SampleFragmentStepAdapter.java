@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
 
+import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.list_foto_agunan.ListFotoAgunan;
@@ -60,6 +61,8 @@ public class SampleFragmentStepAdapter extends AbstractFragmentStepAdapter{
     @NonNull
     @Override
     public StepViewModel getViewModel(@IntRange(from = 0) int position) {
+        StepViewModel.Builder builder = new StepViewModel.Builder(context);
+
         if(status==1){
             switch (position){
             case 0:
@@ -75,6 +78,10 @@ public class SampleFragmentStepAdapter extends AbstractFragmentStepAdapter{
                 default:
                     title = "Default Tab";
         }
+
+
+
+
         }
         else if(status==2){
             switch (position){
@@ -104,6 +111,25 @@ public class SampleFragmentStepAdapter extends AbstractFragmentStepAdapter{
                     title = "Default Tab";
             }
         }
+
+//        else if(status==3){
+//            switch (position){
+//                case 0:
+//                    title = "Data Pribadi";
+//                    break;
+//                case 1:
+//                    title = "Data Alamat";
+//                    break;
+//                case 2:
+//                    title = "Data Pekerjaan";
+//
+//                    builder.setEndButtonLabel("Ke Prescreening");
+//                    break;
+//
+//                default:
+//                    title = "Default Tab";
+//            }
+//        }
 
         return new StepViewModel.Builder(context)
                 .setTitle(title)

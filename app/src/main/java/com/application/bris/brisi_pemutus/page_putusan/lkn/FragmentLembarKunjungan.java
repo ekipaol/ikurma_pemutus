@@ -231,7 +231,7 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
-                intent.putExtra("id_foto",(data.getFID_PHOTO_DEPAN()));
+                intent.putExtra("id_foto",(Integer.parseInt(data.getFID_PHOTO_DEPAN())));
                 startActivity(intent);
             }
         });
@@ -241,7 +241,7 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
-                intent.putExtra("id_foto",(data.FID_PHOTO_DALAM));
+                intent.putExtra("id_foto",(Integer.parseInt(data.getFID_PHOTO_DALAM())));
                 startActivity(intent);
             }
         });
@@ -250,7 +250,7 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
-                intent.putExtra("id_foto",(data.FID_PHOTO_LINGKUNGAN));
+                intent.putExtra("id_foto",(Integer.parseInt(data.getFID_PHOTO_LINGKUNGAN())));
                 startActivity(intent);
             }
         });

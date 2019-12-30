@@ -16,8 +16,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +42,7 @@ import java.util.HashMap;
 
 import me.toptas.fancyshowcase.FancyShowCaseView;
 import me.toptas.fancyshowcase.FocusShape;
+import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 /**
  * Created by Idong
@@ -69,6 +73,42 @@ public class AppUtil {
                 ((AppCompatActivity) context).onBackPressed();
             }
         });
+    }
+
+    public static String parseRupiahNoSymbol(String amount){
+        Double amountDouble = Double.valueOf(amount);
+        DecimalFormat kursIDN = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRP = new DecimalFormatSymbols();
+        formatRP.setCurrencySymbol("");
+        formatRP.setMonetaryDecimalSeparator(',');
+        formatRP.setGroupingSeparator('.');
+        kursIDN.setDecimalFormatSymbols(formatRP);
+        return kursIDN.format(amountDouble);
+    }
+
+    public final static String parseNpwp(String data)
+    {
+        String strfix = "";
+        try {
+            if (data.length() == 15)
+            {
+                String str1 = data.substring(0, 2);
+                String str2 = data.substring(2, 5);
+                String str3 = data.substring(5, 8);
+                String str4 = data.substring(8, 9);
+                String str5 = data.substring(9, 12);
+                String str6 = data.substring(12, 15);
+                strfix = str1+"."+str2+"."+str3+"."+str4+"-"+str5+"."+str6;
+            }
+            else{
+                strfix = data;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return strfix;
     }
 
     public static void toolbarRegularFragment(final Activity context, String title) {
@@ -154,6 +194,65 @@ public class AppUtil {
         formatRP.setGroupingSeparator('.');
         kursIDN.setDecimalFormatSymbols(formatRP);
         return kursIDN.format(amountDouble);
+    }
+
+    //METHOD UNTUK MENGUBAH ICON DI TEXTFIELD SECARA DINAMIS, KLAU SUDAH DIISI DIA CEKLIS, KALO ISINYA DIHAPUS DIA JADI WARNING
+    public static void dynamicIconLogoChange(final Context context, EditText editText, final TextFieldBoxes textFieldBoxes){
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(s.length()==0){
+                    textFieldBoxes.setIsResponsiveIconColor(false);
+                    textFieldBoxes.getIconImageButton().setColorFilter(ContextCompat.getColor(context, R.color.red_btn_bg_color));
+
+                    textFieldBoxes.getIconImageButton().setImageResource(R.drawable.ic_error_outline_secondary_24dp);
+
+                }
+                else{
+                    textFieldBoxes.setIsResponsiveIconColor(false);
+                    textFieldBoxes.getIconImageButton().setColorFilter(ContextCompat.getColor(context, R.color.colorGreenSuccess));
+                    textFieldBoxes.getIconImageButton().setImageResource(R.drawable.ic_checked);
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    //METHOD MENGUBAH ICON TEXTFIELDBOXES KHUSUS UNTUK DROPDOWN/FRAGMENT DIALOG
+    public static void dynamicIconLogoChangeDropdown( Context context,final TextFieldBoxes textFieldBoxes){
+
+
+        textFieldBoxes.setIsResponsiveIconColor(false);
+        textFieldBoxes.getIconImageButton().setColorFilter(ContextCompat.getColor(context, R.color.colorGreenSuccess));
+        textFieldBoxes.getIconImageButton().setImageResource(R.drawable.ic_checked);
+
+
+    }
+
+    public static void dynamicIconLogoChangeDropdown( Context context,final TextFieldBoxes textFieldBoxes,final EditText editText){
+
+
+        if(!editText.getText().toString().isEmpty()){
+            textFieldBoxes.setIsResponsiveIconColor(false);
+            textFieldBoxes.getIconImageButton().setColorFilter(ContextCompat.getColor(context, R.color.colorGreenSuccess));
+            textFieldBoxes.getIconImageButton().setImageResource(R.drawable.ic_checked);
+        }
+
+
+
     }
 
     public static void notifwarning(Context mcontex, View root, String snackTitle) {
