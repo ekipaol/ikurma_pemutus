@@ -3,16 +3,12 @@ package com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
@@ -34,8 +30,6 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.grantland.widget.AutofitTextView;
-import ozaydin.serkan.com.image_zoom_view.ImageViewZoom;
 
 public class ActivityFotoKelengkapanDokumen extends AppCompatActivity {
 

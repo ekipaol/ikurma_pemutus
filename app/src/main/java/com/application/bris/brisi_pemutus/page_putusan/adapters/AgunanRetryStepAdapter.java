@@ -1,17 +1,13 @@
 package com.application.bris.brisi_pemutus.page_putusan.adapters;
 
 import android.content.Context;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
-import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.Agunan3Retry;
-import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.FragmentDataAlamat;
-import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.FragmentDataPribadi;
-import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.FragmentDataUsaha;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.viewmodel.StepViewModel;

@@ -22,8 +22,32 @@ public class Prescreening {
     @Nullable
     @SerializedName("FID_APLIKASI")
     private String fid_aplikasi;
+    @Nullable
+    @SerializedName("noPermin")
+    private String noPermin;
+    @Nullable
+    @SerializedName("noPermin2")
+    private String noPermin2;
     @SerializedName("RESULT")
     private String result;
+
+    @Nullable
+    public String getNoPermin() {
+        return noPermin;
+    }
+
+    public void setNoPermin(@Nullable String noPermin) {
+        this.noPermin = noPermin;
+    }
+
+    @Nullable
+    public String getNoPermin2() {
+        return noPermin2;
+    }
+
+    public void setNoPermin2(@Nullable String noPermin2) {
+        this.noPermin2 = noPermin2;
+    }
 
     public String getResult() {
         return result;

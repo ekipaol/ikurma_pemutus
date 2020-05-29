@@ -1,21 +1,17 @@
 package com.application.bris.brisi_pemutus.page_putusan.agunan_kendaraan;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,19 +34,8 @@ import com.bumptech.glide.request.transition.Transition;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 /**

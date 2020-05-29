@@ -1,9 +1,8 @@
 package com.application.bris.brisi_pemutus.page_putusan.agunan_kendaraan;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -12,7 +11,6 @@ import android.widget.RelativeLayout;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_global_idapl_agunan_cif.AgunanGlobal;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;

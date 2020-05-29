@@ -1,16 +1,15 @@
 package com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -30,10 +29,7 @@ import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen_agunan.Kelen
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
 import com.application.bris.brisi_pemutus.page_putusan.history_catatan.CatatanActivity;
-import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
-import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -171,6 +167,9 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
     @BindView(R.id.bt_lanjut_kelengkapan_data)
     Button bt_lanjut_kelengkapan_data;
 
+    @BindView(R.id.tv_dokumen_agunan)
+    TextView tv_dokumen_agunan;
+
     AllDataFront superData;
 
 
@@ -206,14 +205,16 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
         superData=(AllDataFront)getIntent().getSerializableExtra("superData");
 
 
-        if(superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
-            bt_lanjut_kelengkapan_data.setVisibility(View.GONE);
-        }
 
         //kalau belum dilihat semua, gak bisa di putus
         if(appPreferences.getReadKelengkapan().equalsIgnoreCase("no")||appPreferences.getReadPreScreening().equalsIgnoreCase("no")||appPreferences.getReadDataLengkap().equalsIgnoreCase("no")||appPreferences.getReadSektorEkonomi().equalsIgnoreCase("no")||appPreferences.getReadLkn().equalsIgnoreCase("no")||appPreferences.getReadRpc().equalsIgnoreCase("no")||appPreferences.getReadAgunan().equalsIgnoreCase("no")||appPreferences.getReadScoring().equalsIgnoreCase("no")){
             bt_lanjut_kelengkapan_data.setVisibility(View.GONE);
         }
+
+        if(superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
+            bt_lanjut_kelengkapan_data.setVisibility(View.GONE);
+        }
+
 
         bt_lanjut_kelengkapan_data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -479,7 +480,12 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
                             dataKelengkapanAgunan=gson.fromJson(fotoKategoriString,type2);
 
 
-                            //menyimpan id formulir ke preferences, agar di halaman putusan bisa diakses kembali
+                            if(dataKelengkapanAgunan.size()==0){
+                                tv_dokumen_agunan.setVisibility(View.GONE);
+                            }
+
+
+                            //menyimpan id formulir ke preferences, agar foto formulir bisa diakses kembali di halaman putusan
                          appPreferences.setIdFotoFormulir(Integer.toString(dataKelengkapan.getId_foto_dokumen_aplikasi()));
                             //start kondisi checklist
                             if(dataKelengkapan.getSuratPernyataanNasabah()){

@@ -4,12 +4,10 @@ package com.application.bris.brisi_pemutus.page_putusan.agunan;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 
 
 /**
@@ -17,27 +15,17 @@ import android.widget.TextView;
  */
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.InputType;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import android.text.InputType;
 
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
-import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.keyvalue.keyvalue;
-import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;

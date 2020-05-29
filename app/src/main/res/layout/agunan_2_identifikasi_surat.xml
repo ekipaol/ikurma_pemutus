@@ -104,7 +104,7 @@
                         android:textSize="12dp"
                         android:textColor="@color/colorAccent"/>
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp">
 
@@ -133,7 +133,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toRightOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
             </RelativeLayout>

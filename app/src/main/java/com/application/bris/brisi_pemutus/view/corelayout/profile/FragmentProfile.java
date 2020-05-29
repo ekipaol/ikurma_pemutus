@@ -1,19 +1,16 @@
 package com.application.bris.brisi_pemutus.view.corelayout.profile;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.core.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.page_ranking.RankingActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;

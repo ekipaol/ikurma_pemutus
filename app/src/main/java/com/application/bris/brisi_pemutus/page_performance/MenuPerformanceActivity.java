@@ -1,30 +1,21 @@
 package com.application.bris.brisi_pemutus.page_performance;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.application.bris.brisi_pemutus.R;
 
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.ActivityStatusUser;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.MaintenanceUserActivity;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.ReactivePasswordActivity;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.TambahUserActivity;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.UserActivity;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.ActivityAgunanRetry;
-import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 
 public class MenuPerformanceActivity extends AppCompatActivity {
     ImageView performance_cabang,performance_ao;
@@ -46,6 +37,20 @@ public class MenuPerformanceActivity extends AppCompatActivity {
 //        AppUtil.tutorialOverlay(this,ll_menu_performance_container,"Klik pilihan anda untuk melihat performa cabang anda, atau melihat performa AOM anda","tutorial_daftar_menu_performance");
 
 
+        //kalok dia mencet back, di pojok kiri atas, halaman home gak loading lagi, jadi gak berat broooo
+        ImageView backToolbar=findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent=new Intent(MenuPerformanceActivity.this, CoreLayoutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                startActivity(intent);
+
+
+            }
+        });
 
 
 
@@ -80,5 +85,13 @@ public class MenuPerformanceActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent intent=new Intent(MenuPerformanceActivity.this, CoreLayoutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+        startActivity(intent);
     }
 }

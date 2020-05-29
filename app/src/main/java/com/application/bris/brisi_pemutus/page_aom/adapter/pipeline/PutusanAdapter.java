@@ -2,9 +2,9 @@ package com.application.bris.brisi_pemutus.page_aom.adapter.pipeline;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by PID on 4/26/2019.
@@ -124,12 +127,29 @@ public class PutusanAdapter extends RecyclerView.Adapter<PutusanAdapter.Pipeline
             @Override
             public void onClick(View view) {
 
+                if(datas.getTenor().equalsIgnoreCase("0")){
+                    Toasty.info(context,"Aplikasi ini diinput melalui APPEL, silahkan diputus melalui APPEL juga").show();
+                }
+                else{
 
-
-                Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
-                intent.putExtra("data_putusan",datas);
+                    if(datas.getTipe_produk().equalsIgnoreCase("kmg")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
+                        intent.putExtra("data_putusan",datas);
+                        intent.putExtra("jenisPembiayaan","kmg");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
+                        intent.putExtra("data_putusan",datas);
+                        intent.putExtra("jenisPembiayaan","mikro");
 //                Log.d("datasdeviasi",datas.getFid_photo());
-                holder.iv_foto.getContext().startActivity(intent);
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                }
+
+
+
+
             }
         });
         holder.bt_proses.setOnClickListener(new View.OnClickListener() {
@@ -138,9 +158,18 @@ public class PutusanAdapter extends RecyclerView.Adapter<PutusanAdapter.Pipeline
 
 
 
-                Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
-                intent.putExtra("data_putusan",datas);
-                holder.iv_foto.getContext().startActivity(intent);
+                if(datas.getTipe_produk().equalsIgnoreCase("kmg")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
+                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
+                    intent.putExtra("data_putusan",datas);
+                    intent.putExtra("jenisPembiayaan","kmg");
+                    holder.iv_foto.getContext().startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
+                    intent.putExtra("data_putusan",datas);
+//                Log.d("datasdeviasi",datas.getFid_photo());
+                    holder.iv_foto.getContext().startActivity(intent);
+                }
             }
         });
     }

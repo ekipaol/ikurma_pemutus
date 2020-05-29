@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -276,7 +276,7 @@
                             android:textSize="12dp"
                             android:textColor="@color/colorAccent"/>
 
-                        <android.support.constraint.ConstraintLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="200dp">
 
@@ -305,7 +305,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintRight_toRightOf="parent" />
 
-                        </android.support.constraint.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
                 </RelativeLayout>
@@ -390,4 +390,4 @@
             </LinearLayout>
         </FrameLayout>
     </ScrollView>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

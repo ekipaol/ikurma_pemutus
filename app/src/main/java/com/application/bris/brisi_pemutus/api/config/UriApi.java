@@ -3,10 +3,13 @@ package com.application.bris.brisi_pemutus.api.config;
 public class UriApi {
 
     public class Baseurl{
-        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI/webresources/"; //DEV tanpa rev proxy
-//       public static final String URL = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //server prod
-
+//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI/webresources/"; //DEV tanpa rev proxy
+//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-WILLY5/webresources/"; //DEV WILLY 5
+//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN2/webresources/"; //FIRMAN 5
+//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-BAYU/webresources/"; //DEV BAYU
+       public static final String URL = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //server prod
 //        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-EKI/webresources/"; //DEV eki tanpa rev proxy
+//public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-EKINOL/webresources/"; //DEV eki nolock tanpa rev proxy
     }
 
 
@@ -129,6 +132,7 @@ public class UriApi {
     public class inquirySektorEkonomi {
         public static final String inquirySektorEkonomi = "generic/mikro/hotprospek/datapembiayaan/inquireDataPembiayaan";
     }
+
     public class inquiryKelengkapanDokumen {
         public static final String inquiryKelengkapanDokumen = "generic/mikro/hotprospek/kelengkapandokumen/inquireKelengkapanDokumen";
     }
@@ -240,8 +244,68 @@ public class UriApi {
     }
     public class validasiDataFinansial {
         public static final String validasiDataFinansial = " generic/konsumer/kmg/hotprospek/datafinansial/validasiPlafond";
+    }
+    public class inquiryScoringKmg {
+        public static final String inquiryScoringKmg = "generic/konsumer/kmg/hotprospek/scoring/inquireScoring";
+    }
+
+    public class detailHotprospek {
+        public static final String detailHotprospek = "generic/konsumer/kmg/hotprospek/inquireHotprospek";
+    }
+
+    public class detailHotprospekMikro {
+        public static final String detailHotprospekMikro = "generic/mikro/konsumer/kmg/hotprospek/inquireHotprospek";
+    }
+
+
+
+    public class getPdf {
+        public static final String urlPdf = "generic/getPdf/";
+    }
+
+    public class inquiryKelengkapanDokumenKmg {
+        public static final String inquiryKelengkapanDokumenKonsumer = "generic/konsumer/kmg/hotprospek/kelengkapandokumen/inquireKelengkapanDokumen";
+    }
+    public class inquirySektorEkonomiKmg {
+        public static final String inquirySektorEkonomiKmg = "generic/konsumer/kmg/hotprospek/datapby/inquireDataPembiayaan";
+    }
+
+    public class pemutusKembalikanKmg {
+        public static final String pemutusKembalikanKmg = "generic/pemutus/konsumer/pemutusKembalikan";
+    }
+
+    public class pemutusSetujuKmg {
+        public static final String pemutusSetujuKmg = "generic/pemutus/konsumer/pemutusSetuju";
+    }
+
+    public class pemutusTolakKmg {
+        public static final String pemutusTolakKmg = "generic/pemutus/konsumer/pemutusTolak";
+    }
+
+    public class multiFaedahMikro {
+        public static final String inquiryDataLengkapKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/datalengkap/inquireDataLengkap";
+
+        public static final String inquiryPrescreeningKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/prescreening/inquirePrescreening";
+
+        public static final String inquiryRemaksSlikKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/memosales/inquiryMemosales";
+
+        public static final String inquirySektorEkonomiKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/datapby/inquireDataPembiayaan";
+
+        public static final String inquiryDataFinansialKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/datafinansial/inquiryLoadPrescoring";
+        public static final String inquiryScoringKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/scoring/inquireScoring";
+
+        public static final String inquiryKelengkapanDokumenKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/kelengkapandokumen/inquireKelengkapanDokumen";
+
+
+        public static final String downloadSlikKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/prescreening/downloadSLIK";
+
+        public static final String downloadSlikPasanganKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/prescreening/downloadSLIKPasangan";
 
     }
+
+
+
+
 
 
 

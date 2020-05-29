@@ -3,9 +3,9 @@ package com.application.bris.brisi_pemutus.page_putusan.adapters;
 
 
 import android.content.Context;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 
 import com.application.bris.brisi_pemutus.model.agunan_kendaraan.AgunanKendaraan;
@@ -16,8 +16,6 @@ import com.application.bris.brisi_pemutus.page_putusan.agunan_kendaraan.Fragment
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.viewmodel.StepViewModel;
-
-import java.util.List;
 
 public class StepAdapterAgunanKendaraan extends AbstractFragmentStepAdapter{
     private String title;

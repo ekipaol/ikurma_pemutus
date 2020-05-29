@@ -2,49 +2,34 @@ package com.application.bris.brisi_pemutus.page_aom.info_agunan;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 
 import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.airbnb.lottie.parser.IntegerParser;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.EmptyRequest;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_set_pengikatan.ReqSetPengikatan;
-import com.application.bris.brisi_pemutus.api.model.request.delete_agunan.ReqDeleteAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.ikat_agunan.ReqIkatAgunan;
-import com.application.bris.brisi_pemutus.api.model.request.info_agunan.ReqInfoAgunan;
-import com.application.bris.brisi_pemutus.api.model.request.kelengkapan_dokumen.ReqKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.model.agunan_jenis_klasifikasi.AgunanJenisKlasifikasi;
 import com.application.bris.brisi_pemutus.model.agunan_set_pengikatan.AgunanPengikatan;
-import com.application.bris.brisi_pemutus.model.data_cabang.Cabang;
-import com.application.bris.brisi_pemutus.model.info_agunan.InfoAgunan;
-import com.application.bris.brisi_pemutus.model.rpc.Rpc;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.TambahUserActivity;
-import com.application.bris.brisi_pemutus.page_putusan.adapters.AgunanRetryStepAdapter;
-import com.application.bris.brisi_pemutus.page_putusan.agunan.ActivityInsertAgunan;
 import com.application.bris.brisi_pemutus.util.AppUtil;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

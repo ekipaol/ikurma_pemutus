@@ -4,7 +4,7 @@ package com.application.bris.brisi_pemutus.page_putusan.scoring;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -14,23 +14,14 @@ import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
-import com.application.bris.brisi_pemutus.api.model.request.kelengkapan_dokumen.ReqKelengkapanDokumen;
-import com.application.bris.brisi_pemutus.api.model.request.lkn.ReqLkn;
 import com.application.bris.brisi_pemutus.api.model.request.scoring.ReqScoring;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.data_pembiayaan.DataPbySebelumPutusan;
-import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumen;
-import com.application.bris.brisi_pemutus.model.rpc.Rpc;
 import com.application.bris.brisi_pemutus.model.scoring.Scoring;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityKelengkapanDokumen;
-import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
-import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -43,31 +34,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class ScoringActivity extends AppCompatActivity  {

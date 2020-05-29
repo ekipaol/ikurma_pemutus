@@ -1,4 +1,4 @@
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,12 +8,12 @@
     tools:context=".view.corelayout.CoreLayoutActivity"
     android:background="@color/colorBackgroundCore">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:theme="@style/AppTheme.AppBarOverlay">
 
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 />
 
 
-            <android.support.v4.widget.NestedScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/nested_scv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -57,7 +57,7 @@
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="12dp">
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:minWidth="100dp"
                             android:layout_height="40dp"
@@ -81,11 +81,11 @@
                             </LinearLayout>
 
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/cardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
 
 
                             </LinearLayout>
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
                     </RelativeLayout>
 
@@ -130,7 +130,7 @@
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="12dp">
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:minWidth="100dp"
                             android:layout_height="40dp"
@@ -154,11 +154,11 @@
                             </LinearLayout>
 
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/cardViewHotprospek"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
 
 
                             </LinearLayout>
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
                     </RelativeLayout>
 
@@ -204,7 +204,7 @@
                         android:layout_marginRight="12dp"
                         android:layout_marginBottom="20dp">
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:minWidth="100dp"
                             android:layout_height="40dp"
@@ -228,11 +228,11 @@
                             </LinearLayout>
 
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/cardView_pencairan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -265,20 +265,20 @@
 
 
                             </LinearLayout>
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
                     </RelativeLayout>
 
 
                 </RelativeLayout>
 
-            </android.support.v4.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
 
         </RelativeLayout>
 
 
 
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,12 +44,18 @@ public class Constants {
 		public static final String READ_AGUNAN = "readagunan";
 		public static final String READ_SCORING = "readscoring";
 		public static final String READ_KELENGKAPAN = "readkelengkapan";
+		public static final String READ_DATA_FINANSIAL = "readdatafinansial";
 
 		public static final String ID_FOTO_FORMULIR = "idfotoformulir";
 
 		public static final String STATUS_KODE_SKK_PINCA = "statusKodeSkkPinca";
 
 		public static final String STATUS_AMBIL_ALIH = "statusAmbilAlih";
+
+		public static final String ID_USER_PENGAMBIL_ALIH = "idUserPengambilAlih";
+
+		public static final String UPDATE_NOTIFICATION = "update_notification";
+		public static final String NOTIFICATION_VERSION = "notification_version";
 	}
 
 }

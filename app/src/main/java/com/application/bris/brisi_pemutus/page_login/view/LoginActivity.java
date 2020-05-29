@@ -1,26 +1,17 @@
 package com.application.bris.brisi_pemutus.page_login.view;
 
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.EditText;
@@ -30,38 +21,26 @@ import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.aktivasi.Aktivasi;
-import com.application.bris.brisi_pemutus.api.model.request.list_user.listUser;
 import com.application.bris.brisi_pemutus.api.model.request.login.LoginRequest;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.login_cred.LoginCred;
-import com.application.bris.brisi_pemutus.model.user.User;
-import com.application.bris.brisi_pemutus.page_aktivasi.ActivityWelcome;
 import com.application.bris.brisi_pemutus.page_aktivasi.ScanActivity;
-import com.application.bris.brisi_pemutus.page_daftar_user.adapters.AdapterDaftarUser;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.UserActivity;
-import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.Constants;
 import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.lang.reflect.Type;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import es.dmoral.toasty.Toasty;
-import me.toptas.fancyshowcase.FancyShowCaseView;
 import mehdi.sakout.fancybuttons.FancyButton;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -223,8 +202,10 @@ int counterSecretLogin;
 
                                     dataUser = gson.fromJson(listDataString, type);
 
-                                    //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca
-                                    if(dataUser.getFid_role().toString().equalsIgnoreCase("72")||dataUser.getFid_role().toString().equalsIgnoreCase("71")||dataUser.getFid_role().toString().equalsIgnoreCase("76")||dataUser.getFid_role().toString().equalsIgnoreCase("79")){
+                                    //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca dan mm
+                                    //validasi dicabut sajah
+
+//                                    if(dataUser.getFid_role().toString().equalsIgnoreCase("72")||dataUser.getFid_role().toString().equalsIgnoreCase("71")||dataUser.getFid_role().toString().equalsIgnoreCase("76")||dataUser.getFid_role().toString().equalsIgnoreCase("79")||dataUser.getFid_role().toString().equalsIgnoreCase("77")){
                                         Toasty.success(LoginActivity.this,"Selamat datang "+dataUser.getNama(),Toast.LENGTH_LONG, true).show();
 
                                         //ganti preference logged in
@@ -262,14 +243,14 @@ int counterSecretLogin;
 
                                         Intent intent=new Intent(LoginActivity.this, CoreLayoutActivity.class);
                                         startActivity(intent);
-                                    }
-                                    else{
-                                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                                        dialog1.setTitleText("Gagal");
-                                        dialog1.setContentText("Anda tidak memiliki akses untuk aplikasi pemutus");
-                                       dialog1.setConfirmText("Kembali");
-                                       dialog1.showCancelButton(false);
-                                    }
+//                                    }
+//                                    else{
+//                                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+//                                        dialog1.setTitleText("Gagal");
+//                                        dialog1.setContentText("Anda tidak memiliki akses untuk aplikasi pemutus");
+//                                       dialog1.setConfirmText("Kembali");
+//                                       dialog1.showCancelButton(false);
+//                                    }
 
 
                                 }
@@ -497,8 +478,8 @@ int counterSecretLogin;
 
                         dataUser = gson.fromJson(listDataString, type);
 
-                        //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca
-                        if(dataUser.getFid_role().toString().equalsIgnoreCase("72")||dataUser.getFid_role().toString().equalsIgnoreCase("71")||dataUser.getFid_role().toString().equalsIgnoreCase("76")||dataUser.getFid_role().toString().equalsIgnoreCase("79")){
+                        //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca, mm
+//                        if(dataUser.getFid_role().toString().equalsIgnoreCase("72")||dataUser.getFid_role().toString().equalsIgnoreCase("71")||dataUser.getFid_role().toString().equalsIgnoreCase("76")||dataUser.getFid_role().toString().equalsIgnoreCase("79")||dataUser.getFid_role().toString().equalsIgnoreCase("77")){
                             Toasty.success(LoginActivity.this,"Selamat datang "+dataUser.getNama(),Toast.LENGTH_LONG, true).show();
 
                             //ganti preference logged in
@@ -536,14 +517,14 @@ int counterSecretLogin;
 
                             Intent intent=new Intent(LoginActivity.this, CoreLayoutActivity.class);
                             startActivity(intent);
-                        }
-                        else{
-                            dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                            dialog1.setTitleText("Gagal");
-                            dialog1.setContentText("Anda tidak memiliki akses untuk aplikasi pemutus");
-                            dialog1.setConfirmText("Kembali");
-                            dialog1.showCancelButton(false);
-                        }
+//                        }
+//                        else{
+//                            dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+//                            dialog1.setTitleText("Gagal");
+//                            dialog1.setContentText("Anda tidak memiliki akses untuk aplikasi pemutus");
+//                            dialog1.setConfirmText("Kembali");
+//                            dialog1.showCancelButton(false);
+//                        }
 
 
                     }

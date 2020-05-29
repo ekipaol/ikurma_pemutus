@@ -2,14 +2,14 @@ package com.application.bris.brisi_pemutus.page_performance;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -18,13 +18,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.request.data_cabang.RequestDataCabang;
 import com.application.bris.brisi_pemutus.api.model.request.performance.ReqPerformanceAo;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.config.user.DaftarUser;
@@ -32,8 +29,6 @@ import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_ao.Ao;
 import com.application.bris.brisi_pemutus.model.performance_ao.PerformanceAo;
 import com.application.bris.brisi_pemutus.model.user.User;
-import com.application.bris.brisi_pemutus.page_daftar_user.adapters.AdapterDaftarUser;
-import com.application.bris.brisi_pemutus.page_daftar_user.adapters.AdapterStatusUser;
 import com.application.bris.brisi_pemutus.page_performance.adapters.AdapterPerformanceAo;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -46,6 +41,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -166,7 +162,7 @@ public class PerformanceAoActivity extends AppCompatActivity implements SwipeRef
                 if(response.isSuccessful()){
 
                     //tutorial overlay fitur sumary kalau data sukses
-                    AppUtil.tutorialOverlay(PerformanceAoActivity.this,bt_tampil_summary,"Sekarang anda dapat melihat summary performance pembiayaan","tutorial_summary_performance");
+//                    AppUtil.tutorialOverlay(PerformanceAoActivity.this,bt_tampil_summary,"Sekarang anda dapat melihat summary performance pembiayaan","tutorial_summary_performance");
 
                     if(response.body().getStatus().equalsIgnoreCase("00")){
 
@@ -191,12 +187,16 @@ public class PerformanceAoActivity extends AppCompatActivity implements SwipeRef
                             tvWhale.setVisibility(View.INVISIBLE);
                         }
                     }
+                    else{
+                        Toasty.info(PerformanceAoActivity.this,response.body().getMessage()).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<ParseResponse> call, Throwable t) {
                 Log.d("LOG D", t.getMessage());
+                Toasty.info(PerformanceAoActivity.this,"Terjadi Kesalahan Pada Server").show();
             }
         });
     }

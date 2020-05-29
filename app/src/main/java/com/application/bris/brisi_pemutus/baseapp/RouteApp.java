@@ -4,7 +4,7 @@ package com.application.bris.brisi_pemutus.baseapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by PID on 02/06/2019.

@@ -3,19 +3,17 @@ package com.application.bris.brisi_pemutus.page_daftar_user.view;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
-import android.util.LogPrinter;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,7 +28,6 @@ import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.data_cabang.RequestDataCabang;
-import com.application.bris.brisi_pemutus.api.model.request.list_user.listUser;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.config.user.DaftarUser;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
@@ -38,13 +35,10 @@ import com.application.bris.brisi_pemutus.model.data_ao.Ao;
 import com.application.bris.brisi_pemutus.model.data_cabang.Cabang;
 import com.application.bris.brisi_pemutus.model.data_cabang.CabangModel;
 import com.application.bris.brisi_pemutus.model.kantor_cabang.KantorCabang;
-import com.application.bris.brisi_pemutus.model.pipeline.pipeline;
 import com.application.bris.brisi_pemutus.model.user.User;
 import com.application.bris.brisi_pemutus.model.user_mip.UserMip;
 import com.application.bris.brisi_pemutus.page_daftar_user.adapters.AdapterDaftarUser;
 import com.application.bris.brisi_pemutus.util.AppUtil;
-import com.facebook.shimmer.Shimmer;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -120,7 +114,7 @@ public class UserActivity extends AppCompatActivity implements SwipeRefreshLayou
         apiClientAdapter = new ApiClientAdapter(this);
         appPreferences = new AppPreferences(this);
         main();
-//        initializeUser();
+//        initializeListAkad();
     }
 
     @Override
@@ -260,7 +254,7 @@ public class UserActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
 //                    else if (role.getSelectedItem().toString().equalsIgnoreCase("BOS")) {
 //                        String fid_role = "26";
-//                        initializeUser(fid_role, kantor.getSelectedItem().toString());
+//                        initializeListAkad(fid_role, kantor.getSelectedItem().toString());
 //                    }
                     else {
                         String fid_role = "";
@@ -288,7 +282,7 @@ public class UserActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 //                    //still needs work, filter tnapa request ke DB
 //else if (role.getSelectedItem() != null &&kantor.getSelectedItem() != null){
-////                        initializeUser("all", kantor.getSelectedItem().toString());
+////                        initializeListAkad("all", kantor.getSelectedItem().toString());
 //
 //                        if(role.getSelectedItem().toString().equalsIgnoreCase("all")){
 //                            filterUser("all",kodeUkerCabangStringTotal.get(kantor.getSelectedItemPosition()-1),dataUser);
@@ -337,13 +331,13 @@ public class UserActivity extends AppCompatActivity implements SwipeRefreshLayou
 ////                Log.d("Kantor dipilih", kantor.getSelectedItem().toString());
 ////                Log.d("Role dipilih", role.getSelectedItem().toString());
 //                if (role.getSelectedItem().toString().equalsIgnoreCase("All")) {
-//                    initializeUser("All", kantor.getSelectedItem().toString());
+//                    initializeListAkad("All", kantor.getSelectedItem().toString());
 //                }
 //                else if (role.getSelectedItem().toString().equalsIgnoreCase("BOS")) {
-//                    initializeUser("BO", kantor.getSelectedItem().toString());
+//                    initializeListAkad("BO", kantor.getSelectedItem().toString());
 //                }
 //                else {
-//                    initializeUser(role.getSelectedItem().toString(), kantor.getSelectedItem().toString());
+//                    initializeListAkad(role.getSelectedItem().toString(), kantor.getSelectedItem().toString());
 //                }
 //            }
 //
@@ -393,13 +387,13 @@ public class UserActivity extends AppCompatActivity implements SwipeRefreshLayou
 ////                Log.d("Kantor dipilih", kantor.getSelectedItem().toString());
 ////                Log.d("Role dipilih", role.getSelectedItem().toString());
 //                                        if (role.getSelectedItem().toString().equalsIgnoreCase("All")) {
-//                                            initializeUser("All", kantor.getSelectedItem().toString());
+//                                            initializeListAkad("All", kantor.getSelectedItem().toString());
 //                                        }
 //                                        else if (role.getSelectedItem().toString().equalsIgnoreCase("BOS")) {
-//                                            initializeUser("BO", kantor.getSelectedItem().toString());
+//                                            initializeListAkad("BO", kantor.getSelectedItem().toString());
 //                                        }
 //                                        else {
-//                                            initializeUser(role.getSelectedItem().toString(), kantor.getSelectedItem().toString());
+//                                            initializeListAkad(role.getSelectedItem().toString(), kantor.getSelectedItem().toString());
 //                                        }
 //                                    }
 //
@@ -502,6 +496,8 @@ public class UserActivity extends AppCompatActivity implements SwipeRefreshLayou
         else if(apppref.getFidRole().equalsIgnoreCase("76")){
             call = apiClientAdapter.getApiInterface().dataPincaLengkap(req);
             req.setKodeCabang(apppref.getKodeSkk());
+            //pantekan
+//        req.setKodeCabang("0999900108");
         }
         else if(apppref.getFidRole().equalsIgnoreCase("72")){
             call = apiClientAdapter.getApiInterface().dataMmm(req);

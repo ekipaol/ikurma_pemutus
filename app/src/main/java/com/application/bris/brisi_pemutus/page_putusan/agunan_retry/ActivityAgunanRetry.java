@@ -2,9 +2,8 @@ package com.application.bris.brisi_pemutus.page_putusan.agunan_retry;
 
 
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -15,9 +14,6 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
-import com.application.bris.brisi_pemutus.api.model.request.ParseResponseListFoto;
 import com.application.bris.brisi_pemutus.api.model.request.agunan.ReqAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_global_idapl_agunan_cif.AgunanGlobal;
 import com.application.bris.brisi_pemutus.api.model.request.data_lengkap.ReqDataLengkap;
@@ -26,7 +22,6 @@ import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.list_foto_agunan.ListFotoAgunan;
-import com.application.bris.brisi_pemutus.page_putusan.adapters.AgunanRetryStepAdapter;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.SampleFragmentStepAdapter;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
@@ -44,6 +39,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityAgunanRetry extends AppCompatActivity implements StepperLayout.StepperListener{
+
+    //KELAS INI TIDAK DIPAKAI BROOOOO
+
+    //PAKAI KELAS AGUNAN3RETRY DI FOLDER AGUNAN RETRY
+
+    //////////////////////////
+    //////////////////////
+    ////////////////////////
+    ////////////////////
 
     @BindView(R.id.stepperlayout)
     StepperLayout stepperlayout;

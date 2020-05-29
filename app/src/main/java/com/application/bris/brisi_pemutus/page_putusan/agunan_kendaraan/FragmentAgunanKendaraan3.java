@@ -3,12 +3,11 @@ package com.application.bris.brisi_pemutus.page_putusan.agunan_kendaraan;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +22,6 @@ import com.application.bris.brisi_pemutus.util.NumberTextWatcherCanNolForThousan
 import com.application.bris.brisi_pemutus.util.NumberTextWatcherForThousand;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

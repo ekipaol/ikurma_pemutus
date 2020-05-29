@@ -85,9 +85,11 @@ public class KeyValue {
 
         //konsumer kmg
         //tujuan penggunaan kmg
-        mapTypeTujuanPenggunaanKmg.put("Pembelian Kendaraan Bermotor Roda Dua", "72");
-        mapTypeTujuanPenggunaanKmg.put("Pembelian Barang Konsumtif Multiguna (non tanah dan/atau bangunan & non kendaraan bermotor roda empat)", "73");
-        mapTypeTujuanPenggunaanKmg.put("Take Over Kredit Multi Guna dari Bank Konvensional", "74");
+        mapTypeTujuanPenggunaanKmg.put("Pembelian Kendaraan Bermotor Roda Dua", "89");
+        mapTypeTujuanPenggunaanKmg.put("Pembelian Barang Konsumtif Multiguna (non tanah dan/atau bangunan & non kendaraan bermotor roda empat)", "90");
+        mapTypeTujuanPenggunaanKmg.put("Take Over Kredit Multi Guna dari Bank Konvensional", "91");
+        mapTypeTujuanPenggunaanKmg.put("Takeover & Pembelian barang konsumtif multiguna", "110");
+        mapTypeTujuanPenggunaanKmg.put("Takeover & Pembelian kendaraan bermotor roda dua", "111");
 
         //status kepegawaian
         mapTypeStatusKepegawaian.put("Pegawai Tetap","1");
@@ -106,10 +108,10 @@ public class KeyValue {
         mapTypePembayaranGajiMelalui.put("Lainnya","C");
 
         //referensi
-        mapTypeAddressSearch.put("Lain-lain", "1");
-        mapTypeAddressSearch.put("Nasabah", "2");
-        mapTypeAddressSearch.put("Pihak Terkait Bank", "3");
-        mapTypeAddressSearch.put("Prime Customer Bank", "4");
+        mapTypeReferensi.put("Lain-Lain","1");
+        mapTypeReferensi.put("Nasabah","2");
+        mapTypeReferensi.put("Pihak Terkait Bank","3");
+        mapTypeReferensi.put("Prime Customer Bank","4");
 
         //Data Type Address Search
         mapTypeAddressSearch.put("Provinsi", "PROPINSI");
@@ -122,6 +124,26 @@ public class KeyValue {
 
         //Data Type Usaha or Job
         //Usaha
+//        mapTypeUsahaorJob.put("Perkebunan", "1010");
+//        mapTypeUsahaorJob.put("Pertanian/Peternakan/Perikanan", "1011");
+//        mapTypeUsahaorJob.put("Bahan Mentah", "1012");
+//        mapTypeUsahaorJob.put("Petrolium", "1110");
+//        mapTypeUsahaorJob.put("Hortikultura", "1130");
+//        mapTypeUsahaorJob.put("Komputer", "2010");
+//        mapTypeUsahaorJob.put("Komputer Servis", "2011");
+//        mapTypeUsahaorJob.put("Medikal", "2110");
+//        mapTypeUsahaorJob.put("Kimia", "2111");
+//        mapTypeUsahaorJob.put("Perhotelan", "2210");
+//        mapTypeUsahaorJob.put("Perbankan", "3010");
+//        mapTypeUsahaorJob.put("Institusi Financial", "3011");
+//        mapTypeUsahaorJob.put("Konstruksi", "4010");
+//        mapTypeUsahaorJob.put("Real Estate", "4020");
+//        mapTypeUsahaorJob.put("Jasa Real Estate", "5010");
+//        mapTypeUsahaorJob.put("Jasa Entertainment", "5020");
+//        mapTypeUsahaorJob.put("Trading/Perdagangan", "5030");
+//        mapTypeUsahaorJob.put("Jasa Angkutan", "5040");
+//        mapTypeUsahaorJob.put("Jasa Lainnya", "5030");
+
         mapTypeUsahaorJob.put("Perkebunan", "1010");
         mapTypeUsahaorJob.put("Pertanian/Peternakan/Perikanan", "1011");
         mapTypeUsahaorJob.put("Bahan Mentah", "1012");
@@ -140,7 +162,19 @@ public class KeyValue {
         mapTypeUsahaorJob.put("Jasa Entertainment", "5020");
         mapTypeUsahaorJob.put("Trading/Perdagangan", "5030");
         mapTypeUsahaorJob.put("Jasa Angkutan", "5040");
-        mapTypeUsahaorJob.put("Jasa Lainnya", "5030");
+        mapTypeUsahaorJob.put("Militer", "5041");
+        mapTypeUsahaorJob.put("Pendidikan","5042");
+        mapTypeUsahaorJob.put("Pendidiasa Pelayanan Masyarakatkan","5110");
+        mapTypeUsahaorJob.put("Pertambangan","5045");
+        mapTypeUsahaorJob.put("Industri Dasar","5046");
+        mapTypeUsahaorJob.put("Industri Kimia","5047");
+        mapTypeUsahaorJob.put("Industri Otomotif & Komponen","5048");
+        mapTypeUsahaorJob.put("Industri Elektronika","5049");
+        mapTypeUsahaorJob.put("Industri Barang Konsumsi","5050");
+        mapTypeUsahaorJob.put("Jasa Investasi","5051");
+        mapTypeUsahaorJob.put("Institusi Pemerintah","5043");
+        mapTypeUsahaorJob.put("Media/Komunikasi/Informasi","5044");
+        mapTypeUsahaorJob.put("Lainnya","9999");
 
         //Job
         mapTypeUsahaorJob.put("Karyawan / PNS", "1");

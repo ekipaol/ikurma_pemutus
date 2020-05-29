@@ -1,8 +1,8 @@
 package com.application.bris.brisi_pemutus.adapter.hotprospek;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.model.hotprospek.HotProspek;
-import com.application.bris.brisi_pemutus.util.AppUtil;
 
 import java.util.List;
 

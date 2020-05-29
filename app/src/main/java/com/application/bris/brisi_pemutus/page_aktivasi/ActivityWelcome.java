@@ -1,21 +1,17 @@
 package com.application.bris.brisi_pemutus.page_aktivasi;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.aktivasi.Aktivasi;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.baseapp.RouteApp;

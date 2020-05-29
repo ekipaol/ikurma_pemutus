@@ -30,6 +30,7 @@ import com.application.bris.brisi_pemutus.api.model.request.ikat_agunan.ReqIkatA
 import com.application.bris.brisi_pemutus.api.model.request.info_agunan.ReqInfoAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.insert_update_aom.InsertUpdateAom;
 import com.application.bris.brisi_pemutus.api.model.request.kelengkapan_dokumen.ReqKelengkapanDokumen;
+import com.application.bris.brisi_pemutus.api.model.request.list_cair.ReqListCair;
 import com.application.bris.brisi_pemutus.api.model.request.list_disposisi.ReqListDisposisi;
 import com.application.bris.brisi_pemutus.api.model.request.list_hotprospek.ReqHotProspek;
 import com.application.bris.brisi_pemutus.api.model.request.list_user.listUser;
@@ -45,6 +46,7 @@ import com.application.bris.brisi_pemutus.api.model.request.scoring.ReqScoring;
 import com.application.bris.brisi_pemutus.api.model.request.sektor_ekonomi.ReqSektorEkonomi;
 import com.application.bris.brisi_pemutus.api.model.request.simpan_disposisi.ReqSimpanDisposisi;
 import com.application.bris.brisi_pemutus.api.model.request.validasi_data_finansial.ValidasiDataFinansialKmg;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumen;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -123,7 +125,7 @@ public interface ApiInterface {
 
     //menggunakan objek yang sama untuk request, karna sama menggunakan UID
     @POST(UriApi.listPutusanCair.listPutusanCair)
-    Call<ParseResponseArr> listPutusanCair(@Body ReqPutusan ReqPutusan);
+    Call<ParseResponseArr> listPutusanCair(@Body ReqListCair ReqListCair);
 
     //menggunakan objek yang sama untuk request, karna sama menggunakan UID
     @POST(UriApi.listPutusanDitolak.listPutusanDitolak)
@@ -245,6 +247,12 @@ public interface ApiInterface {
     @POST(UriApi.listUms.listUms)
     Call<ParseResponse> listUms(@Body ReqKodeSkk ReqKodeSkk);
 
+    @POST(UriApi.detailHotprospek.detailHotprospek)
+    Call<ParseResponse> detailHotprospek (@Body ReqIdAplikasi ReqIdAplikasi);
+
+    @POST(UriApi.detailHotprospekMikro.detailHotprospekMikro)
+    Call<ParseResponse> detailHotprospekMikro (@Body ReqIdAplikasi ReqIdAplikasi);
+
 
 
 
@@ -304,6 +312,57 @@ public interface ApiInterface {
 
     @POST(UriApi.validasiDataFinansial.validasiDataFinansial)
     Call<ParseResponse> validasiDataFinansial (@Body ValidasiDataFinansialKmg ValidasiDataFinansialKmg);
+
+    @POST(UriApi.inquiryScoringKmg.inquiryScoringKmg)
+    Call<ParseResponse> inquiryScoringKmg (@Body ReqScoring ReqScoring);
+
+    @POST(UriApi.inquiryKelengkapanDokumenKmg.inquiryKelengkapanDokumenKonsumer)
+    Call<ParseResponse> inquiryKelengkapanDokumenKonsumer (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
+    @POST(UriApi.inquirySektorEkonomiKmg.inquirySektorEkonomiKmg)
+    Call<ParseResponse> inquirySektorEkonomiKmg (@Body ReqSektorEkonomi ReqSektorEkonomi);
+
+    @POST(UriApi.pemutusKembalikanKmg.pemutusKembalikanKmg)
+    Call<ParseResponse> pemutusKembalikanKmg (@Body ReqSetujuPutusan ReqSetujuPutusan);
+
+    @POST(UriApi.pemutusSetujuKmg.pemutusSetujuKmg)
+    Call<ParseResponse> pemutusSetujuKmg (@Body ReqSetujuPutusan ReqSetujuPutusan);
+
+    @POST(UriApi.pemutusTolakKmg.pemutusTolakKmg)
+    Call<ParseResponse> pemutusTolakKmg (@Body ReqSetujuPutusan ReqSetujuPutusan);
+
+
+    //multifaedah mikro
+    @POST(UriApi.multiFaedahMikro.inquiryDataLengkapKmgMikro)
+    Call<ParseResponse> inquiryDataLengkapKmgMikro (@Body ReqDataLengkap ReqDataLengkap);
+
+    @POST(UriApi.multiFaedahMikro.inquiryPrescreeningKmgMikro)
+    Call<ParseResponse> inquiryPrescreeningKmgMikro (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
+    @POST(UriApi.multiFaedahMikro.inquiryRemaksSlikKmgMikro)
+    Call<ParseResponse> inquiryRemaksSlikKmgMikro (@Body ReqIdAplikasi ReqIdAplikasi);
+
+    @POST(UriApi.multiFaedahMikro.inquirySektorEkonomiKmgMikro)
+    Call<ParseResponse> inquirySektorEkonomiKmgMikro (@Body ReqSektorEkonomi ReqSektorEkonomi);
+
+    @POST(UriApi.multiFaedahMikro.inquiryDataFinansialKmgMikro)
+    Call<ParseResponseDataInstansi> inquiryDataFinansialKmgMikro (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
+    @POST(UriApi.multiFaedahMikro.inquiryScoringKmgMikro)
+    Call<ParseResponse> inquiryScoringKmgMikro (@Body ReqScoring ReqScoring);
+
+    @POST(UriApi.multiFaedahMikro.inquiryKelengkapanDokumenKmgMikro)
+    Call<ParseResponse> inquiryKelengkapanDokumenKmgMikro (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
+    @POST(UriApi.multiFaedahMikro.downloadSlikKmgMikro)
+    Call<ParseResponse> downloadSlikKmgMikro (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+    @POST(UriApi.multiFaedahMikro.downloadSlikPasanganKmgMikro)
+    Call<ParseResponse> downloadSlikPasanganKmgMikro (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
+
+
+
+
 
 
 

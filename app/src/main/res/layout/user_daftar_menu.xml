@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <include layout="@layout/toolbar_nosearch" />
 
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 android:layout_marginTop="60dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,7 +26,7 @@ android:background="@color/colorBackgroundCore"
 
         >
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="7dp"
@@ -83,9 +83,9 @@ android:background="@color/colorBackgroundCore"
             </FrameLayout>
 
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="7dp"
@@ -139,9 +139,9 @@ android:background="@color/colorBackgroundCore"
             </FrameLayout>
 
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="7dp"
@@ -195,8 +195,8 @@ android:background="@color/colorBackgroundCore"
             </FrameLayout>
 
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:id="@+id/cv_tambah_user"
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -252,8 +252,66 @@ android:background="@color/colorBackgroundCore"
             </FrameLayout>
 
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_ao_silang"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="7dp"
+            android:visibility="gone"
+            app:cardCornerRadius="10dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <ImageView
+                    android:id="@+id/btAoSilang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/icAoSilang"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/ic_ao_silang"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Maintenance AO Silang"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/icAoSilang"
+                            android:textSize="20dp"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/colorBlackHeader"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                    </RelativeLayout>
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -308,9 +366,9 @@ android:background="@color/colorBackgroundCore"
             </FrameLayout>
 
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>
-</android.support.constraint.ConstraintLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -18,12 +18,7 @@ import android.widget.Toast;
 
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.request.sektor_ekonomi.ReqSektorEkonomi;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
-import com.application.bris.brisi_pemutus.model.data_pembiayaan.DataPbySebelumPutusan;
-import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
-import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,11 +26,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.gson.Gson;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {

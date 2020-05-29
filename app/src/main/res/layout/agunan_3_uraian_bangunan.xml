@@ -87,6 +87,60 @@
 
                 </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/tf_nama_pasar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:enabled="false"
+                app:iconSignifier="@drawable/ic_district"
+                app:isResponsiveIconColor="true"
+                app:panelBackgroundColor="@color/colorBgEdittext"
+                app:secondaryColor="@color/colorPrimary"
+                app:primaryColor="@color/colorPrimary"
+                app:labelText="Nama Pasar"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="10dp"
+                app:useDenseSpacing="true"
+                android:visibility="gone">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/et_nama_pasar"
+                    android:textColor="@color/text_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/tf_nkr_pasar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:enabled="false"
+                app:iconSignifier="@drawable/ic_district"
+                app:isResponsiveIconColor="true"
+                app:panelBackgroundColor="@color/colorBgEdittext"
+                app:secondaryColor="@color/colorPrimary"
+                app:primaryColor="@color/colorPrimary"
+                app:labelText="NKR Pasar"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="10dp"
+                app:useDenseSpacing="true"
+                android:visibility="gone">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/et_nkr_pasar"
+                    android:textColor="@color/text_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
 
 
 

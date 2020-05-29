@@ -2,11 +2,24 @@ package com.application.bris.brisi_pemutus.page_putusan;
 
 import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v7.app.AppCompatActivity;
+
+import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
+import com.application.bris.brisi_pemutus.api.model.request.id_aplikasi.ReqIdAplikasi;
+import com.application.bris.brisi_pemutus.model.detailHotprospek.DetailHotprospek;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
+
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,19 +32,18 @@ import android.widget.Toast;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
+import com.application.bris.brisi_pemutus.api.model.Error;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqSetujuPutusan;
 import com.application.bris.brisi_pemutus.api.model.request.req_kode_skk.ReqKodeSkk;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.map_agunan.MapsActivity;
 import com.application.bris.brisi_pemutus.model.cs_model.CsModel;
 import com.application.bris.brisi_pemutus.model.hotprospek.HotProspek;
 import com.application.bris.brisi_pemutus.model.info_cs_pencairan.InfoCs;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.ActivityAgunanRetry;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
 import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
 
@@ -47,15 +59,10 @@ import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
 import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
 import com.application.bris.brisi_pemutus.page_riwayat.ActivityMenuRiwayat;
 import com.application.bris.brisi_pemutus.util.AppUtil;
-import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -84,6 +91,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
     ImageView capsule_close;
     ExtendedEditText catatan;
     Boolean statusPutusan = false;
+    DetailHotprospek detailHotprospek;
 
      AllDataFront superData;
 
@@ -121,6 +129,9 @@ public class PutusanFrontMenu extends AppCompatActivity {
     @BindView(R.id.iv_foto_putusan_front)
     ImageView iv_foto_putusan_front;
 
+    @BindView(R.id.progressbar_loading)
+    RelativeLayout loading;
+
     HotProspek datahotProspek;
     Putusan dataPutusan;
     PutusanAkad dataPutusanAkad;
@@ -128,6 +139,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
     List<CsModel> cekCs;
     String adaCs="belum";
     AppPreferences appPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,9 +165,21 @@ public class PutusanFrontMenu extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    Intent intent=new Intent(PutusanFrontMenu.this, MenuDaftarPutusanActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
-                    startActivity(intent);
+                    SweetAlertDialog dialogWarning=new SweetAlertDialog(PutusanFrontMenu.this,SweetAlertDialog.WARNING_TYPE);
+                    dialogWarning.setTitle("Pembiayaan belum diputus");
+                    dialogWarning.setContentText("Anda belum memutus pembiayaan ini, apakah anda yakin ingin kembali ke menu awal?");
+                    dialogWarning.setCancelText("Batal");
+                    dialogWarning.setConfirmText("Ya");
+                    dialogWarning.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            Intent intent=new Intent(PutusanFrontMenu.this, MenuDaftarPutusanActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                            startActivity(intent);
+                        }
+                    });
+                    dialogWarning.show();
+
                 }
 
             }
@@ -173,8 +197,6 @@ public class PutusanFrontMenu extends AppCompatActivity {
         check_rpc=findViewById(R.id.check_rpc);
         check_sektor_ekonomi=findViewById(R.id.check_sektor_ekonomi);
         check_kelengkapan=findViewById(R.id.check_kelengkapan_data);
-
-
 
 
         //onclick checklist
@@ -222,6 +244,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
             initializeDataFront();
             setSuperData();
             setDataPutusan(dataPutusan);
+//            loadDataHotprospek(Integer.parseInt(dataPutusan.getId_aplikasi()));
 
             iv_foto_putusan_front.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -237,6 +260,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
             initializeDataFrontAkad();
             setSuperDataAkad();
             setDataPutusanAkad(dataPutusanAkad);
+//            loadDataHotprospek(Integer.parseInt(dataPutusanAkad.getId_aplikasi()));
 
             cv_nomor_akad.setVisibility(View.VISIBLE);
             if(dataPutusanAkad.getNO_AKAD()==null){
@@ -247,7 +271,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
             }
 
 
-            if(!dataPutusanAkad.getNO_AKAD_QARDH().isEmpty()){
+            if(dataPutusanAkad!=null&&!dataPutusanAkad.getNO_AKAD_QARDH().isEmpty()){
                 cv_nomor_akad_qardh.setVisibility(View.VISIBLE);
                 autoTv_no_akad_qardh.setText(dataPutusanAkad.getNO_AKAD_QARDH());
 
@@ -304,30 +328,6 @@ public class PutusanFrontMenu extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==2) {
-            Place place = PlacePicker.getPlace(data, this);
-//            String toastMsg = String.format(
-//                    "Place: %s \n" +
-//                            "Alamat: %s \n" +
-//                            "Latlng %s \n", place.getName(), place.getAddress(), place.getLatLng().latitude+" "+place.getLatLng().longitude);
-            Toast.makeText(this, "latitude : " + place.getLatLng().latitude + "\nlongitude : " + place.getLatLng().longitude, Toast.LENGTH_SHORT).show();
-        }
-            else{
-                            String latitude = data.getStringExtra("latitude");
-            String longitude = data.getStringExtra("longitude");
-            Toast.makeText(this, "latitude : "+latitude+"\nlongitude : "+longitude, Toast.LENGTH_SHORT).show();
-                  id_aplikasi.setText(latitude);
-
-            }
-
-
-
-
-
-    }
 
     private void setDataPutusan(final Putusan dataPutusan){
 
@@ -1704,6 +1704,15 @@ public class PutusanFrontMenu extends AppCompatActivity {
             superData.setKodeProduk(dataPutusan.getKODE_PRODUK());
         }
         superData.setAsalHalaman("putusan");
+
+        if(getIntent().getStringExtra("jenisPembiayaan")!=null){
+            Log.d("sureki","intent berhasil didapatkan");
+            superData.setJenisPembiayaan(getIntent().getStringExtra("jenisPembiayaan"));
+        }
+        else{
+            superData.setJenisPembiayaan("mikro");
+        }
+
     }
 
     private void setSuperDataAkad(){
@@ -1717,6 +1726,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
         superData.setIdAgunan(dataPutusanAkad.getFid_agunan());
         superData.setIdTujuan(dataPutusanAkad.getId_tujuan());
         superData.setNamaNasabah(nama.getText().toString());
+        superData.setJenisPembiayaan("mikro");
         if(dataPutusanAkad.getNAMA_PRODUK()!=null){
             superData.setNamaProduk(dataPutusanAkad.getNAMA_PRODUK());
         }
@@ -1725,6 +1735,14 @@ public class PutusanFrontMenu extends AppCompatActivity {
             superData.setKodeProduk(dataPutusanAkad.getKODE_PRODUK());
         }
         superData.setAsalHalaman("riwayat");
+
+        if(getIntent().getStringExtra("jenisPembiayaan")!=null){
+            Log.d("sureki","intent berhasil didapatkan");
+            superData.setJenisPembiayaan(getIntent().getStringExtra("jenisPembiayaan"));
+        }
+        else{
+            superData.setJenisPembiayaan("mikro");
+        }
     }
 
     private void initializeDataFront(){
@@ -1822,7 +1840,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
 
         if(getIntent().getSerializableExtra("data_putusan_akad")!=null){
             Intent intent=new Intent(PutusanFrontMenu.this, ActivityMenuRiwayat.class);
@@ -1830,10 +1848,94 @@ public class PutusanFrontMenu extends AppCompatActivity {
             startActivity(intent);
         }
         else{
-            Intent intent=new Intent(PutusanFrontMenu.this, MenuDaftarPutusanActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
-            startActivity(intent);
+            SweetAlertDialog dialogWarning=new SweetAlertDialog(PutusanFrontMenu.this,SweetAlertDialog.WARNING_TYPE);
+            dialogWarning.setTitle("Pembiayaan belum diputus");
+            dialogWarning.setContentText("Anda belum memutus pembiayaan ini, apakah anda yakin ingin kembali ke menu awal?");
+            dialogWarning.setCancelText("Batal");
+            dialogWarning.setConfirmText("Ya");
+            dialogWarning.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    Intent intent=new Intent(PutusanFrontMenu.this, MenuDaftarPutusanActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                    startActivity(intent);
+                }
+            });
+            dialogWarning.show();
+
         }
+    }
+
+    private void loadDataHotprospek(int idAplikasi) {
+        loading.setVisibility(View.VISIBLE);
+        ReqIdAplikasi req = new ReqIdAplikasi();
+        req.setIdAplikasi(idAplikasi);
+        Call<ParseResponse> call = apiClientAdapter.getApiInterface().detailHotprospek(req);
+        call.enqueue(new Callback<ParseResponse>() {
+            @Override
+            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+                loading.setVisibility(View.GONE);
+                Log.d("palsukauwey","hoyyyy");
+                try {
+                    if (response.isSuccessful()){
+                        if(response.body().getStatus().equalsIgnoreCase("00"))
+                        {
+                            Gson gson = new Gson();
+                            String dataString = response.body().getData().get("aplikasi").toString();
+                            detailHotprospek = gson.fromJson(dataString, DetailHotprospek.class);
+                            Log.d("palsukauwey","herroooo");
+
+                            //hanya inquiry untuk nama produk dulu ya, karena udah dapet banyak dari dari inquiry list
+                                produk.setText(detailHotprospek.getPROGRAM_NAME());
+//                                Log.d("detailhp",detailHotprospek.getPROGRAM_NAME());
+
+
+                        }
+                        else {
+
+                            AppUtil.notiferror(PutusanFrontMenu.this, findViewById(android.R.id.content), response.body().getMessage());
+//                            new Handler().postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    finish();
+//                                }
+//                            }, 2000);
+                        }
+                    }
+                    else {
+                        Error error = ParseResponseError.confirmEror(response.errorBody());
+                        AppUtil.notiferror(PutusanFrontMenu.this, findViewById(android.R.id.content), error.getMessage());
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                finish();
+//                            }
+//                        }, 2000);
+                    }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            finish();
+//                        }
+//                    }, 2000);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParseResponse> call, Throwable t) {
+                loading.setVisibility(View.GONE);
+                AppUtil.notiferror(PutusanFrontMenu.this, findViewById(android.R.id.content), getString(R.string.txt_connection_failure));
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        finish();
+//                    }
+//                }, 2000);
+            }
+        });
     }
 }
 

@@ -2,14 +2,14 @@ package com.application.bris.brisi_pemutus.page_daftar_user.view;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,14 +20,12 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.data_cabang.RequestDataCabang;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.config.user.DaftarUser;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_ao.Ao;
 import com.application.bris.brisi_pemutus.model.user.User;
-import com.application.bris.brisi_pemutus.page_daftar_user.adapters.AdapterDaftarUser;
 import com.application.bris.brisi_pemutus.page_daftar_user.adapters.AdapterStatusUser;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -96,6 +94,9 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
         RequestDataCabang req = new RequestDataCabang();
         req.setKodeCabang(apppref.getKodeCabang());
 
+        //pantekan
+//        req.setKodeCabang("0999909845");
+
         //conditioning list yang ditampilkan
         if(apppref.getFidRole().equalsIgnoreCase("79")){
             call = apiClientAdapter.getApiInterface().dataUh(req);
@@ -110,6 +111,8 @@ public class ActivityStatusUser extends AppCompatActivity implements SwipeRefres
         else if(apppref.getFidRole().equalsIgnoreCase("76")){
             call = apiClientAdapter.getApiInterface().dataPincaLengkap(req);
             req.setKodeCabang(apppref.getKodeSkk());
+            //pantekan
+//        req.setKodeCabang("0999900108");
         }
         else if(apppref.getFidRole().equalsIgnoreCase("72")){
             call = apiClientAdapter.getApiInterface().dataMmm(req);

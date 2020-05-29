@@ -3,34 +3,19 @@ package com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen_agunan.KelengkapanDokumenAgunan;
-import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
-import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
-import com.application.bris.brisi_pemutus.util.AppUtil;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class AdapterKelengkapanDokumenAgunan extends RecyclerView.Adapter<AdapterKelengkapanDokumenAgunan.PipelineViewHolder>  {
 

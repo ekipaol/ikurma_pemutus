@@ -2,9 +2,9 @@ package com.application.bris.brisi_pemutus.page_riwayat.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
@@ -61,6 +62,7 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
         holder.tv_plafond.setText(AppUtil.parseRupiah(datas.getPlafond_induk()));
         holder.tv_no_akad.setText(datas.getNO_AKAD());
         holder.tv_status_akad.setText(datas.getStatus_aplikasi());
+        holder.tv_produk.setText(datas.getTipe_produk());
 
         //tenor specialTreatment
         if(datas.getJangka_waktu().equalsIgnoreCase("0")){
@@ -123,11 +125,23 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
             @Override
             public void onClick(View view) {
 
+                if(datas.getTipe_produk().equalsIgnoreCase("KMG")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
+                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
+                    intent.putExtra("data_putusan_akad",datas);
+                    intent.putExtra("jenisPembiayaan","kmg");
+                    holder.iv_foto.getContext().startActivity(intent);
+                }
+                else{
+                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
+                    intent.putExtra("data_putusan_akad",datas);
+                    intent.putExtra("jenisPembiayaan","mikro");
+                    holder.iv_foto.getContext().startActivity(intent);
+                }
 
-                //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
-                Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
-                intent.putExtra("data_putusan_akad",datas);
-                holder.iv_foto.getContext().startActivity(intent);
+
+
             }
         });
         holder.bt_proses.setOnClickListener(new View.OnClickListener() {
@@ -135,10 +149,21 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
             public void onClick(View view) {
 
 
-
-                Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
-                intent.putExtra("data_putusan_akad",datas);
-                holder.iv_foto.getContext().startActivity(intent);
+                //kmg or mukli faedah mikro
+                if(datas.getTipe_produk().equalsIgnoreCase("KMG")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
+                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
+                    intent.putExtra("data_putusan_akad",datas);
+                    intent.putExtra("jenisPembiayaan","kmg");
+                    holder.iv_foto.getContext().startActivity(intent);
+                }
+                else{
+                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
+                    intent.putExtra("data_putusan_akad",datas);
+                    intent.putExtra("jenisPembiayaan","mikro");
+                    holder.iv_foto.getContext().startActivity(intent);
+                }
             }
         });
     }
@@ -182,7 +207,7 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
     public class PipelineViewHolder extends RecyclerView.ViewHolder {
         private ImageView iv_foto;
         private Button bt_proses;
-        private TextView tv_nama, tv_plafond, tv_tenor, tv_waktu,tv_id_aplikasi,tv_no_akad,tv_status_akad;
+        private TextView tv_nama, tv_plafond, tv_tenor, tv_waktu,tv_id_aplikasi,tv_no_akad,tv_status_akad,tv_produk;
 
         public PipelineViewHolder(View itemView) {
             super(itemView);
@@ -195,6 +220,7 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
             tv_id_aplikasi=itemView.findViewById(R.id.tv_id_aplikasi_akad);
             tv_no_akad=itemView.findViewById(R.id.tv_no_akad);
             tv_status_akad=itemView.findViewById(R.id.tv_status_akad);
+            tv_produk=itemView.findViewById(R.id.tv_produk);
         }
     }
 }

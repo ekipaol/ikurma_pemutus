@@ -190,6 +190,13 @@ public class AppPreferences {
     public String getReadSektorEkonomi(){
         return sharedPref.getString(Constants.Preferences.READ_SEKTOR_EKONOMI, "no");
     }
+    public void setReadDataFinansial(String status){
+        spEditor.putString(Constants.Preferences.READ_DATA_FINANSIAL,status);
+        spEditor.commit();
+    }
+    public String getReadDataFinansial(){
+        return sharedPref.getString(Constants.Preferences.READ_DATA_FINANSIAL, "no");
+    }
     public void setReadLkn(String status){
         spEditor.putString(Constants.Preferences.READ_LKN,status);
         spEditor.commit();
@@ -313,6 +320,32 @@ public class AppPreferences {
     }
     public String getStatusAmbilAlih(){
         return sharedPref.getString(Constants.Preferences.STATUS_AMBIL_ALIH, "TIDAK");
+    }
+
+    public void setIdPengambilAlih(String flag){
+        spEditor.putString(Constants.Preferences.ID_USER_PENGAMBIL_ALIH, flag);
+        spEditor.commit();
+    }
+    public String getIdPengambilAlih(){
+        return sharedPref.getString(Constants.Preferences.ID_USER_PENGAMBIL_ALIH, "0");
+    }
+
+    public void setUpdateNotification(String filename){
+        spEditor.putString(Constants.Preferences.UPDATE_NOTIFICATION, filename);
+        spEditor.commit();
+    }
+
+    public String isUpdateNotificationOn(){
+        return sharedPref.getString(Constants.Preferences.UPDATE_NOTIFICATION, "true");
+    }
+
+    public void setNotificationVersion(String versionNumber){
+        spEditor.putString(Constants.Preferences.NOTIFICATION_VERSION, versionNumber);
+        spEditor.commit();
+    }
+
+    public String getNotificationVersion(){
+        return sharedPref.getString(Constants.Preferences.NOTIFICATION_VERSION, "0");
     }
 
 

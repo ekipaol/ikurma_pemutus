@@ -15,7 +15,43 @@ public class AllDataFront implements Serializable {
     private String kodeProduk;
     private String namaNasabah;
     private String namaProduk;
+    private String jenisPembiayaan;
+    private String kodeGimmick;
+    private String namaGimmick;
+    private String loanType;
     private int idFotoFormulirAplikasi=0;
+
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
+    }
+
+    public String getKodeGimmick() {
+        return kodeGimmick;
+    }
+
+    public void setKodeGimmick(String kodeGimmick) {
+        this.kodeGimmick = kodeGimmick;
+    }
+
+    public String getNamaGimmick() {
+        return namaGimmick;
+    }
+
+    public void setNamaGimmick(String namaGimmick) {
+        this.namaGimmick = namaGimmick;
+    }
+
+    public String getJenisPembiayaan() {
+        return jenisPembiayaan;
+    }
+
+    public void setJenisPembiayaan(String jenisPembiayaan) {
+        this.jenisPembiayaan = jenisPembiayaan;
+    }
 
     public int getIdFotoFormulirAplikasi() {
         return idFotoFormulirAplikasi;

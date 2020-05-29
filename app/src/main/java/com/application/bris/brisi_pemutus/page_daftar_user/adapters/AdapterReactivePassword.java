@@ -2,8 +2,8 @@ package com.application.bris.brisi_pemutus.page_daftar_user.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.request.delete_aom.ReqDeleteAom;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.model.data_ao.Ao;
-import com.application.bris.brisi_pemutus.model.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

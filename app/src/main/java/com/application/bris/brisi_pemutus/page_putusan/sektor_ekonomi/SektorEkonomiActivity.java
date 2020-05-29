@@ -4,7 +4,7 @@ package com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -18,23 +18,20 @@ import android.widget.RelativeLayout;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.sektor_ekonomi.ReqSektorEkonomi;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_pembiayaan.DataPbySebelumPutusan;
+import com.application.bris.brisi_pemutus.model.sektor_ekonomi_kmg.SektorEkonomiKmg;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.data_finansial.DataFinansialKonsumerKmgActivity;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
+import com.application.bris.brisi_pemutus.page_konsumer_purna.page_konsumer_purna.data_finansial.DataFinansialPurnaActivity;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
-import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
-import com.application.bris.brisi_pemutus.page_putusan.history.HistoryActivity;
 import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,30 +113,33 @@ public class SektorEkonomiActivity extends AppCompatActivity {
     private ApiClientAdapter apiClientAdapter;
     private AppPreferences appPreferences;
     AllDataFront superData;
+    String jenisPembiayaan;
+    Call<ParseResponse> call;
 
     private DataPbySebelumPutusan dataPbySebelumPutusan;
+    private SektorEkonomiKmg dataSektorEkonomiKmg;
 
     private String dtKatLBUString, dtJenisPenggunaanLbuString, dtSifatPbyLBUString, dtSifatPbyString,dtBidangUsahaString,
-            dtJenisPenggunaanString, dtJenisKreditLbuString, dtHubDebiturString, dataPbySebelumPutusanString;
+            dtJenisPenggunaanString, dtJenisKreditLbuString, dtHubDebiturString, dataPbySebelumPutusanString,dataSektorEkonomiKmgString;
 
 
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ao_activity_sektor_ekonomi);
         ButterKnife.bind(this);
         apiClientAdapter = new ApiClientAdapter(this);
-
         //set sektor ekonomi as already read
         appPreferences = new AppPreferences(this);
         appPreferences.setReadSektorEkonomi("yes");
-
-        idAplikasi = getIntent().getIntExtra("idAplikasi", 0);
-        cifLas = getIntent().getIntExtra("cifLas", 0);
-        idTujuan = getIntent().getIntExtra("idTujuan", 0);
-        namaTujuan = getIntent().getStringExtra("tujuanPembiayaan");
+        jenisPembiayaan=getIntent().getStringExtra("jenisPembiayaan");
         superData= (AllDataFront)getIntent().getSerializableExtra("superData");
+        idAplikasi = Integer.parseInt(superData.getIdAplikasi());
+        cifLas = Integer.parseInt(superData.getCif());
+        idTujuan = getIntent().getIntExtra("idTujuan", 0);
+        namaTujuan =superData.getTujuanPembiayaan();
 
         backgroundStatusBar();
         AppUtil.toolbarRegular(this, "Sektor Ekonomi");
@@ -147,22 +147,74 @@ public class SektorEkonomiActivity extends AppCompatActivity {
         backToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SektorEkonomiActivity.this, PutusanFrontMenu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                if(jenisPembiayaan!=null&&jenisPembiayaan.equalsIgnoreCase("kmg")){
+                    Intent intent = new Intent(SektorEkonomiActivity.this, PutusanFrontMenuKmg.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(SektorEkonomiActivity.this, PutusanFrontMenu.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+
             }
         });
+
+        if(jenisPembiayaan!=null&&jenisPembiayaan.equalsIgnoreCase("kmg")){
+            bt_lanjut_sektor_ekonomi.setText("Lanjut Ke Data Finansial");
+        }
+
+
         bt_lanjut_sektor_ekonomi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SektorEkonomiActivity.this, LknActivity.class);
-                intent.putExtra("cif", superData.getCif());
-                intent.putExtra("idAplikasi", superData.getIdAplikasi());
-                intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
-                intent.putExtra("jw", Integer.parseInt(superData.getJw()));
-                intent.putExtra("plafond", superData.getPlafond());
-                intent.putExtra("superData",superData);
-                startActivity(intent);
+                if(jenisPembiayaan!=null&&jenisPembiayaan.equalsIgnoreCase("kmg")){
+                    Intent intent;
+//                    Log.d("isikodegimik",superData.getKodeGimmick());
+                    if(superData.getKodeGimmick()!=null&&!superData.getKodeGimmick().isEmpty()&&!superData.getKodeGimmick().trim().equalsIgnoreCase("1")){
+                        intent = new Intent(SektorEkonomiActivity.this, DataFinansialPurnaActivity.class);
+                        intent.putExtra("cif", superData.getCif());
+                        intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                        intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
+                        intent.putExtra("jw", Integer.parseInt(superData.getJw()));
+                        intent.putExtra("plafond", superData.getPlafond());
+                        intent.putExtra("superData",superData);
+                        Log.d("isikodegimik1",superData.getKodeGimmick());
+                        startActivity(intent);
+
+                    }
+                    else if(superData.getKodeGimmick()!=null&&!superData.getKodeGimmick().isEmpty()&&superData.getKodeGimmick().trim().equalsIgnoreCase("1")){
+                        intent = new Intent(SektorEkonomiActivity.this, DataFinansialKonsumerKmgActivity.class);
+                        intent.putExtra("cif", superData.getCif());
+                        intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                        intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
+                        intent.putExtra("jw", Integer.parseInt(superData.getJw()));
+                        intent.putExtra("plafond", superData.getPlafond());
+                        intent.putExtra("superData",superData);
+                        Log.d("isikodegimik2",superData.getKodeGimmick());
+                        Log.d("isikodeproduk",superData.getKodeProduk());
+                        startActivity(intent);
+                    }
+//                    intent.putExtra("cif", superData.getCif());
+//                    intent.putExtra("idAplikasi", superData.getIdAplikasi());
+//                    intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
+//                    intent.putExtra("jw", Integer.parseInt(superData.getJw()));
+//                    intent.putExtra("plafond", superData.getPlafond());
+//                    intent.putExtra("superData",superData);
+//                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(SektorEkonomiActivity.this, LknActivity.class);
+                    intent.putExtra("cif", superData.getCif());
+                    intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                    intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
+                    intent.putExtra("jw", Integer.parseInt(superData.getJw()));
+                    intent.putExtra("plafond", superData.getPlafond());
+                    intent.putExtra("superData",superData);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -176,7 +228,13 @@ public class SektorEkonomiActivity extends AppCompatActivity {
         super.onResume();
         ll_shimmer.setVisibility(View.VISIBLE);
         sm_placeholder.startShimmer();
-        loadData();
+        if(jenisPembiayaan!=null&&jenisPembiayaan.equalsIgnoreCase("kmg")){
+            loadDataKmg();
+        }
+        else{
+            loadData();
+        }
+
     }
 
 
@@ -213,7 +271,10 @@ public class SektorEkonomiActivity extends AppCompatActivity {
                             dataPbySebelumPutusanString = response.body().getData().get("dataPbySebelumPutusan").toString();
                             dataPbySebelumPutusan = gson.fromJson(dataPbySebelumPutusanString, DataPbySebelumPutusan.class);
 
-                            setData();
+
+                                setData();
+
+
                         }
                         else{
                             finish();
@@ -223,6 +284,64 @@ public class SektorEkonomiActivity extends AppCompatActivity {
                     else {
                         finish();
                       //error message
+                    }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParseResponse> call, Throwable t) {
+                finish();
+                AppUtil.notiferror(SektorEkonomiActivity.this, findViewById(android.R.id.content), "Terjadi kesalahan");
+            }
+        });
+
+    }
+
+    private void loadDataKmg() {
+        ReqSektorEkonomi req = new ReqSektorEkonomi();
+        //data real
+        req.setIdAplikasi(idAplikasi);
+        req.setIdRole(Integer.parseInt(appPreferences.getFidRole()));
+
+
+
+        //multifaedah or konsumer
+        if(superData.getKodeProduk().equalsIgnoreCase("428")){
+            call = apiClientAdapter.getApiInterface().inquirySektorEkonomiKmgMikro(req);
+        }
+        else{
+            call = apiClientAdapter.getApiInterface().inquirySektorEkonomiKmg(req);
+        }
+        call.enqueue(new Callback<ParseResponse>() {
+            @Override
+            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+                sm_placeholder.stopShimmer();
+                sm_placeholder.setVisibility(View.GONE);
+                ll_content.setVisibility(View.VISIBLE);
+                try {
+                    if (response.isSuccessful()){
+                        if (response.body().getStatus().equalsIgnoreCase("00")){
+
+                            Gson gson = new Gson();
+                            dataSektorEkonomiKmgString = response.body().getData().get("dataPbySebelumPutusan").toString();
+                            dataSektorEkonomiKmg = gson.fromJson(dataSektorEkonomiKmgString, SektorEkonomiKmg.class);
+
+
+                            setDataKmg();
+
+
+                        }
+                        else{
+                            finish();
+                            AppUtil.notiferror(SektorEkonomiActivity.this, findViewById(android.R.id.content), response.body().getMessage());
+                        }
+                    }
+                    else {
+                        finish();
+                        //error message
                     }
                 }
                 catch (Exception e){
@@ -250,6 +369,21 @@ public class SektorEkonomiActivity extends AppCompatActivity {
         et_kategoripembiayaanlbu.setText(dataPbySebelumPutusan.getKategoriKreditLBUText());
         et_sektorekonomi.setText(dataPbySebelumPutusan.getSektorEkonomiText());
         et_hubungannasabahdgnbank.setText(dataPbySebelumPutusan.getHubDebiturDgnBankText());
+
+
+    }
+    public void setDataKmg(){
+        et_tujuanpenggunaan.setText(namaTujuan);
+        et_bidangusaha.setText(dataSektorEkonomiKmg.getBidangUsahaText());
+        et_sifatpembiayaan.setText(dataSektorEkonomiKmg.getSifatKreditText());
+        et_jenispenggunaan.setText(dataSektorEkonomiKmg.getJenisPenggunaanText());
+        et_jenispenggunaanlbu.setText(dataSektorEkonomiKmg.getJenisPenggunaanText());
+        et_jenispembiayaanlbu.setText(dataSektorEkonomiKmg.getJenisKreditLBUText());
+        et_sifatpembiayaanlbu.setText(dataSektorEkonomiKmg.getSifatKreditLBUText());
+        //tidak ada kategori pembiayaan di kmg
+        tf_kategoripembiayaanlbu.setVisibility(View.GONE);
+        et_sektorekonomi.setText(dataSektorEkonomiKmg.getSektorEkonomiText());
+        et_hubungannasabahdgnbank.setText(dataSektorEkonomiKmg.getHubDebiturDgnBankText());
 
 
     }

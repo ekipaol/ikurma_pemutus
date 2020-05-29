@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -48,7 +48,7 @@
             android:textAlignment="center"
             android:text="Pertimbangkan catatan dari pemrakarsa dan pemutus lain, sebelum melakukan putusan"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_below="@id/tv_keterangan_catatan"
             android:layout_marginTop="12dp"
             android:id="@+id/rv_historycatatan"
@@ -63,4 +63,4 @@
 
     </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

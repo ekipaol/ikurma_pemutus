@@ -47,10 +47,11 @@
 
         <me.grantland.widget.AutofitTextView
             android:id="@+id/tv_titlemenu"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textSize="13sp"
-            android:maxLines="1"
+            android:maxLines="2"
             android:fontFamily="@font/mm"
             android:layout_below="@+id/iv_iconmenu"
             android:layout_centerHorizontal="true"

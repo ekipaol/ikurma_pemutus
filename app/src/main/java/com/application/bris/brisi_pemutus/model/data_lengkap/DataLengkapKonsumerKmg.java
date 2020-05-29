@@ -209,10 +209,127 @@ public class DataLengkapKonsumerKmg {
     @SerializedName("namaPejabat")
     @Expose
     private String namaPejabat;
-
     @SerializedName("referensi")
     @Expose
     private String referensi;
+    @SerializedName("FID_PHOTO_RUMAH1")
+    @Expose
+    private int FID_PHOTO_RUMAH1;
+    @SerializedName("FID_PHOTO_RUMAH2")
+    @Expose
+    private int FID_PHOTO_RUMAH2;
+    @SerializedName("FID_PHOTO_KANTOR1")
+    @Expose
+    private int FID_PHOTO_KANTOR1;
+    @SerializedName("FID_PHOTO_KANTOR2")
+    @Expose
+    private int FID_PHOTO_KANTOR2;
+
+    private String idInstitusi;
+    @SerializedName("namaInstitusi")
+    @Expose
+    private String namaInstitusi;
+    @SerializedName("idRekDm")
+    @Expose
+    private String idRekDm;
+    @SerializedName("rekDm")
+    @Expose
+    private String rekDm;
+    @SerializedName("jenisKMG")
+    @Expose
+    private String jenisKMG;
+
+    @SerializedName("skPensiun")
+    @Expose
+    private String skPensiun;
+
+    @SerializedName("noTaspen")
+    @Expose
+    private String nomorTaspen;
+
+    @SerializedName("tglPensiunan")
+    @Expose
+    private String tglPensiunan;
+
+    public String getTglPensiunan() {
+        return tglPensiunan;
+    }
+
+    public void setTglPensiunan(String tglPensiunan) {
+        this.tglPensiunan = tglPensiunan;
+    }
+
+    public String getSkPensiun() {
+        return skPensiun;
+    }
+
+    public void setSkPensiun(String skPensiun) {
+        this.skPensiun = skPensiun;
+    }
+
+    public String getNomorTaspen() {
+        return nomorTaspen;
+    }
+
+    public void setNomorTaspen(String nomorTaspen) {
+        this.nomorTaspen = nomorTaspen;
+    }
+
+    public String getIdInstitusi() {
+        return idInstitusi;
+    }
+
+    public void setIdInstitusi(String idInstitusi) {
+        this.idInstitusi = idInstitusi;
+    }
+
+    public String getNamaInstitusi() {
+        return namaInstitusi;
+    }
+
+    public void setNamaInstitusi(String namaInstitusi) {
+        this.namaInstitusi = namaInstitusi;
+    }
+
+    public String getIdRekDm() {
+        return idRekDm;
+    }
+
+    public void setIdRekDm(String idRekDm) {
+        this.idRekDm = idRekDm;
+    }
+
+    public String getRekDm() {
+        return rekDm;
+    }
+
+    public void setRekDm(String rekDm) {
+        this.rekDm = rekDm;
+    }
+
+    public String getJenisKMG() {
+        return jenisKMG;
+    }
+
+    public void setJenisKMG(String jenisKMG) {
+        this.jenisKMG = jenisKMG;
+    }
+
+    public void setFID_PHOTO_RUMAH1(int FID_PHOTO_RUMAH1) {
+        this.FID_PHOTO_RUMAH1 = FID_PHOTO_RUMAH1;
+    }
+
+    public void setFID_PHOTO_RUMAH2(int FID_PHOTO_RUMAH2) {
+        this.FID_PHOTO_RUMAH2 = FID_PHOTO_RUMAH2;
+    }
+
+    public void setFID_PHOTO_KANTOR1(int FID_PHOTO_KANTOR1) {
+        this.FID_PHOTO_KANTOR1 = FID_PHOTO_KANTOR1;
+    }
+
+    public void setFID_PHOTO_KANTOR2(int FID_PHOTO_KANTOR2) {
+        this.FID_PHOTO_KANTOR2 = FID_PHOTO_KANTOR2;
+    }
 
     public String getReferensi() {
         return referensi;
@@ -764,5 +881,21 @@ public class DataLengkapKonsumerKmg {
 
     public void setNamaPejabat(String namaPejabat) {
         this.namaPejabat = namaPejabat;
+    }
+
+    public int getFID_PHOTO_RUMAH1() {
+        return FID_PHOTO_RUMAH1;
+    }
+
+    public int getFID_PHOTO_RUMAH2() {
+        return FID_PHOTO_RUMAH2;
+    }
+
+    public int getFID_PHOTO_KANTOR1() {
+        return FID_PHOTO_KANTOR1;
+    }
+
+    public int getFID_PHOTO_KANTOR2() {
+        return FID_PHOTO_KANTOR2;
     }
 }

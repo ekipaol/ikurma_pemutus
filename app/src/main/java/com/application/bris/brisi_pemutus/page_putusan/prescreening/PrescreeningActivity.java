@@ -1,19 +1,13 @@
 package com.application.bris.brisi_pemutus.page_putusan.prescreening;
 
 import android.app.DownloadManager;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,33 +19,27 @@ import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.kelengkapan_dokumen.ReqKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
-import com.application.bris.brisi_pemutus.baseapp.RouteApp;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumen;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.model.prescreening.Prescreening;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
 import com.application.bris.brisi_pemutus.page_putusan.detail_slik.DetailSlikActivity;
-import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityKelengkapanDokumen;
+import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.DownloadTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.stepstone.stepper.StepperLayout;
-import com.stepstone.stepper.VerificationError;
 
-import java.io.File;
 import java.lang.reflect.Type;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,11 +73,16 @@ public RelativeLayout loading;
     Button bt_download_slik_pasangan;
     @BindView (R.id.btn_detailslik)
     Button btn_detailslik;
+    @BindView (R.id.tv_no_tiket_slik_nasabah)
+    TextView tv_no_tiket_slik_nasabah;
+    @BindView (R.id.tv_no_tiket_slik_pasangan)
+    TextView tv_no_tiket_slik_pasangan;
 
     Putusan dataPutusan;
 
     SweetAlertDialog dialog;
      AllDataFront superData;
+    Call<ParseResponse> call;
 
 
 
@@ -98,7 +91,7 @@ public RelativeLayout loading;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ao_activity_prescreening);
         loading=findViewById(R.id.progressbar_loading);
-        apiClientAdapter=new ApiClientAdapter(this);
+        apiClientAdapter = new ApiClientAdapter(this);
         ButterKnife.bind(this);
          superData=(AllDataFront)getIntent().getSerializableExtra("superData");
 
@@ -108,17 +101,59 @@ public RelativeLayout loading;
 
         dataPutusan=(Putusan)getIntent().getSerializableExtra("dataPutusan");
        // tv_dhn.setVisibility(View.VISIBLE);
+               AppUtil.toolbarRegular(this, "Prescreening");
+        ImageView backToolbar=findViewById(R.id.btn_back);
+
+
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(superData.getJenisPembiayaan()!=null&&superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                    Intent intent = new Intent(PrescreeningActivity.this, PutusanFrontMenuKmg.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(PrescreeningActivity.this, PutusanFrontMenu.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+        if(superData.getJenisPembiayaan()!=null&&superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+            bt_lanjut_data_lengkap.setText("Lanjut ke Sektor Ekonomi");
+        }
+        else{
+            bt_lanjut_data_lengkap.setText("Lanjut ke Data Lengkap");
+
+        }
+
         loadData();
+
+
         bt_lanjut_data_lengkap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PrescreeningActivity.this, ActivityDataLengkap.class);
-                intent.putExtra("cif", superData.getCif());
-                intent.putExtra("idAplikasi", superData.getIdAplikasi());
-                intent.putExtra("superData",superData);
-                intent.putExtra("dataPutusan",dataPutusan);
-               //when back make this thing go to putusan frontmenu
-                startActivity(intent);
+                if(superData.getJenisPembiayaan()!=null&&superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                    Intent intent=new Intent(PrescreeningActivity.this, SektorEkonomiActivity.class);
+                    intent.putExtra("cif", superData.getCif());
+                    intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                    intent.putExtra("superData",superData);
+                    intent.putExtra("jenisPembiayaan",superData.getJenisPembiayaan());
+                    intent.putExtra("dataPutusan",dataPutusan);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent=new Intent(PrescreeningActivity.this, ActivityDataLengkap.class);
+                    intent.putExtra("cif", superData.getCif());
+                    intent.putExtra("idAplikasi", superData.getIdAplikasi());
+                    intent.putExtra("superData",superData);
+                    intent.putExtra("dataPutusan",dataPutusan);
+                    startActivity(intent);
+                }
+
 
 
             }
@@ -144,29 +179,15 @@ public RelativeLayout loading;
             public void onClick(View v) {
                 Intent intent=new Intent(PrescreeningActivity.this, DetailSlikActivity.class);
                 intent.putExtra("idAplikasi",Integer.parseInt(superData.getIdAplikasi()));
+                intent.putExtra("kodeProduk",superData.getKodeProduk());
                 startActivity(intent);
             }
         });
-
-
-
-
-
-
-
 
 
         backgroundStatusBar();
-        AppUtil.toolbarRegular(this, "Prescreening");
-        ImageView backToolbar=findViewById(R.id.btn_back);
-        backToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(PrescreeningActivity.this,PutusanFrontMenu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
-                startActivity(intent);
-            }
-        });
+
+
     }
 
     private void backgroundStatusBar(){
@@ -180,14 +201,21 @@ public RelativeLayout loading;
         loading.setVisibility(View.VISIBLE);
         //real data
         ReqKelengkapanDokumen req = new ReqKelengkapanDokumen();
-        req.setId_aplikasi(Integer.parseInt(getIntent().getStringExtra("idAplikasi")));
+        req.setId_aplikasi(Integer.parseInt(superData.getIdAplikasi()));
         //pantekan buat testing
 //        ReqHistoryPutusan req=new ReqHistoryPutusan();
 //                req.setCif(81857);
 //        req.setId_aplikasi(101678);
 
 
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().inquiryPrescreening(req);
+
+        if(superData.getKodeProduk().equalsIgnoreCase("428")){
+            call = apiClientAdapter.getApiInterface().inquiryPrescreeningKmgMikro(req);
+        }
+        else{
+            call = apiClientAdapter.getApiInterface().inquiryPrescreening(req);
+        }
+
         call.enqueue(new Callback<ParseResponse>() {
             @Override
             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
@@ -203,6 +231,14 @@ public RelativeLayout loading;
                             dataPrescreening = gson.fromJson(dataKelengkapanString, Prescreening.class);
 //                            Log.d("preyscreening",dataPrescreening.getResult());
 //                            Log.d("preyscreeningstring",dataKelengkapanString);
+                            if(dataPrescreening.getNoPermin()!=null&&!dataPrescreening.getNoPermin().isEmpty()){
+                                tv_no_tiket_slik_nasabah.setText(dataPrescreening.getNoPermin());
+                            }
+                            if(dataPrescreening.getNoPermin2()!=null&&!dataPrescreening.getNoPermin2().isEmpty()){
+                                tv_no_tiket_slik_pasangan.setText(dataPrescreening.getNoPermin2());
+                            }
+
+
 
 
                             //tutorial overlay
@@ -298,14 +334,13 @@ public RelativeLayout loading;
 
         //hati hati blok kode dibawah, kalau nerima null, dia tidak akan menjalankan kode dibawahnya, jadi kode sikp ditaruh di paling bawah
 
-        if(dataPrescreening.getSikp().equalsIgnoreCase("true")){
-
+        if(dataPrescreening.getSikp()!=null&&dataPrescreening.getSikp().equalsIgnoreCase("true")){
             tv_sikp.setText("LOLOS");
             tv_sikp.setVisibility(View.VISIBLE);
             ll_content_sikp.setVisibility(View.VISIBLE);
 //            Log.d("jakiro2",dataPrescreening.getResult());
         }
-        else if(dataPrescreening.getSikp().equalsIgnoreCase("false")){
+        else if(dataPrescreening.getSikp()!=null&&dataPrescreening.getSikp().equalsIgnoreCase("false")){
 
             tv_sikp.setText("TIDAK LOLOS");
             tv_sikp.setVisibility(View.VISIBLE);
@@ -336,10 +371,22 @@ public RelativeLayout loading;
 
         Call<ParseResponse> call = null;
         if (id == 1){
-            call = apiClientAdapter.getApiInterface().downloadSlik(req);
+            if (superData.getKodeProduk().equalsIgnoreCase("428")) {
+                call = apiClientAdapter.getApiInterface().downloadSlikKmgMikro(req);
+            }
+            else{
+                call = apiClientAdapter.getApiInterface().downloadSlik(req);
+            }
+
         }
         else{
-            call = apiClientAdapter.getApiInterface().downloadSlikPasangan(req);
+            if (superData.getKodeProduk().equalsIgnoreCase("428")) {
+                call = apiClientAdapter.getApiInterface().downloadSlikPasanganKmgMikro(req);
+            }
+            else{
+                call = apiClientAdapter.getApiInterface().downloadSlikPasangan(req);
+            }
+
         }
         call.enqueue(new Callback<ParseResponse>() {
             @Override
@@ -412,6 +459,7 @@ public RelativeLayout loading;
 
 
          startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+
     }
 
 

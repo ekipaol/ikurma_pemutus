@@ -1,15 +1,13 @@
 package com.application.bris.brisi_pemutus.page_putusan.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +20,8 @@ import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
-import com.application.bris.brisi_pemutus.model.agunan_kendaraan.AgunanKendaraan;
-import com.application.bris.brisi_pemutus.model.agunan_kios.AgunanKios;
-import com.application.bris.brisi_pemutus.model.agunan_set_pengikatan.AgunanPengikatan;
 import com.application.bris.brisi_pemutus.model.agunan_terikat.AgunanTerikat;
-import com.application.bris.brisi_pemutus.page_aom.info_agunan.InfoAgunanActivity;
 import com.application.bris.brisi_pemutus.page_aom.info_agunan.SetPengikatanActivity;
-import com.application.bris.brisi_pemutus.page_putusan.agunan.ActivityInsertAgunan;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_deposito.AgunanDepositoActivity;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_kendaraan.AgunanKendaraanActivity;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_kios.AgunanKiosActivity;
@@ -44,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import es.dmoral.toasty.Toasty;
 
 public class AgunanTerikatAdapater extends RecyclerView.Adapter<AgunanTerikatAdapater.PipelineViewHolder> implements Filterable {
 
@@ -93,12 +87,21 @@ public class AgunanTerikatAdapater extends RecyclerView.Adapter<AgunanTerikatAda
                     }
                 });
 
+
+
         //  holder.iv_foto.setImageResource(datas.getFoto());
         holder.tv_nama.setText(datas.getNAMA_DEBITUR_1());
         holder.tv_jenis.setText(datas.getDESC_AGUNAN());
         holder.tv_id_agunan.setText(datas.getFID_AGUNAN());
         holder.tv_id_aplikasi.setText(datas.getID_APLIKASI());
         holder.tv_plafond_induk.setText(AppUtil.parseRupiah(datas.getPLAFOND_INDUK()));
+
+
+        //pantek desc agunan kalau dia SK, karena dari db gak diisi
+        if(datas.getFID_JENIS_AGUNAN().equalsIgnoreCase("35")){
+            holder.tv_jenis.setText("SK Pegawai");
+        }
+
         holder.cv_agunan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +120,9 @@ public class AgunanTerikatAdapater extends RecyclerView.Adapter<AgunanTerikatAda
                 }
                 else  if(  holder.tv_jenis.getText().toString().equalsIgnoreCase("kendaraan")){
                     onCLickStuff(holder.tv_id_agunan,32,AgunanKendaraanActivity.class,datas);
+                }
+                else if(datas.getFID_JENIS_AGUNAN().equalsIgnoreCase("35")){
+                    Toasty.info(context,"Agunan SK Pegawai").show();
                 }
 
 
@@ -141,6 +147,9 @@ public class AgunanTerikatAdapater extends RecyclerView.Adapter<AgunanTerikatAda
                 }
                 else  if(  holder.tv_jenis.getText().toString().equalsIgnoreCase("kendaraan")){
                     onCLickStuff(holder.tv_id_agunan,32,AgunanKendaraanActivity.class,datas);
+                }
+                else if(datas.getFID_JENIS_AGUNAN().equalsIgnoreCase("35")){
+                    Toasty.info(context,"Agunan SK Pegawai").show();
                 }
             }
         });

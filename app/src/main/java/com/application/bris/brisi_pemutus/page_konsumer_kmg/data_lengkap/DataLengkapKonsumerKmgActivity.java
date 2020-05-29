@@ -1,13 +1,12 @@
 package com.application.bris.brisi_pemutus.page_konsumer_kmg.data_lengkap;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 
 
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -21,9 +20,10 @@ import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.data_lengkap.ReqDataLengkap;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkapKonsumerKmg;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
+import com.application.bris.brisi_pemutus.page_putusan.prescreening.PrescreeningActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
 import com.stepstone.stepper.StepperLayout;
@@ -35,6 +35,7 @@ import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements StepperLayout.StepperListener{
     @BindView(R.id.stepperlayout)
@@ -57,6 +58,7 @@ public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements
     private DataLengkapKonsumerKmg dataLengkap;
     private int startingStepPosition;
     AllDataFront superData;
+    Call<ParseResponse> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +68,10 @@ public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements
         superData = (AllDataFront) getIntent().getSerializableExtra("superData");
 
         //ceklis telah melihat datalengkap
-        appPreferences.setReadDataLengkap("yes");
+//        appPreferences.setReadDataLengkap("yes");
+
         realm = Realm.getDefaultInstance();
-        apiClientAdapter = new ApiClientAdapter(this,"http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN/webresources/");
+        apiClientAdapter = new ApiClientAdapter(this);
         appPreferences = new AppPreferences(this);
         cif = getIntent().getStringExtra("cif");
         uid = Integer.parseInt(appPreferences.getUid());
@@ -79,12 +82,19 @@ public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements
         startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
         loadDataLengkap();
 
-//        btn_back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CustomDialog.DialogBackpress(DataLengkapKonsumerKmgActivity.this);
-//            }
-//        });
+        //set session as read
+        appPreferences.setReadDataLengkap("yes");
+
+        //toolbar back configuration, hard to explain, just ask to mr eki. In short, this is needed so the activity flows as eki wants
+        ImageView backToolbar = findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DataLengkapKonsumerKmgActivity.this, PutusanFrontMenuKmg.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
     }
 
     private void backgroundStatusBar(){
@@ -100,20 +110,29 @@ public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements
 
 
 
-//        req.setCif(cif);
-//        req.setIdAplikasi(String.valueOf(uid));
+        req.setCif(cif);
+        req.setIdAplikasi(superData.getIdAplikasi());
 
         //pantekan
-        req.setCif("81862");
-        req.setIdAplikasi("101928");
 
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().inquiryDataLengkapKonsumerKmg(req);
+//        req.setCif("81862");
+//        req.setIdAplikasi("101928");
+//        Toasty.info(DataLengkapKonsumerKmgActivity.this,"id aplikasi masih hardcoded").show();
+
+      //multifaedah or konsumer ?
+        if(superData.getKodeProduk().equalsIgnoreCase("428")){
+           call = apiClientAdapter.getApiInterface().inquiryDataLengkapKmgMikro(req);
+        }
+        else{
+           call = apiClientAdapter.getApiInterface().inquiryDataLengkapKonsumerKmg(req);
+        }
         call.enqueue(new Callback<ParseResponse>() {
             @Override
             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
                 loading.setVisibility(View.GONE);
                 try {
                     if (response.isSuccessful()){
+
                         if(response.body().getStatus().equalsIgnoreCase("00")){
                             Gson gson = new Gson();
                             dataPribadiString = response.body().getData().get("nasabah").toString();
@@ -171,9 +190,20 @@ public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements
 
 
     @Override
-    public void onCompleted(View completeButton) {
-//        sendData();
+    public void onCompleted(View view) {
+
+        Intent intent = new Intent(DataLengkapKonsumerKmgActivity.this, PrescreeningActivity.class);
+
+        intent.putExtra("cif", superData.getCif());
+        intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
+        intent.putExtra("id_tujuan", superData.getIdTujuan());
+        intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
+        intent.putExtra("superData", superData);
+
+        startActivity(intent);
     }
+
+
 
     @Override
     public void onError(VerificationError verificationError) {

@@ -1,9 +1,8 @@
 package com.application.bris.brisi_pemutus.page_putusan.data_lengkap;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,26 +11,21 @@ import android.widget.RelativeLayout;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.data_lengkap.ReqDataLengkap;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
-import com.application.bris.brisi_pemutus.baseapp.RouteApp;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.SampleFragmentStepAdapter;
-import com.application.bris.brisi_pemutus.page_putusan.prescreening.PrescreeningActivity;
 import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
-import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 import com.google.gson.Gson;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Route;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -117,6 +111,7 @@ public class ActivityDataLengkap extends AppCompatActivity implements StepperLay
         idAplikasi = getIntent().getStringExtra("idAplikasi");
         backgroundStatusBar();
         AppUtil.toolbarRegular(this, "Data Lengkap");
+
         //toolbar back configuration, hard to explain, just ask to mr eki. In short, this is needed so the activity flows as eki wants
         ImageView backToolbar = findViewById(R.id.btn_back);
         backToolbar.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +122,7 @@ public class ActivityDataLengkap extends AppCompatActivity implements StepperLay
                 startActivity(intent);
             }
         });
+
         startingStepPosition = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_STEP_POSITION_KEY) : 0;
 
         if(superData.getKodeProduk().equalsIgnoreCase("71")||superData.getKodeProduk().equalsIgnoreCase("72")||superData.getKodeProduk().equalsIgnoreCase("73")){

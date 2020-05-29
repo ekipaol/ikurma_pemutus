@@ -2,6 +2,8 @@ package com.application.bris.brisi_pemutus.splash_screen;
 
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,33 +11,28 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.check_update.CheckUpdate;
 import com.application.bris.brisi_pemutus.api.model.request.firebase.ReqFirebase;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.baseapp.RouteApp;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.model.detail_slik.DetailSlik;
 import com.application.bris.brisi_pemutus.page_aktivasi.ActivityWelcome;
 import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
-import com.application.bris.brisi_pemutus.page_putusan.detail_slik.DetailSlikActivity;
-import com.application.bris.brisi_pemutus.page_putusan.detail_slik.DetailSlikAdapter;
-import com.application.bris.brisi_pemutus.page_ranking.RankingActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.Constants;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -76,6 +73,11 @@ public class SplashScreen extends AppCompatActivity {
         appPreferences = new AppPreferences(this);
         apiClientAdapter = new ApiClientAdapter(this, 0, 30, TimeUnit.SECONDS);
         ButterKnife.bind(this);
+
+        //harus buat notification channel agar notifikasi tampil di foreground untuk android diatas OReo
+        //nama channel yang dibuat disini, harus dipanggil di kelas notification service, di object NotificationCompatBuilder >line 58
+        createNotificationChannel();
+
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
@@ -107,11 +109,15 @@ public class SplashScreen extends AppCompatActivity {
                 try {
                     if (response.isSuccessful()){
                         installedVersionName = packageInfo.versionName;
-                        //real if
-                        if (response.body().getData().get("versionName").getAsString().equalsIgnoreCase(installedVersionName)){
+                        int installedVersionNameInt=Integer.parseInt(packageInfo.versionName.replace(".",""));
+                        int responseVersionInt=Integer.parseInt(response.body().getData().get("versionName").getAsString().replace(".",""));
 
-                        //pantekan
-//                        if (response.body().getData().get("versionName").getAsString().equalsIgnoreCase("1.0.0")){
+                        //metode lama, kalau versinya baru, tetap keluar error
+                        //real if
+//                        if (response.body().getData().get("versionName").getAsString().equalsIgnoreCase(installedVersionName)){
+
+
+                            if(installedVersionNameInt>=responseVersionInt){
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -306,7 +312,7 @@ public class SplashScreen extends AppCompatActivity {
                 .show();
     }
     private void confirmAgain(String msg){
-        final android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
+        final androidx.appcompat.app.AlertDialog.Builder dialog = new androidx.appcompat.app.AlertDialog.Builder(this);
         dialog.setMessage(msg)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -343,6 +349,23 @@ public class SplashScreen extends AppCompatActivity {
             }
         } catch (Exception e) {
             Log.e("exc" , String.valueOf(e));
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "i-kurma notification";
+            String description = "notifikasi i-kurma pemutus";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("kurma2", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            Log.d("notificationChannel","ithas been made");
         }
     }
 

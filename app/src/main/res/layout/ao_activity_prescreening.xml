@@ -261,6 +261,78 @@
                     android:layout_weight="1.5"/>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_tiket_slik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="horizontal"
+                android:padding="8dp"
+               >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginRight="8dp"
+                    android:text="Nomor Tiket SLIK : "
+                    android:maxLines="1"
+                    android:fontFamily="@font/muli_b"
+                    android:textColor="@color/colorBlackHeader"/>
+
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/tv_no_tiket_slik_nasabah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/muli_b"
+                    android:textColor="@color/text_color"
+                    android:text="-"
+                    android:layout_marginRight="0.7dp"
+                    android:visibility="visible"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_tiket_slik_pasangan"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginRight="8dp"
+                    android:text="Nomor Tiket SLIK Pasangan: "
+                    android:maxLines="1"
+                    android:fontFamily="@font/muli_b"
+                    android:textColor="@color/colorBlackHeader"/>
+
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/tv_no_tiket_slik_pasangan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/muli_b"
+                    android:textColor="@color/text_color"
+                    android:text="-"
+                    android:layout_marginRight="0.7dp"
+                    android:visibility="visible"/>
+
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

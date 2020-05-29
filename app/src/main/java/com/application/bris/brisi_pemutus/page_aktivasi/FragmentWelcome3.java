@@ -1,11 +1,10 @@
 package com.application.bris.brisi_pemutus.page_aktivasi;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.page_ranking.RankingActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;

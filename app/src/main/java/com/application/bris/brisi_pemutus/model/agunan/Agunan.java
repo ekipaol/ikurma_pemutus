@@ -231,6 +231,12 @@ public class Agunan {
     @SerializedName("NamaPenghuni")
     @Expose
     private String namaPenghuni;
+    @SerializedName("namaPasarBRINS")
+    @Expose
+    private String namaPasarBRINS;
+    @SerializedName("nkrPasarBRINS")
+    @Expose
+    private String nkrPasarBRINS;
     @SerializedName("Koordinat")
     @Nullable
     @Expose
@@ -247,6 +253,22 @@ public class Agunan {
     private int idPhotoTBtimur;
     @SerializedName("idPhotoTBbpn")
     private int idPhotoTBbpn;
+
+    public String getNkrPasarBRINS() {
+        return nkrPasarBRINS;
+    }
+
+    public void setNkrPasarBRINS(String nkrPasarBRINS) {
+        this.nkrPasarBRINS = nkrPasarBRINS;
+    }
+
+    public String getNamaPasarBRINS() {
+        return namaPasarBRINS;
+    }
+
+    public void setNamaPasarBRINS(String namaPasarBRINS) {
+        this.namaPasarBRINS = namaPasarBRINS;
+    }
 
     public int getIdPhotoTBbangunan() {
         return idPhotoTBbangunan;

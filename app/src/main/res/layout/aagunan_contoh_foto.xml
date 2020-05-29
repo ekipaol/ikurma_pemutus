@@ -28,7 +28,7 @@
                 android:layout_marginTop="10dp"
                 android:padding="15dp">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
 
@@ -56,7 +56,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent" />
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </RelativeLayout>
 
             <TextView
@@ -78,7 +78,7 @@
                     android:layout_weight="1"
                     android:padding="15dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp">
 
@@ -106,7 +106,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toRightOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -117,7 +117,7 @@
                     android:layout_weight="1"
                     android:padding="15dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp">
 
@@ -145,7 +145,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toRightOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </RelativeLayout>
 
             </LinearLayout>
@@ -184,7 +184,7 @@
                     android:layout_weight="1"
                     android:padding="15dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp">
 
@@ -212,7 +212,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toRightOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -223,7 +223,7 @@
                     android:layout_weight="1"
                     android:padding="15dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp">
 
@@ -251,7 +251,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toRightOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </RelativeLayout>
             </LinearLayout>
 

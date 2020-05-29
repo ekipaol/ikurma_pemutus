@@ -2,9 +2,9 @@ package com.application.bris.brisi_pemutus.page_konsumer_kmg.data_lengkap;
 
 
 import android.content.Context;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkapKonsumerKmg;
 import com.stepstone.stepper.Step;
@@ -23,7 +23,8 @@ public class DataLengkapKonsumerKmgStepAdapter extends AbstractFragmentStepAdapt
     @NonNull
     @Override
     public StepViewModel getViewModel(@IntRange(from = 0) int position) {
-        StepViewModel.Builder builder = new StepViewModel.Builder(context);
+
+//        builder.setEndButtonLabel("");
         switch (position){
             case 0:
                 title = "Data Pribadi";

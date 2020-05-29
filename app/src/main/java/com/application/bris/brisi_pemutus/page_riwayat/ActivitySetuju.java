@@ -4,14 +4,14 @@ package com.application.bris.brisi_pemutus.page_riwayat;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,7 +48,7 @@ public class ActivitySetuju extends AppCompatActivity implements SwipeRefreshLay
     @BindView(R.id.tb_regular)
     Toolbar tb_regular;
     @BindView(R.id.rv_listakad)
-    RecyclerView rv_listpipeline;
+    RecyclerView rv_listsetuju;
     @BindView(R.id.progressbar_loading)
     RelativeLayout progressbar_loading;
     @BindView(R.id.refresh)
@@ -77,7 +77,7 @@ public class ActivitySetuju extends AppCompatActivity implements SwipeRefreshLay
         main();
         backgroundStatusBar();
         String kodePutusan=getIntent().getStringExtra("kodePutusan");
-        initializeUser();
+        initializeListSetuju();
 
 
     }
@@ -139,14 +139,14 @@ public class ActivitySetuju extends AppCompatActivity implements SwipeRefreshLay
     public void initializePipelineHome(){
 //        dataPipeline = getListPipelineHome();
 //        adapterAkad = new PutusanAdapter(this, dataPipeline);
-//        rv_listpipeline.setLayoutManager(new LinearLayoutManager(PutusanActivity.this));
-//        rv_listpipeline.setItemAnimator(new DefaultItemAnimator());
-//        rv_listpipeline.setAdapter(adapterAkad);
+//        rv_listakad.setLayoutManager(new LinearLayoutManager(PutusanActivity.this));
+//        rv_listakad.setItemAnimator(new DefaultItemAnimator());
+//        rv_listakad.setAdapter(adapterAkad);
     }
 
-    public void initializeUser() {
+    public void initializeListSetuju() {
         //  dataUser = getListUser();
-        //progressbar_loading.setVisibility(View.VISIBLE);
+        //loading.setVisibility(View.VISIBLE);
         shimmer.setVisibility(View.VISIBLE);
         ReqPutusan req = new ReqPutusan();
         AppPreferences appPreferences=new AppPreferences(ActivitySetuju.this);
@@ -163,8 +163,9 @@ public class ActivitySetuju extends AppCompatActivity implements SwipeRefreshLay
         call.enqueue(new Callback<ParseResponseArr>() {
             @Override
             public void onResponse(Call<ParseResponseArr> call, Response<ParseResponseArr> response) {
-                //progressbar_loading.setVisibility(View.GONE);
+                //loading.setVisibility(View.GONE);
                 shimmer.setVisibility(View.GONE);
+                rv_listsetuju.setVisibility(View.VISIBLE);
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equalsIgnoreCase("00")) {
                         String listDataString = response.body().getData().toString();
@@ -175,9 +176,11 @@ public class ActivitySetuju extends AppCompatActivity implements SwipeRefreshLay
                         dataAkad = gson.fromJson(listDataString, type);
                         Log.d("akadActivity",listDataString);
                         adapterAkad = new AdapterAkad(ActivitySetuju.this, dataAkad);
-                        rv_listpipeline.setLayoutManager(new LinearLayoutManager(ActivitySetuju.this));
-                        rv_listpipeline.setItemAnimator(new DefaultItemAnimator());
-                        rv_listpipeline.setAdapter(adapterAkad);
+                        rv_listsetuju.setLayoutManager(new LinearLayoutManager(ActivitySetuju.this));
+                        rv_listsetuju.setItemAnimator(new DefaultItemAnimator());
+                        rv_listsetuju.setAdapter(adapterAkad);
+
+
 
 
                         if (dataAkad.size() == 0) {
@@ -231,7 +234,11 @@ public class ActivitySetuju extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
-        swipeRefreshLayout.setRefreshing(true);
-        ActivitySetuju.this.recreate();
+        swipeRefreshLayout.setRefreshing(false);
+        shimmer.setVisibility(View.VISIBLE);
+        shimmer.startShimmer();
+        initializeListSetuju();
+        rv_listsetuju.setVisibility(View.GONE);
+//        ActivitySetuju.this.recreate();
     }
 }

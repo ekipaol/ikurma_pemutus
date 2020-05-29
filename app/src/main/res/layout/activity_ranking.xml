@@ -11,7 +11,7 @@
 
     <include layout="@layout/toolbar_nosearch"></include>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_marginLeft="4dp"
                 android:layout_width="150dp"
                 android:layout_height="30dp"
@@ -41,14 +41,14 @@
                     android:layout_gravity="center_vertical"
 
                     />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="4dp"
@@ -104,9 +104,9 @@
                     </RelativeLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="4dp"
@@ -159,8 +159,8 @@
 
                     </RelativeLayout>
 
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="4dp"
@@ -213,7 +213,7 @@
 
                     </RelativeLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
 
             </LinearLayout>
@@ -234,7 +234,7 @@
                     />
             </LinearLayout>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
@@ -261,7 +261,7 @@
                         />
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_marginTop="15dp"
@@ -292,7 +292,7 @@
 
             </LinearLayout>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
 
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -343,9 +343,9 @@
 
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -393,9 +393,9 @@
 
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -444,7 +444,7 @@
 
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -470,7 +470,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
@@ -499,7 +499,7 @@
 
                         />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_marginTop="15dp"
@@ -530,7 +530,7 @@
 
             </LinearLayout>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
 
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -576,9 +576,9 @@
 
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -624,9 +624,9 @@
 
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -672,7 +672,7 @@
 
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <Button
                 android:layout_width="wrap_content"
@@ -684,7 +684,7 @@
 
 
         </LinearLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

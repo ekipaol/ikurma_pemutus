@@ -2,10 +2,10 @@ package com.application.bris.brisi_pemutus.page_daftar_user.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.model.data_ao.Ao;
-import com.application.bris.brisi_pemutus.model.user.User;
 import com.application.bris.brisi_pemutus.page_daftar_user.view.DetailUserActivity;
 
 import java.util.ArrayList;

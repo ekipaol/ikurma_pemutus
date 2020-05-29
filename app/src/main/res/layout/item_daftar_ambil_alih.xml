@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_content_user"
@@ -24,13 +24,13 @@
             android:weightSum="2"
             android:id="@+id/ll_nama_user">
 
-            <TextView
+            <me.grantland.widget.AutofitTextView
                 android:id="@+id/tv_namauser_ambil_alih"
-                android:layout_width="0dp"
-
-
+                android:layout_width="match_parent"
+                android:layout_marginRight="112dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:text="{Nama User}"/>
@@ -46,14 +46,26 @@
             android:text="{Jabatan user}"
             android:layout_below="@id/ll_nama_user"/>
 
-        <TextView
-            android:id="@+id/tv_kantoruser_ambil_alih"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="5dp"
-            android:textSize="16sp"
-            android:text="{Kantor user}"
-            android:layout_below="@id/tv_jabatanuser_ambil_alih"/>
+            android:weightSum="2"
+            android:id="@+id/ll_kantor_ambil_alih"
+            android:layout_below="@id/tv_jabatanuser_ambil_alih">
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/tv_kantoruser_ambil_alih"
+                android:layout_width="match_parent"
+                android:layout_marginRight="112dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:text="{Kantor User}"/>
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tv_uid_ambil_alih"
@@ -63,7 +75,7 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:text="{UID User}"
-            android:layout_below="@id/tv_kantoruser_ambil_alih"/>
+            android:layout_below="@id/ll_kantor_ambil_alih"/>
 
 
 
@@ -86,4 +98,4 @@
 
     </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

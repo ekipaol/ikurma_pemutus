@@ -1,12 +1,11 @@
 package com.application.bris.brisi_pemutus.page_putusan.adapters;
 
 import android.content.Context;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 
-import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.list_foto_agunan.ListFotoAgunan;

@@ -3,49 +3,30 @@ package com.application.bris.brisi_pemutus.view.corelayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.request.dashboard.RequestDashboard;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.dashboard.DashboardCred;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
-import com.application.bris.brisi_pemutus.page_performance.PerformanceActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.BackStackFragment;
-import com.application.bris.brisi_pemutus.view.corelayout.dashboard.FragmentDashboard;
 import com.application.bris.brisi_pemutus.view.corelayout.home.FragmentHome;
 import com.application.bris.brisi_pemutus.view.corelayout.profile.FragmentProfile;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CoreLayoutActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private Fragment fragment;
@@ -146,7 +127,7 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        for (android.support.v4.app.Fragment frg : getSupportFragmentManager().getFragments()) {
+        for (Fragment frg : getSupportFragmentManager().getFragments()) {
             frg.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -223,6 +204,8 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
     @Override
     protected void onRestart() {
         super.onRestart();
-        recreate();
+
+        //jangan di recreate nanti berat
+//        recreate();
     }
 }

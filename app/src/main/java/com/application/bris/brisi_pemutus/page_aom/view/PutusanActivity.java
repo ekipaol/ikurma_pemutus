@@ -2,20 +2,22 @@ package com.application.bris.brisi_pemutus.page_aom.view;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,7 +31,9 @@ import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.model.pipeline.pipeline;
 import com.application.bris.brisi_pemutus.page_aom.adapter.pipeline.PutusanAdapter;
+import com.application.bris.brisi_pemutus.page_putusan.menu.MenuDaftarPutusanActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -68,6 +72,7 @@ public class PutusanActivity extends AppCompatActivity implements SwipeRefreshLa
     PutusanAdapter adapaterPipeline;
     LinearLayoutManager layoutPipeline;
     ApiClientAdapter apiClientAdapter;
+    String kodePutusan;
 
 
 
@@ -77,21 +82,32 @@ public class PutusanActivity extends AppCompatActivity implements SwipeRefreshLa
         setContentView(R.layout.ao_activity_pipeline);
         main();
         backgroundStatusBar();
-        String kodePutusan=getIntent().getStringExtra("kodePutusan");
-        if(kodePutusan.equalsIgnoreCase("putusanDeviasi")){
+         kodePutusan=getIntent().getStringExtra("kodePutusan");
+        if(kodePutusan!=null&&kodePutusan.equalsIgnoreCase("putusanDeviasi")){
             initializeUserDeviasi();
         }
         else{
             initializeUser();
         }
 
+        ImageView backToolbar=findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent=new Intent(PutusanActivity.this, MenuDaftarPutusanActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                    startActivity(intent);
+
+
+
+            }
+        });
+
 
 
 
     }
 
-    @Override
-    public void onBackPressed() { finish(); }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -165,6 +181,7 @@ public class PutusanActivity extends AppCompatActivity implements SwipeRefreshLa
             public void onResponse(Call<ParseResponseArr> call, Response<ParseResponseArr> response) {
                 //progressbar_loading.setVisibility(View.GONE);
                 shimmer.setVisibility(View.GONE);
+                rv_listpipeline.setVisibility(View.VISIBLE);
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equalsIgnoreCase("00")) {
                         String listDataString = response.body().getData().toString();
@@ -211,6 +228,7 @@ public class PutusanActivity extends AppCompatActivity implements SwipeRefreshLa
             @Override
             public void onResponse(Call<ParseResponseArr> call, Response<ParseResponseArr> response) {
                 //progressbar_loading.setVisibility(View.GONE);
+                rv_listpipeline.setVisibility(View.VISIBLE);
                 shimmer.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equalsIgnoreCase("00")) {
@@ -277,7 +295,26 @@ public class PutusanActivity extends AppCompatActivity implements SwipeRefreshLa
 
     @Override
     public void onRefresh() {
-        swipeRefreshLayout.setRefreshing(true);
-        PutusanActivity.this.recreate();
+        swipeRefreshLayout.setRefreshing(false);
+        shimmer.setVisibility(View.VISIBLE);
+//        progressbar_loading.setVisibility(View.VISIBLE);
+        rv_listpipeline.setVisibility(View.GONE);
+        if(kodePutusan!=null&&kodePutusan.equalsIgnoreCase("putusanDeviasi")){
+            initializeUserDeviasi();
+        }
+        else{
+            initializeUser();
+        }
+//        PutusanActivity.this.recreate();
     }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent intent=new Intent(PutusanActivity.this, CoreLayoutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+        startActivity(intent);
+    }
+
+
 }

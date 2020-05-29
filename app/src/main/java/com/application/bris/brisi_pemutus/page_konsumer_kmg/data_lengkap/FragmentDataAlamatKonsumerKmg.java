@@ -2,27 +2,33 @@ package com.application.bris.brisi_pemutus.page_konsumer_kmg.data_lengkap;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.InputType;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
-import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
+import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkapKonsumerKmg;
-import com.application.bris.brisi_pemutus.page_putusan.agunan.DialogKeyValue;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
@@ -69,6 +75,13 @@ public class FragmentDataAlamatKonsumerKmg extends Fragment implements Step {
     EditText et_kodeposktp;
     @BindView(R.id.btn_ktp)
     Button btn_ktp;
+
+    @BindView(R.id.img_fotorumah1)
+    RoundedImageView img_fotorumah1;
+    @BindView(R.id.btn_upload_fotorumah1)
+    ImageView btn_upload_fotorumah1;
+    @BindView(R.id.img_fotorumah2)
+    RoundedImageView img_fotorumah2;
 
     //DOMISILI
     @BindView(R.id.sw_domisiliktpsama)
@@ -118,31 +131,13 @@ public class FragmentDataAlamatKonsumerKmg extends Fragment implements Step {
     @BindView(R.id.btn_dom)
     Button btn_dom;
 
+    private Bitmap bitmapPhotoRumah1, bitmapPhotoRumah2, loadedPicture;
+
     private Realm realm;
 
     private DataLengkapKonsumerKmg dataLengkap;
 
-    private String val_AlamatId ="";
-    private String val_RtId ="";
-    private String val_RwId ="";
-    private String val_ProvId ="";
-    private String val_KotaId ="";
-    private String val_KecId ="";
-    private String val_KelId ="";
-    private String val_KodePosId ="";
-    private String val_StatusTptTinggal ="";
-    private String val_LamaMenetap ;
-    private String val_AlamatDom ="";
-    private String val_RtDom ="";
-    private String val_RwDom ="";
-    private String val_ProvDom ="";
-    private String val_KotaDom ="";
-    private String val_KecDom ="";
-    private String val_KelDom ="";
-    private String val_KodePosDom ="";
 
-    private int val_domAsId = 0;
-    private String btnAddressString = "";
 
     public FragmentDataAlamatKonsumerKmg(DataLengkapKonsumerKmg mdataLengkap) {
         dataLengkap = mdataLengkap;
@@ -154,24 +149,10 @@ public class FragmentDataAlamatKonsumerKmg extends Fragment implements Step {
         View view = inflater.inflate(R.layout.ao_fragment_data_alamat_konsumer_kmg, container, false);
         ButterKnife.bind(this, view);
         realm = Realm.getDefaultInstance();
-        sw_domisiliktpsama.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    ll_alamatdom.setVisibility(View.GONE);
-                    val_domAsId = 1;
-                }
-                else {
-                    ll_alamatdom.setVisibility(View.VISIBLE);
-                    val_domAsId = 0;
-                }
-            }
-        });
-
         setDynamicIcon();
         setData();
         setDynamicIconDropDown();
-        onSelectDialog();
+        disableEditTexts();
 
 
         return view;
@@ -197,26 +178,71 @@ public class FragmentDataAlamatKonsumerKmg extends Fragment implements Step {
         et_kecamatandom.setText(dataLengkap.getKecDom());
         et_kelurahandom.setText(dataLengkap.getKelDom());
         et_kodeposdom.setText(dataLengkap.getKodePosDom());
+        bitmapPhotoRumah1 = setLoadImage(img_fotorumah1, dataLengkap.getFID_PHOTO_RUMAH1());
+        bitmapPhotoRumah2 = setLoadImage(img_fotorumah2, dataLengkap.getFID_PHOTO_RUMAH2());
+
+        img_fotorumah1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(dataLengkap.getFID_PHOTO_RUMAH1()));
+                startActivity(intent);
+            }
+        });
+
+        img_fotorumah2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(dataLengkap.getFID_PHOTO_RUMAH2()));
+                startActivity(intent);
+            }
+        });
     }
 
-    private void onSelectDialog(){
+    private void disableEditTexts(){
         //STATUS DOMISILI
+
+
+        et_alamatktp.setFocusable(false);
+        et_rtktp.setFocusable(false);
+        et_rwktp.setFocusable(false);
+        et_lamadom.setFocusable(false);
+        et_alamatdom.setFocusable(false);
+        et_rtdom.setFocusable(false);
+        et_rwdom.setFocusable(false);
+
+
         et_statusdom.setFocusable(false);
-
-
-
         et_provinsiktp.setFocusable(false);
-
         et_kotaktp.setFocusable(false);
         et_kecamatanktp.setFocusable(false);
         et_kelurahanktp.setFocusable(false);
         et_kodeposktp.setFocusable(false);
-
         et_provinsidom.setFocusable(false);
         et_kotadom.setFocusable(false);
         et_kecamatandom.setFocusable(false);
         et_kelurahandom.setFocusable(false);
         et_kodeposdom.setFocusable(false);
+    }
+
+
+    public Bitmap setLoadImage(final ImageView iv, int idFoto){
+        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
+        Glide
+                .with(getContext())
+                .asBitmap()
+                .load(url_photo)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        iv.setImageBitmap(resource);
+                        loadedPicture = resource;
+                    }
+                });
+        return loadedPicture;
     }
 
 

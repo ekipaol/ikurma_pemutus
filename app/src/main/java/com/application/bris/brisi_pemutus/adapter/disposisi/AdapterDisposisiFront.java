@@ -1,58 +1,21 @@
 package com.application.bris.brisi_pemutus.adapter.disposisi;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.api.config.UriApi;
-import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.request.dashboard.RequestDashboard;
-import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
-import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.model.agunan_deposito.AgunanDeposito;
-import com.application.bris.brisi_pemutus.model.dashboard.DashboardCred;
 import com.application.bris.brisi_pemutus.model.disposisi.Disposisi;
-import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
-import com.application.bris.brisi_pemutus.model.pipeline.pipeline;
-import com.application.bris.brisi_pemutus.page_disposisi.view.DaftarDisposisiActivity;
 import com.application.bris.brisi_pemutus.page_disposisi.view.DetailDisposisiActivity;
-import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_deposito.AgunanDepositoActivity;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_kendaraan.AgunanKendaraanActivity;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_kios.AgunanKiosActivity;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_tanah_kosong.ActivityAgunanTanahKosong;
 import com.application.bris.brisi_pemutus.util.AppUtil;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.Serializable;
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class AdapterDisposisiFront extends RecyclerView.Adapter<AdapterDisposisiFront.PipelineViewHolder> {

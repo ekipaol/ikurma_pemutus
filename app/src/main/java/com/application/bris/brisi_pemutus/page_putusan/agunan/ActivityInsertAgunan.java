@@ -2,7 +2,7 @@ package com.application.bris.brisi_pemutus.page_putusan.agunan;
 
 
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,27 +12,16 @@ import android.widget.RelativeLayout;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
-import com.application.bris.brisi_pemutus.api.model.request.ParseResponseListFoto;
-import com.application.bris.brisi_pemutus.api.model.request.agunan.ReqAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_global_idapl_agunan_cif.AgunanGlobal;
 import com.application.bris.brisi_pemutus.api.model.request.data_lengkap.ReqDataLengkap;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
-import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
-import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
-import com.application.bris.brisi_pemutus.page_putusan.adapters.SampleFragmentStepAdapter;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.StepAdapterAgunan;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

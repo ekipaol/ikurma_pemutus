@@ -1,12 +1,11 @@
 package com.application.bris.brisi_pemutus.page_putusan.lkn;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.lkn.ReqLkn;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
@@ -28,9 +26,7 @@ import com.application.bris.brisi_pemutus.model.lkn.DataRekomendasiLkn;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.LknStepAdapter;
-import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
 import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
-import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
 import com.stepstone.stepper.StepperLayout;

@@ -1,7 +1,7 @@
 
 <!-- TODO: Update blank fragment layout -->
 
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/observablescrollview"
     android:layout_width="match_parent"
@@ -16,7 +16,7 @@
 
 
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
@@ -260,9 +260,9 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
@@ -529,7 +529,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
 
@@ -540,7 +540,7 @@
     </LinearLayout>
 
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>
 
 
 

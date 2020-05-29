@@ -26,7 +26,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".page_ambil_alih.AmbilAlihActivity"></activity>
+        <activity android:name=".page_konsumer_purna.page_konsumer_purna.kelengkapan_dokumen.KelengkapanDokumenPrapurnaActivity"></activity>
+        <activity android:name=".page_konsumer_purna.page_konsumer_purna.kelengkapan_dokumen.KelengkapanDokumenPurnaActivity" />
+        <activity android:name=".page_konsumer_purna.page_konsumer_purna.data_finansial.DataFinansialPurnaActivity" />
+        <activity android:name=".page_konsumer_purna.page_konsumer_purna.data_lengkap.DataLengkapActivityPurna" />
+        <activity android:name=".page_konsumer_kmg.front_menu.PutusanFrontMenuKmg" />
+        <activity android:name=".page_ao_silang.AoSilangActivity" />
+        <activity android:name=".page_konsumer_kmg.kelengkapan_dokumen.KelengkapanDokumenKonsumerKmgActivity" />
+        <activity android:name=".page_konsumer_kmg.scoring.ScoringKonsumerKmgActivity" />
+        <activity android:name=".page_konsumer_kmg.data_finansial.DataFinansialKonsumerKmgActivity" />
+        <activity android:name=".page_konsumer_kmg.data_lengkap.DataLengkapKonsumerKmgActivity" />
+        <activity android:name=".page_ambil_alih.AmbilAlihActivity" />
         <activity android:name=".page_performance.MenuPerformanceActivity" />
         <activity android:name=".page_performance.PerformanceAoActivity" />
         <activity android:name=".page_performance.PerformanceActivity" />
@@ -86,7 +96,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_radar" />
+            android:resource="@drawable/ic_kurma_notif_large" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -125,6 +135,16 @@
         <!-- <action android:name="com.google.firebase.MESSAGING_EVENT" /> -->
         <!-- </intent-filter> -->
         <!-- </service> -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.application.bris.brisi_pemutus.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <service android:name=".service.NotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

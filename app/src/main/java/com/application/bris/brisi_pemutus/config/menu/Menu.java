@@ -25,22 +25,27 @@ public class Menu {
 //        menu.add(new ListViewMenu(R.drawable.ic_disposisi_3, "Disposisi"));
         menu.add(new ListViewMenu(R.drawable.ic_riwayat, "Riwayat"));
 
-        //seluruh pemutus kecuali UH bisa mengakses menu manajemen user
-        if(!appPreferences.getFidRole().equalsIgnoreCase("71")){
+        //hanya pinca dan pincapem yang bisa akses menu manajemen user
+        if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
             menu.add(new ListViewMenu(R.drawable.ic_manajemen_user, context.getString(R.string.menu_disetujui)));
         }
 
 
 
-//        if (!appPreferences.getFidRole().equalsIgnoreCase("71")) {
+        //halaman performance hanya bisa diakses pinca pincapem dan mmm dan UH
+        if (appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")||appPreferences.getFidRole().equalsIgnoreCase("72")||appPreferences.getFidRole().equalsIgnoreCase("71")) {
             menu.add(new ListViewMenu(R.drawable.ic_performance, "Performance"));
-//  }
+  }
 
 
-        //seluruh pemutus kecuali UH bisa mengakses menu ambil alih
-        if(!appPreferences.getFidRole().equalsIgnoreCase("71")){
-//            menu.add(new ListViewMenu(R.drawable.ic_ambil_alih_2, "Ambil Alih"));
+        //seluruh pemutus kecuali UH dan MM bisa mengakses menu ambil alih
+        if(!appPreferences.getFidRole().equalsIgnoreCase("71")&&!appPreferences.getFidRole().equalsIgnoreCase("77")){
+            menu.add(new ListViewMenu(R.drawable.ic_ambil_alih_2, "Ambil Alih Putusan"));
         }
+
+        //halaman ao silang hanya bisa diakses pinca pincapem
+//
+
 
 
         //ada tombol logout jika bukan ambil alih

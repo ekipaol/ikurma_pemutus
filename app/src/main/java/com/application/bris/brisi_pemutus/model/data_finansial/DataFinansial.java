@@ -34,13 +34,22 @@ public class DataFinansial {
     private String nETWORTH;
     @SerializedName("PLAFOND_YANG_DIUSULKAN")
     @Expose
-    private String pLAFONDYANGDIUSULKAN;
+    private Long pLAFONDYANGDIUSULKAN;
+    @SerializedName("PLAFOND_KONSUMTIF")
+    @Expose
+    private Long PLAFOND_KONSUMTIF;
+    @SerializedName("PLAFOND_TAKEOVER")
+    @Expose
+    private Long PLAFONDTAKEOVER;
     @SerializedName("PERMOHONAN_KREDIT")
     @Expose
-    private String pERMOHONANKREDIT;
+    private Long pERMOHONANKREDIT;
     @SerializedName("ANGSURAN")
     @Expose
-    private String aNGSURAN;
+    private Long aNGSURAN;
+    @SerializedName("ANGSURAN_KONSUMTIF")
+    @Expose
+    private Long ANGSURAN_KONSUMTIF;
     @SerializedName("DEVIASI_DIR")
     @Expose
     private String dEVIASIDIR;
@@ -64,13 +73,13 @@ public class DataFinansial {
     private String bIAYATOTAL;
     @SerializedName("MAKSIMUM_PLAFOND")
     @Expose
-    private String mAKSIMUMPLAFOND;
+    private Long mAKSIMUMPLAFOND;
     @SerializedName("MAKSIMUM_PLAFOND_COUNTER")
     @Expose
     private String mAKSIMUMPLAFONDCOUNTER;
     @SerializedName("PLAFOND_INDUK")
     @Expose
-    private String pLAFONDINDUK;
+    private Long pLAFONDINDUK;
     @SerializedName("POTONGAN_PER_BULAN")
     @Expose
     private String pOTONGANPERBULAN;
@@ -88,10 +97,13 @@ public class DataFinansial {
     private String mAKSTANGGAL;
     @SerializedName("PENGHASILAN_TETAP_LAIN")
     @Expose
-    private String pENGHASILANTETAPLAIN;
+    private Long pENGHASILANTETAPLAIN;
     @SerializedName("JANGKA_WAKTU")
     @Expose
     private String jANGKAWAKTU;
+    @SerializedName("JANGKA_WAKTU_TO")
+    @Expose
+    private String JANGKA_WAKTU_TO;
     @SerializedName("HARGA_PER_PAKET")
     @Expose
     private String hARGAPERPAKET;
@@ -137,6 +149,9 @@ public class DataFinansial {
     @SerializedName("MAX_JW_1")
     @Expose
     private String mAXJW1;
+    @SerializedName("JANGKA_WAKTU_MAX")
+    @Expose
+    private String JANGKA_WAKTU_MAX;
     @SerializedName("SISA_PLAFOND_INSTANSI")
     @Expose
     private String sISAPLAFONDINSTANSI;
@@ -158,6 +173,158 @@ public class DataFinansial {
     @SerializedName("MARGIN_RATE_2")
     @Expose
     private String mARGINRATE2;
+
+    @SerializedName("SUKU_MARGIN")
+    @Expose
+    private String SUKU_MARGIN;
+
+    @SerializedName("SUKU_MARGIN_KONSUMTIF")
+    @Expose
+    private String SUKU_MARGIN_KONSUMTIF;
+
+    @SerializedName("qanun")
+    @Expose
+    private String qanun;
+
+    @SerializedName("FIX_RATE")
+    @Expose
+    private String FIX_RATE;
+
+    @SerializedName("FEE")
+    @Expose
+    private String FEE;
+
+    @SerializedName("RATE1")
+    @Expose
+    private String RATE1;
+
+    @SerializedName("RATE2")
+    @Expose
+    private String RATE2;
+
+    @SerializedName("BIAYA_FEE")
+    @Expose
+    private String BIAYA_FEE;
+
+    @SerializedName("ijk")
+    @Expose
+    private String ijk;
+
+    @SerializedName("ASURANSI_PENJAMINAN")
+    @Expose
+    private String ASURANSI_PENJAMINAN;
+
+    public String getASURANSI_PENJAMINAN() {
+        return ASURANSI_PENJAMINAN;
+    }
+
+    public void setASURANSI_PENJAMINAN(String ASURANSI_PENJAMINAN) {
+        this.ASURANSI_PENJAMINAN = ASURANSI_PENJAMINAN;
+    }
+
+    public String getRATE1() {
+        return RATE1;
+    }
+
+    public void setRATE1(String RATE1) {
+        this.RATE1 = RATE1;
+    }
+
+    public String getRATE2() {
+        return RATE2;
+    }
+
+    public void setRATE2(String RATE2) {
+        this.RATE2 = RATE2;
+    }
+
+    public String getBIAYA_FEE() {
+        return BIAYA_FEE;
+    }
+
+    public void setBIAYA_FEE(String BIAYA_FEE) {
+        this.BIAYA_FEE = BIAYA_FEE;
+    }
+
+    public String getIjk() {
+        return ijk;
+    }
+
+    public void setIjk(String ijk) {
+        this.ijk = ijk;
+    }
+
+    public String getFEE() {
+        return FEE;
+    }
+
+    public void setFEE(String FEE) {
+        this.FEE = FEE;
+    }
+
+    public String getJANGKA_WAKTU_MAX() {
+        return JANGKA_WAKTU_MAX;
+    }
+
+    public void setJANGKA_WAKTU_MAX(String JANGKA_WAKTU_MAX) {
+        this.JANGKA_WAKTU_MAX = JANGKA_WAKTU_MAX;
+    }
+
+    public String getFIX_RATE() {
+        return FIX_RATE;
+    }
+
+    public void setFIX_RATE(String FIX_RATE) {
+        this.FIX_RATE = FIX_RATE;
+    }
+
+    public String getSUKU_MARGIN() {
+        return SUKU_MARGIN;
+    }
+
+    public void setSUKU_MARGIN(String SUKU_MARGIN) {
+        this.SUKU_MARGIN = SUKU_MARGIN;
+    }
+
+    public String getSUKU_MARGIN_KONSUMTIF() {
+        return SUKU_MARGIN_KONSUMTIF;
+    }
+
+    public void setSUKU_MARGIN_KONSUMTIF(String SUKU_MARGIN_KONSUMTIF) {
+        this.SUKU_MARGIN_KONSUMTIF = SUKU_MARGIN_KONSUMTIF;
+    }
+
+    public Long getPLAFONDTAKEOVER() {
+        return PLAFONDTAKEOVER;
+    }
+
+    public void setPLAFONDTAKEOVER(Long PLAFONDTAKEOVER) {
+        this.PLAFONDTAKEOVER = PLAFONDTAKEOVER;
+    }
+
+    public Long getPLAFOND_KONSUMTIF() {
+        return PLAFOND_KONSUMTIF;
+    }
+
+    public void setPLAFOND_KONSUMTIF(Long PLAFOND_KONSUMTIF) {
+        this.PLAFOND_KONSUMTIF = PLAFOND_KONSUMTIF;
+    }
+
+    public String getJANGKA_WAKTU_TO() {
+        return JANGKA_WAKTU_TO;
+    }
+
+    public void setJANGKA_WAKTU_TO(String JANGKA_WAKTU_TO) {
+        this.JANGKA_WAKTU_TO = JANGKA_WAKTU_TO;
+    }
+
+    public String getQanun() {
+        return qanun;
+    }
+
+    public void setQanun(String qanun) {
+        this.qanun = qanun;
+    }
 
     public String getMINPLAFONBERAGUNAN() {
         return mINPLAFONBERAGUNAN;
@@ -351,27 +518,27 @@ public class DataFinansial {
         this.nETWORTH = nETWORTH;
     }
 
-    public String getPLAFONDYANGDIUSULKAN() {
+    public Long getPLAFONDYANGDIUSULKAN() {
         return pLAFONDYANGDIUSULKAN;
     }
 
-    public void setPLAFONDYANGDIUSULKAN(String pLAFONDYANGDIUSULKAN) {
+    public void setPLAFONDYANGDIUSULKAN(Long pLAFONDYANGDIUSULKAN) {
         this.pLAFONDYANGDIUSULKAN = pLAFONDYANGDIUSULKAN;
     }
 
-    public String getPERMOHONANKREDIT() {
+    public Long getPERMOHONANKREDIT() {
         return pERMOHONANKREDIT;
     }
 
-    public void setPERMOHONANKREDIT(String pERMOHONANKREDIT) {
+    public void setPERMOHONANKREDIT(Long pERMOHONANKREDIT) {
         this.pERMOHONANKREDIT = pERMOHONANKREDIT;
     }
 
-    public String getANGSURAN() {
+    public Long getANGSURAN() {
         return aNGSURAN;
     }
 
-    public void setANGSURAN(String aNGSURAN) {
+    public void setANGSURAN(Long aNGSURAN) {
         this.aNGSURAN = aNGSURAN;
     }
 
@@ -431,11 +598,11 @@ public class DataFinansial {
         this.bIAYATOTAL = bIAYATOTAL;
     }
 
-    public String getMAKSIMUMPLAFOND() {
+    public Long getMAKSIMUMPLAFOND() {
         return mAKSIMUMPLAFOND;
     }
 
-    public void setMAKSIMUMPLAFOND(String mAKSIMUMPLAFOND) {
+    public void setMAKSIMUMPLAFOND(Long mAKSIMUMPLAFOND) {
         this.mAKSIMUMPLAFOND = mAKSIMUMPLAFOND;
     }
 
@@ -447,11 +614,11 @@ public class DataFinansial {
         this.mAKSIMUMPLAFONDCOUNTER = mAKSIMUMPLAFONDCOUNTER;
     }
 
-    public String getPLAFONDINDUK() {
+    public Long getPLAFONDINDUK() {
         return pLAFONDINDUK;
     }
 
-    public void setPLAFONDINDUK(String pLAFONDINDUK) {
+    public void setPLAFONDINDUK(Long pLAFONDINDUK) {
         this.pLAFONDINDUK = pLAFONDINDUK;
     }
 
@@ -495,11 +662,11 @@ public class DataFinansial {
         this.mAKSTANGGAL = mAKSTANGGAL;
     }
 
-    public String getPENGHASILANTETAPLAIN() {
+    public Long getPENGHASILANTETAPLAIN() {
         return pENGHASILANTETAPLAIN;
     }
 
-    public void setPENGHASILANTETAPLAIN(String pENGHASILANTETAPLAIN) {
+    public void setPENGHASILANTETAPLAIN(Long pENGHASILANTETAPLAIN) {
         this.pENGHASILANTETAPLAIN = pENGHASILANTETAPLAIN;
     }
 
@@ -565,5 +732,13 @@ public class DataFinansial {
 
     public void setUSIAMPP(String uSIAMPP) {
         this.uSIAMPP = uSIAMPP;
+    }
+
+    public Long getANGSURAN_KONSUMTIF() {
+        return ANGSURAN_KONSUMTIF;
+    }
+
+    public void setANGSURAN_KONSUMTIF(Long ANGSURAN_KONSUMTIF) {
+        this.ANGSURAN_KONSUMTIF = ANGSURAN_KONSUMTIF;
     }
 }

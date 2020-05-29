@@ -1,20 +1,17 @@
 package com.application.bris.brisi_pemutus.page_putusan.history;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.page_putusan.adapters.ViewPagerAdapter;
 
 
 public class FragmentHistory extends Fragment {

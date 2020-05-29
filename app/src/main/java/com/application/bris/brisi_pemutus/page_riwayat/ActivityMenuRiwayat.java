@@ -2,16 +2,12 @@ package com.application.bris.brisi_pemutus.page_riwayat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.page_aom.view.PutusanActivity;
-import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 
@@ -98,7 +94,7 @@ public class ActivityMenuRiwayat extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         Intent intent=new Intent(ActivityMenuRiwayat.this, CoreLayoutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
         startActivity(intent);

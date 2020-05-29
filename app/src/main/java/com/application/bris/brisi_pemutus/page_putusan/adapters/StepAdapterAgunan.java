@@ -2,14 +2,12 @@ package com.application.bris.brisi_pemutus.page_putusan.adapters;
 
 
 import android.content.Context;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
-import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.page_putusan.agunan.FragmentAgunan2Surat;
 import com.application.bris.brisi_pemutus.page_putusan.agunan.FragmentAgunan1Identifikasi;
 import com.application.bris.brisi_pemutus.page_putusan.agunan.FragmentAgunan3Uraian;
@@ -20,8 +18,6 @@ import com.application.bris.brisi_pemutus.page_putusan.agunan.FragmentAgunan7Lai
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.viewmodel.StepViewModel;
-
-import java.util.List;
 
 public class StepAdapterAgunan extends AbstractFragmentStepAdapter{
     private String title;

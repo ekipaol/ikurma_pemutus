@@ -1,19 +1,16 @@
 package com.application.bris.brisi_pemutus.page_disposisi.view;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,25 +19,16 @@ import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.request.data_cabang.RequestDataCabang;
 import com.application.bris.brisi_pemutus.api.model.request.req_kode_skk.ReqKodeSkk;
 import com.application.bris.brisi_pemutus.api.model.request.simpan_disposisi.ReqSimpanDisposisi;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.aom_disposisi.AomDisposisi;
-import com.application.bris.brisi_pemutus.model.data_cabang.Cabang;
-import com.application.bris.brisi_pemutus.model.data_cabang.CabangModel;
 import com.application.bris.brisi_pemutus.model.disposisi.Disposisi;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.TambahUserActivity;
-import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppBarStateChangedListener;
 import com.application.bris.brisi_pemutus.util.AppUtil;
-import com.application.bris.brisi_pemutus.util.NumberTextWatcherCanNolForThousand;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

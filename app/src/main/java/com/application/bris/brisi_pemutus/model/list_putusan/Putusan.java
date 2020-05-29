@@ -44,6 +44,26 @@ public class Putusan implements Serializable {
     private String nama_produk;
     @SerializedName("KODE_PRODUK")
     private String KODE_PRODUK;
+    @SerializedName("GIMMICK_ID")
+    private String KODE_GIMMICK;
+    @SerializedName("NAMA_GIMMICK")
+    private String NAMA_GIMMICK;
+
+    public String getNAMA_GIMMICK() {
+        return NAMA_GIMMICK;
+    }
+
+    public void setNAMA_GIMMICK(String NAMA_GIMMICK) {
+        this.NAMA_GIMMICK = NAMA_GIMMICK;
+    }
+
+    public String getKODE_GIMMICK() {
+        return KODE_GIMMICK;
+    }
+
+    public void setKODE_GIMMICK(String KODE_GIMMICK) {
+        this.KODE_GIMMICK = KODE_GIMMICK;
+    }
 
     public String getKODE_PRODUK() {
         return KODE_PRODUK;

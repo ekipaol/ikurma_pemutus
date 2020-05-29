@@ -1,22 +1,21 @@
 package com.application.bris.brisi_pemutus.page_daftar_user.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.ActivityAgunanRetry;
-import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 
 public class MenuDaftarUser extends AppCompatActivity {
-ImageView daftarUser,tambahUser,aktifinaktif,maintenance,reaktif;
-CardView cv_tambah_user;
+ImageView daftarUser,tambahUser,aktifinaktif,maintenance,reaktif,aoSilang;
+CardView cv_tambah_user,cv_ao_silang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +26,46 @@ CardView cv_tambah_user;
         maintenance=findViewById(R.id.btMaintenance);
         aktifinaktif=findViewById(R.id.btActiveInactive);
         reaktif=findViewById(R.id.btPassword);
+        aoSilang=findViewById(R.id.btAoSilang);
         cv_tambah_user=findViewById(R.id.cv_tambah_user);
+        cv_ao_silang=findViewById(R.id.cv_ao_silang);
+
+
         AppUtil.toolbarRegular(this, "Menu User");
 
         AppPreferences appPreferences=new AppPreferences(this);
 
+        //kalok dia mencet back, di pojok kiri atas, halaman home gak loading lagi, jadi gak berat broooo
+        ImageView backToolbar=findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent=new Intent(MenuDaftarUser.this, CoreLayoutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                startActivity(intent);
+
+
+            }
+        });
 
 
 
-        //UNTUK HIDE TAMBAH USER
+
+        //UNTUK HIDE TAMBAH USER dan ao silang
         cv_tambah_user.setVisibility(View.GONE);
+        cv_ao_silang.setVisibility(View.GONE);
 
         //sementara fitur tambah dinonaktifkan sampai fix kode ao dan kode pemutus
         if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
             cv_tambah_user.setVisibility(View.VISIBLE);
         }
+
+        //AO SILANG HANYA UNTUK PINCA DAN PINCAPEM
+//        if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
+//            cv_ao_silang.setVisibility(View.VISIBLE);
+//        }
 
         daftarUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,16 +74,6 @@ CardView cv_tambah_user;
                 startActivity(intent);
             }
         });
-
-        //delete this later
-//        daftarUser.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                Intent intent=new Intent(MenuDaftarUser.this, ActivityAgunanRetry.class);
-//                startActivity(intent);
-//                return false;
-//            }
-//        });
 
         tambahUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,5 +104,23 @@ CardView cv_tambah_user;
                 startActivity(intent);
             }
         });
+        aoSilang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent=new Intent(MenuDaftarUser.this,ReactivePasswordActivity.class);
+//                startActivity(intent);
+                Toast.makeText(MenuDaftarUser.this, "Dalam pengembangan", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent intent=new Intent(MenuDaftarUser.this, CoreLayoutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+        startActivity(intent);
     }
 }

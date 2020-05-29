@@ -18,7 +18,7 @@
 package com.application.bris.brisi_pemutus.util.magiccrypt;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 
 import com.application.bris.brisi_pemutus.util.Constants;

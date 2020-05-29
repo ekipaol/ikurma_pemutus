@@ -1,8 +1,8 @@
 package com.application.bris.brisi_pemutus.page_putusan;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.core.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

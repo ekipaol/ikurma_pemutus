@@ -2,11 +2,10 @@ package com.application.bris.brisi_pemutus.page_daftar_user.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.adapter.pipeline.PipelineHomeAdapater;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.dashboard.RequestDashboard;
@@ -28,19 +26,15 @@ import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_ao.Ao;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
-import com.application.bris.brisi_pemutus.model.user.User;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.DetailUserActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.zip.Inflater;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -841,14 +835,17 @@ public class AdapterStatusUser extends RecyclerView.Adapter<AdapterStatusUser.St
                         }.getType();
 
                         dialogLoading.dismissWithAnimation();
-                        if (!listDataPutusanString.equalsIgnoreCase("[]")) {
-                            SweetAlertDialog dialogError = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
-                            dialogError.setTitleText("Gagal");
-                            dialogError.setContentText(role + " masih memiliki pencairan yang belum diselesaikan, harap selesaikan pencairan terlebih dahulu sebelum menonaktifkan " + role).show();
-//                            ((Activity)context).recreate();
-                        } else {
+
+                        //comment dlu cek pencairan, karena kata mas wildan dicabut dlu
+                        //uncomment semuanya jika validasi diperlukan lagi
+//                        if (!listDataPutusanString.equalsIgnoreCase("[]")) {
+//                            SweetAlertDialog dialogError = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
+//                            dialogError.setTitleText("Gagal");
+//                            dialogError.setContentText(role + " masih memiliki pencairan yang belum diselesaikan, harap selesaikan pencairan terlebih dahulu sebelum menonaktifkan " + role).show();
+////                            ((Activity)context).recreate();
+//                        } else {
                             deaktivasiStatusAom(Integer.parseInt(uid), role, nama, kantor);
-                        }
+//                        }
 
 
                     } else {

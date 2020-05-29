@@ -1,7 +1,7 @@
 package com.application.bris.brisi_pemutus.util;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * Created by akbaranjas on 26/01/17.

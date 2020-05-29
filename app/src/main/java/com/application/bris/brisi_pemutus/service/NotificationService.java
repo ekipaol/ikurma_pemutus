@@ -1,6 +1,7 @@
 package com.application.bris.brisi_pemutus.service;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -8,18 +9,14 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.page_aom.view.PutusanActivity;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.MenuDaftarUser;
 import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
-import com.application.bris.brisi_pemutus.page_putusan.menu.MenuDaftarPutusanActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -46,16 +43,14 @@ public class NotificationService extends FirebaseMessagingService {
              notificationIntent = new Intent(NotificationService.this,   LoginActivity.class);
         }
 
-
-
         //working pending intent method
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         final PendingIntent pendingIntent2 = PendingIntent.getActivity(this, 0, notificationIntent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Notification notification = new NotificationCompat.Builder(this, "1")
-                    .setSmallIcon(R.drawable.ic_radar)  //custom small icon
+            Notification notification = new NotificationCompat.Builder(this, "kurma2")
+                    .setSmallIcon(R.drawable.ic_kurma_notif_large)  //custom small icon
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("body")))
                     .setContentTitle(remoteMessage.getData().get("title"))
                     .setContentText(remoteMessage.getData().get("body"))
@@ -63,6 +58,7 @@ public class NotificationService extends FirebaseMessagingService {
                     .setDefaults(Notification.DEFAULT_VIBRATE)
                     .build();
             NotificationManagerCompat manager = NotificationManagerCompat.from(getApplicationContext());
+//            createNotificationChannel();
             manager.notify(123, notification);
         } else {
             Log.d( "firebasemessage","Message Notification Body: " + remoteMessage.getNotification().getBody());
@@ -71,7 +67,7 @@ public class NotificationService extends FirebaseMessagingService {
 
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "1")
-                    .setSmallIcon(R.drawable.ic_radar)  //custom small icon
+                    .setSmallIcon(R.drawable.ic_kurma_notif_large)  //custom small icon
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("body")))
                     .setContentTitle(remoteMessage.getData().get("title")) //title
                     .setContentText(remoteMessage.getData().get("body")) //content
@@ -89,6 +85,23 @@ public class NotificationService extends FirebaseMessagingService {
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
             notificationManager.notify(notificationId /* ID of notification */, notificationBuilder.build());
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "i-kurma notification";
+            String description = "notifikasi i-kurma pemutus";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("kurma2", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            Log.d("notificationChannel","ithas been made");
         }
     }
 

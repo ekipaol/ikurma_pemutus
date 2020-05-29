@@ -5,14 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import android.widget.TextView;
@@ -29,16 +28,15 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.request.agunan.ReqAgunan;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_terikat.ReqAgunanTerikat;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
-import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.agunan_terikat.AgunanTerikat;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.scoring.ScoringKonsumerKmgActivity;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.AgunanTerikatAdapater;
-import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
 import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -101,14 +99,22 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
         bt_lanjut_agunan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AgunanTerikatActivity.this, ScoringActivity.class);
-                intent.putExtra("cif", Integer.parseInt(superData.getCif()));
-                intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
-                intent.putExtra("superData",superData);
+                if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                    Intent intent=new Intent(AgunanTerikatActivity.this, ScoringKonsumerKmgActivity.class);
+                    intent.putExtra("cif", Integer.parseInt(superData.getCif()));
+                    intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
+                    intent.putExtra("superData",superData);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent=new Intent(AgunanTerikatActivity.this, ScoringActivity.class);
+                    intent.putExtra("cif", Integer.parseInt(superData.getCif()));
+                    intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
+                    intent.putExtra("superData",superData);
+                    startActivity(intent);
+                }
 
 
-                //when back make this thing go to putusan frontmenu
-                startActivity(intent);
             }
         });
 
@@ -170,9 +176,17 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
         backToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AgunanTerikatActivity.this, PutusanFrontMenu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                    Intent intent = new Intent(AgunanTerikatActivity.this, PutusanFrontMenuKmg.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(AgunanTerikatActivity.this, PutusanFrontMenu.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+
             }
         });
         swipeRefreshLayout.setOnRefreshListener(this);

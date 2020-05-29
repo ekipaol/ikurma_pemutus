@@ -14,6 +14,9 @@ public class ParseResponseDataInstansi {
     @SerializedName("data_instansi")
     private JsonObject dataInstansi;
 
+    @SerializedName("data_angsuran")
+    private JsonObject dataAngsuran;
+
     public JsonObject getDataInstansi() {
         return dataInstansi;
     }
@@ -28,5 +31,9 @@ public class ParseResponseDataInstansi {
 
     public JsonObject getData() {
         return data;
+    }
+
+    public JsonObject getDataAngsuran() {
+        return dataAngsuran;
     }
 }

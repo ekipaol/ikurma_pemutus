@@ -1,12 +1,11 @@
 package com.application.bris.brisi_pemutus.page_putusan.adapters;
 
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,6 @@ import android.widget.Toast;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.history_catatan.HistoryCatatan;
-import com.application.bris.brisi_pemutus.model.history_fasilitas.HistoryFasilitas;
-import com.application.bris.brisi_pemutus.page_daftar_user.view.TambahUserActivity;
-import com.application.bris.brisi_pemutus.util.AppUtil;
 
 import java.util.List;
 

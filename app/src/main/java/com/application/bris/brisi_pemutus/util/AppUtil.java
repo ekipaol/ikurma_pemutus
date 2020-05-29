@@ -2,6 +2,8 @@ package com.application.bris.brisi_pemutus.util;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,23 +12,33 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import com.application.bris.brisi_pemutus.database.AppPreferences;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.util.magiccrypt.MagicCrypt;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +54,7 @@ import java.util.HashMap;
 
 import me.toptas.fancyshowcase.FancyShowCaseView;
 import me.toptas.fancyshowcase.FocusShape;
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 /**
@@ -51,6 +64,7 @@ import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 public class AppUtil {
     public static MagicCrypt magicCrypt = new MagicCrypt();
     private Snackbar snackbar;
+    private static AlertDialog alertDialog = null;
 
     public static void showToastShort(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -73,6 +87,23 @@ public class AppUtil {
                 ((AppCompatActivity) context).onBackPressed();
             }
         });
+    }
+
+    //method super duper canggih, the power of rekursiv oh yes, bisa ngambil semua children dan mengeditnya tanpa perlu di deklarasi satu satu
+    public static void disableEditTexts(View viewInduk){
+
+        if(viewInduk instanceof ViewGroup) {
+            ViewGroup vg = (ViewGroup) viewInduk;
+            for (int i = 0, count = vg.getChildCount(); i < count; ++i) {
+                View view = vg.getChildAt(i);
+                disableEditTexts(view);
+                if (view instanceof ExtendedEditText) {
+                    ((ExtendedEditText) view).setFocusable(false);
+
+                }
+            }
+        }
+
     }
 
     public static String parseRupiahNoSymbol(String amount){
@@ -144,6 +175,34 @@ public class AppUtil {
             initials+=initial;
         }
         return(initials.toUpperCase());
+    }
+
+    public static void loadPhotoWithCache(Context context, ImageView imageView,String idFoto){
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.banner_placeholder)
+                .error(R.drawable.banner_placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH);
+
+        Glide.with(context)
+                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+idFoto)
+                .apply(options)
+                .into(imageView);
+    }
+
+    public static void loadPhotoProfilWithCache(Context context, ImageView imageView,String idFoto){
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.banner_placeholder)
+                .error(R.drawable.banner_placeholder)
+                .priority(Priority.HIGH);
+
+        Glide.with(context)
+                .load(UriApi.Baseurl.URL + UriApi.fotoProfil.urlFotoProfil+idFoto)
+                .apply(options)
+                .into(imageView);
     }
 
     public static HashMap<String, String> getDeviceInfo(Context context) {
@@ -261,11 +320,11 @@ public class AppUtil {
         View view = snackbar.getView();
 
         //lakukan ini jika in ingin menambah panjang snackbar
-//        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+//        TextView textView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
 //        textView.setMaxLines(5);  // show multiple line
 //        view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorWarning));
 
-        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_warning_outline_white), null, null, null);
         }
@@ -280,16 +339,44 @@ public class AppUtil {
         view.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.colorWhite));
 
         //lakukan ini jika in ingin menambah panjang snackbar
-//        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+//        TextView textView = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
 //        textView.setMaxLines(5);  // show multiple line
 //        view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorWarning));
 
-        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_correct), null, null, null);
         }
         txtv.setCompoundDrawablePadding(30);
         txtv.setTextColor(ContextCompat.getColor(mcontex, R.color.green_teal));
+        txtv.setGravity(Gravity.CENTER_HORIZONTAL);
+    }
+
+    public static void notifinfo(Context mcontex, View root, String snackTitle) {
+        Snackbar snackbar = Snackbar.make(root, snackTitle, Snackbar.LENGTH_SHORT);
+        snackbar.show();
+        View view = snackbar.getView();
+        view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorWhite));
+        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_info_outline_blue), null, null, null);
+        }
+        txtv.setCompoundDrawablePadding(30);
+        txtv.setTextColor(ContextCompat.getColor(mcontex, R.color.colorInfo));
+        txtv.setGravity(Gravity.CENTER_HORIZONTAL);
+    }
+
+    public static void notifinfoLong(Context mcontex, View root, String snackTitle) {
+        Snackbar snackbar = Snackbar.make(root, snackTitle, Snackbar.LENGTH_LONG);
+        snackbar.show();
+        View view = snackbar.getView();
+        view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorWhite));
+        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_info_outline_blue), null, null, null);
+        }
+        txtv.setCompoundDrawablePadding(30);
+        txtv.setTextColor(ContextCompat.getColor(mcontex, R.color.colorInfo));
         txtv.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
@@ -347,7 +434,7 @@ public class AppUtil {
         snackbar.show();
         View view = snackbar.getView();
         view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorWhite));
-        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_error_outline_secondary_24dp), null, null, null);
         }
@@ -459,6 +546,35 @@ public class AppUtil {
         //END OF TUTORIAL OVERLAYYY
     }
 
+    public static void DialogUpdateInformation(Context context, String header, String message){
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        AppPreferences appPreferences=new AppPreferences(context);
+        View view = layoutInflater.inflate(R.layout.custom_dialog_update_information, null);
+        Button btn_confirm = (Button) view.findViewById(R.id.btn_send);
+        TextView tv_header = (TextView) view.findViewById(R.id.tv_header);
+        TextView tv_message = (TextView) view.findViewById(R.id.tv_message);
+        tv_header.setText(header);
+        tv_message.setText(message);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setView(view);
+        final AlertDialog dialog = alert.create();
+
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                appPreferences.setUpdateNotification("false");
+            }
+        });
+        animateDialog(dialog);
+        dialog.show();
+    }
+
+    public static void animateDialog(Dialog dialog) {
+        dialog.getWindow().getAttributes().windowAnimations = R.style.AppTheme_Slide;
+    }
+
 
 
 //    public static String encrypt(String data){
@@ -476,7 +592,7 @@ public class AppUtil {
 //        snackbar.show();
 //        View view = snackbar.getView();
 //        view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorError));
-//        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+//        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 //            txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_info_outline_white_24dp), null, null, null);
 //        }
@@ -490,7 +606,7 @@ public class AppUtil {
 //        snackbar.show();
 //        View view = snackbar.getView();
 //        view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorWarning));
-//        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+//        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 //            txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_warning_white_24dp), null, null, null);
 //        }
@@ -505,7 +621,7 @@ public class AppUtil {
 //        snackbar.show();
 //        View view = snackbar.getView();
 //        view.setBackgroundColor(ContextCompat.getColor(mcontex, R.color.colorSuccess));
-//        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+//        TextView txtv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 //            txtv.setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mcontex, R.drawable.ic_check_white_24dp), null, null, null);
 //        }

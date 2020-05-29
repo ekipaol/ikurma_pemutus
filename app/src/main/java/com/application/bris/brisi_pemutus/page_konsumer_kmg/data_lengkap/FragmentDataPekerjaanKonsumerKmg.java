@@ -2,32 +2,36 @@ package com.application.bris.brisi_pemutus.page_konsumer_kmg.data_lengkap;
 
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
+import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkapKonsumerKmg;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
 import com.application.bris.brisi_pemutus.util.NumberTextWatcherCanNolForThousand;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
-
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +41,8 @@ import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 @SuppressLint("ValidFragment")
 public class FragmentDataPekerjaanKonsumerKmg extends Fragment implements Step{
 
+    @BindView(R.id.sv_data_pekerjaan_konsumer_kmg)
+    ViewGroup sv_data_pekerjaan_konsumer_kmg;
     @BindView(R.id.tf_bidang_pekerjaan)
     TextFieldBoxes tf_bidang_pekerjaan;
     @BindView(R.id.et_bidang_pekerjaan)
@@ -160,47 +166,27 @@ public class FragmentDataPekerjaanKonsumerKmg extends Fragment implements Step{
     @BindView(R.id.et_no_surat_rekomendasi)
     EditText et_no_surat_rekomendasi;
 
+    @BindView(R.id.img_fotokantor1)
+    RoundedImageView img_fotokantor1;
+    @BindView(R.id.btn_upload_fotokantor1)
+    ImageView btn_upload_fotokantor1;
+    @BindView(R.id.img_fotokantor2)
+    RoundedImageView img_fotokantor2;
+    @BindView(R.id.btn_upload_fotokantor2)
+    ImageView btn_upload_fotokantor2;
+
 
 
 
     @BindView(R.id.btn_perusahaan)
     Button btn_perusahaan;
 
+    private Bitmap bitmapPhotoKantor1, bitmapPhotoKantor2, loadedPicture;
+
     private Realm realm;
 
     private DataLengkapKonsumerKmg dataLengkap;
-    private Calendar calTanggalMulaiUsaha;
-    private Calendar calTanggalverifikasi;
-    private DatePickerDialog dpTanggalMulaiUsaha;
-    private DatePickerDialog dpTanggalVerifikasi;
 
-    private String val_BidangUsaha ="";
-    private String val_NamaUsaha ="";
-    private String val_TglMulaiUsaha ="";
-    private String val_NoTelpUsaha ="";
-    private String val_AlamatUsaha ="";
-    private String val_RtUsaha ="";
-    private String val_RwUsaha ="";
-    private String val_ProvUsaha ="";
-    private String val_KotaUsaha ="";
-    private String val_KecUsaha ="";
-    private String val_KelUsaha ="";
-    private String val_KodePosUsaha ="";
-    private String val_status_kepegawaian ="";
-    private String val_bidang_pekerjaan ="";
-    private String val_sisa_plafond ="";
-    private String val_no_sk_pegawai_tetap ="";
-    private String val_no_sk_pangkat_terakhir ="";
-    private String val_no_induk_pegawai ="";
-    private String val_usia_mpp ="";
-    private String val_posisi_jabatan ="";
-    private String val_pembayaran_gaji_melalui ="";
-    private String val_tanggal_verifikasi ="";
-    private String val_nama_pejabat_berwenang ="";
-    private String val_no_surat_rekomendasi ="";
-    private String val_id_instansi ="";
-
-    private int val_usahaAsId = 0;
 
     @SuppressLint("ValidFragment")
     public FragmentDataPekerjaanKonsumerKmg(DataLengkapKonsumerKmg mdataLengkap) {
@@ -212,26 +198,13 @@ public class FragmentDataPekerjaanKonsumerKmg extends Fragment implements Step{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ao_fragment_data_perusahaan_konsumer_kmg, container, false);
         ButterKnife.bind(this, view);
-        realm = Realm.getDefaultInstance();
-        sw_usahaktpsama.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    ll_alamatperusahaan.setVisibility(View.GONE);
-                    val_usahaAsId = 1;
-                }
-                else {
-                    ll_alamatperusahaan.setVisibility(View.VISIBLE);
-                    val_usahaAsId = 0;
-                }
-            }
-        });
 
 
         setDynamicIcon();
         setData();
         setDynamicIconDropDown();
         onSelectDialog();
+        AppUtil.disableEditTexts(sv_data_pekerjaan_konsumer_kmg);
 
         return view;
     }
@@ -264,6 +237,26 @@ public class FragmentDataPekerjaanKonsumerKmg extends Fragment implements Step{
         et_nama_pejabat_berwenang.setText(dataLengkap.getNamaPejabat());
         et_no_surat_rekomendasi.setText(dataLengkap.getNoRekomendasi());
 
+        bitmapPhotoKantor1 = setLoadImage(img_fotokantor1, dataLengkap.getFID_PHOTO_KANTOR1());
+        bitmapPhotoKantor2 = setLoadImage(img_fotokantor2, dataLengkap.getFID_PHOTO_KANTOR2());
+
+        img_fotokantor1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(dataLengkap.getFID_PHOTO_KANTOR1()));
+                startActivity(intent);
+            }
+        });
+
+        img_fotokantor2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(dataLengkap.getFID_PHOTO_KANTOR2()));
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -360,6 +353,7 @@ public class FragmentDataPekerjaanKonsumerKmg extends Fragment implements Step{
 
 
 
+
     private void setDynamicIcon(){
         AppUtil.dynamicIconLogoChange(getContext(),et_namaperusahaan,tf_namaperusahaan);
         AppUtil.dynamicIconLogoChange(getContext(),et_nomortelponperusahaan,tf_nomortelponperusahaan);
@@ -403,5 +397,24 @@ public class FragmentDataPekerjaanKonsumerKmg extends Fragment implements Step{
 
 
 
+    }
+
+
+    public Bitmap setLoadImage(final ImageView iv, int idFoto){
+        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
+        Glide
+                .with(getContext())
+                .asBitmap()
+                .load(url_photo)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        iv.setImageBitmap(resource);
+                        loadedPicture = resource;
+                    }
+                });
+        return loadedPicture;
     }
 }

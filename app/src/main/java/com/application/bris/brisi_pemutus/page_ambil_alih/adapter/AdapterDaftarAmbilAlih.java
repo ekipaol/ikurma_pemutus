@@ -4,9 +4,9 @@ package com.application.bris.brisi_pemutus.page_ambil_alih.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +26,6 @@ import com.application.bris.brisi_pemutus.model.data_ao.Ao;
 import com.application.bris.brisi_pemutus.model.login_cred.LoginCred;
 import com.application.bris.brisi_pemutus.model.user_ambil_alih.UserAmbilAlih;
 import com.application.bris.brisi_pemutus.page_daftar_user.view.DetailUserActivity;
-import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
-import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -68,14 +66,24 @@ public class AdapterDaftarAmbilAlih extends RecyclerView.Adapter<AdapterDaftarAm
         for (int i = 0; i <data.size() ; i++) {
             //hanya mengambil data pemutus yang aktif saja, dan 1 tingkat dibawah user (pinca hanyabisa ambil putusan pincapem, pincapem hanya bisa ambil putusan uh dan seterusnya
             if(role.equalsIgnoreCase("76")){
-                if(data.get(i).getFid_role().equalsIgnoreCase("79")||data.get(i).getFid_role().equalsIgnoreCase("72")) {
+                //pinca bisa ambil alih M3, MM, Pincapem,AMM yang aktif
+                if(data.get(i).getFid_role().equalsIgnoreCase("79")||data.get(i).getFid_role().equalsIgnoreCase("72")||data.get(i).getFid_role().equalsIgnoreCase("77")||data.get(i).getFid_role().equalsIgnoreCase("121")) {
                     if (data.get(i).getStatus().equalsIgnoreCase("aktif")) {
                         datafiltered.add(data.get(i));
                     }
                 }
             }
             else if(role.equalsIgnoreCase("79")){
+                //pincapem bisa ambil alih UH doang
                 if(data.get(i).getFid_role().equalsIgnoreCase("71")) {
+                    if (data.get(i).getStatus().equalsIgnoreCase("aktif")) {
+                        datafiltered.add(data.get(i));
+                    }
+                }
+            }
+            //user MMM hanya tampil ambil alih UH di cabangnya saja
+            else if(role.equalsIgnoreCase("72")){
+                if(data.get(i).getFid_role().equalsIgnoreCase("71") ) {
                     if (data.get(i).getStatus().equalsIgnoreCase("aktif")) {
                         datafiltered.add(data.get(i));
                     }
@@ -174,9 +182,12 @@ public class AdapterDaftarAmbilAlih extends RecyclerView.Adapter<AdapterDaftarAm
 
                                     dataUser = gson.fromJson(listDataString, type);
 
-                                    //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca
-                                    if(dataUser.getFid_role().toString().equalsIgnoreCase("72")||dataUser.getFid_role().toString().equalsIgnoreCase("71")||dataUser.getFid_role().toString().equalsIgnoreCase("76")||dataUser.getFid_role().toString().equalsIgnoreCase("79")){
+                                    //hanya pemutus yang bisa login,yaitu : uh, pincapem, m3, pinca, mm, AMM
+
                                         Toasty.success(context,"Berhasil Ambil Alih  "+dataUser.getNama(),Toast.LENGTH_LONG, true).show();
+
+                                        //SIMPAN UID PEMUTUS ORIGINALNYA BRO sebelum preference id direplace
+                                        appPreferences.setIdPengambilAlih(appPreferences.getUid());
 
                                         //ganti preference logged in
                                         appPreferences.setLoggedin("yes");
@@ -213,15 +224,6 @@ public class AdapterDaftarAmbilAlih extends RecyclerView.Adapter<AdapterDaftarAm
 
                                         Intent intent=new Intent(context, CoreLayoutActivity.class);
                                         context.startActivity(intent);
-                                    }
-                                    else{
-                                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                                        dialog1.setTitleText("Gagal");
-                                        dialog1.setContentText("User ini tidak memiliki akses untuk aplikasi pemutus");
-                                        dialog1.setConfirmText("Kembali");
-                                        dialog1.showCancelButton(false);
-                                    }
-
 
                                 }
                                 else{

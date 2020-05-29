@@ -17,7 +17,26 @@ public class ReqSetujuPutusan {
     private String catatan_pemutus;
     @SerializedName("kode_dsn")
     private String kode_dsn;
+    @SerializedName("id_pemutus2")
+    private String id_pemutus2;
+    @SerializedName("ambil_alih")
+    private boolean ambil_alih;
 
+    public String getId_pemutus2() {
+        return id_pemutus2;
+    }
+
+    public void setId_pemutus2(String id_pemutus2) {
+        this.id_pemutus2 = id_pemutus2;
+    }
+
+    public boolean isAmbil_alih() {
+        return ambil_alih;
+    }
+
+    public void setAmbil_alih(boolean ambil_alih) {
+        this.ambil_alih = ambil_alih;
+    }
 
     public String getRole_id() {
         return role_id;

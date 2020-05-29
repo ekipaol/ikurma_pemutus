@@ -4,30 +4,26 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v7.app.AppCompatActivity;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.history_putusan.ReqHistoryPutusan;
@@ -35,31 +31,17 @@ import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqS
 import com.application.bris.brisi_pemutus.api.model.request.req_kode_skk.ReqKodeSkk;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.baseapp.RouteApp;
-import com.application.bris.brisi_pemutus.config.globaldata.GlobalData;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.cs_model.CsModel;
 import com.application.bris.brisi_pemutus.model.history_catatan.HistoryCatatan;
 import com.application.bris.brisi_pemutus.model.info_cs_pencairan.InfoCs;
-import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.HistoryCatatanAdapter;
-import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.AgunanTerikatActivity;
-import com.application.bris.brisi_pemutus.page_putusan.data_lengkap.ActivityDataLengkap;
-import com.application.bris.brisi_pemutus.page_putusan.history.HistoryActivity;
-import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityPreviewFotoSecondary;
-import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
-import com.application.bris.brisi_pemutus.page_putusan.prescreening.PrescreeningActivity;
-import com.application.bris.brisi_pemutus.page_putusan.rpc.RpcActivity;
-import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
-import com.application.bris.brisi_pemutus.page_putusan.sektor_ekonomi.SektorEkonomiActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -169,6 +151,7 @@ public class CatatanActivity extends AppCompatActivity {
 
         //connection related instanziation
         apiClientAdapter=new ApiClientAdapter(this);
+//        Toast.makeText(this, "masih shoot vimen", Toast.LENGTH_SHORT).show();
         cif = getIntent().getStringExtra("cif");
         idAplikasi = getIntent().getIntExtra("idAplikasi", 0);
         fidStatus=getIntent().getStringExtra("fidStatus");
@@ -180,9 +163,16 @@ public class CatatanActivity extends AppCompatActivity {
         backToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CatatanActivity.this, PutusanFrontMenu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                if(superData.getJenisPembiayaan()!=null&&superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                    Intent intent = new Intent(CatatanActivity.this, PutusanFrontMenuKmg.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(CatatanActivity.this, PutusanFrontMenu.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -403,13 +393,14 @@ public class CatatanActivity extends AppCompatActivity {
                         route.openActivityAndClearAllPrevious(CoreLayoutActivity.class);
                     }
                     else{
-                        Log.d("cekkcpanda",appPreferences.getNamaKantor().substring(4,7).trim());
-                        //galau seleksi kc dan kcp dari kode uker atau dari nama skk
+//                        Log.d("cekkcpanda",appPreferences.getNamaKantor().substring(4,7).trim());
+                        //galau seleksi  kc dan kcp dari kode uker atau dari nama skk
 //                        if(appPreferences.getUker().equalsIgnoreCase("R")||appPreferences.getUker().equalsIgnoreCase("K")){
 
-                        //seleksi dia dari kc atau kcp
-                        if(appPreferences.getNamaSKK().substring(0,3).equalsIgnoreCase("KCP")){
-                            cekAdaCs(dialog1);
+                        //seleksi kalo dia dari KCP atau dari unit(qanun) maka cek CS, selain itu cek ADP
+                        if(appPreferences.getNamaSKK().substring(0,3).equalsIgnoreCase("KCP")||appPreferences.getNamaSKK().substring(0,4).equalsIgnoreCase("UNIT")){
+                            cekAdaCs(dialog1);//isi method cek cs masih di tembak untuk langsung setuju, jadi sebenernya tidak ada pengecekan CS
+
                         }
 //                        else if (appPreferences.getUker().equalsIgnoreCase("B")||appPreferences.getUker().equalsIgnoreCase("W")){
 
@@ -473,7 +464,15 @@ public class CatatanActivity extends AppCompatActivity {
                                             req.setKode_dsn(appPreferences.getDsnCode());
 
 
-                                            Call<ParseResponse> call = apiClientAdapter.getApiInterface().pemutusTolak(req);
+//                                            Call<ParseResponse> call = apiClientAdapter.getApiInterface().pemutusTolak(req);
+                                            Call<ParseResponse> call= apiClientAdapter.getApiInterface().pemutusTolak(req);
+//                                        Log.d("superdete",superData.getJenisPembiayaan());
+                                            if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                                                call = apiClientAdapter.getApiInterface().pemutusTolakKmg(req);
+                                            }
+                                            else{
+                                                call = apiClientAdapter.getApiInterface().pemutusTolak(req);
+                                            }
                                             call.enqueue(new Callback<ParseResponse>() {
                                                 @Override
                                                 public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
@@ -582,8 +581,15 @@ public class CatatanActivity extends AppCompatActivity {
                                         req.setCatatan_pemutus(extended_catatan.getText().toString());
                                         req.setKode_dsn(appPreferences.getDsnCode());
 
+                                        Call<ParseResponse> call= apiClientAdapter.getApiInterface().pemutusKembalikan(req);
+//                                        Log.d("superdete",superData.getJenisPembiayaan());
+                                        if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                                           call = apiClientAdapter.getApiInterface().pemutusKembalikanKmg(req);
+                                        }
+                                        else{
+                                           call = apiClientAdapter.getApiInterface().pemutusKembalikan(req);
+                                        }
 
-                                        Call<ParseResponse> call = apiClientAdapter.getApiInterface().pemutusKembalikan(req);
                                         call.enqueue(new Callback<ParseResponse>() {
                                             @Override
                                             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
@@ -687,8 +693,14 @@ public class CatatanActivity extends AppCompatActivity {
         });
     }
 
+
+    //gausah cek CS kata mas wildan, eh barusan katanya biarin aja ada cek CS
     private void cekAdaCs(final SweetAlertDialog dialog1){
 
+        //langsung pantek setuju, kalau cek cs diabaikan dulu
+//        setujuPembiayaan(dialog1);
+
+//
         dialog1.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
         dialog1.show();
 
@@ -735,6 +747,8 @@ public class CatatanActivity extends AppCompatActivity {
 
 
 
+
+
                     } else {
                         dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
                         dialog1.setTitle("Terjadi Kesalahan");
@@ -757,6 +771,9 @@ public class CatatanActivity extends AppCompatActivity {
     }
 
     private void cekAdaAdp(final SweetAlertDialog dialog1){
+
+        //langsung pantek setuju kalau tidak diperlukan lagi cek adp
+//        setujuPembiayaan(dialog1);
 
         dialog1.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
         dialog1.show();
@@ -847,6 +864,13 @@ public class CatatanActivity extends AppCompatActivity {
                         } else if (statusPutusanInt <= 0) {
                             final AppPreferences appPreferences = new AppPreferences(CatatanActivity.this);
                             ReqSetujuPutusan req = new ReqSetujuPutusan();
+
+                            //cek apakah sedang ambil alih putusan, tambah parameter jika ya
+                            if(appPreferences.getStatusAmbilAlih().equalsIgnoreCase("YA")){
+                                req.setId_pemutus2(appPreferences.getIdPengambilAlih());
+                                req.setAmbil_alih(true);
+                            }
+
                             req.setRole_id(appPreferences.getFidRole());
                             req.setSt_aplikasid(fidStatus);
                             req.setFid_aplikasi(Integer.toString(idAplikasi));
@@ -855,7 +879,14 @@ public class CatatanActivity extends AppCompatActivity {
                             req.setKode_dsn(appPreferences.getDsnCode());
 
 
-                            Call<ParseResponse> call = apiClientAdapter.getApiInterface().pemutusSetuju(req);
+                            Call<ParseResponse> call= apiClientAdapter.getApiInterface().pemutusSetuju(req);
+//                                        Log.d("superdete",superData.getJenisPembiayaan());
+                            if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                                call = apiClientAdapter.getApiInterface().pemutusSetujuKmg(req);
+                            }
+                            else{
+                                call = apiClientAdapter.getApiInterface().pemutusSetuju(req);
+                            }
                             call.enqueue(new Callback<ParseResponse>() {
                                 @Override
                                 public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
@@ -874,7 +905,7 @@ public class CatatanActivity extends AppCompatActivity {
                                             dialog1.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                                             dialog1.setTitleText("Putusan Berhasil");
                                             if (dataCs.getNama_petugas().equalsIgnoreCase("[GAGAL]")) {
-
+                                                dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
                                                 dialog1.setTitleText("Putusan Gagal");
                                                 dialog1.setContentText("Gagal menerima user");
                                                 dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {

@@ -2,13 +2,11 @@ package com.application.bris.brisi_pemutus.page_putusan.lkn;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,18 +25,11 @@ import com.application.bris.brisi_pemutus.model.lkn.DataRekomendasiLkn;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.NumberTextWatcherCanNolForThousand;
 import com.application.bris.brisi_pemutus.util.NumberTextWatcherForThousand;
-import com.google.gson.Gson;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 /**

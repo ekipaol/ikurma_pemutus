@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cv_disposisi"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="5dp">
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="100dp"
                         android:layout_height="25dp"
                         app:cardCornerRadius="10dp"
@@ -51,9 +51,9 @@
                         android:layout_marginBottom="6dp"
                         android:layout_above="@id/tv_produk">
 
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/tv_pemrakarsa"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
@@ -67,7 +67,7 @@
                         />
 
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/tv_produk"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
@@ -75,7 +75,7 @@
                         android:layout_alignParentBottom="true"
                         />
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/tv_plafon"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
@@ -85,7 +85,7 @@
                         android:layout_alignParentRight="true"
                        />
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/tv_tenor"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
@@ -101,7 +101,7 @@
 
             </FrameLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 
@@ -110,7 +110,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_disposisi2"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
@@ -127,7 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="5dp">
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="100dp"
                             android:layout_height="25dp"
                             app:cardCornerRadius="10dp"
@@ -135,9 +135,9 @@
                             android:layout_marginBottom="6dp"
                             android:layout_above="@id/tv_produk2">
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_pemrakarsa2"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -151,7 +151,7 @@
                             />
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_produk2"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -159,7 +159,7 @@
                             android:layout_alignParentBottom="true"
                             />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_plafon2"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -169,7 +169,7 @@
                             android:layout_alignParentRight="true"
                             />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_tenor2"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -185,7 +185,7 @@
 
                 </FrameLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
@@ -194,7 +194,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_disposisi3"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
@@ -211,7 +211,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="5dp">
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="100dp"
                             android:layout_height="25dp"
                             app:cardCornerRadius="10dp"
@@ -219,9 +219,9 @@
                             android:layout_marginBottom="6dp"
                             android:layout_above="@id/tv_produk3">
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_pemrakarsa3"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -235,7 +235,7 @@
                             />
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_produk3"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -243,7 +243,7 @@
                             android:layout_alignParentBottom="true"
                             />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_plafon3"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -253,7 +253,7 @@
                             android:layout_alignParentRight="true"
                             />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_tenor3"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -269,7 +269,7 @@
 
                 </FrameLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
@@ -278,7 +278,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_disposisi4"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
@@ -295,7 +295,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="5dp">
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="100dp"
                             android:layout_height="25dp"
                             app:cardCornerRadius="10dp"
@@ -303,9 +303,9 @@
                             android:layout_marginBottom="6dp"
                             android:layout_above="@id/tv_produk4">
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_pemrakarsa4"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -319,7 +319,7 @@
                             />
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_produk4"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -327,7 +327,7 @@
                             android:layout_alignParentBottom="true"
                             />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_plafon4"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -337,7 +337,7 @@
                             android:layout_alignParentRight="true"
                             />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/tv_tenor4"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
@@ -353,7 +353,7 @@
 
                 </FrameLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
     </LinearLayout>

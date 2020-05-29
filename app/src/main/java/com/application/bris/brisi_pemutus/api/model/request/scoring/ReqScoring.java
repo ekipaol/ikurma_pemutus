@@ -12,6 +12,9 @@ public class ReqScoring {
         this.cif = cif;
         this.idAplikasi = idAplikasi;
     }
+    public ReqScoring() {
+
+    }
 
     public void setCif(int cif) {
         this.cif = cif;

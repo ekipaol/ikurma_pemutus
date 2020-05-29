@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -19,10 +19,10 @@
         app:ms_completeButtonColor="@color/colorWhite"
         app:ms_tabStepDividerWidth="120dp"
         app:ms_bottomNavigationBackground="?attr/colorAccent"
-        app:ms_completeButtonText="Ke Sektor Ekonomi"
+        app:ms_completeButtonText="Lanjut "
 
         android:layout_marginTop="@dimen/toolbar_height_default"/>
 
     <include layout="@layout/toolbar_nosearch"/>
     <include layout="@layout/loading"/>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
