@@ -2,9 +2,15 @@ package com.application.bris.brisi_pemutus.page_putusan.agunan;
 
 
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 import com.application.bris.brisi_pemutus.R;
@@ -67,6 +74,12 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
     @BindView(R.id.et_pendapat_kondisi_jaminan)
     EditText et_pendapat_kondisi_jaminan;
 
+
+    @BindView(R.id.tf_rekomendasi_penilai)
+    TextFieldBoxes tf_rekomendasi_penilai;
+    @BindView(R.id.et_rekomendasi_penilai)
+    EditText et_rekomendasi_penilai;
+
     @BindView(R.id.img_agunan)
     BitmapImageViewRounded img_agunan;
     @BindView(R.id.img_utara)
@@ -77,6 +90,15 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
     BitmapImageViewRounded img_barat;
     @BindView(R.id.img_timur)
     BitmapImageViewRounded img_timur;
+
+    @BindView(R.id.cl_dok_41)
+    ConstraintLayout cl_dok_41;
+
+    @BindView(R.id.tv_dok_41)
+    TextView tv_dok_41;
+
+    @BindView(R.id.img_dok_41)
+    BitmapImageViewRounded img_dok_41;
 
     private Calendar calLahir;
     private Calendar calLahirPasangan;
@@ -115,6 +137,8 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
     public static String val_TipePendapatan ="";
     public static String val_Jenkel ="";
 
+    private boolean isFlpp=false;
+
 
 
     public FragmentAgunan7Lain() {
@@ -134,6 +158,8 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.agunan_7_lain, container, false);
       ButterKnife.bind(this, view);
+
+      otherViewChanges();
          setData();
 
         return view;
@@ -143,6 +169,11 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
         et_pendapat_harga.setText(dataLengkap.getPendapatHarga());
         et_kondisi_lingkungan.setText(dataLengkap.getKondisiSekitar());
         et_pendapat_kondisi_jaminan.setText(dataLengkap.getPendapatKondisiJaminan());
+
+        if(dataLengkap.getDescRekomendasiPenilai()!=null&&!dataLengkap.getDescRekomendasiPenilai().isEmpty()){
+            tf_rekomendasi_penilai.setVisibility(View.VISIBLE);
+            et_rekomendasi_penilai.setText(dataLengkap.getDescRekomendasiPenilai());
+        }
 
 
         final int id_bangunan =dataLengkap.getIdPhotoTBbangunan();
@@ -259,6 +290,57 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
             }
         });
 
+        if(isFlpp){
+            onClickLihatPdf(img_dok_41,Integer.parseInt(dataLengkap.getIdDok41()));
+        }
+
+    }
+
+    private void onClickLihatPdf(View butt, final int id_pdf){
+        butt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url_pdf = UriApi.Baseurl.URL + UriApi.getPdf.urlPdf + id_pdf;
+                Uri external = Uri.parse(url_pdf);
+                Intent intentPdf;
+                intentPdf = new Intent(Intent.ACTION_VIEW);
+                intentPdf.setDataAndType(external, "application/pdf");
+                try {
+                    startActivity(intentPdf);
+                } catch (ActivityNotFoundException e) {
+                    // No application to view, ask to download one
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Anda Belum Memiliki Aplikasi untuk Membaca PDF");
+                    builder.setMessage("Download Aplikasi PDF dari Play Store??");
+                    builder.setPositiveButton("Download",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent marketIntent = new Intent(Intent.ACTION_VIEW);
+                                    marketIntent
+                                            .setData(Uri
+                                                    .parse("market://details?id=com.adobe.reader"));
+                                    startActivity(marketIntent);
+                                }
+                            });
+                    builder.setNegativeButton("Batal", null);
+                    builder.create().show();
+                }
+            }
+        });
+    }
+
+    private void otherViewChanges(){
+        if(dataLengkap.getKodeWilayah()!=null&&!dataLengkap.getKodeWilayah().isEmpty()){
+            isFlpp=true;
+            cl_dok_41.setVisibility(View.VISIBLE);
+            tv_dok_41.setVisibility(View.VISIBLE);
+
+        }
+        else{
+            cl_dok_41.setVisibility(View.GONE);
+            tv_dok_41.setVisibility(View.GONE);
+        }
     }
 
 

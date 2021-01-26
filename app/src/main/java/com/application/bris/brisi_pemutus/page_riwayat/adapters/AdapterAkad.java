@@ -18,6 +18,7 @@ import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.PutusanFrontMenuKpr;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
@@ -124,21 +125,41 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
         holder.iv_foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(datas.getTipe_produk()!=null&&datas.getKODE_PRODUK()!=null){
+                    if(datas.getTipe_produk().equalsIgnoreCase("KMG")||datas.getKODE_PRODUK().equalsIgnoreCase("428")||datas.getKODE_PRODUK().equalsIgnoreCase("429")||datas.getKODE_PRODUK().equalsIgnoreCase("430")){
+                        //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","kmg");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    //tetep bikin validasi kpr disini siapa tau nanti ditambahin kode produk waktu dahsboard kpr
+                    else  if(datas.getTipe_produk().equalsIgnoreCase("kpr")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","kpr");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    else{
+                        //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","mikro");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
 
-                if(datas.getTipe_produk().equalsIgnoreCase("KMG")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
-                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
-                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
-                    intent.putExtra("data_putusan_akad",datas);
-                    intent.putExtra("jenisPembiayaan","kmg");
-                    holder.iv_foto.getContext().startActivity(intent);
+                    //kalo kpr, maka kode produknya dapet null, jadi bikin if sendiri
+                }else{
+                    if(datas.getTipe_produk().equalsIgnoreCase("kpr")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","kpr");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+
                 }
-                else{
-                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
-                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
-                    intent.putExtra("data_putusan_akad",datas);
-                    intent.putExtra("jenisPembiayaan","mikro");
-                    holder.iv_foto.getContext().startActivity(intent);
-                }
+
+
 
 
 
@@ -149,21 +170,41 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
             public void onClick(View view) {
 
 
-                //kmg or mukli faedah mikro
-                if(datas.getTipe_produk().equalsIgnoreCase("KMG")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
-                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
-                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
-                    intent.putExtra("data_putusan_akad",datas);
-                    intent.putExtra("jenisPembiayaan","kmg");
-                    holder.iv_foto.getContext().startActivity(intent);
+                if(datas.getTipe_produk()!=null&&datas.getKODE_PRODUK()!=null){
+                    if(datas.getTipe_produk().equalsIgnoreCase("KMG")||datas.getKODE_PRODUK().equalsIgnoreCase("428")||datas.getKODE_PRODUK().equalsIgnoreCase("429")||datas.getKODE_PRODUK().equalsIgnoreCase("430")){
+                        //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","kmg");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    //tetep bikin validasi kpr disini siapa tau nanti ditambahin kode produk waktu dahsboared kpr
+                    else  if(datas.getTipe_produk().equalsIgnoreCase("kpr")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","kpr");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    else{
+                        //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","mikro");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+
+                    //kalo kpr, maka kode produknya dapet null, jadi bikin if sendiri
+                }else{
+                    if(datas.getTipe_produk().equalsIgnoreCase("kpr")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                        intent.putExtra("data_putusan_akad",datas);
+                        intent.putExtra("jenisPembiayaan","kpr");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+
                 }
-                else{
-                    //ngirim intent dengan keterangan ini, agar tidak ada tombol putusan di halaman detail
-                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenu.class);
-                    intent.putExtra("data_putusan_akad",datas);
-                    intent.putExtra("jenisPembiayaan","mikro");
-                    holder.iv_foto.getContext().startActivity(intent);
-                }
+
+
             }
         });
     }

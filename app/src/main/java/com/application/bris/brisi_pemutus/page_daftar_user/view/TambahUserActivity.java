@@ -726,6 +726,10 @@ public class TambahUserActivity extends AppCompatActivity {
 //                            getCountUser("aom");
                             }
                         } else {
+                            //ini ERROR BROOO, PINCAPEM GAK BISA BIKIN AOM
+                            //CARITAU KENAPA BROO
+                            //APAKAH DIGANTI KE METHOD GETCOUNTUSERPINCA ????
+                            //BELOM SEMPET SAYA TENGOK KARNA MASIH NGERJAIN FLPP
                             getCountUser(kodeUkerCabangStringTotal.get(kantor.getSelectedItemPosition() - 1), "aom");
                         }
                     }

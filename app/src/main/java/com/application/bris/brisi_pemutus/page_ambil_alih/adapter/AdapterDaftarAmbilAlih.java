@@ -212,6 +212,12 @@ public class AdapterDaftarAmbilAlih extends RecyclerView.Adapter<AdapterDaftarAm
                                         appPreferences.setNamaSkk(dataUser.getNama_skk());
                                         appPreferences.setKodeAo(dataUser.getKode_ao());
                                         appPreferences.setKantor(dataUser.getKantor());
+                                    if(dataUser.getCbAmanah()!=null){
+                                        appPreferences.setCbAmanah(dataUser.getCbAmanah());
+                                    }
+                                    else{
+                                        appPreferences.setCbAmanah("false");
+                                    }
 //                                    appPreferences.setUsername(datas.getUsername());
 
                                         //set status ambil alih
@@ -324,6 +330,12 @@ public class AdapterDaftarAmbilAlih extends RecyclerView.Adapter<AdapterDaftarAm
                                         appPreferences.setNamaSkk(dataUser.getNama_skk());
                                         appPreferences.setKodeAo(dataUser.getKode_ao());
                                         appPreferences.setKantor(dataUser.getKantor());
+                                        if(dataUser.getCbAmanah()!=null){
+                                            appPreferences.setCbAmanah(dataUser.getCbAmanah());
+                                        }
+                                        else{
+                                            appPreferences.setCbAmanah("false");
+                                        }
 //                                    appPreferences.setUsername(datas.getUsername());
 
                                         //set status ambil alih

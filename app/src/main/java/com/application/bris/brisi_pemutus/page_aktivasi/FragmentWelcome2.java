@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.bris.brisi_pemutus.BuildConfig;
 import com.application.bris.brisi_pemutus.R;
 
 import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
@@ -65,20 +66,35 @@ public class FragmentWelcome2 extends Fragment implements Step{
             }
         });
 
+
+        //disable jika release prod pure
         iv_welcome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 if(counterBypassActivation>=4){
-                    Intent intent =new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
+
+                    //otomasi status backdoor jika prod atau dev
+                    if (!BuildConfig.IS_PRODUCTION) {
+                        Intent intent =new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        if(BuildConfig.IS_BD){
+                            Intent intent =new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+
                 }
                 else{
-                    Toast.makeText(getActivity(), "@ekipaol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "...rezeki yang halal lagi berkah, yang dengannya kami dapat meneguhkan ikhtiar diatas nama-Mu", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
             }
         });
+
+
         return view;
     }
 

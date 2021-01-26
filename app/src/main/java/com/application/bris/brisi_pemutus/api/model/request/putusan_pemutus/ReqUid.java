@@ -2,7 +2,7 @@ package com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ReqPutusan {
+public class ReqUid {
     @SerializedName("uid")
     private String uid;
 

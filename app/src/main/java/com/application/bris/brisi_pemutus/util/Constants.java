@@ -1,7 +1,6 @@
 package com.application.bris.brisi_pemutus.util;
 
 public class Constants {
-	public static final String SECRET_KEY = ".:Pd4MAp1S3c12EtK3y:.";
 	public static final String DEVICE_ID = "device_id";
 	public static final String DEVICE_NAME = "device_name";
 	public static final String IMEI = "imei";
@@ -35,6 +34,7 @@ public class Constants {
 		public static final String KANTOR = "kantor";
 		public static final String IS_ACTIVATED = "is_activated";
 		public static final String IS_LOGGED_IN = "logged_in";
+		public static final String CB_AMANAH = "cb_amanah";
 
 		public static final String READ_PRESCREENING = "readprescreening";
 		public static final String READ_DATA_LENGKAP = "readdatalengkap";

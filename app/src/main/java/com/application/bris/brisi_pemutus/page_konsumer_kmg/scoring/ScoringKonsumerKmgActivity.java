@@ -100,13 +100,32 @@ public class ScoringKonsumerKmgActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent;
 
+                //purna kmg
                 if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("125")){
                     intent = new Intent(ScoringKonsumerKmgActivity.this, KelengkapanDokumenPurnaActivity.class);
 //                    Log.d("purnafaedah","masuk ke purna");
                 }
+
+                //prapurna kmg
                 else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("129")){
                     intent = new Intent(ScoringKonsumerKmgActivity.this, KelengkapanDokumenPrapurnaActivity.class);
 //                    Log.d("purnafaedah","masuk ke purna");
+                }
+
+                //purna mikro KMG DAN KMJ
+                else if(superData.getLoanType()!=null&&!superData.getLoanType().isEmpty()&superData.getLoanType().equalsIgnoreCase("429")){
+                    intent = new Intent(ScoringKonsumerKmgActivity.this, KelengkapanDokumenPurnaActivity.class);
+                }
+                else if(superData.getLoanType()!=null&&!superData.getLoanType().isEmpty()&superData.getLoanType().equalsIgnoreCase("317")){
+                    intent = new Intent(ScoringKonsumerKmgActivity.this, KelengkapanDokumenPurnaActivity.class);
+                }
+
+                //prapurna mikro KMG DAN KMJ
+                else if(superData.getLoanType()!=null&&!superData.getLoanType().isEmpty()&&superData.getLoanType().equalsIgnoreCase("430")){
+                    intent = new Intent(ScoringKonsumerKmgActivity.this, KelengkapanDokumenPrapurnaActivity.class);
+                }
+                else if(superData.getLoanType()!=null&&!superData.getLoanType().isEmpty()&&superData.getLoanType().equalsIgnoreCase("321")){
+                    intent = new Intent(ScoringKonsumerKmgActivity.this, KelengkapanDokumenPrapurnaActivity.class);
                 }
                 else{
                     intent = new Intent(ScoringKonsumerKmgActivity.this, KelengkapanDokumenKonsumerKmgActivity.class);
@@ -160,7 +179,7 @@ public class ScoringKonsumerKmgActivity extends AppCompatActivity{
 
 
         //multifaedah or konsumer
-        if(superData.getKodeProduk().equalsIgnoreCase("428")){
+        if(superData.getKodeProduk().equalsIgnoreCase("428")||superData.getKodeProduk().equalsIgnoreCase("429")||superData.getKodeProduk().equalsIgnoreCase("430")||superData.getKodeProduk().equalsIgnoreCase("316")||superData.getKodeProduk().equalsIgnoreCase("317")||superData.getKodeProduk().equalsIgnoreCase("321")){
             call = apiClientAdapter.getApiInterface().inquiryScoringKmgMikro(req);
         }
         else{

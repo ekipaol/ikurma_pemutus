@@ -309,7 +309,7 @@ public class SektorEkonomiActivity extends AppCompatActivity {
 
 
         //multifaedah or konsumer
-        if(superData.getKodeProduk().equalsIgnoreCase("428")){
+        if(superData.getKodeProduk().equalsIgnoreCase("428")||superData.getKodeProduk().equalsIgnoreCase("429")||superData.getKodeProduk().equalsIgnoreCase("430")||superData.getKodeProduk().equalsIgnoreCase("316")||superData.getKodeProduk().equalsIgnoreCase("317")||superData.getKodeProduk().equalsIgnoreCase("321")){
             call = apiClientAdapter.getApiInterface().inquirySektorEkonomiKmgMikro(req);
         }
         else{

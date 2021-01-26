@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -169,6 +170,9 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
 
     @BindView(R.id.tv_dokumen_agunan)
     TextView tv_dokumen_agunan;
+
+    @BindView(R.id.et_nomorsiup)
+    EditText et_nomorsiup;
 
     AllDataFront superData;
 
@@ -612,6 +616,9 @@ public class ActivityKelengkapanDokumen extends AppCompatActivity {
                                 onClickLihatFoto(bt_keterangan_lunas, dataKelengkapan.getId_foto_dokumen_lunas_kur());
 
                                 //end onclick lihat foto
+
+                                //set no SKU
+                                et_nomorsiup.setText("No SIUP : "+dataKelengkapan.getNoSku());
                             }
                             catch (Exception e) {
 

@@ -36,6 +36,7 @@ import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkapKonsumerKmg;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
 import com.bumptech.glide.Glide;
@@ -166,7 +167,7 @@ public class FragmentDataAlamatPurna extends Fragment implements Step{
     @BindView(R.id.progress_rumah2)
     ProgressBar progress_rumah2;
 
-    private Realm realm;
+
     private ApiClientAdapter apiClientAdapter;
     private AppPreferences appPreferences;
     private DataLengkapKonsumerKmg dataLengkap;
@@ -205,7 +206,6 @@ public class FragmentDataAlamatPurna extends Fragment implements Step{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ao_fragment_dataalamat_purna, container, false);
         ButterKnife.bind(this, view);
-        realm = Realm.getDefaultInstance();
         apiClientAdapter = new ApiClientAdapter(getContext());
         appPreferences = new AppPreferences(getContext());
 
@@ -245,6 +245,24 @@ public class FragmentDataAlamatPurna extends Fragment implements Step{
             sw_domisiliktpsama.setVisibility(View.GONE);
             btn_upload_fotorumah1.setVisibility(View.GONE);
             btn_upload_fotorumah2.setVisibility(View.GONE);
+
+        img_fotorumah1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(dataLengkap.getFID_PHOTO_RUMAH1()));
+                startActivity(intent);
+            }
+        });
+
+        img_fotorumah2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",(dataLengkap.getFID_PHOTO_RUMAH2()));
+                startActivity(intent);
+            }
+        });
     }
 
 

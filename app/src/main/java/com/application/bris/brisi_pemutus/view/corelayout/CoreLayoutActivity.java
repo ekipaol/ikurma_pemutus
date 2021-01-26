@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
+
+import com.application.bris.brisi_pemutus.view.corelayout.ranking.FragmentRanking;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -174,13 +176,13 @@ public class CoreLayoutActivity extends AppCompatActivity implements BottomNavig
             case R.id.navigation_dashboard:
 //                AppUtil.showToastShort(getApplicationContext(), "Dashboard dalam pengembangan");
                 //hide dashboard for a while
-//                fragment = new FragmentDashboard();
+                fragment = new FragmentRanking();
 
                 AppPreferences appPreferences=new AppPreferences(CoreLayoutActivity.this);
 //                Intent intent=new Intent(CoreLayoutActivity.this, PerformanceActivity.class);
 //                intent.putExtra("kodeKanwil",appPreferences.getKodeKanwil());
 //                startActivity(intent);
-                Toasty.info(CoreLayoutActivity.this,"Masih dalam pengembangan").show();
+//                Toasty.info(CoreLayoutActivity.this,"Masih dalam pengembangan").show();
                 break;
             case R.id.navigation_notifications:
 //                AppUtil.showToastShort(getApplicationContext(), "user");

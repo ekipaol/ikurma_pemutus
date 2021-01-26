@@ -57,6 +57,14 @@ public class ScoringActivity extends AppCompatActivity  {
     TextFieldBoxes tf_ratio_agunan;
     @BindView(R.id.et_ratio_agunan)
     EditText et_ratio_agunan;
+    @BindView(R.id.tf_currentratio)
+    TextFieldBoxes tf_currentratio;
+    @BindView(R.id.et_currentratio)
+    EditText et_currentratio;
+    @BindView(R.id.tf_profitability)
+    TextFieldBoxes tf_profitability;
+    @BindView(R.id.et_profitability)
+    EditText et_profitability;
     @BindView(R.id.tf_reputasiusaha)
     TextFieldBoxes tf_reputasiusaha;
     @BindView(R.id.et_reputasiusaha)
@@ -262,8 +270,22 @@ public class ScoringActivity extends AppCompatActivity  {
             et_rpcratio.setText(KeyValue.getKeyRpcRatio(superData.getKodeProduk(),String.valueOf(data.getrPCRATIO())));
         }
 
+        if (data.getCurrentratio()!=null&&data.getCurrentratio()!=0){
+            tf_currentratio.setVisibility(View.VISIBLE);
+            et_currentratio.setText(KeyValue.getKeyCurrentRatio(String.valueOf(data.getCurrentratio())));
+        }
 
-        et_ratio_agunan.setText(KeyValue.getKeyAgunanRatio(String.valueOf(data.getRatioAgunan())));
+        if (data.getProfitabiility()!=null&&data.getProfitabiility()!=0){
+            tf_profitability.setVisibility(View.VISIBLE);
+            et_profitability.setText(KeyValue.getKeyProfitability(String.valueOf(data.getProfitabiility())));
+        }
+
+        if (data.getRatioAgunan()!=null&&data.getRatioAgunan()!=0){
+            tf_ratio_agunan.setVisibility(View.VISIBLE);
+            et_ratio_agunan.setText(KeyValue.getKeyAgunanRatio(String.valueOf(data.getRatioAgunan())));
+        }
+
+
         et_reputasiusaha.setText(KeyValue.getKeyReputasiUsaha(String.valueOf(data.getrEPUTASIUSAHA())));
         et_riwayathubunganbank.setText(KeyValue.getKeyRiwayatHubdgnBank(String.valueOf(data.gethUBUNGANBANK())));
         et_lamausaha.setText(KeyValue.getKeyLamaUsaha(String.valueOf(data.getlAMAUSAHA())));
@@ -313,6 +335,12 @@ public class ScoringActivity extends AppCompatActivity  {
 
         et_ratio_agunan.setInputType(InputType.TYPE_NULL);
         et_ratio_agunan.setFocusable(false);
+
+        et_currentratio.setInputType(InputType.TYPE_NULL);
+        et_currentratio.setFocusable(false);
+
+        et_profitability.setInputType(InputType.TYPE_NULL);
+        et_profitability.setFocusable(false);
 
         et_reputasiusaha.setInputType(InputType.TYPE_NULL);
         et_reputasiusaha.setFocusable(false);

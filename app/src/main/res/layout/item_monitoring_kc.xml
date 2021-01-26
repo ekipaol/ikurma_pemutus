@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="8dp"
+    android:paddingBottom="4dp"
+    app:cardElevation="3dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_nama_kc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="{Nama Cabang}"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorBlackHeader"
+            android:background="@drawable/bordertextbox_primary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pencapaian Pencairan"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_pencairan_kc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{10%}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:textAlignment="viewEnd"
+                android:layout_marginRight="12dp"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pencapaian Outstanding"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>/>
+
+            <TextView
+                android:id="@+id/tv_outstanding_kc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{10%}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:textAlignment="viewEnd"
+                android:layout_marginRight="12dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pencapaian DPK"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_dpk_kc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{23%}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:textAlignment="viewEnd"
+                android:layout_marginRight="12dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Kol 2"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_kol_kc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{15%}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:textAlignment="viewEnd"
+                android:layout_marginRight="12dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total NPF"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/tv_npf_kc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{1%}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:layout_gravity="end"
+                android:textAlignment="viewEnd"
+                android:layout_marginRight="12dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="6dp"
+            android:paddingTop="5dp"
+            >
+            <Button
+                android:id="@+id/bt_detil_monitoring_pencairan_kc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_gravity="right"
+                android:text="Lihat KCP yang Disupervisi"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -58,7 +58,7 @@ public class NotificationService extends FirebaseMessagingService {
                     .setDefaults(Notification.DEFAULT_VIBRATE)
                     .build();
             NotificationManagerCompat manager = NotificationManagerCompat.from(getApplicationContext());
-//            createNotificationChannel();
+            createNotificationChannel();
             manager.notify(123, notification);
         } else {
             Log.d( "firebasemessage","Message Notification Body: " + remoteMessage.getNotification().getBody());
@@ -75,7 +75,7 @@ public class NotificationService extends FirebaseMessagingService {
                     .setContentIntent(pendingIntent2)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setDefaults(NotificationCompat.DEFAULT_VIBRATE)
-                    .setVisibility(Notification.VISIBILITY_PUBLIC)
+//                    .setVisibility(Notification.VISIBILITY_PUBLIC)
                     .setSound(defaultSoundUri);
 
 
@@ -103,6 +103,12 @@ public class NotificationService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
             Log.d("notificationChannel","ithas been made");
         }
+    }
+
+    @Override
+    public void onNewToken(String mToken) {
+        super.onNewToken(mToken);
+        Log.e("TOKEN",mToken);
     }
 
 }

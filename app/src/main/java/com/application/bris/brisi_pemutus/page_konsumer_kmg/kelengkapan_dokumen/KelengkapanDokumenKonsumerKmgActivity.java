@@ -206,8 +206,6 @@ public class KelengkapanDokumenKonsumerKmgActivity extends AppCompatActivity {
     Call<ParseResponse> call;
 
 
-
-
     private SearchView searchView;
     List<Putusan> dataHotProspek;
     AdapterKelengkapanDokumenAgunan adapterKelengkapanDokumenAgunan;

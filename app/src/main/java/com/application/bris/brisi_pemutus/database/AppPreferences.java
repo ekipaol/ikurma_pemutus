@@ -168,6 +168,14 @@ public class AppPreferences {
         return sharedPref.getString(Constants.Preferences.IS_LOGGED_IN, "no");
     }
 
+    public void setCbAmanah(String status){
+        spEditor.putString(Constants.Preferences.CB_AMANAH,status);
+        spEditor.commit();
+    }
+    public String getCbAmanah(){
+        return sharedPref.getString(Constants.Preferences.CB_AMANAH, "false");
+    }
+
     public void setReadPreScreening(String status){
         spEditor.putString(Constants.Preferences.READ_PRESCREENING,status);
         spEditor.commit();

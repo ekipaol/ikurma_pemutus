@@ -47,7 +47,8 @@ public class ActivityFotoKelengkapanDokumen extends AppCompatActivity {
         setContentView(R.layout.activity_foto_kelengkapan_dokumen);
         ButterKnife.bind(this);
         AppUtil.toolbarRegular(this, "Preview Foto");
-        //Load foto, ambil dari intent ya kalo udah ada webservicenya, ini masi di pantek soalnya
+
+
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.drawable.banner_placeholder)

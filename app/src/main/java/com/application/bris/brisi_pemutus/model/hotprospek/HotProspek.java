@@ -15,6 +15,8 @@ public class HotProspek implements Serializable {
     private String id_st_aplikasi;
     @SerializedName("KODE_PRODUK")
     private String kode_produk;
+    @SerializedName("NAMA_TUJUAN")
+    private String nama_tujuan;
     @SerializedName("PLAFOND_INDUK")
     private String plafond_induk;
     @SerializedName("KLASIFIKASI_KREDIT")
@@ -33,6 +35,24 @@ public class HotProspek implements Serializable {
     private String jw;
     @SerializedName("NAMA_DEBITUR_1")
     private String nama_debitur;
+    @SerializedName("ID_PROGRAM")
+    private String idProgram;
+
+    public String getIdProgram() {
+        return idProgram;
+    }
+
+    public void setIdProgram(String idProgram) {
+        this.idProgram = idProgram;
+    }
+
+    public String getNama_tujuan() {
+        return nama_tujuan;
+    }
+
+    public void setNama_tujuan(String nama_tujuan) {
+        this.nama_tujuan = nama_tujuan;
+    }
 
     public String getFid_cif_las() {
         return fid_cif_las;

@@ -13,7 +13,7 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/main_green_stroke_color">
+        android:color="#FFDF00">
     </stroke>
 
 </shape>

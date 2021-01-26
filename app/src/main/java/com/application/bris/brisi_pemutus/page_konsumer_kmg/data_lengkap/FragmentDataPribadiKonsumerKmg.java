@@ -28,7 +28,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 @SuppressLint("ValidFragment")
@@ -186,7 +185,7 @@ public class FragmentDataPribadiKonsumerKmg extends Fragment implements Step {
     private String val_TipePendapatan ="";
     private String val_Jenkel ="";
 
-    private Realm realm;
+
 
 
 
@@ -202,7 +201,6 @@ public class FragmentDataPribadiKonsumerKmg extends Fragment implements Step {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ao_fragment_data_pribadi_konsumer_kmg, container, false);
         ButterKnife.bind(this, view);
-        realm = Realm.getDefaultInstance();
 //        onSelectDialog();
 
 

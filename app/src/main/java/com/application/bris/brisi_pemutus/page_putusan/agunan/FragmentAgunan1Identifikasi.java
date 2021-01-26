@@ -127,6 +127,17 @@ public class FragmentAgunan1Identifikasi extends Fragment implements Step {
     @BindView(R.id.et_permukaan_tanah)
     ExtendedEditText et_permukaan_tanah;
 
+    //khusus FLPP
+    @BindView(R.id.tf_kode_wilayah)
+    TextFieldBoxes tf_kode_wilayah;
+    @BindView(R.id.et_kode_wilayah)
+    ExtendedEditText et_kode_wilayah;
+
+    @BindView(R.id.tf_no_rumah_flpp)
+    TextFieldBoxes tf_no_rumah_flpp;
+    @BindView(R.id.et_no_rumah_flpp)
+    ExtendedEditText et_no_rumah_flpp;
+
     @BindView(R.id.btn_set_loc)
     Button btn_set_loc;
 
@@ -173,6 +184,7 @@ public class FragmentAgunan1Identifikasi extends Fragment implements Step {
     public static String val_TptLahir ="";
     public static String val_TipePendapatan ="";
     public static String val_Jenkel ="";
+    private boolean isFlpp=false;
 
 
 
@@ -190,9 +202,10 @@ public class FragmentAgunan1Identifikasi extends Fragment implements Step {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.agunan_1_identifikasi, container, false);
         ButterKnife.bind(this,view);
-        et_permukaan_tanah=view.findViewById(R.id.et_permukaan_tanah);
-//        et_permukaan_tanah.setText(dataLengkap.getPERMUKAANTANAH());
+
+        otherViewChanges();
         setData();
+
         btn_set_loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -277,8 +290,33 @@ public class FragmentAgunan1Identifikasi extends Fragment implements Step {
         disableTextFocus(et_permukaan_tanah);
         et_permukaan_tanah.setText(dataLengkap.getPermukaanTanah());
 
+        if(isFlpp){
+            disableTextFocus(et_kode_wilayah);
+            et_kode_wilayah.setText(dataLengkap.getKodeWilayah());
+
+            disableTextFocus(et_no_rumah_flpp);
+            et_no_rumah_flpp.setText(dataLengkap.getNoAlamat());
+        }
 
 
+
+
+
+    }
+
+    private void otherViewChanges(){
+
+        //cek apakah pembiayaan FLPP
+        if(dataLengkap.getKodeWilayah()!=null&&!dataLengkap.getKodeWilayah().isEmpty()){
+            isFlpp=true;
+            tf_kode_wilayah.setVisibility(View.VISIBLE);
+            tf_no_rumah_flpp.setVisibility(View.VISIBLE);
+        }
+        else{
+            tf_kode_wilayah.setVisibility(View.GONE);
+            tf_no_rumah_flpp.setVisibility(View.GONE);
+
+        }
     }
 
 

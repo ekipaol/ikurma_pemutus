@@ -14,6 +14,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.disposisi.Disposisi;
 import com.application.bris.brisi_pemutus.page_disposisi.view.DetailDisposisiActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
@@ -27,6 +28,7 @@ public class AdapterDaftarDisposisi extends RecyclerView.Adapter<AdapterDaftarDi
     private Context context;
     private List<Disposisi> data;
     private List<Disposisi> datafiltered;
+    AppPreferences appPreferences;
 
     public AdapterDaftarDisposisi(Context context, List<Disposisi> data) {
         this.context = context;

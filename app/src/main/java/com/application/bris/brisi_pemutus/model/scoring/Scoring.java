@@ -25,6 +25,10 @@ public class Scoring {
     public Long rPCRATIO;
     @SerializedName("RATIO_AGUNAN")
     public Long ratioAgunan;
+    @SerializedName("CURRENT_RATIO")
+    public Long currentratio;
+    @SerializedName("PROFITABILITY")
+    public Long profitabiility;
     @SerializedName("REPUTASI_USAHA")
     public Long rEPUTASIUSAHA;
     @SerializedName("hasil")
@@ -50,6 +54,22 @@ public class Scoring {
         this.kETERGANTUNGANSUPPLIER = kETERGANTUNGANSUPPLIER;
         this.pROSPEKUSAHA = pROSPEKUSAHA;
         this.ratioAgunan=ratioAgunan;
+    }
+
+    public Long getCurrentratio() {
+        return currentratio;
+    }
+
+    public void setCurrentratio(Long currentratio) {
+        this.currentratio = currentratio;
+    }
+
+    public Long getProfitabiility() {
+        return profitabiility;
+    }
+
+    public void setProfitabiility(Long profitabiility) {
+        this.profitabiility = profitabiility;
     }
 
     public Long getRatioAgunan() {

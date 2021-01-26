@@ -27,6 +27,7 @@ import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
 import com.application.bris.brisi_pemutus.model.keyvalue.keyvalue;
+import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
@@ -114,6 +115,26 @@ public class Agunan3Retry extends Fragment implements Step, KeyValueListener {
     @BindView(R.id.et_nkr_pasar)
     ExtendedEditText et_nkr_pasar;
 
+    @BindView(R.id.tf_no_bast)
+    TextFieldBoxes tf_no_bast;
+    @BindView(R.id.et_no_bast)
+    ExtendedEditText et_no_bast;
+
+    @BindView(R.id.tf_tanggal_bast)
+    TextFieldBoxes tf_tanggal_bast;
+    @BindView(R.id.et_tanggal_bast)
+    ExtendedEditText et_tanggal_bast;
+
+    @BindView(R.id.tf_no_slf)
+    TextFieldBoxes tf_no_slf;
+    @BindView(R.id.et_nomor_slf)
+    ExtendedEditText et_nomor_slf;
+
+    @BindView(R.id.tf_tanggal_slf)
+    TextFieldBoxes tf_tanggal_slf;
+    @BindView(R.id.et_tanggal_slf)
+    ExtendedEditText et_tanggal_slf;
+
 
 
     private Calendar calLahir;
@@ -127,7 +148,7 @@ public class Agunan3Retry extends Fragment implements Step, KeyValueListener {
     public static SimpleDateFormat dateClient = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     public static SimpleDateFormat dateServer = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     private Agunan dataAgunan;
-    private DataLengkap dataLengkapContoh;
+
 
     public static String val_NamaAlias ="";
     public static String val_NoKtpPasangan ="";
@@ -153,13 +174,11 @@ public class Agunan3Retry extends Fragment implements Step, KeyValueListener {
     public static String val_TipePendapatan ="";
     public static String val_Jenkel ="";
 
-String agunanMbakMini;
+    private boolean isFlpp=false;
+
+
 
     public Agunan3Retry() {
-    }
-
-    public Agunan3Retry(DataLengkap mdataLengkap) {
-        dataLengkapContoh = mdataLengkap;
     }
 
     public Agunan3Retry(Agunan mdataLengkap) {
@@ -173,6 +192,9 @@ String agunanMbakMini;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.agunan_3_uraian_bangunan, container, false);
         ButterKnife.bind(this, view);
+
+        otherViewChanges();
+
          setData();
      //   Log.d("kota dom ekipaol",dataLengkapContoh.getKotaDom());
 //        et_alamat_imb.setText(dataAgunan.getNamaAoSilang());
@@ -229,6 +251,15 @@ String agunanMbakMini;
             et_nkr_pasar.setText(dataAgunan.getNkrPasarBRINS());
         }
 
+        if(isFlpp){
+            et_no_bast.setText(dataAgunan.getNoBast());
+            et_nomor_slf.setText(dataAgunan.getNoSlf());
+
+            et_tanggal_bast.setText(AppUtil.parseTanggalGeneral(dataAgunan.getTglBast(),"ddMMyyyy","dd-MM-yyyy"));
+            et_tanggal_slf.setText(AppUtil.parseTanggalGeneral(dataAgunan.getTglSlf(),"ddMMyyyy","dd-MM-yyyy"));
+
+        }
+
 
 
     }
@@ -273,6 +304,27 @@ String agunanMbakMini;
 //
 //
 //    }
+
+    private void otherViewChanges(){
+
+        //cek apakah pembiayaan FLPP
+        if(dataAgunan.getKodeWilayah()!=null&&!dataAgunan.getKodeWilayah().isEmpty()){
+            isFlpp=true;
+            tf_no_bast.setVisibility(View.VISIBLE);
+            tf_no_slf.setVisibility(View.VISIBLE);
+            tf_tanggal_bast.setVisibility(View.VISIBLE);
+            tf_tanggal_slf.setVisibility(View.VISIBLE);
+            tf_alamat_imb.setVisibility(View.GONE);
+        }
+        else{
+            tf_no_bast.setVisibility(View.GONE);
+            tf_no_slf.setVisibility(View.GONE);
+            tf_tanggal_bast.setVisibility(View.GONE);
+            tf_tanggal_slf.setVisibility(View.GONE);
+
+
+        }
+    }
 
     private void disableTextFocus(ExtendedEditText et){
         et.setFocusable(false);

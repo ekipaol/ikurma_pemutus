@@ -32,7 +32,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
+
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class FragmentDataPribadiPurna extends Fragment implements Step{
@@ -200,8 +200,6 @@ public class FragmentDataPribadiPurna extends Fragment implements Step{
     private String val_Jenkel = "";
     private String val_Referensi = "";
 
-    private Realm realm;
-
     int umur = 0;
     String tglLahirOri = "";
 
@@ -224,7 +222,7 @@ public class FragmentDataPribadiPurna extends Fragment implements Step{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ao_fragment_datapribadi_purna, container, false);
         ButterKnife.bind(this, view);
-        realm = Realm.getDefaultInstance();
+
         apiClientAdapter = new ApiClientAdapter(getContext());
 
 

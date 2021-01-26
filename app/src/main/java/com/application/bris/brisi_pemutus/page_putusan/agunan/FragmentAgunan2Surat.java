@@ -2,9 +2,15 @@ package com.application.bris.brisi_pemutus.page_putusan.agunan;
 
 
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +27,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.text.InputType;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 import com.application.bris.brisi_pemutus.R;
@@ -28,6 +37,7 @@ import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.keyvalue.keyvalue;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenKprActivity;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.BitmapImageViewRounded;
@@ -44,6 +54,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
@@ -97,6 +108,25 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
 
     @BindView(R.id.img_bpn)
     BitmapImageViewRounded img_bpn;
+
+    @BindView(R.id.cl_dok_bpn)
+    ConstraintLayout cl_dok_bpn;
+
+    @BindView(R.id.cl_foto_bpn)
+    ConstraintLayout cl_foto_bpn;
+
+    @BindView(R.id.ll_foto_pbb)
+    LinearLayout ll_foto_pbb;
+
+    @BindView(R.id.ll_foto_imb)
+    LinearLayout ll_foto_imb;
+
+    @BindView(R.id.img_bpn2)
+    ImageView img_bpn2;
+    @BindView(R.id.img_pbb)
+    ImageView img_pbb;
+    @BindView(R.id.img_imb)
+    ImageView img_imb;
 
 
     private Calendar calLahir;
@@ -188,31 +218,92 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
 //                                .diskCacheStrategy(DiskCacheStrategy.ALL);
 
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBbpn())
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_bpn.setImageBitmap(resource);
+        //IMAGES AND DOCUMENTS
 
-                    }
-                });
+//        Toasty.info(getContext(),"ada pantekan id foto pbb");
+//        dataLengkap.setIdPhotoTBImb(100);
+//        dataLengkap.setIdPhotoTBPbb(120);
 
-        img_bpn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
-                intent.putExtra("id_foto",(dataLengkap.getIdPhotoTBbpn()));
-                startActivity(intent);
-            }
-        });
+        //kalo foto pbb tidak kosong, berarti ini halaman KPR, jadi dokumen BPNnya dalam bentuk PDF bukan foto
+        if(dataLengkap.getIdPhotoTBPbb()!=null&&dataLengkap.getIdPhotoTBPbb()!=0){
 
+            //layout dokumen bpn tampilin
+            cl_dok_bpn.setVisibility(View.VISIBLE);
 
+            //layout foto bpn ilangin
+            cl_foto_bpn.setVisibility(View.GONE);
+
+            ll_foto_imb.setVisibility(View.VISIBLE);
+            ll_foto_pbb.setVisibility(View.VISIBLE);
+
+            //onclick listener khusus buat pdf
+            onClickLihatPdf(img_bpn2,dataLengkap.getIdPhotoTBbpn());
 
 
+            Glide.with(getActivity())
+                    .asBitmap()
+                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBPbb())
+                    .apply(options)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            img_pbb.setImageBitmap(resource);
 
+                        }
+                    });
+
+            img_pbb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                    intent.putExtra("id_foto",(dataLengkap.getIdPhotoTBPbb()));
+                    startActivity(intent);
+                }
+            });
+
+            Glide.with(getActivity())
+                    .asBitmap()
+                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBImb())
+                    .apply(options)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            img_imb.setImageBitmap(resource);
+
+                        }
+                    });
+
+            img_imb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                    intent.putExtra("id_foto",(dataLengkap.getIdPhotoTBImb()));
+                    startActivity(intent);
+                }
+            });
+        }
+        else{
+            Glide.with(getActivity())
+                    .asBitmap()
+                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBbpn())
+                    .apply(options)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            img_bpn.setImageBitmap(resource);
+
+                        }
+                    });
+
+            img_bpn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(getContext(), ActivityFotoKelengkapanDokumen.class);
+                    intent.putExtra("id_foto",(dataLengkap.getIdPhotoTBbpn()));
+                    startActivity(intent);
+                }
+            });
+        }
 
 
 
@@ -251,6 +342,40 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
         else if (title.equalsIgnoreCase("Hub nasabah dengan pemegang hak")){
             et_hub_nasabah_dengan_pemegang_hak.setText(data.getName());
         }
+    }
+
+    private void onClickLihatPdf(View butt, final int id_pdf){
+        butt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url_pdf = UriApi.Baseurl.URL + UriApi.getPdf.urlPdf + id_pdf;
+                Uri external = Uri.parse(url_pdf);
+                Intent intentPdf;
+                intentPdf = new Intent(Intent.ACTION_VIEW);
+                intentPdf.setDataAndType(external, "application/pdf");
+                try {
+                    startActivity(intentPdf);
+                } catch (ActivityNotFoundException e) {
+                    // No application to view, ask to download one
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Anda Belum Memiliki Aplikasi untuk Membaca PDF");
+                    builder.setMessage("Download Aplikasi PDF dari Play Store??");
+                    builder.setPositiveButton("Download",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent marketIntent = new Intent(Intent.ACTION_VIEW);
+                                    marketIntent
+                                            .setData(Uri
+                                                    .parse("market://details?id=com.adobe.reader"));
+                                    startActivity(marketIntent);
+                                }
+                            });
+                    builder.setNegativeButton("Batal", null);
+                    builder.create().show();
+                }
+            }
+        });
     }
 }
 

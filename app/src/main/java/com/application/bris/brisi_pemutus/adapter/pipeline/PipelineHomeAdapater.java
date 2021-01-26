@@ -16,6 +16,7 @@ import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.PutusanFrontMenuKpr;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
@@ -76,6 +77,10 @@ public class PipelineHomeAdapater extends RecyclerView.Adapter<PipelineHomeAdapa
             holder.tv_produk.setText(data.get(position).getNama_produk());
         }
 
+        if(data.get(position).getKODE_PRODUK()==null){
+            data.get(position).setKODE_PRODUK("0");
+        }
+
         holder.tv_nama.setText(data.get(position).getNama_nasabah());
         holder.tv_id_aplikasi.setText("ID Aplikasi : "+data.get(position).getId_aplikasi());
         holder.tv_plafond.setText(AppUtil.parseRupiah(data.get(position).getPlafond_induk()));
@@ -116,12 +121,33 @@ public class PipelineHomeAdapater extends RecyclerView.Adapter<PipelineHomeAdapa
             public void onClick(View view) {
 
 
-                if(data.get(position).getTipe_produk().equalsIgnoreCase("kmg")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("428")){
+                //check apakah dia purna prapurna (kmg/kmj mikro/konsumer) dan kmg embp (mikro/konsumer)
+
+                //LOAN TYPE MIKRO
+                //1	428		Multiguna Mikro EmBP
+                //2	428		Multiguna Mikro non EmBP
+                //3	316		Multijasa Mikro EmBP
+                //4	317		KMJ Purna Faedah iB Mikro
+                //5	321		KMJ Pra Purna EmBP iB Mikro
+                //6	429		KMG Purna Faedah iB Mikro
+                //7	430		KMG Pra Purna EmBP iB Mikro
+                //8	321		KMJ Pra Purna Faedah iB Mikro
+                //9	430		KMG Pra Purna Faedah iB Mikro
+
+
+
+                if(data.get(position).getTipe_produk().equalsIgnoreCase("kmg")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("428")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("429")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("430")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("316")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("317")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("321")){
                     Intent intent=new Intent(context, PutusanFrontMenuKmg.class);
                     intent.putExtra("data_putusan",data.get(position));
                     intent.putExtra("jenisPembiayaan","kmg");
                     context.startActivity(intent);
 
+                }
+                else  if(data.get(position).getTipe_produk().equalsIgnoreCase("kpr")){
+                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                    intent.putExtra("data_putusan",data.get(position));
+                    intent.putExtra("jenisPembiayaan","kpr");
+                    holder.iv_foto.getContext().startActivity(intent);
                 }
                 else{
                     Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
@@ -152,12 +178,18 @@ public class PipelineHomeAdapater extends RecyclerView.Adapter<PipelineHomeAdapa
 
 
 
-                if(data.get(position).getTipe_produk().equalsIgnoreCase("kmg")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("428")){
+                if(data.get(position).getTipe_produk().equalsIgnoreCase("kmg")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("428")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("429")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("430")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("316")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("317")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("321")){
                     Intent intent=new Intent(context, PutusanFrontMenuKmg.class);
                     intent.putExtra("data_putusan",data.get(position));
                     intent.putExtra("jenisPembiayaan","kmg");
                     context.startActivity(intent);
 
+                }
+                else  if(data.get(position).getTipe_produk().equalsIgnoreCase("kpr")){
+                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                    intent.putExtra("data_putusan",data.get(position));
+                    intent.putExtra("jenisPembiayaan","kpr");
+                    holder.iv_foto.getContext().startActivity(intent);
                 }
                 else{
                     Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);

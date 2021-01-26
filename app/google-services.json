@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "205582530442",
-    "firebase_url": "https://brisi-pemutus.firebaseio.com",
-    "project_id": "brisi-pemutus",
-    "storage_bucket": "brisi-pemutus.appspot.com"
+    "project_number": "1027333736964",
+    "firebase_url": "https://i-kurma.firebaseio.com",
+    "project_id": "i-kurma",
+    "storage_bucket": "i-kurma.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:205582530442:android:15c830eddca1b3f2",
+        "mobilesdk_app_id": "1:1027333736964:android:4af4eaf3859b561da54351",
         "android_client_info": {
           "package_name": "com.application.bris.brisi_pemutus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "205582530442-es9v3cba0afbvk148c63pepg59bcjb4q.apps.googleusercontent.com",
+          "client_id": "1027333736964-na3k4rctrpjt4pg4cfneoc9v896hnabs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDU4UJYPZvAINRB7QbB1R0gyKvjbLJyQtY"
+          "current_key": "AIzaSyDRTrOiNnUdFktFIZVikAC_2IBLhvrBrEw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "205582530442-es9v3cba0afbvk148c63pepg59bcjb4q.apps.googleusercontent.com",
+              "client_id": "1027333736964-na3k4rctrpjt4pg4cfneoc9v896hnabs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqPutusan;
+import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqUid;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.config.pipelinehome.Pipelinehome;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
@@ -172,7 +172,7 @@ public class PutusanActivity extends AppCompatActivity implements SwipeRefreshLa
         //  dataUser = getListUser();
         //progressbar_loading.setVisibility(View.VISIBLE);
         shimmer.setVisibility(View.VISIBLE);
-        ReqPutusan req = new ReqPutusan();
+        ReqUid req = new ReqUid();
         AppPreferences appPreferences=new AppPreferences(PutusanActivity.this);
         req.setUid(appPreferences.getUid());
         Call<ParseResponseArr> call = apiClientAdapter.getApiInterface().listPemutus(req);
@@ -218,7 +218,7 @@ public class PutusanActivity extends AppCompatActivity implements SwipeRefreshLa
         //  dataUser = getListUser();
         //progressbar_loading.setVisibility(View.VISIBLE);
         shimmer.setVisibility(View.VISIBLE);
-        ReqPutusan req = new ReqPutusan();
+        ReqUid req = new ReqUid();
         AppPreferences appPreferences=new AppPreferences(PutusanActivity.this);
         req.setUid(appPreferences.getUid());
 

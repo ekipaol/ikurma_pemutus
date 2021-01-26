@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/layoutcoordinator"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <include layout="@layout/toolbar_regular" />
+    <include layout="@layout/loading" />
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:layout_marginTop="@dimen/toolbar_height_default"
+        >
+
+
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_prauji_flpp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animWhale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lottie_fileName="empty_whale.json"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"/>
+
+            <TextView
+                android:id="@+id/tvWhale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/animWhale"
+                android:visibility="invisible"
+                android:layout_centerInParent="true"
+                android:text="Belum ada user"
+                android:textColor="@android:color/darker_gray"
+                />
+        </RelativeLayout>
+
+        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--android:id="@+id/fb_advanced_search"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:src="@drawable/ic_search_black_24dp"-->
+        <!--/>-->
+
+    </RelativeLayout>
+
+
+
+
+    <include layout="@layout/item_daftar_disposisi_shimmer"/>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

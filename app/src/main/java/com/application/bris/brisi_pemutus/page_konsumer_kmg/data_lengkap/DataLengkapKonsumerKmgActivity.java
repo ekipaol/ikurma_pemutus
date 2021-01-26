@@ -31,7 +31,6 @@ import com.stepstone.stepper.VerificationError;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +44,7 @@ public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements
     @BindView(R.id.btn_back)
     ImageView btn_back;
 
-    private Realm realm;
+
     private static final String CURRENT_STEP_POSITION_KEY = "position";
     public static String cif;
     public static int uid;
@@ -70,7 +69,6 @@ public class DataLengkapKonsumerKmgActivity extends AppCompatActivity implements
         //ceklis telah melihat datalengkap
 //        appPreferences.setReadDataLengkap("yes");
 
-        realm = Realm.getDefaultInstance();
         apiClientAdapter = new ApiClientAdapter(this);
         appPreferences = new AppPreferences(this);
         cif = getIntent().getStringExtra("cif");

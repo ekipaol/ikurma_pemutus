@@ -503,12 +503,20 @@ public class PutusanFrontMenuKmg extends AppCompatActivity {
                     Log.d("purnafaedah","masuk ke prapurna");
                 }
 
-                //seleksi untuk mikro purna dan prapurna, if-nya dipisah, soalnya ngeri, takut ngegabungin and dan or dalam satu if, takut ga masuk
+                //seleksi untuk mikro purna dan prapurna KMG DAN KMJ, if-nya dipisah, soalnya ngeri, takut ngegabungin and dan or dalam satu if, takut ga masuk
                 else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("429")){
                     intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPurnaActivity.class);
                     Log.d("purnafaedah","masuk ke purna");
                 }
                 else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("430")){
+                    intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPrapurnaActivity.class);
+                    Log.d("purnafaedah","masuk ke prapurna");
+                }
+                else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("317")){
+                    intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPurnaActivity.class);
+                    Log.d("purnafaedah","masuk ke purna");
+                }
+                else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("321")){
                     intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPrapurnaActivity.class);
                     Log.d("purnafaedah","masuk ke prapurna");
                 }
@@ -807,12 +815,20 @@ public class PutusanFrontMenuKmg extends AppCompatActivity {
                     Log.d("purnafaedah","masuk ke prapurna");
                 }
 
-                //seleksi untuk mikro purna dan prapurna, if-nya dipisah, soalnya ngeri, takut ngegabungin and dan or dalam satu if, takut ga masuk
+                //seleksi untuk mikro purna dan prapurna KMG DAN KMJ, if-nya dipisah, soalnya ngeri, takut ngegabungin and dan or dalam satu if, takut ga masuk
                 else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("429")){
                     intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPurnaActivity.class);
                     Log.d("purnafaedah","masuk ke purna");
                 }
                 else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("430")){
+                    intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPrapurnaActivity.class);
+                    Log.d("purnafaedah","masuk ke prapurna");
+                }
+                else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("317")){
+                    intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPurnaActivity.class);
+                    Log.d("purnafaedah","masuk ke purna");
+                }
+                else if(superData.getLoanType()!=null&&superData.getLoanType().equalsIgnoreCase("321")){
                     intent = new Intent(PutusanFrontMenuKmg.this, KelengkapanDokumenPrapurnaActivity.class);
                     Log.d("purnafaedah","masuk ke prapurna");
                 }
@@ -1225,7 +1241,7 @@ public class PutusanFrontMenuKmg extends AppCompatActivity {
         super.onResume();
 
         //memberi ceklis di modul yang sudah dilihat user, berdasarkan preference (hanya di halaman putusan. tidak di halaman riwayat
-        if(!superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
+        if(superData.getAsalHalaman()!=null&&!superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
             if(appPreferences.getReadPreScreening().equalsIgnoreCase("yes")){
                 check_prescreening.setVisibility(View.VISIBLE);
             }
@@ -1296,6 +1312,21 @@ public class PutusanFrontMenuKmg extends AppCompatActivity {
             if(dataPutusan.getKODE_PRODUK()!=null&&!dataPutusan.getKODE_PRODUK().isEmpty()&&dataPutusan.getKODE_PRODUK().equalsIgnoreCase("428")){
                 call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
             }
+            else if(dataPutusan.getKODE_PRODUK()!=null&&!dataPutusan.getKODE_PRODUK().isEmpty()&&dataPutusan.getKODE_PRODUK().equalsIgnoreCase("429")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusan.getKODE_PRODUK()!=null&&!dataPutusan.getKODE_PRODUK().isEmpty()&&dataPutusan.getKODE_PRODUK().equalsIgnoreCase("430")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusan.getKODE_PRODUK()!=null&&!dataPutusan.getKODE_PRODUK().isEmpty()&&dataPutusan.getKODE_PRODUK().equalsIgnoreCase("316")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusan.getKODE_PRODUK()!=null&&!dataPutusan.getKODE_PRODUK().isEmpty()&&dataPutusan.getKODE_PRODUK().equalsIgnoreCase("317")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusan.getKODE_PRODUK()!=null&&!dataPutusan.getKODE_PRODUK().isEmpty()&&dataPutusan.getKODE_PRODUK().equalsIgnoreCase("321")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
             else{
                 call = apiClientAdapter.getApiInterface().detailHotprospek(req);
             }
@@ -1303,6 +1334,22 @@ public class PutusanFrontMenuKmg extends AppCompatActivity {
         else{
             //seleksi apakah dia multifaedah mikro atau kmg biasa
             if(dataPutusanAkad.getKODE_PRODUK()!=null&&!dataPutusanAkad.getKODE_PRODUK().isEmpty()&&dataPutusanAkad.getKODE_PRODUK().equalsIgnoreCase("428")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+
+            else if(dataPutusanAkad.getKODE_PRODUK()!=null&&!dataPutusanAkad.getKODE_PRODUK().isEmpty()&&dataPutusanAkad.getKODE_PRODUK().equalsIgnoreCase("429")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusanAkad.getKODE_PRODUK()!=null&&!dataPutusanAkad.getKODE_PRODUK().isEmpty()&&dataPutusanAkad.getKODE_PRODUK().equalsIgnoreCase("430")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusanAkad.getKODE_PRODUK()!=null&&!dataPutusanAkad.getKODE_PRODUK().isEmpty()&&dataPutusanAkad.getKODE_PRODUK().equalsIgnoreCase("316")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusanAkad.getKODE_PRODUK()!=null&&!dataPutusanAkad.getKODE_PRODUK().isEmpty()&&dataPutusanAkad.getKODE_PRODUK().equalsIgnoreCase("317")){
+                call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
+            }
+            else if(dataPutusanAkad.getKODE_PRODUK()!=null&&!dataPutusanAkad.getKODE_PRODUK().isEmpty()&&dataPutusanAkad.getKODE_PRODUK().equalsIgnoreCase("321")){
                 call = apiClientAdapter.getApiInterface().detailHotprospekMikro(req);
             }
             else{

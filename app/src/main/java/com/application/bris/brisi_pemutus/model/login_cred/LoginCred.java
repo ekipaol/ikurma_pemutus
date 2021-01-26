@@ -39,6 +39,16 @@ public class LoginCred {
     private String kode_ao;
     @SerializedName("kantor")
     private String kantor;
+    @SerializedName("cb_amanah")
+    private String cbAmanah;
+
+    public String getCbAmanah() {
+        return cbAmanah;
+    }
+
+    public void setCbAmanah(String cbAmanah) {
+        this.cbAmanah = cbAmanah;
+    }
 
     public String getNama_kanwil() {
         return nama_kanwil;

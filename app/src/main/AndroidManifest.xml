@@ -2,19 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.application.bris.brisi_pemutus">
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
         android:name=".database.Realm.BaseApp"
@@ -26,7 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".page_konsumer_purna.page_konsumer_purna.kelengkapan_dokumen.KelengkapanDokumenPrapurnaActivity"></activity>
+        <activity android:name=".page_flpp.DetailHasilPraujiActivity"></activity>
+        <activity android:name=".page_flpp.HasilPraujiFlppActivity" />
+        <activity android:name=".page_salam_digital.MonitoringSalamDigitalActivity" />
+        <activity android:name=".page_monitoring.MonitoringKcActivity" />
+        <activity android:name=".page_monitoring.ActivityRiwayatMutasi" />
+        <activity android:name=".page_monitoring.MonitoringKcpActivity" />
+        <activity android:name=".page_monitoring.MonitoringAoActivity" />
+        <activity android:name=".page_monitoring.MonitoringNasabahActivity" />
+        <activity android:name=".page_monitoring.DetailMonitoringNasabahActivity" />
+        <activity android:name=".page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenKprActivity" />
+        <activity android:name=".page_konsumer_kpr.scoring.ScoringKprActivity" />
+        <activity android:name=".page_konsumer_kpr.data_finansial.DataFinansialKprActivity" />
+        <activity android:name=".page_konsumer_kpr.sektor_ekonomi.SektorEkonomiKprActivity" />
+        <activity android:name=".page_konsumer_kpr.prescreening.DetailSlikKprActivity" />
+        <activity android:name=".page_konsumer_kpr.prescreening.PrescreeningKprActivity" />
+        <activity android:name=".page_konsumer_kpr.data_lengkap.DataLengkapKprActivity" />
+        <activity android:name=".page_ao_silang.PilihAoSilang.KonsumerKPRPilihAoSilangActivity" />
+        <activity android:name=".page_konsumer_kpr.PutusanFrontMenuKpr" />
+        <activity android:name=".page_konsumer_purna.page_konsumer_purna.kelengkapan_dokumen.KelengkapanDokumenPrapurnaActivity" />
         <activity android:name=".page_konsumer_purna.page_konsumer_purna.kelengkapan_dokumen.KelengkapanDokumenPurnaActivity" />
         <activity android:name=".page_konsumer_purna.page_konsumer_purna.data_finansial.DataFinansialPurnaActivity" />
         <activity android:name=".page_konsumer_purna.page_konsumer_purna.data_lengkap.DataLengkapActivityPurna" />
@@ -72,13 +77,10 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".map_agunan.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".page_putusan.menu.MenuDaftarPutusanActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -87,27 +89,16 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <activity android:name=".page_putusan.menu.MenuDaftarPutusanActivity" />
         <activity android:name=".map_agunan.MapAgunanActivity" />
         <activity android:name=".page_putusan.lkn.LknActivity" />
         <activity android:name=".page_aom.info_agunan.SetPengikatanActivity" />
         <activity android:name=".page_aom.info_agunan.InfoAgunanActivity" />
         <activity android:name=".page_putusan.agunan_retry.AgunanTerikatActivity" />
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_kurma_notif_large" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <activity android:name=".page_putusan.scoring.ScoringActivity" />
         <activity android:name=".page_putusan.agunan_retry.ActivityAgunanRetry" />
         <activity android:name=".page_putusan.rpc.RpcActivity" />
-        <activity android:name=".page_putusan.prescreening.PrescreeningActivity" />
+        <activity android:name=".page_putusan.prescreening.PrescreeningActivity" /> <!-- harus ditambahkan meta data dibawah ini, supaya walaupun aplikasi ada di background, dia tetap muncul popup notifikasi dari atas -->
+        <!-- pastikan isi dari default channel id, sesuai dengan nama channel id yang dibuat di notification service -->
         <activity android:name=".page_putusan.sektor_ekonomi.SektorEkonomiActivity" />
         <activity android:name=".page_putusan.history.HistoryActivity" />
         <activity android:name=".page_putusan.kelengkapan_dokumen.ActivityKelengkapanDokumen" />
@@ -128,7 +119,23 @@
         <activity android:name=".page_daftar_user.view.MenuDaftarUser" />
         <activity android:name=".view.corelayout.CoreLayoutActivity" />
         <activity android:name=".page_aom.view.PutusanActivity" />
-        <activity android:name=".page_daftar_user.view.UserActivity" /> <!-- <service -->
+        <activity android:name=".page_daftar_user.view.UserActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_kurma_notif_large" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" /> <!-- <service -->
         <!-- android:name="com.google.firebase.messaging.FirebaseMessagingService" -->
         <!-- android:exported="false"> -->
         <!-- <intent-filter> -->
@@ -151,5 +158,14 @@
             </intent-filter>
         </service>
     </application>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

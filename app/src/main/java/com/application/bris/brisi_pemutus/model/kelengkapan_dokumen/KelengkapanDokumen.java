@@ -33,6 +33,9 @@ public class KelengkapanDokumen implements Serializable {
     @SerializedName("SURAT_PERNYATAAN_KUR")
     private boolean suratPernyataanKur;
 
+    @SerializedName("NO_SKU")
+    public String noSku;
+
     @SerializedName("ID_DOKUMEN_APLIKASI")
     private int id_foto_dokumen_aplikasi;
     @SerializedName("ID_DOKUMEN_SURAT_NIKAH")
@@ -55,6 +58,14 @@ public class KelengkapanDokumen implements Serializable {
     private int id_foto_dokumen_lunas_kur;
     @SerializedName("ID_DOKUMEN_PAS_PHOTO")
     private int id_foto_dokumen_pas_photo;
+
+    public String getNoSku() {
+        return noSku;
+    }
+
+    public void setNoSku(String noSku) {
+        this.noSku = noSku;
+    }
 
     public boolean getSuratPernyataanNasabah() {
         return suratPernyataanNasabah;

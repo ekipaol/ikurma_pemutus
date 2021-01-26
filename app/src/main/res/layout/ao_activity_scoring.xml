@@ -62,6 +62,7 @@
                 app:secondaryColor="@color/colorPrimary"
                 app:primaryColor="@color/colorPrimary"
                 app:labelText="Ratio Agunan"
+                android:visibility="gone"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 app:useDenseSpacing="true"
@@ -69,6 +70,53 @@
 
                 <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                     android:id="@+id/et_ratio_agunan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/tf_currentratio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_salary"
+                app:isResponsiveIconColor="true"
+                app:panelBackgroundColor="@color/colorBgEdittext"
+                app:secondaryColor="@color/colorPrimary"
+                app:primaryColor="@color/colorPrimary"
+                app:labelText="Current Ratio"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:useDenseSpacing="true"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/et_currentratio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/tf_profitability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_salary"
+                app:isResponsiveIconColor="true"
+                app:panelBackgroundColor="@color/colorBgEdittext"
+                app:secondaryColor="@color/colorPrimary"
+                app:primaryColor="@color/colorPrimary"
+                app:labelText="Profitability"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:useDenseSpacing="true"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/et_profitability"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

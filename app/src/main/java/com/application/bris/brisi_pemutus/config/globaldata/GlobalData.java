@@ -86,6 +86,18 @@ public class GlobalData {
         data.add(new keyvalue("Profesional + Wiraswasta", "9"));
     }
 
+    public static void currentRatio(Context context, List<keyvalue> data){
+        data.add(new keyvalue("< 1", "1"));
+        data.add(new keyvalue("1 - 2", "2"));
+        data.add(new keyvalue("> 2", "3"));
+    }
+
+    public static void profitability(Context context, List<keyvalue> data){
+        data.add(new keyvalue("< 15%", "1"));
+        data.add(new keyvalue("15% - 25%", "2"));
+        data.add(new keyvalue("> 25%", "3"));
+    }
+
     public static void tujuanPenggunaan(Context context, List<keyvalue> data){
         data.add(new keyvalue("Barang Modal Kerja", "40"));
         data.add(new keyvalue("Investasi", "41"));

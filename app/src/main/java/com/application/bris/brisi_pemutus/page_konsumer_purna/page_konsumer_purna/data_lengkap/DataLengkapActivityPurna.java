@@ -32,7 +32,6 @@ import com.stepstone.stepper.VerificationError;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +44,7 @@ public class DataLengkapActivityPurna extends AppCompatActivity implements Stepp
     @BindView(R.id.btn_back)
     ImageView btn_back;
 
-    private Realm realm;
+
     private static final String CURRENT_STEP_POSITION_KEY = "position";
     public static String cif,approved, gimmick;
     public static int uid;
@@ -65,7 +64,6 @@ public class DataLengkapActivityPurna extends AppCompatActivity implements Stepp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ao_activity_datalengkap);
         ButterKnife.bind(this);
-        realm = Realm.getDefaultInstance();
         apiClientAdapter = new ApiClientAdapter(this);
         appPreferences = new AppPreferences(this);
         superData = (AllDataFront) getIntent().getSerializableExtra("superData");
@@ -116,7 +114,22 @@ public class DataLengkapActivityPurna extends AppCompatActivity implements Stepp
 //        req.setCif("81272");
 //        req.setIdAplikasi("100997");
 
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().inquiryDataLengkapKonsumerKmg(req);
+        Call<ParseResponse> call;
+
+        //purna mikro atau purna konsumer
+
+
+        //kalau kmg/kmg purna mikro
+        if(superData.getLoanType().equalsIgnoreCase("429")||superData.getLoanType().equalsIgnoreCase("430")||superData.getLoanType().equalsIgnoreCase("317")||superData.getLoanType().equalsIgnoreCase("321")){
+          call = apiClientAdapter.getApiInterface().inquiryDataLengkapKmgMikro(req);
+        }
+
+        //kalau kmg purna konsumer
+        else{
+           call = apiClientAdapter.getApiInterface().inquiryDataLengkapKonsumerKmg(req);
+        }
+
+
         call.enqueue(new Callback<ParseResponse>() {
             @Override
             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {

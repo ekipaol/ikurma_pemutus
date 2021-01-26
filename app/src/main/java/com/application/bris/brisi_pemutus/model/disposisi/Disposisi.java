@@ -14,6 +14,8 @@ public class Disposisi implements Serializable {
     private String RT_KTP;
     @SerializedName("RW_KTP")
     private String RW_KTP;
+    @SerializedName("RTRW_KTP")
+    private String RTRW_KTP;
     @SerializedName("TGL_CREATED")
     private String TGL_CREATED;
     @SerializedName("KODE_PRODUK")
@@ -48,6 +50,8 @@ public class Disposisi implements Serializable {
     private String KEL_KTP;
     @SerializedName("FID_APLIKASI")
     private String FID_APLIKASI;
+    @SerializedName("ID")
+    private String ID;
     @SerializedName("KEC_KTP")
     private String KEC_KTP;
     @Nullable
@@ -60,7 +64,13 @@ public class Disposisi implements Serializable {
     @SerializedName("TGL_ASSIGNED")
     private String TANGGAL_ASSIGNED;
 
+    public String getID() {
+        return ID;
+    }
 
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 
     @Nullable
     public String getTANGGAL_ASSIGNED() {
@@ -89,6 +99,14 @@ public class Disposisi implements Serializable {
 
     public String getRT_KTP() {
         return RT_KTP;
+    }
+
+    public String getRTRW_KTP() {
+        return RTRW_KTP;
+    }
+
+    public void setRTRW_KTP(String RTRW_KTP) {
+        this.RTRW_KTP = RTRW_KTP;
     }
 
     public void setRT_KTP(String RT_KTP) {

@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -47,6 +49,7 @@ public class HistoryActivity extends AppCompatActivity{
     private int idAplikasi;
     private ApiClientAdapter apiClientAdapter;
     public String dataStatus, dataFasilitas,dataCatatan;
+    AllDataFront superData;
 
 
     @Override
@@ -58,6 +61,7 @@ public class HistoryActivity extends AppCompatActivity{
 
         cif = getIntent().getStringExtra("cif");
         idAplikasi = getIntent().getIntExtra("idAplikasi", 0);
+        superData=(AllDataFront)getIntent().getSerializableExtra("superData");
 
         backgroundStatusBar();
         AppUtil.toolbarRegular(this, "History");
@@ -86,7 +90,20 @@ public class HistoryActivity extends AppCompatActivity{
 //        ReqHistoryPutusan req=new ReqHistoryPutusan();
 //                req.setCif(81857);
 //        req.setId_aplikasi(101678);
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().inquiryHistory(req);
+
+        Call<ParseResponse> call;
+
+        if(superData.getJenisPembiayaan().equalsIgnoreCase("kpr")){
+           call = apiClientAdapter.getApiInterface().inquiryHistoryKmg(req);
+        }
+        else if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+          call = apiClientAdapter.getApiInterface().inquiryHistoryKmg(req);
+        }
+        else{
+            call = apiClientAdapter.getApiInterface().inquiryHistory(req);
+        }
+
+
 
         call.enqueue(new Callback<ParseResponse>() {
             @Override

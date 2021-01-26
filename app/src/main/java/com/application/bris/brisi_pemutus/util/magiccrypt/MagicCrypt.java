@@ -21,6 +21,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 
+import com.application.bris.brisi_pemutus.BuildConfig;
 import com.application.bris.brisi_pemutus.util.Constants;
 import com.application.bris.brisi_pemutus.util.magiccrypt.lib.AESCrypt;
 import com.application.bris.brisi_pemutus.util.magiccrypt.lib.Crypt;
@@ -64,7 +65,7 @@ public class MagicCrypt {
 //     * @param key 傳入任意長度的密鑰字串
      */
     public MagicCrypt() {
-    	this(Constants.SECRET_KEY, 256);
+    	this(BuildConfig.MAGIC_CRYPT_KEY, 256);
     }
     
     public MagicCrypt(final String key) {

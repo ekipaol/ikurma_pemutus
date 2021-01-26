@@ -1665,7 +1665,15 @@ public class DataFinansialPurnaActivity extends AppCompatActivity  {
         //pantekan
 //        inquiryRPC req=new inquiryRPC(101928);
 //        Toast.makeText(DataFinansialPurnaActivity.this, "Id aplikasi masih hardcode", Toast.LENGTH_SHORT).show();
-        Call<ParseResponseDataInstansi> call = apiClientAdapter.getApiInterface().inquiryDataFinansialKmg(req);
+
+        Call<ParseResponseDataInstansi> call;
+        if(superData.getLoanType().equalsIgnoreCase("429")||superData.getLoanType().equalsIgnoreCase("430")||superData.getLoanType().equalsIgnoreCase("317")||superData.getLoanType().equalsIgnoreCase("321")){
+            call = apiClientAdapter.getApiInterface().inquiryDataFinansialKmgMikro(req);
+        }
+        else{
+            call = apiClientAdapter.getApiInterface().inquiryDataFinansialKmg(req);
+        }
+
         call.enqueue(new Callback<ParseResponseDataInstansi>() {
             @Override
             public void onResponse(Call<ParseResponseDataInstansi> call, Response<ParseResponseDataInstansi> response) {

@@ -223,6 +223,12 @@ public class FragmentDataPekerjaanPurna extends Fragment implements Step {
     @BindView(R.id.progress_kantor2)
     ProgressBar progress_kantor2;
 
+
+    @BindView(R.id.rl_fotokantor1)
+    RelativeLayout rl_fotokantor1;
+    @BindView(R.id.rl_fotokantor2)
+    RelativeLayout rl_fotokantor2;
+
     private Realm realm;
     private ApiClientAdapter apiClientAdapter;
     private AppPreferences appPreferences;
@@ -303,26 +309,44 @@ public class FragmentDataPekerjaanPurna extends Fragment implements Step {
 
         //PENGHILANGAN FIELD TERGANTUNG GIMMICK
 
-        //kmg embp dan pra purna embp
-        //26,27,28 -> kmg pra purna embp
-        //7 -> multifaedah mikro prapurna embp
+        //kmg/kmj embp
 
-        if (gimmick.equalsIgnoreCase("1") || gimmick.equalsIgnoreCase("26") || gimmick.equalsIgnoreCase("27") || gimmick.equalsIgnoreCase("28")|| gimmick.equalsIgnoreCase("7") ) {
+        if (gimmick.equalsIgnoreCase("1")||gimmick.equalsIgnoreCase("3") ) {
             tf_institusi_pembayaran_gaji_pensiun.setVisibility(View.GONE);
             tf_direct_marketing.setVisibility(View.GONE);
             tf_kategori_calon_nasabah_pensiunan.setVisibility(View.GONE);
-            Log.d("masuk if1","masuk1");
+            Log.d("masuk if1", "masuk1");
+        }
+
+
+        //         pra purna embp
+        //        //26,27,28 -> kmg pra purna embp
+        //        //7-> multifaedah mikro kmg prapurna embp
+        //        //5-> multifaedah mikro kmj  prapurna embp
+            else if( gimmick.equalsIgnoreCase("26") || gimmick.equalsIgnoreCase("27") || gimmick.equalsIgnoreCase("28")  || gimmick.equalsIgnoreCase("7")|| gimmick.equalsIgnoreCase("5")){
+
+            tf_bidang_pekerjaan.setVisibility(View.VISIBLE);
+            tf_namaperusahaan.setVisibility(View.VISIBLE);
+            tf_jenis_pekerjaan.setVisibility(View.VISIBLE);
+            tf_deskripsi_pekerjaan.setVisibility(View.VISIBLE);
+            tf_no_surat_rekomendasi.setVisibility(View.GONE);
+            tf_sisa_plafond_perusahaan.setVisibility(View.GONE);
+
+            }
 
 
             //purna
             //14,15,16 -> kmg purna
-            //6 -> multifaedah mikro purna
+            //6 -> multifaedah mikro purna kmg
+            //4 -> multifaedah mikro purna kmj
 
-        } else if (gimmick.equalsIgnoreCase("14") || gimmick.equalsIgnoreCase("15") || gimmick.equalsIgnoreCase("16")|| gimmick.equalsIgnoreCase("6")) {
+         else if (gimmick.equalsIgnoreCase("14") || gimmick.equalsIgnoreCase("15") || gimmick.equalsIgnoreCase("16")|| gimmick.equalsIgnoreCase("6")|| gimmick.equalsIgnoreCase("4")) {
             ubahFieldKhususPurna();
             Log.d("masuk if2","masuk2");
 
-        } else {
+        }
+         //ini untuk kmg dan kmj prapurna non embp
+         else {
             tf_bidang_pekerjaan.setVisibility(View.GONE);
             tf_namaperusahaan.setVisibility(View.GONE);
             tf_jenis_pekerjaan.setVisibility(View.GONE);
@@ -437,6 +461,8 @@ public class FragmentDataPekerjaanPurna extends Fragment implements Step {
         tf_kodeposperusahaan.setVisibility(View.GONE);
         btn_perusahaan.setVisibility(View.GONE);
         ll_alamatperusahaan.setVisibility(View.GONE);
+        rl_fotokantor1.setVisibility(View.GONE);
+        rl_fotokantor2.setVisibility(View.GONE);
 
     }
 

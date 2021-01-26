@@ -176,6 +176,79 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_hasil_prauji_flpp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_margin="7dp"
+                    app:cardCornerRadius="10dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <ImageView
+                            android:id="@+id/bt_hasil_prauji_flpp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/tv_notifikasi_hasil_prauji_flpp"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="5dp"
+                                    android:visibility="visible"
+                                    android:textColor="#fff"
+                                    android:textSize="10sp"
+                                    android:fontFamily="@font/ml"
+                                    android:textStyle="bold"
+                                    android:padding="4dp"
+                                    android:background="@drawable/roundbadge"/>
+                                <ImageView
+                                    android:id="@+id/ic_prauji_flpp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:src="@drawable/ic_daftar_disposisi"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hasil Pra Uji FLPP"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="10dp"
+                                    android:textSize="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_toRightOf="@id/ic_prauji_flpp"
+                                    android:textColor="@color/colorBlackHeader"/>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_alignParentRight="true"
+                                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                            </RelativeLayout>
+
+                        </FrameLayout>
+
+                    </FrameLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_putusan_koreksi"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"

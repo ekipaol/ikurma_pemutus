@@ -6,6 +6,11 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.application.bris.brisi_pemutus.page_monitoring.MonitoringAoActivity;
+import com.application.bris.brisi_pemutus.page_monitoring.MonitoringKcActivity;
+import com.application.bris.brisi_pemutus.page_monitoring.MonitoringKcpActivity;
+import com.application.bris.brisi_pemutus.page_salam_digital.MonitoringSalamDigitalActivity;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import androidx.fragment.app.Fragment;
@@ -245,8 +250,8 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
         //ubah nilai versi notifikasi disini dengan nilai baru, jika ada notifikasi baru/update baru
-        //update 1.4.7 versi notifikasi 1 ( ubah jadi 2 atau nilai lain di versi selanjutnya
-        String versiNotifikasi="1";
+        //update 1.4.8 versi notifikasi 2 ( ubah jadi 3 atau nilai lain di versi selanjutnya
+        String versiNotifikasi="6";
         if(!appPreferences.getNotificationVersion().equalsIgnoreCase(versiNotifikasi)){
             appPreferences.setNotificationVersion(versiNotifikasi);
             appPreferences.setUpdateNotification("true");
@@ -258,9 +263,13 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             //MENAMPILKAN CHANGELOG UNTUK UPDATE TERBARU KORMA
             AppUtil.DialogUpdateInformation(getContext(),
                     "Fitur Terbaru i-Kurma Pemutus",
-                    "-Penambahan support untuk pembiayaan Purna dan Prapurna\n\n" +
-                    "-Perbaikan pada halaman data finansial untuk pembiayaan multifaedah mikro\n\n" +
-                    "-Pencarian data pembiayaan cair berdasarkan bulan dan tahun\n");
+                    "- Penambahan support untuk pembiayaan Ijarah dan MMQ\n\n" +
+                            "- Penambahan support untuk menerima notifikasi (pop up notification) cth : ketika menerima pengajuan pembiayaan dari AO/AOM untuk diputus\n\n"+
+                            "- Perbaikan agar user pemutus dapat melihat/klik foto rumah di halaman data lengkap pembiayaan purna/prapurna\n\n"+
+                            "- Penambahan kolom nomor siup di halaman kelengkapan dokumen pembiayaan mikro"
+
+
+            );
         }
 
 
@@ -349,7 +358,23 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private List<ListViewMenu> getListMenu() {
         List<ListViewMenu> menu = new ArrayList<>();
-        Menu.mainMenuAO(getContext(), menu);
+
+
+
+        if(appPreferences.getCbAmanah().equalsIgnoreCase("true")){
+            Menu.mainMenuPemutusAmanah(getContext(),menu);
+        }
+        else{
+
+            if(appPreferences.getFidRole().equals("84")){
+                Menu.mainMenuPusat(getContext(), menu);
+            }
+            else{
+                Menu.mainMenuPemutus(getContext(), menu);
+            }
+        }
+
+
         return menu;
     }
 
@@ -382,6 +407,19 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                     rv_pipeline.setVisibility(View.VISIBLE);
                     rv_deviasi.setVisibility(View.VISIBLE);
                     rv_disposisi.setVisibility(View.VISIBLE);
+
+
+                    //hanya pinca dan pincapem yang bisa liat disposisi
+                    //ADA PENGECEKAN ROLE LAGI DIBAWAH UNTUK TEXT DISPOSISI KOSONG, KALAU PARAMETER INI DIUPDSATE, JANGN LUPA YANG DIBAWAH JG
+                    if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
+                        cl_disposisi.setVisibility(View.VISIBLE);
+                        rv_disposisi.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        cl_disposisi.setVisibility(View.GONE);
+                        rv_disposisi.setVisibility(View.GONE);
+                    }
+
 
 
                     if(response.isSuccessful()){
@@ -456,8 +494,14 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                             if(dataDisposisi!=null){
                                 if(dataDisposisi.size()==0){
 //                                whale.setVisibility(View.VISIBLE);
-                                    progressBar_daftar_disposisi.setVisibility(View.GONE);
-                                    textWhaleDisposisi.setVisibility(View.VISIBLE);
+                                    if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")){
+                                        progressBar_daftar_disposisi.setVisibility(View.GONE);
+                                        textWhaleDisposisi.setVisibility(View.VISIBLE);
+                                    }
+                                    else{
+                                        progressBar_daftar_disposisi.setVisibility(View.GONE);
+                                        textWhaleDisposisi.setVisibility(View.GONE);
+                                    }
 
                                 }
                                 else{
@@ -468,7 +512,8 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                                     progressBar_daftar_disposisi.setVisibility(View.GONE);
                                     adapterDisposisiFront = new AdapterDisposisiFront(getContext(), dataDisposisi);
                                     layoutDisposisiHome = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                                    rv_disposisi.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                                    rv_disposisi.setLayoutManager(layoutDisposisiHome);
                                     rv_disposisi.setItemAnimator(new DefaultItemAnimator());
                                     rv_disposisi.setAdapter(adapterDisposisiFront);
                                     ViewCompat.setNestedScrollingEnabled(rv_disposisi, false);
@@ -568,7 +613,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                         dataDisposisi = gson.fromJson(listDataString, type);
                         adapterDisposisiFront = new AdapterDisposisiFront(getContext(), dataDisposisi);
                         layoutDisposisiHome = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                        rv_disposisi.setLayoutManager(new LinearLayoutManager(getContext()));
+                        rv_disposisi.setLayoutManager(layoutDisposisiHome);
                         rv_disposisi.setItemAnimator(new DefaultItemAnimator());
                         rv_disposisi.setAdapter(adapterDisposisiFront);
                         if (dataDisposisi.size() == 0) {
@@ -735,10 +780,58 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 logout.show();
 //            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
+
+            //MENU MONITORING
+
+            //pcp dan UH hanya melihat unitnya saja
+            else if(menu.equalsIgnoreCase("monitoring")){
+                if(appPreferences.getFidRole().equalsIgnoreCase("79")|appPreferences.getFidRole().equalsIgnoreCase("71")){
+                    Intent intent = new Intent(getContext(), MonitoringAoActivity.class);
+                    startActivity(intent);
+                }
+
+                //user KP masuk monitoring
+                else if(appPreferences.getFidRole().equalsIgnoreCase("84")){
+                    Intent intent = new Intent(getContext(), MonitoringKcActivity.class);
+                    startActivity(intent);
+                }
+
+                //pinca mmm dan mm melihat data seluruh kcp bawahan kcnya
+                else if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("72")||appPreferences.getFidRole().equalsIgnoreCase("77")){
+
+                    if(indikatorSelesaiLoading==false&&!appPreferences.getFidRole().equalsIgnoreCase("76")){//ini untuk akses tombol setelah login khusus non pinca
+                        Intent intent = new Intent(getContext(), MonitoringKcpActivity.class);
+                        startActivity(intent);
+                    }
+                    else if(appPreferences.getStatusKodeSkkPinca().equalsIgnoreCase("berubah")){ //ini untuk akses tombol setelah akses menu menu lain, tapi kembali ke dashboard lagi untuk akses menu ambil alih khusus pinca
+                        Intent intent = new Intent(getContext(), MonitoringKcpActivity.class);
+                        startActivity(intent);
+                    }
+                    else if(indikatorSelesaiLoading==false&&appPreferences.getFidRole().equalsIgnoreCase("76")){//ini untuk akses tombol setelah login khusus pinca
+                        Toasty.info(getContext(),"Tunggu hingga loading selesai, sebelum mengakses menu monitoring",Toast.LENGTH_LONG).show();
+                    }
+
+                    else{
+                        Toasty.info(getContext(),"Tunggu hingga loading selesai, sebelum mengakses menu monitoring",Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+            }
+            //menu salam digital
+
+            else if(menu.equalsIgnoreCase("Salam Digital")){
+                Intent intent = new Intent(getContext(), MonitoringSalamDigitalActivity.class);
+                startActivity(intent);
+//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+            }
             else{
                 AppUtil.showToastShort(getContext(), menu);
             }
         }
+
+
 
 
     }

@@ -2,6 +2,7 @@
     <string name="app_name">i-Kurma Pemutus</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="title_ranking">Ranking</string>
     <string name="title_notifications">Notifications</string>
 
     <!--String Menu AOM-->
@@ -79,5 +80,7 @@
 
     <string name="title_nohasface">Duh muka Nasabahnya gak jelas nih, take foto ulang yah.. </string>
     <string name="title_pleasewaitslik">Mohon tunggu sampai proses pengecekan SLIK selesai, Maksimum 3 Menit..</string>
+
+    <string name="default_notification_channel_id">kurma2</string>
 </resources>
 

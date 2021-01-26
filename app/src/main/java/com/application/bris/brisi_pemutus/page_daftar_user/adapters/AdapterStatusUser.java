@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.dashboard.RequestDashboard;
 import com.application.bris.brisi_pemutus.api.model.request.delete_aom.ReqDeleteAom;
-import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqPutusan;
+import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqUid;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_ao.Ao;
@@ -809,7 +808,7 @@ public class AdapterStatusUser extends RecyclerView.Adapter<AdapterStatusUser.St
         dialogLoading.show();
 
         apiClientAdapter = new ApiClientAdapter(context);
-        ReqPutusan req = new ReqPutusan();
+        ReqUid req = new ReqUid();
         req.setUid(uid);
 
         if (role.equalsIgnoreCase("ADP")) {
@@ -919,7 +918,7 @@ public class AdapterStatusUser extends RecyclerView.Adapter<AdapterStatusUser.St
         dialogLoading.show();
 
         apiClientAdapter = new ApiClientAdapter(context);
-        ReqPutusan req = new ReqPutusan();
+        ReqUid req = new ReqUid();
         AppPreferences appPreferences = new AppPreferences(context);
         req.setUid(uid);
         Call<ParseResponseArr> call = apiClientAdapter.getApiInterface().cekAdaPutusan(req);

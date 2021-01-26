@@ -1,15 +1,16 @@
 package com.application.bris.brisi_pemutus.api.config;
 
+import com.application.bris.brisi_pemutus.BuildConfig;
+
 public class UriApi {
 
-    public class Baseurl{
-//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI/webresources/"; //DEV tanpa rev proxy
-//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-WILLY5/webresources/"; //DEV WILLY 5
-//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN2/webresources/"; //FIRMAN 5
-//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-BAYU/webresources/"; //DEV BAYU
-       public static final String URL = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //server prod
-//        public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-EKI/webresources/"; //DEV eki tanpa rev proxy
-//public static final String URL = "http://10.1.25.55:8080/MobileBRISIAPI-EKINOL/webresources/"; //DEV eki nolock tanpa rev proxy
+    public static class Baseurl{
+        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-EKI/webresources/"; //DEV
+        public static final String URLPROD = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //PROD
+
+        public static String URL = (BuildConfig.IS_PRODUCTION) ? URLPROD : URLDEV ; //ENV BASED URI SELECTOR
+
+
     }
 
 
@@ -75,6 +76,10 @@ public class UriApi {
     public class insertUpdateAom {
         public static final String insertUpdateAom = "generic/mikro/usermanagement/updateAOM";
     }
+    public class listAppraisal {
+        public static final String listAppraisal = "  generic/pemutus/listPermintaanApraisal";
+    }
+
     public class deleteAom {
         public static final String deleteAom = "generic/mikro/usermanagement/deleteAOM";
     }
@@ -207,6 +212,9 @@ public class UriApi {
     public class updateFirebase {
         public static final String updateFirebase = "generic/aktivasi/updateFirebaseMessagingID";
     }
+    public class brisNotif {
+        public static final String brisnotifRegister = "generic/brisnotifRegister";
+    }
     public class downloadSlik {
         public static final String downloadSlik = "generic/mikro/hotprospek/prescreening/downloadSLIK";
     }
@@ -231,6 +239,22 @@ public class UriApi {
     }
     public class listUms {
         public static final String listUms = "generic/mikro/usermanagement/listUms";
+    }
+
+    //KPR
+    public class konsumerKpr{
+        public static final String detailHotprospekKpr = "generic/konsumer/kpr/hotprospek/inquireHotprospek";
+        public static final String inquiryDataLengkapKpr = "generic/konsumer/kpr/hotprospek/datalengkap/inquireDataLengkap";
+        public static final String inquiryPrescreeningKpr = "generic/konsumer/kpr/hotprospek/prescreening/inquirePrescreening";
+        public static final String downloadSlikKpr = "generic/konsumer/kpr/hotprospek/prescreening/downloadSLIK";
+        public static final String downloadSlikPasanganKpr = "generic/konsumer/kpr/hotprospek/prescreening/downloadSLIKPasangan";
+        public static final String inquiryRemaksSlikKpr = "generic/konsumer/kpr/hotprospek/memosales/inquiryMemosales";
+        public static final String inquiryDataFinansialKpr = "generic/konsumer/kpr/hotprospek/datafinansial/inquiryLoadPrescoring";
+        public static final String inquiryKelengkapanDokumenKpr = "generic/konsumer/kpr/hotprospek/kelengkapandokumen/inquireKelengkapanDokumen";
+        public static final String inquirySektorEkonomiKpr = "generic/konsumer/kpr/hotprospek/datapby/inquireDataPembiayaan";
+        public static final String inquiryScoringKpr = "generic/konsumer/kpr/hotprospek/scoring/inquireScoring";
+
+
     }
 
 
@@ -282,6 +306,26 @@ public class UriApi {
         public static final String pemutusTolakKmg = "generic/pemutus/konsumer/pemutusTolak";
     }
 
+    public class reqAoSilang {
+        public static final String listKanwil = "generic/mikro/ukermanagement/listKanwil";
+        public static final String listCabang =  "generic/mikro/ukermanagement/listSKK";
+        public static final String listRsc = "generic/mikro/ukermanagement/listRSC";
+        public static final String listUser = "generic/mikro/usermanagement/listUser";
+        public static final String kirimApraisal = "generic/pemutus/apraisalKirimKeApraisal";
+        public static final String appraisalKembalikanKeAo = "generic/pemutus/apraisalKembalikanKeAO";
+
+
+    }
+
+    public class inquiryHistoryKmg {
+        public static final String inquiryHistoryKmg = "generic/konsumer/kmg/hotprospek/history/history";
+    }
+
+    //KONSUMER MIKRO
+    public class inquiryDataLengkapKonsumerMikro {
+        public static final String inquiryDataLengkapKonsumerMikro = "generic/mikro/konsumer/kmg/hotprospek/datalengkap/inquireDataLengkap";
+    }
+
     public class multiFaedahMikro {
         public static final String inquiryDataLengkapKmgMikro = "generic/mikro/konsumer/kmg/hotprospek/datalengkap/inquireDataLengkap";
 
@@ -303,19 +347,24 @@ public class UriApi {
 
     }
 
+    public class monitoring {
+        public static final String listMonitoringNasabah = "generic/monitor/listNasabah";
+        public static final String listMonitoringAo = "generic/monitor/listTargetKCP";
+        public static final String listMonitoringKcp = "generic/monitor/listTargetKC";
+        public static final String listMonitoringKp = "generic/monitor/listKP";
+        public static final String listMonitoringSalamDigital = "generic/monitor/getMonitoringSalamDigital";
+        public static final String getSaldoNasabah = "generic/getSaldoNasabah";
+        public static final String getRiwayatMutasi = "generic/monitor/getRiwayatMutasi";
+        public static final String rankingAoTop = "generic/monitor/getRankingAoTop";
+        public static final String rankingAoBottom = "generic/monitor/getRankingAoWorst";
+        public static final String getRataRata = "generic/monitor/getRatarata";
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public class flpp{
+        public static final String listHasilPraujiFlpp = "generic/konsumer/kpr/hotprospek/listHasilPraujiFlpp";
+        public static final String pemutusSetujuFlpp = "generic/pemutus/konsumer/pemutusSetujuFlpp";
+        public static final String inquirySektorEkonomiFlpp = "generic/konsumer/kpr/hotprospek/datapby/inquireDataPembiayaanFlpp";
+    }
 
 
     public class foto {

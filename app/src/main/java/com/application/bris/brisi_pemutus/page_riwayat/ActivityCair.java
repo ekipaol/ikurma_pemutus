@@ -27,7 +27,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.request.list_cair.ReqListCair;
-import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqPutusan;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
@@ -371,7 +370,7 @@ public class ActivityCair extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void initializeSpinnerFilter(){
-        String[] Bulan = {"Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"};
+        String[] Bulan = {"ALL","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"};
         ArrayList<String> Tahun = new ArrayList<>();
 
         //mulai tahun dari 2019, hingga tahun sekarang (future proof)
@@ -393,6 +392,8 @@ public class ActivityCair extends AppCompatActivity implements SwipeRefreshLayou
         //tanpa break, karena menggunakan return, jadi tidak perlu di break-break
 
         switch(nomorBulan){
+            case "":
+                return "ALL";
             case "01":
                 return "Januari";
             case "02":
@@ -430,6 +431,8 @@ public class ActivityCair extends AppCompatActivity implements SwipeRefreshLayou
         //tanpa break, karena menggunakan return, jadi tidak perlu di break-break
 
         switch(teksBulan){
+            case "ALL":
+                return "";
             case "Januari":
                 return "01";
             case "Februari":

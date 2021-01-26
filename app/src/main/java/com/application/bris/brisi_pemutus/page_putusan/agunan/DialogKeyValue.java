@@ -130,6 +130,13 @@ public class DialogKeyValue extends DialogFragment{
             dataKeyvalue = getDataStatusNikah();
         }
 
+        else if (title.equalsIgnoreCase("Current Ratio")){
+            dataKeyvalue = getCurrentRatio();
+        }
+        else if (title.equalsIgnoreCase("Profitability")){
+            dataKeyvalue = getProfitability();
+        }
+
         else if (title.equalsIgnoreCase("tipe pendapatan")){
             dataKeyvalue = getDataTipePendapatan();
         }
@@ -209,6 +216,17 @@ public class DialogKeyValue extends DialogFragment{
         List<keyvalue> data = new ArrayList<>();
         GlobalData.bidangKerjaan(getContext(), data);
         return data;
+    }
+
+    private List<keyvalue> getCurrentRatio(){
+        List<keyvalue> data = new ArrayList<>();
+        GlobalData.currentRatio(getContext(), data);
+        return  data;
+    }
+    private List<keyvalue> getProfitability(){
+        List<keyvalue> data = new ArrayList<>();
+        GlobalData.profitability(getContext(), data);
+        return  data;
     }
 
     private List<keyvalue> getDataTujuanPenggunaan(){

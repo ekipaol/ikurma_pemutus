@@ -1,19 +1,25 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.application.bris.brisi_pemutus"
         minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 41
-        versionName "1.4.8"
+        targetSdkVersion 29
+        versionCode 46
+        versionName "1.5.3"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    }
+        buildConfigField("Boolean", "IS_PRODUCTION", "false")
+        buildConfigField ("Boolean","IS_BD", "false")
+        buildConfigField ("String","SECRET_KEY", "\"12131415\"")
+        buildConfigField ("String","MAGIC_CRYPT_KEY", "\".:Pd4MAp1S3c12EtK3y:.\"")
+
+    } 
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
@@ -22,8 +28,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+//            minifyEnabled true
+//            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,7 +42,7 @@ android {
 }
 
 ext {
-    supportLibraryVersion = "28.0.0"
+    supportLibraryVersion = "1.0.0"
     playServicesMapsVersion = "16.1.0"
     playServicesLocationVersion = "16.0.0"
 }
@@ -58,8 +64,12 @@ dependencies {
     implementation 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
     implementation 'com.github.HITGIF:TextFieldBoxes:1.4.5'
     implementation 'com.makeramen:roundedimageview:2.3.0'
-    implementation 'com.google.firebase:firebase-core:17.2.3'
-    implementation 'com.google.firebase:firebase-messaging:20.1.2'
+
+    //firebase
+//    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+//    implementation 'com.google.firebase:firebase-messaging'
+//    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging:20.3.0'
 
     //google maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
@@ -151,5 +161,5 @@ dependencies {
 
 
 }
-apply plugin: 'com.google.gms.google-services'
+
 

@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class ReqSimpanDisposisi {
 
-    @SerializedName("idAplikasi")
-    private String idAplikasi;
+    @SerializedName("idReferal")
+    private String idReferal;
 
     @SerializedName("uidAssigned")
     private String uidAssigned;
@@ -13,12 +13,12 @@ public class ReqSimpanDisposisi {
     @SerializedName("uidAssigner")
     private String uidAssigner;
 
-    public String getIdAplikasi() {
-        return idAplikasi;
+    public String getIdReferal() {
+        return idReferal;
     }
 
-    public void setIdAplikasi(String idAplikasi) {
-        this.idAplikasi = idAplikasi;
+    public void setIdReferal(String idReferal) {
+        this.idReferal = idReferal;
     }
 
     public String getUidAssigned() {

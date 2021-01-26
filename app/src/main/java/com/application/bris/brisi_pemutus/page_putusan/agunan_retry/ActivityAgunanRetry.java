@@ -40,14 +40,7 @@ import retrofit2.Response;
 
 public class ActivityAgunanRetry extends AppCompatActivity implements StepperLayout.StepperListener{
 
-    //KELAS INI TIDAK DIPAKAI BROOOOO
 
-    //PAKAI KELAS AGUNAN3RETRY DI FOLDER AGUNAN RETRY
-
-    //////////////////////////
-    //////////////////////
-    ////////////////////////
-    ////////////////////
 
     @BindView(R.id.stepperlayout)
     StepperLayout stepperlayout;

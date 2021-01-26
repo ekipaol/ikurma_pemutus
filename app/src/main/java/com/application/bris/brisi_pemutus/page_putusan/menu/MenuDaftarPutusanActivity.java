@@ -10,14 +10,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.page_aom.view.PutusanActivity;
+import com.application.bris.brisi_pemutus.page_flpp.HasilPraujiFlppActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 
 public class MenuDaftarPutusanActivity extends AppCompatActivity {
-    ImageView putusanPembiayaan, putusanDeviasi, putusanKoreksi;
-    TextView tvNotifikasiPembiayaan,tvNotifikasiDeviasi;
-    CardView cvPutusanKoreksi;
+    ImageView putusanPembiayaan, putusanDeviasi, putusanKoreksi,praujiFlpp;
+    TextView tvNotifikasiPembiayaan,tvNotifikasiDeviasi,tvNotifikasiPraujiFlpp;
+    CardView cvPutusanKoreksi,cvHasilPrauji;
+    AppPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +29,23 @@ public class MenuDaftarPutusanActivity extends AppCompatActivity {
         putusanPembiayaan=findViewById(R.id.bt_putusan_pembiayaan);
         putusanDeviasi =findViewById(R.id.bt_putusan_deviasi);
         putusanKoreksi =findViewById(R.id.bt_putusan_koreksi);
+        praujiFlpp =findViewById(R.id.bt_hasil_prauji_flpp);
 
         cvPutusanKoreksi=findViewById(R.id.cv_putusan_koreksi);
+        cvHasilPrauji=findViewById(R.id.cv_hasil_prauji_flpp);
 
         tvNotifikasiPembiayaan=findViewById(R.id.tv_notifikasi_putusan_pembiayaan);
         tvNotifikasiDeviasi=findViewById(R.id.tv_notifikasi_putusan_deviasi);
+        tvNotifikasiPraujiFlpp=findViewById(R.id.tv_notifikasi_hasil_prauji_flpp);
 
         tvNotifikasiPembiayaan.setVisibility(View.GONE);
         tvNotifikasiDeviasi.setVisibility(View.GONE);
 
+        appPreferences=new AppPreferences(this);
 
-        //hide putusan koreksi until reinstated to work on again
-        cvPutusanKoreksi.setVisibility(View.GONE);
+
+
+       otherViewChanges();
 
         AppUtil.toolbarRegular(this, "Menu Putusan");
 
@@ -100,6 +108,15 @@ public class MenuDaftarPutusanActivity extends AppCompatActivity {
             }
         });
 
+        praujiFlpp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MenuDaftarPutusanActivity.this, HasilPraujiFlppActivity.class);
+                startActivity(intent);
+//                Toast.makeText(MenuDaftarPutusanActivity.this, "Ting Tong anggap saja sedang masuk menu pra uji", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -108,6 +125,19 @@ public class MenuDaftarPutusanActivity extends AppCompatActivity {
         Intent intent=new Intent(MenuDaftarPutusanActivity.this, CoreLayoutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
         startActivity(intent);
+    }
+
+    private void otherViewChanges(){
+        //hide putusan koreksi until reinstated to work on again
+        cvPutusanKoreksi.setVisibility(View.GONE);
+
+        if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("79")||appPreferences.getFidRole().equalsIgnoreCase("77")){
+            cvHasilPrauji.setVisibility(View.VISIBLE);
+            tvNotifikasiPraujiFlpp.setVisibility(View.GONE);
+        }
+        else{
+            cvHasilPrauji.setVisibility(View.GONE);
+        }
     }
 
 

@@ -35,6 +35,8 @@ import com.application.bris.brisi_pemutus.model.agunan_terikat.AgunanTerikat;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.scoring.ScoringKonsumerKmgActivity;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.PutusanFrontMenuKpr;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.scoring.ScoringKprActivity;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.AgunanTerikatAdapater;
 import com.application.bris.brisi_pemutus.page_putusan.scoring.ScoringActivity;
@@ -99,8 +101,16 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
         bt_lanjut_agunan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Log.d("jenispembiayaan",superData.getJenisPembiayaan());
                 if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
                     Intent intent=new Intent(AgunanTerikatActivity.this, ScoringKonsumerKmgActivity.class);
+                    intent.putExtra("cif", Integer.parseInt(superData.getCif()));
+                    intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
+                    intent.putExtra("superData",superData);
+                    startActivity(intent);
+                }
+                else if(superData.getJenisPembiayaan().equalsIgnoreCase("kpr")){
+                    Intent intent=new Intent(AgunanTerikatActivity.this, ScoringKprActivity.class);
                     intent.putExtra("cif", Integer.parseInt(superData.getCif()));
                     intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
                     intent.putExtra("superData",superData);
@@ -178,6 +188,11 @@ public class AgunanTerikatActivity extends AppCompatActivity implements SwipeRef
             public void onClick(View v) {
                 if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
                     Intent intent = new Intent(AgunanTerikatActivity.this, PutusanFrontMenuKmg.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+                else if(superData.getJenisPembiayaan().equalsIgnoreCase("kpr")){
+                    Intent intent = new Intent(AgunanTerikatActivity.this, PutusanFrontMenuKpr.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                 }

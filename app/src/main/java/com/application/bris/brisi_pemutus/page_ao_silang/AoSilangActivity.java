@@ -2,8 +2,9 @@ package com.application.bris.brisi_pemutus.page_ao_silang;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -12,25 +13,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
+import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqUid;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
+import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.ao_silang.AoSilang;
+import com.application.bris.brisi_pemutus.model.detailHotprospek.DetailHotprospekKpr;
 import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AoSilangActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
@@ -56,6 +68,7 @@ public class AoSilangActivity extends AppCompatActivity implements SwipeRefreshL
     AdapterAoSilang adapterUser;
     LinearLayoutManager layoutUser;
     ApiClientAdapter apiClientAdapter;
+    List<DetailHotprospekKpr> dataAppraisal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,24 +76,37 @@ public class AoSilangActivity extends AppCompatActivity implements SwipeRefreshL
         setContentView(R.layout.activity_maintenance_user);
         main();
         //simulasi initialize user
-        progressbar_loading.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressbar_loading.setVisibility(View.GONE);
-               initializeUserSimulated();
-            }
-        }, 3500);
+//        progressbar_loading.setVisibility(View.VISIBLE);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                progressbar_loading.setVisibility(View.GONE);
+//               initializeUserSimulated();
+//            }
+//        }, 3500);
 
         //initialize beneran
-//        initializeUser();
+        initializeUser();
+
+        ImageView backToolbar=findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AoSilangActivity.this, CoreLayoutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+                startActivity(intent);
+
+
+
+            }
+        });
 
     }
 
     public void main(){
         ButterKnife.bind(this);
         setSupportActionBar(tb_regular);
-        AppUtil.toolbarRegular(this, "Daftar AO Silang");
+        AppUtil.toolbarRegular(this, "Daftar Permintaan Appraisal");
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setDistanceToTriggerSync(220);
         apiClientAdapter = new ApiClientAdapter(this);
@@ -147,62 +173,7 @@ public class AoSilangActivity extends AppCompatActivity implements SwipeRefreshL
         dataUser.add(ao5);
         dataUser.add(ao6);
 
-        adapterUser = new AdapterAoSilang(AoSilangActivity.this, dataUser);
-                        rv_listuser.setLayoutManager(new LinearLayoutManager(AoSilangActivity.this));
-                        rv_listuser.setItemAnimator(new DefaultItemAnimator());
-                        rv_listuser.setAdapter(adapterUser);
-                        if(dataUser.size()==0){
-                            whale.setVisibility(View.VISIBLE);
-                            tvWhale.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            whale.setVisibility(View.GONE);
-                            tvWhale.setVisibility(View.INVISIBLE);
-                        }
-
-    }
-
-    public void initializeUser(){
-//        final AppPreferences apppref=new AppPreferences(AoSilangActivity.this);
-//        // progressbar_loading.setVisibility(View.VISIBLE);
-//        shimmer.setVisibility(View.VISIBLE);
-////        RequestDataCabang req = new RequestDataCabang();
-////        //conditioning list yang ditampilkan
-////
-////        call = apiClientAdapter.getApiInterface().dataMmm(req);
-////        req.setKodeCabang(apppref.getKodeSkk());getKodeSkk
-//
-//        call.enqueue(new Callback<ParseResponse>() {
-//
-//            @Override
-//            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
-//                // progressbar_loading.setVisibility(View.GONE);
-//                shimmer.setVisibility(View.GONE);
-//                if(response.isSuccessful()){
-//                    if(response.body().getStatus().equalsIgnoreCase("00")){
-//                        if(apppref.getFidRole().equalsIgnoreCase("79")){
-//                            String listDataString = response.body().getData().get("listUh").toString();
-//                            Gson gson = new Gson();
-//                            Type type = new TypeToken<List<AoSilang>>() {}.getType();
-//                            dataUser = gson.fromJson(listDataString, type);
-//
-//                        }
-//
-//                        else if(apppref.getFidRole().equalsIgnoreCase("76")){
-//                            String listDataString = response.body().getData().get("listBawahanLangsung").toString();
-//                            Gson gson = new Gson();
-//                            Type type = new TypeToken<List<AoSilang>>() {}.getType();
-//                            dataUser = gson.fromJson(listDataString, type);
-//
-//                        }
-//                        List<AoSilang> dataUserAktif=new ArrayList<>();
-//                        for (int i = 0; i <dataUser.size() ; i++) {
-//                            if(dataUser.get(i).getStatus().equalsIgnoreCase("aktif")){
-//                                dataUserAktif.add(dataUser.get(i));
-//
-//                            }
-//                        }
-//                        adapterUser = new AdapterReactivePassword(AoSilangActivity.this, dataUserAktif);
+//        adapterUser = new AdapterAoSilang(AoSilangActivity.this, dataUser);
 //                        rv_listuser.setLayoutManager(new LinearLayoutManager(AoSilangActivity.this));
 //                        rv_listuser.setItemAnimator(new DefaultItemAnimator());
 //                        rv_listuser.setAdapter(adapterUser);
@@ -214,15 +185,61 @@ public class AoSilangActivity extends AppCompatActivity implements SwipeRefreshL
 //                            whale.setVisibility(View.GONE);
 //                            tvWhale.setVisibility(View.INVISIBLE);
 //                        }
-//                    }
-//                }
-//            }
+
+    }
+
+    public void initializeUser(){
+        final AppPreferences apppref=new AppPreferences(AoSilangActivity.this);
+
+        //pantekan token
+//        apppref.setToken("123123123");
+//        Toast.makeText(this, "ada pantekan token", Toast.LENGTH_SHORT).show();
+
+        // progressbar_loading.setVisibility(View.VISIBLE);
+        shimmer.setVisibility(View.VISIBLE);
+        ReqUid req = new ReqUid();
+//        //conditioning list yang ditampilkan
 //
-//            @Override
-//            public void onFailure(Call<ParseResponse> call, Throwable t) {
-//                Log.d("LOG D", t.getMessage());
-//            }
-//        });
+        call = apiClientAdapter.getApiInterface().listAppraisal(req);
+        req.setUid(apppref.getUid());
+//        Toast.makeText(this, "Ada pantekan uid", Toast.LENGTH_SHORT).show();
+
+        call.enqueue(new Callback<ParseResponse>() {
+
+            @Override
+            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+                // progressbar_loading.setVisibility(View.GONE);
+                shimmer.setVisibility(View.GONE);
+                if(response.isSuccessful()){
+                    if(response.body().getStatus().equalsIgnoreCase("00")){
+                            String listAppraisalString = response.body().getData().get("listPermintaanApraisal").toString();
+                            Gson gson = new Gson();
+                            Type type = new TypeToken<List<DetailHotprospekKpr>>() {}.getType();
+                            dataAppraisal = gson.fromJson(listAppraisalString, type);
+
+
+//
+                        adapterUser = new AdapterAoSilang(AoSilangActivity.this, dataAppraisal);
+                        rv_listuser.setLayoutManager(new LinearLayoutManager(AoSilangActivity.this));
+                        rv_listuser.setItemAnimator(new DefaultItemAnimator());
+                        rv_listuser.setAdapter(adapterUser);
+                        if(dataAppraisal.size()==0){
+                            whale.setVisibility(View.VISIBLE);
+                            tvWhale.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            whale.setVisibility(View.GONE);
+                            tvWhale.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParseResponse> call, Throwable t) {
+                Log.d("LOG D", t.getMessage());
+            }
+        });
     }
 
 
@@ -230,7 +247,11 @@ public class AoSilangActivity extends AppCompatActivity implements SwipeRefreshL
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        AoSilangActivity.this.recreate();
+        shimmer.setVisibility(View.VISIBLE);
+//        progressbar_loading.setVisibility(View.VISIBLE);
+        rv_listuser.setVisibility(View.GONE);
+            initializeUser();
+
     }
 
     @Override
@@ -269,5 +290,12 @@ public class AoSilangActivity extends AppCompatActivity implements SwipeRefreshL
                 }
             }
         });
+    }
+
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent intent=new Intent(AoSilangActivity.this, CoreLayoutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+        startActivity(intent);
     }
 }

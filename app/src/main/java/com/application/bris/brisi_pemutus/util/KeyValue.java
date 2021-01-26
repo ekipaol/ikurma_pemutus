@@ -18,6 +18,7 @@ public class KeyValue {
     private static HashMap<String, String> mapTypeTipePendapatan = new HashMap<>();
     private static HashMap<String, String> mapTypePendidikanTerakhir = new HashMap<>();
     private static HashMap<String, String> mapTypeStatusTempatDomisili = new HashMap<>();
+    private static HashMap<String, String> mapTypeValiditasTempatTinggal = new HashMap<>();
 
 
     private static HashMap<String, String> mapTypeStatusPermohonan = new HashMap<>();
@@ -229,6 +230,10 @@ public class KeyValue {
         mapTypeStatusTempatDomisili.put("Kost", "6");
         mapTypeStatusTempatDomisili.put("Lainnya", "1");
 
+        //Validitas TEMPAT TINGGAL
+        mapTypeValiditasTempatTinggal.put("Sesuai dengan data aplikasi", "Y");
+        mapTypeValiditasTempatTinggal.put("Tidak sesuai dengan data aplikasi", "T");
+
         //STATUS PERMOHONAN
         mapTypeStatusPermohonan.put("Baru", "Baru");
         mapTypeStatusPermohonan.put("Lama", "Lama");
@@ -372,6 +377,7 @@ public class KeyValue {
         mapTypeJenisPembiayaan.put("Musyarakah", "1");
         mapTypeJenisPembiayaan.put("Mudharabah", "2");
         mapTypeJenisPembiayaan.put("Murabahah", "3");
+        mapTypeJenisPembiayaan.put("Ijarah", "4");
 
 
         //
@@ -574,8 +580,52 @@ public class KeyValue {
                         return key;
                     }
                 }
+            case "840" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio127.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
             case "128" :
                 for (Map.Entry<String, String> e : mapTypeRpcRatio128.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+
+            case "318" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio127.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+
+            case "319" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio128.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+
+            case "320" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio128.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+
+            case "841" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio127.entrySet()){
                     String key = e.getKey();
                     String val = e.getValue();
                     if (val.toString().equalsIgnoreCase(value)){
@@ -675,6 +725,21 @@ public class KeyValue {
 
     public static String getKeyStatusTempatDomisili(String value){
         for (Map.Entry<String, String> e : mapTypeStatusTempatDomisili.entrySet()){
+            String key = e.getKey();
+            String val = e.getValue();
+            if (val.toString().equalsIgnoreCase(value)){
+                return key;
+            }
+        }
+        return null;
+    }
+
+    public static String getTypeValiditasTempatTinggal(String param){
+        return mapTypeValiditasTempatTinggal.get(param);
+    }
+
+    public static String getKeyValiditasTempatTinggal(String value){
+        for (Map.Entry<String, String> e : mapTypeValiditasTempatTinggal.entrySet()){
             String key = e.getKey();
             String val = e.getValue();
             if (val.toString().equalsIgnoreCase(value)){

@@ -55,6 +55,7 @@ RelativeLayout loading;
 SweetAlertDialog dialog1;
 ImageView logo, logo_letter,logo_ikurma;
 int counterSecretLogin;
+boolean expiredToken;
 
 
 
@@ -119,12 +120,15 @@ int counterSecretLogin;
         logo_ikurma.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(counterSecretLogin>=4&&password.getText().toString().equalsIgnoreCase("superduper"))
+
+                //double md5, soalnya passwordnya udah bisa di decrypt online kalo cuma sekali
+                if(counterSecretLogin>=4&&AppUtil.hashMd5(AppUtil.hashMd5(password.getText().toString())).equalsIgnoreCase("c4226ac7f81c121914da0851edaa93fa"))
                 {
                     secretLogin();
+//                    secretLogin();
                 }
                 else{
-                    Toast.makeText(LoginActivity.this, "@ekipaol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "(QS. An-Nahl : 69)", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -145,6 +149,24 @@ int counterSecretLogin;
             DrawableCompat.setTint(mDrawable, Color.parseColor("#fd9c00"));
             password.setCompoundDrawablesWithIntrinsicBounds(mDrawable, null, null, null);
             password.setBackgroundResource(R.drawable.shapeemailhighligh);
+        }
+
+        expiredToken=getIntent().getBooleanExtra("expiredToken",false);
+
+        if(expiredToken){
+            SweetAlertDialog dialog=new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.WARNING_TYPE);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setTitle("Sesi habis");
+            dialog.setContentText("Silahkan lakukan login ulang untuk kembali dapat mengakses aplikasi i-Kurma");
+            dialog.setConfirmText("OK");
+
+            dialog.show();
+            dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    dialog.dismissWithAnimation();
+                }
+            });
         }
 
 
@@ -232,6 +254,12 @@ int counterSecretLogin;
                                         apppref.setKodeAo(dataUser.getKode_ao());
                                         apppref.setKantor(dataUser.getKantor());
                                         apppref.setUsername(username.getText().toString());
+                                    if(dataUser.getCbAmanah()!=null){
+                                        apppref.setCbAmanah(dataUser.getCbAmanah());
+                                    }
+                                    else{
+                                        apppref.setCbAmanah("false");
+                                    }
 
                                         //set status ambil alih
                                         apppref.setStatusAmbilAlih("TIDAK");
@@ -506,6 +534,12 @@ int counterSecretLogin;
                             apppref.setKodeAo(dataUser.getKode_ao());
                             apppref.setKantor(dataUser.getKantor());
                             apppref.setUsername(username.getText().toString());
+                        if(dataUser.getCbAmanah()!=null){
+                            apppref.setCbAmanah(dataUser.getCbAmanah());
+                        }
+                        else{
+                            apppref.setCbAmanah("false");
+                        }
 
                             //reset status ambil alih
                             apppref.setStatusAmbilAlih("TIDAK");

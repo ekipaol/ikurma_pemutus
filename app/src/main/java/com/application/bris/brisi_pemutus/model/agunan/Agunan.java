@@ -221,7 +221,7 @@ public class Agunan {
     private String dinding;
     @SerializedName("NPWBangunan")
     @Expose
-    private int nPWBangunan;
+    private Long nPWBangunan;
     @SerializedName("HubNasabahDgnPemegangHak")
     @Expose
     private String hubNasabahDgnPemegangHak;
@@ -253,6 +253,138 @@ public class Agunan {
     private int idPhotoTBtimur;
     @SerializedName("idPhotoTBbpn")
     private int idPhotoTBbpn;
+
+    @SerializedName("idPhotoTBPbb")
+    @Expose
+    private Integer idPhotoTBPbb;
+
+    @SerializedName("idPhotoTBImb")
+    @Expose
+    private Integer idPhotoTBImb;
+
+    @SerializedName("MarketableDesc")
+    @Expose
+    private String descRekomendasiPenilai;
+
+    @SerializedName("noBast")
+    @Expose
+    private String noBast;
+
+    @SerializedName("tglBast")
+    @Expose
+    private String tglBast;
+
+    @SerializedName("noSlf")
+    @Expose
+    private String noSlf;
+
+    @SerializedName("tglSlf")
+    @Expose
+    private String tglSlf;
+
+    @SerializedName("kodeWilayah")
+    @Expose
+    private String kodeWilayah;
+
+    @SerializedName("noAlamat")
+    @Expose
+    private String noAlamat;
+
+    @SerializedName("idDok41")
+    @Expose
+    private String idDok41;
+
+    @SerializedName("idDok41b")
+    @Expose
+    private String idDok41b;
+
+    public String getNoBast() {
+        return noBast;
+    }
+
+    public void setNoBast(String noBast) {
+        this.noBast = noBast;
+    }
+
+    public String getTglBast() {
+        return tglBast;
+    }
+
+    public void setTglBast(String tglBast) {
+        this.tglBast = tglBast;
+    }
+
+    public String getNoSlf() {
+        return noSlf;
+    }
+
+    public void setNoSlf(String noSlf) {
+        this.noSlf = noSlf;
+    }
+
+    public String getTglSlf() {
+        return tglSlf;
+    }
+
+    public void setTglSlf(String tglSlf) {
+        this.tglSlf = tglSlf;
+    }
+
+    public String getKodeWilayah() {
+        return kodeWilayah;
+    }
+
+    public void setKodeWilayah(String kodeWilayah) {
+        this.kodeWilayah = kodeWilayah;
+    }
+
+    public String getNoAlamat() {
+        return noAlamat;
+    }
+
+    public void setNoAlamat(String noAlamat) {
+        this.noAlamat = noAlamat;
+    }
+
+    public String getIdDok41() {
+        return idDok41;
+    }
+
+    public void setIdDok41(String idDok41) {
+        this.idDok41 = idDok41;
+    }
+
+    public String getIdDok41b() {
+        return idDok41b;
+    }
+
+    public void setIdDok41b(String idDok41b) {
+        this.idDok41b = idDok41b;
+    }
+
+    public String getDescRekomendasiPenilai() {
+        return descRekomendasiPenilai;
+    }
+
+    public void setDescRekomendasiPenilai(String descRekomendasiPenilai) {
+        this.descRekomendasiPenilai = descRekomendasiPenilai;
+    }
+
+    public Integer getIdPhotoTBPbb() {
+        return idPhotoTBPbb;
+    }
+
+    public void setIdPhotoTBPbb(Integer idPhotoTBPbb) {
+        this.idPhotoTBPbb = idPhotoTBPbb;
+    }
+
+    public Integer getIdPhotoTBImb() {
+        return idPhotoTBImb;
+    }
+
+    public void setIdPhotoTBImb(Integer idPhotoTBImb) {
+        this.idPhotoTBImb = idPhotoTBImb;
+    }
 
     public String getNkrPasarBRINS() {
         return nkrPasarBRINS;
@@ -882,11 +1014,11 @@ public class Agunan {
         this.dinding = dinding;
     }
 
-    public int getNPWBangunan() {
+    public Long getNPWBangunan() {
         return nPWBangunan;
     }
 
-    public void setNPWBangunan(int nPWBangunan) {
+    public void setNPWBangunan(Long nPWBangunan) {
         this.nPWBangunan = nPWBangunan;
     }
 

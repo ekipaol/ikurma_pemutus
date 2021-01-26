@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.PutusanFrontMenuKpr;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
@@ -132,10 +134,16 @@ public class PutusanAdapter extends RecyclerView.Adapter<PutusanAdapter.Pipeline
                 }
                 else{
 
-                    if(datas.getTipe_produk().equalsIgnoreCase("kmg")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
+                    if(data.get(position).getTipe_produk().equalsIgnoreCase("kmg")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("428")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("429")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("430")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("316")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("317")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("321")){
                         Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
                         intent.putExtra("data_putusan",datas);
                         intent.putExtra("jenisPembiayaan","kmg");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    else  if(datas.getTipe_produk().equalsIgnoreCase("kpr")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                        intent.putExtra("data_putusan",datas);
+                        intent.putExtra("jenisPembiayaan","kpr");
                         holder.iv_foto.getContext().startActivity(intent);
                     }
                     else{
@@ -156,20 +164,35 @@ public class PutusanAdapter extends RecyclerView.Adapter<PutusanAdapter.Pipeline
             @Override
             public void onClick(View view) {
 
+//                Log.d("tipeproduk",datas.getTipe_produk());
 
-
-                if(datas.getTipe_produk().equalsIgnoreCase("kmg")||datas.getKODE_PRODUK().equalsIgnoreCase("428")){
-                    Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
-                    intent.putExtra("data_putusan",datas);
-                    intent.putExtra("jenisPembiayaan","kmg");
-                    holder.iv_foto.getContext().startActivity(intent);
+                if(datas.getTenor().equalsIgnoreCase("0")){
+                    Toasty.info(context,"Aplikasi ini diinput melalui APPEL, silahkan diputus melalui APPEL juga").show();
                 }
                 else{
-                    Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
-                    intent.putExtra("data_putusan",datas);
+                    if(data.get(position).getTipe_produk().equalsIgnoreCase("kmg")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("428")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("429")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("430")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("316")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("317")||data.get(position).getKODE_PRODUK().equalsIgnoreCase("321")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKmg.class);
+                        intent.putExtra("data_putusan",datas);
+                        intent.putExtra("jenisPembiayaan","kmg");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    else  if(datas.getTipe_produk().equalsIgnoreCase("kpr")){
+                        Intent intent = new Intent(holder.iv_foto.getContext(), PutusanFrontMenuKpr.class);
+                        intent.putExtra("data_putusan",datas);
+                        intent.putExtra("jenisPembiayaan","kpr");
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(holder.iv_foto.getContext(),PutusanFrontMenu.class);
+                        intent.putExtra("data_putusan",datas);
 //                Log.d("datasdeviasi",datas.getFid_photo());
-                    holder.iv_foto.getContext().startActivity(intent);
+                        holder.iv_foto.getContext().startActivity(intent);
+                    }
                 }
+
+
+
+
             }
         });
     }

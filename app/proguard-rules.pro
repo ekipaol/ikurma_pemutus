@@ -22,3 +22,12 @@
  -keep class cn.pedant.SweetAlert.Rotate3dAnimation {
     public <init>(...);
  }
+
+ # disable log in production (uncomment when release)
+
+#  -assumenosideeffects class android.util.Log {
+#      public static *** d(...);
+#      public static *** w(...);
+#      public static *** v(...);
+#      public static *** i(...);
+#  }

@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
-import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqPutusan;
+import com.application.bris.brisi_pemutus.api.model.request.putusan_pemutus.ReqUid;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.putusan_akad.PutusanAkad;
@@ -147,7 +147,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
         //  dataUser = getListUser();
         //loading.setVisibility(View.VISIBLE);
         shimmer.setVisibility(View.VISIBLE);
-        ReqPutusan req = new ReqPutusan();
+        ReqUid req = new ReqUid();
         AppPreferences appPreferences=new AppPreferences(ActivityAkad.this);
 
         //pantekan

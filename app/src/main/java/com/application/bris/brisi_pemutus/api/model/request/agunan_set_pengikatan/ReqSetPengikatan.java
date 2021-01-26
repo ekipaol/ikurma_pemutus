@@ -5,36 +5,36 @@ import com.google.gson.annotations.SerializedName;
 public class ReqSetPengikatan {
 
     @SerializedName("idAgunan")
-    private String idAgunan;
+    private int idAgunan;
     @SerializedName("idApl")
-    private String idApl;
+    private int idApl;
     @SerializedName("idCif")
-    private String idCif;
+    private int idCif;
     @SerializedName("fidjenisAgunan")
     private int fidjenisAgunan;
 
 
-    public String getIdAgunan() {
+    public int getIdAgunan() {
         return idAgunan;
     }
 
-    public void setIdAgunan(String idAgunan) {
+    public void setIdAgunan(int idAgunan) {
         this.idAgunan = idAgunan;
     }
 
-    public String getIdApl() {
+    public int getIdApl() {
         return idApl;
     }
 
-    public void setIdApl(String idApl) {
+    public void setIdApl(int idApl) {
         this.idApl = idApl;
     }
 
-    public String getIdCif() {
+    public int getIdCif() {
         return idCif;
     }
 
-    public void setIdCif(String idCif) {
+    public void setIdCif(int idCif) {
         this.idCif = idCif;
     }
 

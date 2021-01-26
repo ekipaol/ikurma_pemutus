@@ -138,6 +138,7 @@ public class CatatanActivity extends AppCompatActivity {
     InfoCs dataCs;
     List<CsModel> cekCs;
     String adaCs="belum";
+    String idProgram="";
     AppPreferences appPreferences;
     AllDataFront superData;
 
@@ -155,7 +156,13 @@ public class CatatanActivity extends AppCompatActivity {
         cif = getIntent().getStringExtra("cif");
         idAplikasi = getIntent().getIntExtra("idAplikasi", 0);
         fidStatus=getIntent().getStringExtra("fidStatus");
+
+        if(getIntent().hasExtra("idProgram")){
+            idProgram=getIntent().getStringExtra("idProgram");
+        }
+
         superData=(AllDataFront)getIntent().getSerializableExtra("superData");
+
         //end of connection related
 
         AppUtil.toolbarRegular(this, "Lakukan Putusan");
@@ -879,11 +886,19 @@ public class CatatanActivity extends AppCompatActivity {
                             req.setKode_dsn(appPreferences.getDsnCode());
 
 
-                            Call<ParseResponse> call= apiClientAdapter.getApiInterface().pemutusSetuju(req);
-//                                        Log.d("superdete",superData.getJenisPembiayaan());
-                            if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
-                                call = apiClientAdapter.getApiInterface().pemutusSetujuKmg(req);
+                            Call<ParseResponse> call;
+                                        Log.d("superdete",superData.getJenisPembiayaan());
+                            Log.d("superdeteidprogram",idProgram);
+
+                          if(idProgram.equalsIgnoreCase("222")){
+                                call = apiClientAdapter.getApiInterface().pemutusSetujuFlpp(req);
                             }
+                           else  if(superData.getJenisPembiayaan().equalsIgnoreCase("kpr")){
+
+                               call = apiClientAdapter.getApiInterface().pemutusSetujuKmg(req);
+
+                            }
+
                             else{
                                 call = apiClientAdapter.getApiInterface().pemutusSetuju(req);
                             }
@@ -904,6 +919,11 @@ public class CatatanActivity extends AppCompatActivity {
 
                                             dialog1.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                                             dialog1.setTitleText("Putusan Berhasil");
+
+                                            if(dataCs.getNama_petugas()==null){
+                                                dataCs.setNama_petugas("");
+                                            }
+
                                             if (dataCs.getNama_petugas().equalsIgnoreCase("[GAGAL]")) {
                                                 dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
                                                 dialog1.setTitleText("Putusan Gagal");

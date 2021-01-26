@@ -15,6 +15,7 @@ public class BaseApp extends Application {
             RealmConfiguration configuration = new RealmConfiguration.Builder()
                     .name(RealmConfig.REALM_NAME)
                     .schemaVersion(RealmConfig.REALM_CURRENT_VERSION)
+                    .deleteRealmIfMigrationNeeded()
                     .build();
             Realm.setDefaultConfiguration(configuration);
             Realm.getInstance(configuration);

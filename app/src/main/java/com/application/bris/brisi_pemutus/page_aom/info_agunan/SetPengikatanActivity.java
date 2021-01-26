@@ -148,13 +148,13 @@ public class SetPengikatanActivity extends AppCompatActivity{
         progressbar_loading.setVisibility(View.VISIBLE);
         ReqSetPengikatan req = new ReqSetPengikatan();
 
-        //pantekan dummy, ambil dari intent dalam implementasi sbeleum
-        req.setIdApl(getIntent().getStringExtra("idAplikasi"));
-        req.setIdCif(getIntent().getStringExtra("cif"));
-        req.setIdAgunan(getIntent().getStringExtra("idAgunan"));
+
+        req.setIdApl(Integer.parseInt(getIntent().getStringExtra("idAplikasi")));
+        req.setIdCif(Integer.parseInt(getIntent().getStringExtra("cif")));
+        req.setIdAgunan(Integer.parseInt(getIntent().getStringExtra("idAgunan")));
         req.setFidjenisAgunan(getIntent().getIntExtra("tipeAgunan",0));
 
-
+//        {"fidjenisAgunan":7,"idAgunan":48971,"idApl":601771,"idCif":82296}
 
 
         Call<ParseResponse> call = apiClientAdapter.getApiInterface().setPengikatan(req);

@@ -48,7 +48,7 @@ public class DetailDisposisiActivity extends AppCompatActivity  {
 FButton bt_disposisi,bt_confirm,disposisi,bt_cancel_disposisi;
 MaterialSpinner sp_ao;
 TextView segmen,produk,plafond,tenor,nik,nama,tempatlahir,tanggllahir,nohp,jenisUsaha,omsetHari,alamat,kecamatan,kota,provinsi,namaAo,uid,page_title,email,rtrw,waktu_pengajuan,kode_unik,id_aplikasi,kodepos,tanggal_disposisi;
-ImageView capsule_close;
+ImageView capsule_close,iv_foto;
 CardView dataPemrakarsa;
     @BindView(R.id.tb_custom)
     Toolbar tb_regular;
@@ -64,6 +64,7 @@ CardView dataPemrakarsa;
     List<String> kodeAomString;
 
     String statusDisposisi="belum";
+    Disposisi dDisposisi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +92,7 @@ CardView dataPemrakarsa;
          mappbar=findViewById(R.id.appbar);
 
         dataPemrakarsa=findViewById(R.id.cv_datapemrakarsa);
+        iv_foto=findViewById(R.id.header);
 
 
         bt_disposisi=findViewById(R.id.bt_disposisi);
@@ -142,7 +144,7 @@ CardView dataPemrakarsa;
         bottom_sheet=findViewById(R.id.bottom_sheet);
 
         //check apakah melihat daftar AO atau riwayat AO
-        Disposisi dDisposisi = (Disposisi)getIntent().getSerializableExtra("disposisi");
+         dDisposisi = (Disposisi)getIntent().getSerializableExtra("disposisi");
 
         if(getIntent().getStringExtra("menuAsal")!=null){
            dataPemrakarsa.setVisibility(View.VISIBLE);
@@ -251,12 +253,16 @@ CardView dataPemrakarsa;
 
             plafond.setText(AppUtil.parseRupiah(dDisposisi.getPLAFOND()));
             email.setText(dDisposisi.getEMAIL());
-            rtrw.setText(dDisposisi.getRT_KTP()+"/"+dDisposisi.getRW_KTP());
+            rtrw.setText(dDisposisi.getRTRW_KTP());
 //            tempatlahir.setText(dDisposisi.getta());
 //            tanggllahir.setText(dDisposisi.getTanggal_lahir());
             nohp.setText(dDisposisi.getNO_HP());
 //            jenisUsaha.setText(dDisposisi.getBidang_usaha());
 //            omsetHari.setText(dDisposisi.getOmzet_per_hari());
+
+            AppUtil.loadPhotoWithCache(DetailDisposisiActivity.this,iv_foto,dDisposisi.getFID_PHOTO_KTP());
+
+
         }
         catch(Exception e){
 
@@ -370,7 +376,7 @@ CardView dataPemrakarsa;
 
         loading.setVisibility(View.VISIBLE);
         ReqSimpanDisposisi req = new ReqSimpanDisposisi();
-        req.setIdAplikasi(idAplikasi);
+        req.setIdReferal(dDisposisi.getID());
         req.setUidAssigned(uid_pemrakarsa);
         req.setUidAssigner(uid_pemutus);
 
@@ -397,8 +403,18 @@ CardView dataPemrakarsa;
 
                     }
                     else{
-                        Toasty.error(DetailDisposisiActivity.this,"Gagal mendapatkan daftar AOM");
-                        finish();
+                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                        dialog1.setTitleText("Gagal");
+                        dialog1.setContentText(response.body().getMessage());
+                        dialog1.setConfirmText("Ok");
+                        dialog1.showCancelButton(false);
+                        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                dialog1.dismissWithAnimation();
+                                finish();
+                            }
+                        });
                     }
                 }
                 else{

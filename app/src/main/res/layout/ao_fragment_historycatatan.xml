@@ -45,8 +45,49 @@
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:fontFamily="@font/roboto_m"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
             android:text="Pastikan data pembiayaan sudah sesuai dan pertimbangkan catatan dari pemrakarsa dan pemutus lain, sebelum melakukan putusan"/>
+
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:background="@drawable/bordertextbox_info"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_info_outline_secondary_24p"
+                android:tint="@color/colorBlackHeader"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"/>
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="Pastikan data pembiayaan dan data nasabah sudah sesuai sebelum melakukan putusan"
+                android:textAlignment="center"
+                android:layout_gravity="center_horizontal"
+                android:textSize="12sp"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"/>
+
+        </LinearLayout>
         
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_data_pembiayaan_catatan"
@@ -54,7 +95,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
             android:layout_margin="8dp"
-            android:layout_below="@id/tv_keterangan_catatan"
+            android:layout_below="@id/ll_info"
             android:animateLayoutChanges="true"
 
             >

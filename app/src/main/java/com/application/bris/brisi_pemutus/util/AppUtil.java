@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
+import com.application.bris.brisi_pemutus.BuildConfig;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
@@ -22,10 +23,12 @@ import androidx.appcompat.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -205,6 +208,15 @@ public class AppUtil {
                 .into(imageView);
     }
 
+    public static String formatStringDoubleBelakangKoma(String string, int berapaAngkaBelakangKoma) {
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(berapaAngkaBelakangKoma);
+
+        Double pencairan=Double.parseDouble(string);
+
+        return df.format(pencairan);
+    }
+
     public static HashMap<String, String> getDeviceInfo(Context context) {
         HashMap<String, String> deviceInfo = new HashMap<>();
         String deviceId = "";
@@ -240,6 +252,14 @@ public class AppUtil {
         else{
             return magicCrypt.encrypt(data);
         }
+    }
+
+    public static void logSecure( String tag,String message){
+
+        if(!BuildConfig.IS_PRODUCTION){
+            Log.d(tag,message);
+        }
+
     }
 
 
@@ -430,6 +450,11 @@ public class AppUtil {
     }
 
     public static void notiferror(Context mcontex, View root, String snackTitle) {
+        //hide the keyboard
+        InputMethodManager imm = (InputMethodManager)mcontex.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
+
+        //then show the snackbar
         Snackbar snackbar = Snackbar.make(root, snackTitle, Snackbar.LENGTH_LONG);
         snackbar.show();
         View view = snackbar.getView();

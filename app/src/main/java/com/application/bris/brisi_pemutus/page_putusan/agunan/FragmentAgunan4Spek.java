@@ -195,18 +195,18 @@ public class FragmentAgunan4Spek extends Fragment implements Step, KeyValueListe
         et_pagar.setText(dataLengkap.getPagar());
         disableTextFocus(et_listrik);
         et_listrik.setText(dataLengkap.getTeganganListrik());
-        if(dataLengkap.getTeganganListrik().length()>0){
-            ada_listrik.isChecked();
+        if(dataLengkap.getTeganganListrik()!=null&&!dataLengkap.getTeganganListrik().isEmpty()){
+            ada_listrik.setChecked(true);
         }
         disableTextFocus(et_air);
         et_air.setText(dataLengkap.getJenisAir());
-        if(dataLengkap.getJenisAir().length()>0){
-            ada_air.isChecked();
+        if(dataLengkap.getJenisAir()!=null&&!dataLengkap.getJenisAir().isEmpty()){
+            ada_air.setChecked(true);
         }
         disableTextFocus(et_telepon);
         et_telepon.setText(dataLengkap.getNoTelepon());
-        if(dataLengkap.getNoTelepon().length()>0){
-            ada_telepon.isChecked();
+        if(dataLengkap.getNoTelepon()!=null&&!dataLengkap.getNoTelepon().isEmpty()){
+            ada_telepon.setChecked(true);
         }
         disableTextFocus(et_atap);
         et_atap.setText(KeyValue.getKeyAtap(dataLengkap.getAtap()));
