@@ -28,6 +28,7 @@ import com.application.bris.brisi_pemutus.model.sektor_ekonomi_kpr.SektorEkonomi
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.data_finansial.DataFinansialKonsumerKmgActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.PutusanFrontMenuKpr;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.data_finansial.DataFinansialFlppActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.data_finansial.DataFinansialKprActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_purna.page_konsumer_purna.data_finansial.DataFinansialPurnaActivity;
 import com.application.bris.brisi_pemutus.page_putusan.lkn.LknActivity;
@@ -202,8 +203,15 @@ public class SektorEkonomiKprActivity extends AppCompatActivity {
              
                     Intent intent;
 //                    Log.d("isikodegimik",superData.getKodeGimmick());
+
+                if(superData.getKodeGimmick().equalsIgnoreCase("222")){
+                    intent = new Intent(SektorEkonomiKprActivity.this, DataFinansialFlppActivity.class);
+                }
+                else{
+                    intent = new Intent(SektorEkonomiKprActivity.this, DataFinansialKprActivity.class);
+                }
                  
-                        intent = new Intent(SektorEkonomiKprActivity.this, DataFinansialKprActivity.class);
+
                         intent.putExtra("cif", superData.getCif());
                         intent.putExtra("idAplikasi", superData.getIdAplikasi());
                         intent.putExtra("tujuanPembiayaan", superData.getTujuanPembiayaan());
@@ -260,7 +268,7 @@ public class SektorEkonomiKprActivity extends AppCompatActivity {
         req.setIdAplikasi(idAplikasi);
         req.setIdRole(Integer.parseInt(appPreferences.getFidRole()));
 
-        if(idProgram.equalsIgnoreCase("222")){
+        if(superData.getKodeGimmick().equalsIgnoreCase("222")){
             call = apiClientAdapter.getApiInterface().inquirySektorEkonomiFlpp(req);
         }
         else{
