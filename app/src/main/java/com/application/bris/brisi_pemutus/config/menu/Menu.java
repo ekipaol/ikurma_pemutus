@@ -175,5 +175,23 @@ public class Menu {
 //        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
 //        menu.add(new ListViewMenu(R.drawable.ico_approved, context.getString(R.string.menu_approved)));
     }
+
+    public static void menuPemutusAm(Context context, List<ListViewMenu> menu){
+        menu.add(new ListViewMenu(R.drawable.ic_daftar_putusan, context.getString(R.string.menu_pengajuan)));
+        menu.add(new ListViewMenu(R.drawable.ic_riwayat, "Riwayat"));
+        menu.add(new ListViewMenu(R.drawable.ic_business,"Monitoring"));
+        menu.add(new ListViewMenu(R.drawable.ic_logout_front, "Logout"));
+
+
+    }
+
+    public static void menuPemutusAmpm(Context context, List<ListViewMenu> menu){
+        menu.add(new ListViewMenu(R.drawable.ic_daftar_putusan, context.getString(R.string.menu_pengajuan)));
+        menu.add(new ListViewMenu(R.drawable.ic_riwayat, "Riwayat"));
+        menu.add(new ListViewMenu(R.drawable.ic_business,"Monitoring"));
+        menu.add(new ListViewMenu(R.drawable.ic_logout_front, "Logout"));
+
+
+    }
     }
 

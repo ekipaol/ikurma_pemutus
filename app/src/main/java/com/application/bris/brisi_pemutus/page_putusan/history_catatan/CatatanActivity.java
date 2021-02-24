@@ -163,6 +163,10 @@ public class CatatanActivity extends AppCompatActivity {
 
         superData=(AllDataFront)getIntent().getSerializableExtra("superData");
 
+        if(superData.getKodeGimmick()!=null&&superData.getKodeGimmick().equalsIgnoreCase("222")){
+            idProgram="222";
+        }
+
         //end of connection related
 
         AppUtil.toolbarRegular(this, "Lakukan Putusan");

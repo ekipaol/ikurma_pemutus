@@ -90,8 +90,6 @@ public class AmbilAlihActivity extends AppCompatActivity implements SwipeRefresh
         progressbar_loading.setVisibility(View.VISIBLE);
 
 
-        //khusus m3, menggunakan service lain, karena ada perbedaan struktur data di database, jadi tidak bisa diambil dari service untuk daftar user
-        if(apppref.getFidRole().equalsIgnoreCase("72")){
             ReqAmbilAlih reqAmbilAlih=new ReqAmbilAlih();
             reqAmbilAlih.setKodeSkk(apppref.getKodeSkk());
             reqAmbilAlih.setKodeKanwil(apppref.getKodeKanwil());
@@ -141,105 +139,7 @@ public class AmbilAlihActivity extends AppCompatActivity implements SwipeRefresh
                     Log.d("LOG D", t.getMessage());
                 }
             });
-        }
 
-        else {
-
-            RequestDataCabang req = new RequestDataCabang();
-            req.setKodeCabang(apppref.getKodeCabang());
-
-            //conditioning list yang ditampilkan
-
-            if(apppref.getFidRole().equalsIgnoreCase("79")){ //pincapem
-                call = apiClientAdapter.getApiInterface().dataUh(req);
-                req.setKodeSkk(apppref.getKodeSkk());
-            }
-            else if(apppref.getFidRole().equalsIgnoreCase("76")){ //pinca
-                call = apiClientAdapter.getApiInterface().dataPincaLengkap(req);
-                req.setKodeCabang(apppref.getKodeSkk());
-            }
-            else if(apppref.getFidRole().equalsIgnoreCase("72")){//mmm
-                call = apiClientAdapter.getApiInterface().dataUh(req);
-                req.setKodeSkk(apppref.getKodeSkk());
-            }
-//            else if(apppref.getFidRole().equalsIgnoreCase("77")){//mmm
-//                call = apiClientAdapter.getApiInterface().dataPincaLengkap(req);
-//                req.setKodeCabang(apppref.getKodeSkk());
-//            }
-            else{
-                Toast.makeText(this, "Anda belum dapat mengakses halaman ini", Toast.LENGTH_SHORT).show();
-            }
-
-            call.enqueue(new Callback<ParseResponse>() {
-                @Override
-                public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
-                    // progressbar_loading.setVisibility(View.GONE);
-
-                    progressbar_loading.setVisibility(View.GONE);
-
-                    if (response.isSuccessful()) {
-                        if (response.body().getStatus().equalsIgnoreCase("00")) {
-
-                            if (apppref.getFidRole().equalsIgnoreCase("79")) {
-                                String listDataString = response.body().getData().get("listUh").toString();
-                                Gson gson = new Gson();
-                                Type type = new TypeToken<List<Ao>>() {
-                                }.getType();
-                                dataUser = gson.fromJson(listDataString, type);
-
-                                if (dataUser.size() == 0) {
-//                                whale.setVisibility(View.VISIBLE);
-//                                tvWhale.setVisibility(View.VISIBLE);
-                                    rl_whale.setVisibility(View.VISIBLE);
-                                    rv_listuser.setVisibility(View.GONE);
-                                } else {
-//                                whale.setVisibility(View.GONE);
-//                                tvWhale.setVisibility(View.INVISIBLE);
-                                    rl_whale.setVisibility(View.GONE);
-                                    adapterDaftarAmbilAlih = new AdapterDaftarAmbilAlih(AmbilAlihActivity.this, dataUser, apppref
-                                            .getFidRole());
-                                    adapterDaftarAmbilAlih.notifyDataSetChanged();
-                                }
-                            } else if (apppref.getFidRole().equalsIgnoreCase("76") || apppref.getFidRole().equalsIgnoreCase("72")) {
-                                String listDataStringAo = response.body().getData().get("listBawahanLangsung").toString();
-                                List<Ao> dataFilter = new ArrayList<>();
-                                Gson gson = new Gson();
-                                Type type = new TypeToken<List<Ao>>() {
-                                }.getType();
-                                dataUser = gson.fromJson(listDataStringAo, type);
-
-
-                                if (dataUser.size() == 0) {
-//                                whale.setVisibility(View.VISIBLE);
-//                                tvWhale.setVisibility(View.VISIBLE);
-                                    rl_whale.setVisibility(View.VISIBLE);
-                                    rv_listuser.setVisibility(View.GONE);
-                                } else {
-                                    rv_listuser.setVisibility(View.VISIBLE);
-                                    rl_whale.setVisibility(View.GONE);
-//                                whale.setVisibility(View.GONE);
-//                                tvWhale.setVisibility(View.INVISIBLE);
-                                    adapterDaftarAmbilAlih = new AdapterDaftarAmbilAlih(AmbilAlihActivity.this, dataUser, apppref.getFidRole());
-                                    adapterDaftarAmbilAlih.notifyDataSetChanged();
-                                }
-                            }
-
-
-                            rv_listuser.setLayoutManager(new LinearLayoutManager(AmbilAlihActivity.this));
-                            rv_listuser.setItemAnimator(new DefaultItemAnimator());
-                            rv_listuser.setAdapter(adapterDaftarAmbilAlih);
-                        }
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<ParseResponse> call, Throwable t) {
-                    Log.d("LOG D", t.getMessage());
-                }
-            });
-
-        }
     }
 
     @Override

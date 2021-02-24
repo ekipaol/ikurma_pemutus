@@ -1,0 +1,673 @@
+package com.application.bris.brisi_pemutus.page_konsumer_kpr.kelengkapan_dokumen;
+
+
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.api.config.UriApi;
+import com.application.bris.brisi_pemutus.api.model.ParseResponse;
+import com.application.bris.brisi_pemutus.api.model.request.kelengkapan_dokumen.ReqKelengkapanDokumen;
+import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
+import com.application.bris.brisi_pemutus.database.AppPreferences;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumenFlpp;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumenKprKaryawanBris;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen_agunan.KelengkapanDokumenAgunan;
+import com.application.bris.brisi_pemutus.model.list_putusan.Putusan;
+import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.PutusanFrontMenuKpr;
+import com.application.bris.brisi_pemutus.page_putusan.history_catatan.CatatanActivity;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityPreviewFotoSecondary;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.AdapterKelengkapanDokumenAgunan;
+import com.application.bris.brisi_pemutus.util.AppUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import me.grantland.widget.AutofitTextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class KelengkapanDokumenFlppActivity extends AppCompatActivity {
+
+    @BindView(R.id.tv_dokumen_agunan)
+    TextView tv_dokumen_agunan;
+
+    @BindView(R.id.cv_ktp)
+    CardView cv_ktp;
+    @BindView(R.id.cb_ktp)
+    CheckBox cb_ktp;
+    @BindView(R.id.tv_ktp)
+    AutofitTextView tv_ktp;
+
+    @BindView(R.id.cv_kartu_keluarga)
+    CardView cv_kartu_keluarga;
+    @BindView(R.id.cb_kartu_keluarga)
+    CheckBox cb_kartu_keluarga;
+    @BindView(R.id.tv_kartu_keluarga)
+    TextView tv_kartu_keluarga;
+
+
+    @BindView(R.id.cv_surat_nikah)
+    CardView cv_surat_nikah;
+    @BindView(R.id.cb_surat_nikah)
+    CheckBox cb_surat_nikah;
+    @BindView(R.id.tv_surat_nikah)
+    TextView tv_surat_nikah;
+
+
+    @BindView(R.id.cv_pas_photo)
+    CardView cv_pas_photo;
+    @BindView(R.id.cb_pas_photo)
+    CheckBox cb_pas_photo;
+    @BindView(R.id.tv_pas_photo)
+    TextView tv_pas_photo;
+
+
+    @BindView(R.id.cv_npwp)
+    CardView cv_npwp;
+    @BindView(R.id.cb_npwp)
+    CheckBox cb_npwp;
+    @BindView(R.id.tv_npwp)
+    TextView tv_npwp;
+
+
+    @BindView(R.id.cv_formulir_aplikasi)
+    CardView cv_formulir_aplikasi;
+    @BindView(R.id.cb_formulir_aplikasi)
+    CheckBox cb_formulir_aplikasi;
+    @BindView(R.id.tv_formulir_aplikasi)
+    TextView tv_formulir_aplikasi;
+
+    @BindView(R.id.cv_sk_penghasilan)
+    CardView cv_sk_penghasilan;
+    @BindView(R.id.cb_sk_penghasilan)
+    CheckBox cb_sk_penghasilan;
+    @BindView(R.id.tv_sk_penghasilan)
+    TextView tv_sk_penghasilan;
+
+    @BindView(R.id.cv_pernyataan_penghasilan)
+    CardView cv_pernyataan_penghasilan;
+    @BindView(R.id.cb_pernyataan_penghasilan)
+    CheckBox cb_pernyataan_penghasilan;
+    @BindView(R.id.tv_pernyataan_penghasilan)
+    TextView tv_pernyataan_penghasilan;
+
+    @BindView(R.id.cv_pemberitahuan_tahunan)
+    CardView cv_pemberitahuan_tahunan;
+    @BindView(R.id.cb_pemberitahuan_tahunan)
+    CheckBox cb_pemberitahuan_tahunan;
+    @BindView(R.id.tv_pemberitahuan_tahunan)
+    TextView tv_pemberitahuan_tahunan;
+
+    @BindView(R.id.cv_pernyataan_rumah)
+    CardView cv_pernyataan_rumah;
+    @BindView(R.id.cb_pernyataan_rumah)
+    CheckBox cb_pernyataan_rumah;
+    @BindView(R.id.tv_pernyataan_rumah)
+    TextView tv_pernyataan_rumah;
+
+    @BindView(R.id.cv_pernyataan_subsidi)
+    CardView cv_pernyataan_subsidi;
+    @BindView(R.id.cb_pernyataan_subsidi)
+    CheckBox cb_pernyataan_subsidi;
+    @BindView(R.id.tv_pernyataan_subsidi)
+    TextView tv_pernyataan_subsidi;
+
+    @BindView(R.id.cv_pernyataan_sejahtera)
+    CardView cv_pernyataan_sejahtera;
+    @BindView(R.id.cb_pernyataan_sejahtera)
+    CheckBox cb_pernyataan_sejahtera;
+    @BindView(R.id.tv_pernyataan_sejahtera)
+    TextView tv_pernyataan_sejahtera;
+
+    @BindView(R.id.cv_pernyataan_kesediaan)
+    CardView cv_pernyataan_kesediaan;
+    @BindView(R.id.cb_pernyataan_kesediaan)
+    CheckBox cb_pernyataan_kesediaan;
+    @BindView(R.id.tv_pernyataan_kesediaan)
+    TextView tv_pernyataan_kesediaan;
+
+    @BindView(R.id.cv_pernyataan_kelaikan)
+    CardView cv_pernyataan_kelaikan;
+    @BindView(R.id.cb_pernyataan_kelaikan)
+    CheckBox cb_pernyataan_kelaikan;
+    @BindView(R.id.tv_pernyataan_kelaikan)
+    TextView tv_pernyataan_kelaikan;
+
+    @BindView(R.id.cv_berita_acara)
+    CardView cv_berita_acara;
+    @BindView(R.id.cb_berita_acara)
+    CheckBox cb_berita_acara;
+    @BindView(R.id.tv_berita_acara)
+    TextView tv_berita_acara;
+
+    @BindView(R.id.cv_surat_rab)
+    CardView cv_surat_rab;
+    @BindView(R.id.cb_surat_rab)
+    CheckBox cb_surat_rab;
+    @BindView(R.id.tv_surat_rab)
+    TextView tv_surat_rab;
+
+
+
+    @BindView(R.id.progressbar_loading)
+    RelativeLayout loading;
+
+    //button lihat foto
+
+    @BindView(R.id.bt_ktp_kelengkapan)
+    Button bt_ktp_kelengkapan;
+    @BindView(R.id.bt_kartu_keluarga_kelengkapan)
+    Button bt_kartu_keluarga_kelengkapan;
+    @BindView(R.id.bt_surat_nikah_kelengkapan)
+    Button bt_surat_nikah_kelengkapan;
+    @BindView(R.id.bt_pas_photo_kelengkapan)
+    Button bt_pas_photo_kelengkapan;
+    @BindView(R.id.bt_npwp_kelengkapan)
+    Button bt_npwp_kelengkapan;
+    @BindView(R.id.bt_formulir_kelengkapan)
+    Button bt_formulir_kelengkapan;
+
+
+    @BindView(R.id.bt_sk_penghasilan)
+    Button bt_sk_penghasilan;
+
+    @BindView(R.id.bt_pemberitahuan_tahunan)
+    Button bt_pemberitahuan_tahunan;
+    @BindView(R.id.bt_pernyataan_rumah)
+    Button bt_pernyataan_rumah;
+    @BindView(R.id.bt_pernyataan_subsidi)
+    Button bt_pernyataan_subsidi;
+    @BindView(R.id.bt_pernyataan_sejahtera)
+    Button bt_pernyataan_sejahtera;
+    @BindView(R.id.bt_pernyataan_kesediaan)
+    Button bt_pernyataan_kesediaan;
+    @BindView(R.id.bt_pernyataan_kelaikan)
+    Button bt_pernyataan_kelaikan;
+    @BindView(R.id.bt_berita_acara)
+    Button bt_berita_acara;
+    @BindView(R.id.bt_surat_rab)
+    Button bt_surat_rab;
+    @BindView(R.id.bt_pernyataan_penghasilan)
+    Button bt_pernyataan_penghasilan;
+
+
+    @BindView(R.id.rv_agunan_kelengkapan)
+    RecyclerView rv_agunan_kelengkapan;
+
+    @BindView(R.id.bt_lanjut_kelengkapan_data)
+    Button bt_lanjut_kelengkapan_data;
+
+    AllDataFront superData;
+    Call<ParseResponse> call;
+
+
+
+    private SearchView searchView;
+    List<Putusan> dataHotProspek;
+    AdapterKelengkapanDokumenAgunan adapterKelengkapanDokumenAgunan;
+    LinearLayoutManager layoutPipeline;
+    ApiClientAdapter apiClientAdapter;
+    KelengkapanDokumenFlpp dataKelengkapan;
+    List<KelengkapanDokumenAgunan> dataKelengkapanAgunan;
+
+    AppPreferences appPreferences;
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.kelengkapan_dokumen_flpp_activity);
+
+        superData=(AllDataFront)getIntent().getSerializableExtra("superData");
+
+
+        main();
+        loadData();
+        backgroundStatusBar();
+
+        //set kelengkapan as already read
+        appPreferences = new AppPreferences(this);
+        appPreferences.setReadKelengkapan("yes");
+
+
+
+
+
+
+//        kalau belum dilihat semua, gak bisa di putus
+        if(appPreferences.getReadKelengkapan().equalsIgnoreCase("no")||appPreferences.getReadPreScreening().equalsIgnoreCase("no")||appPreferences.getReadDataLengkap().equalsIgnoreCase("no")||appPreferences.getReadSektorEkonomi().equalsIgnoreCase("no")||appPreferences.getReadAgunan().equalsIgnoreCase("no")||appPreferences.getReadDataFinansial().equalsIgnoreCase("no")||appPreferences.getReadScoring().equalsIgnoreCase("no")){
+            bt_lanjut_kelengkapan_data.setVisibility(View.GONE);
+        }
+        else{
+            bt_lanjut_kelengkapan_data.setVisibility(View.VISIBLE);
+        }
+
+        if(superData.getAsalHalaman().equalsIgnoreCase("riwayat")){
+            bt_lanjut_kelengkapan_data.setVisibility(View.GONE);
+        }
+
+        bt_lanjut_kelengkapan_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(KelengkapanDokumenFlppActivity.this, CatatanActivity.class);
+                intent.putExtra("cif", superData.getCif());
+                intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));
+                intent.putExtra("fidStatus",superData.getFidStatus());
+                intent.putExtra("superData",superData);
+
+
+                //when back make this thing go to putusan frontmenu
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
+    }
+
+    @Override
+    public void onBackPressed() { finish(); }
+
+
+
+
+    private void backgroundStatusBar(){
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(getResources().getColor(R.color.colorWhite));
+        }
+    }
+
+    public void main(){
+          ButterKnife.bind(this);
+        apiClientAdapter = new ApiClientAdapter(this);
+        AppUtil.toolbarRegular(this, "Kelengkapan Dokumen");
+        ImageView backToolbar = findViewById(R.id.btn_back);
+        backToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(KelengkapanDokumenFlppActivity.this, PutusanFrontMenuKpr.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+
+//        bt_ktp_kelengkapan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(KelengkapanDokumenFlppActivity.this, ActivityFotoKelengkapanDokumen.class);
+//                startActivity(intent);
+//            }
+//        });
+
+    }
+
+    public void loadData(){
+        loading.setVisibility(View.VISIBLE);
+        //real data
+//        ReqKelengkapanDokumen req = new ReqKelengkapanDokumen();
+//        req.setId_aplikasi(Integer.parseInt(getIntent().getStringExtra("idAplikasi")));
+
+
+        //pantekan buat testing
+        ReqKelengkapanDokumen req = new ReqKelengkapanDokumen();
+//       req.setId_aplikasi(101928);
+//        Toast.makeText(KelengkapanDokumenFlppActivity.this, "Id Aplikasi masih hardcode", Toast.LENGTH_SHORT).show();
+
+        req.setId_aplikasi(Integer.parseInt(superData.getIdAplikasi()));
+
+        call = apiClientAdapter.getApiInterface().inquiryKelengkapanDokumenFlpp(req);
+
+
+        call.enqueue(new Callback<ParseResponse>() {
+            @Override
+            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+                loading.setVisibility(View.GONE);
+                try {
+                    if (response.isSuccessful()){
+                        if (response.body().getStatus().equalsIgnoreCase("00")){
+
+                            String dataKelengkapanString = response.body().getData().get("kelDokumen").toString();
+//                            String fotoKategoriString=response.body().getData().get("kelDokumen").getAsJsonObject().get("ID_DOKUMEN_AGUNAN").toString();
+
+//                            Log.d("fotokategoriString",fotoKategoriString);
+                            Gson gson = new Gson();
+                            Type type = new TypeToken<KelengkapanDokumenFlpp>() {
+                            }.getType();
+
+                            Type type2 = new TypeToken<List<KelengkapanDokumenAgunan>>() {
+                            }.getType();
+
+                            dataKelengkapan = gson.fromJson(dataKelengkapanString, type);
+
+                            //hapus comment disekitar tv_dokumen visibility, jika sudah ada dokumen agunan yang dapat diterima
+//                            dataKelengkapanAgunan=gson.fromJson(fotoKategoriString,type2);
+//                            if(dataKelengkapanAgunan.size()==0){
+                            tv_dokumen_agunan.setVisibility(View.GONE);
+//                            }
+
+
+
+                            //menyimpan id formulir ke preferences, agar di halaman putusan bisa diakses kembali untuk bagian sumary pmebiayaan diatas yang warnanya hijau
+
+                            appPreferences.setIdFotoFormulir(Integer.toString(dataKelengkapan.getID_DOKUMEN_APLIKASI()));
+                            //start kondisi checklist
+                            if(dataKelengkapan.getID_DOKUMEN_KTP()>0){
+                                cb_ktp.setChecked(true);
+                                bt_ktp_kelengkapan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_ktp.setChecked(false);
+                                bt_ktp_kelengkapan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_NPWP_PRIBADI()>0){
+                                cb_npwp.setChecked(true);
+                                bt_npwp_kelengkapan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_npwp.setChecked(false);
+                                bt_npwp_kelengkapan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_APLIKASI()>0){
+                                cb_formulir_aplikasi.setChecked(true);
+                                bt_formulir_kelengkapan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_formulir_aplikasi.setChecked(false);
+                                bt_formulir_kelengkapan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_KK()>0){
+                                cb_kartu_keluarga.setChecked(true);
+                                bt_kartu_keluarga_kelengkapan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_kartu_keluarga.setChecked(false);
+                                bt_kartu_keluarga_kelengkapan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_SURAT_NIKAH()>0){
+                                cb_surat_nikah.setChecked(true);
+                                bt_surat_nikah_kelengkapan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_surat_nikah.setChecked(false);
+                                bt_surat_nikah_kelengkapan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_PAS_PHOTO()>0){
+                                cb_pas_photo.setChecked(true);
+                                bt_pas_photo_kelengkapan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pas_photo.setChecked(false);
+                                bt_pas_photo_kelengkapan.setVisibility(View.GONE);
+                            }
+
+
+
+
+                            if(dataKelengkapan.getID_DOKUMEN_SPR_SPP_RAB()>0){
+                                cb_surat_rab.setChecked(true);
+                                bt_surat_rab.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_surat_rab.setChecked(false);
+                                bt_surat_rab.setVisibility(View.GONE);
+                            }
+
+
+                            if(dataKelengkapan.getID_DOKUMEN_SLIP_GAJI()>0){
+                                cb_sk_penghasilan.setChecked(true);
+                                bt_sk_penghasilan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_sk_penghasilan.setChecked(false);
+                                bt_sk_penghasilan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_PEMBERITAHUAN_TAHUNAN()>0){
+                                cb_pemberitahuan_tahunan.setChecked(true);
+                                bt_pemberitahuan_tahunan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pemberitahuan_tahunan.setChecked(false);
+                                bt_pemberitahuan_tahunan.setVisibility(View.GONE);
+                            }
+
+
+                            if(dataKelengkapan.getID_DOKUMEN_PERNYATAAN_PENGHASILAN()>0){
+                                cb_pernyataan_penghasilan.setChecked(true);
+                                bt_sk_penghasilan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pernyataan_penghasilan.setChecked(false);
+                                bt_sk_penghasilan.setVisibility(View.GONE);
+                            }
+
+
+
+                            if(dataKelengkapan.getID_DOKUMEN_PERNYATAAN_RUMAH()>0){
+                                cb_pernyataan_rumah.setChecked(true);
+                                bt_pernyataan_rumah.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pernyataan_rumah.setChecked(false);
+                                bt_pernyataan_rumah.setVisibility(View.GONE);
+                            }
+
+
+
+                            if(dataKelengkapan.getID_DOKUMEN_PERNYATAAN_PEMOHON_SUBSIDI()>0){
+                                cb_pernyataan_subsidi.setChecked(true);
+                                bt_pernyataan_subsidi.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pernyataan_subsidi.setChecked(false);
+                                bt_pernyataan_subsidi.setVisibility(View.GONE);
+                            }
+
+
+
+                            if(dataKelengkapan.getID_DOKUMEN_PERNYATAAN_PEMOHON_SEJAHTERA()>0){
+                                cb_pernyataan_sejahtera.setChecked(true);
+                                bt_pernyataan_sejahtera.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pernyataan_sejahtera.setChecked(false);
+                                bt_pernyataan_sejahtera.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_PERNYATAAN_KELAIKAN()>0){
+                                cb_pernyataan_kelaikan.setChecked(true);
+                                bt_pernyataan_kelaikan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pernyataan_kelaikan.setChecked(false);
+                                bt_pernyataan_kelaikan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_PERNYATAAN_KESEDIAAN()>0){
+                                cb_pernyataan_kesediaan.setChecked(true);
+                                bt_pernyataan_kesediaan.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_pernyataan_kesediaan.setChecked(false);
+                                bt_pernyataan_kesediaan.setVisibility(View.GONE);
+                            }
+
+                            if(dataKelengkapan.getID_DOKUMEN_BERITA_ACARA_SERAH_TERIMA()>0){
+                                cb_berita_acara.setChecked(true);
+                                bt_berita_acara.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                cb_berita_acara.setChecked(false);
+                                bt_berita_acara.setVisibility(View.GONE);
+                            }
+
+
+
+
+
+
+
+                            //end kondisi checklist
+
+
+                            //belum ada agunan
+
+//                            adapterKelengkapanDokumenAgunan = new AdapterKelengkapanDokumenAgunan(KelengkapanDokumenFlppActivity.this, dataKelengkapanAgunan);
+//                            rv_agunan_kelengkapan.setLayoutManager(new LinearLayoutManager(KelengkapanDokumenFlppActivity.this));
+//                            rv_agunan_kelengkapan.setItemAnimator(new DefaultItemAnimator());
+//                            rv_agunan_kelengkapan.setAdapter(adapterKelengkapanDokumenAgunan);
+
+
+
+                            //START ONCLICK LIHAT FOTO
+                            try{
+                                onClickLihatFoto(bt_ktp_kelengkapan, dataKelengkapan.getID_DOKUMEN_KTP());
+                                onClickLihatFoto(bt_kartu_keluarga_kelengkapan, dataKelengkapan.getID_DOKUMEN_KK());
+                                onClickLihatFoto(bt_pas_photo_kelengkapan, dataKelengkapan.getID_DOKUMEN_PAS_PHOTO());
+                                onClickLihatFoto(bt_npwp_kelengkapan, dataKelengkapan.getID_FC_NPWP_PRIBADI());
+                                onClickLihatFoto(bt_formulir_kelengkapan, dataKelengkapan.getID_DOKUMEN_APLIKASI());
+
+
+                                //start onclick lihat pdf
+                                onClickLihatPdf(bt_surat_nikah_kelengkapan, dataKelengkapan.getID_DOKUMEN_SURAT_NIKAH());
+                                onClickLihatPdf(bt_surat_rab, dataKelengkapan.getID_DOKUMEN_SPR_SPP_RAB());
+                                onClickLihatPdf(bt_sk_penghasilan, dataKelengkapan.getID_DOKUMEN_SLIP_GAJI());
+
+                                onClickLihatPdf(bt_pernyataan_penghasilan, dataKelengkapan.getID_DOKUMEN_PERNYATAAN_PENGHASILAN());
+                                onClickLihatPdf(bt_pemberitahuan_tahunan, dataKelengkapan.getID_DOKUMEN_PEMBERITAHUAN_TAHUNAN());
+                                onClickLihatPdf(bt_pernyataan_rumah, dataKelengkapan.getID_DOKUMEN_PERNYATAAN_RUMAH());
+                                onClickLihatPdf(bt_pernyataan_subsidi, dataKelengkapan.getID_DOKUMEN_PERNYATAAN_PEMOHON_SUBSIDI());
+                                onClickLihatPdf(bt_pernyataan_sejahtera, dataKelengkapan.getID_DOKUMEN_PERNYATAAN_PEMOHON_SEJAHTERA());
+                                onClickLihatPdf(bt_pernyataan_kesediaan, dataKelengkapan.getID_DOKUMEN_PERNYATAAN_KESEDIAAN());
+                                onClickLihatPdf(bt_pernyataan_kelaikan, dataKelengkapan.getID_DOKUMEN_PERNYATAAN_KELAIKAN());
+                                onClickLihatPdf(bt_berita_acara, dataKelengkapan.getID_DOKUMEN_BERITA_ACARA_SERAH_TERIMA());
+
+
+
+
+                                //end onclick lihat foto
+                            }
+                            catch (Exception e) {
+
+                                Log.d("Exception_foto",e.toString());
+
+                            }
+
+
+
+
+                        }
+                        else{
+                            AppUtil.notiferror(KelengkapanDokumenFlppActivity.this, findViewById(android.R.id.content), response.body().getMessage());
+                            finish();
+                        }
+                    }
+                    else {
+                        //error message minta ke bang idong
+                    }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParseResponse> call, Throwable t) {
+                loading.setVisibility(View.GONE);
+                AppUtil.notiferror(KelengkapanDokumenFlppActivity.this, findViewById(android.R.id.content), "Terjadi kesalahan");
+                finish();
+            }
+        });
+
+
+    }
+
+    private void onClickLihatFoto(Button butt, final int id_foto){
+        butt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(KelengkapanDokumenFlppActivity.this, ActivityPreviewFotoSecondary.class);
+                intent.putExtra("id_foto",id_foto);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void onClickLihatPdf(Button butt, final int id_pdf){
+        butt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url_pdf = UriApi.Baseurl.URL + UriApi.getPdf.urlPdf + id_pdf;
+                Uri external = Uri.parse(url_pdf);
+                Intent intentPdf;
+                intentPdf = new Intent(Intent.ACTION_VIEW);
+                intentPdf.setDataAndType(external, "application/pdf");
+                try {
+                    startActivity(intentPdf);
+                } catch (ActivityNotFoundException e) {
+                    // No application to view, ask to download one
+                    AlertDialog.Builder builder = new AlertDialog.Builder(KelengkapanDokumenFlppActivity.this);
+                    builder.setTitle("Anda Belum Memiliki Aplikasi untuk Membaca PDF");
+                    builder.setMessage("Download Aplikasi PDF dari Play Store??");
+                    builder.setPositiveButton("Download",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent marketIntent = new Intent(Intent.ACTION_VIEW);
+                                    marketIntent
+                                            .setData(Uri
+                                                    .parse("market://details?id=com.adobe.reader"));
+                                    startActivity(marketIntent);
+                                }
+                            });
+                    builder.setNegativeButton("Batal", null);
+                    builder.create().show();
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+}

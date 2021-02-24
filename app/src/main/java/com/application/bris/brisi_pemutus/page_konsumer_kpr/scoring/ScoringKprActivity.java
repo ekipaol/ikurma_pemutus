@@ -21,11 +21,13 @@ import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.scoring.ReqScoring;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumenFlpp;
 import com.application.bris.brisi_pemutus.model.scoring.ScoringKonsumerKmg;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.page_konsumer_kmg.kelengkapan_dokumen.KelengkapanDokumenKonsumerKmgActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.PutusanFrontMenuKpr;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenFlppActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenKprActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_purna.page_konsumer_purna.kelengkapan_dokumen.KelengkapanDokumenPrapurnaActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_purna.page_konsumer_purna.kelengkapan_dokumen.KelengkapanDokumenPurnaActivity;
@@ -104,7 +106,13 @@ public class ScoringKprActivity extends AppCompatActivity{
                 Intent intent;
 
                 //purna kmg
+                if(superData.getKodeGimmick().equalsIgnoreCase("222")){
+                    intent = new Intent(ScoringKprActivity.this, KelengkapanDokumenFlppActivity.class);
+                }
+                else{
                     intent = new Intent(ScoringKprActivity.this, KelengkapanDokumenKprActivity.class);
+                }
+
 
                 //real data
                 intent.putExtra("idAplikasi", Integer.parseInt(superData.getIdAplikasi()));

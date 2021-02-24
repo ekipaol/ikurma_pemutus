@@ -362,12 +362,31 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
         if(appPreferences.getCbAmanah().equalsIgnoreCase("true")){
-            Menu.mainMenuPemutusAmanah(getContext(),menu);
+
+
+            if(appPreferences.getFidRole().equals("84")){
+                Menu.mainMenuPusat(getContext(), menu);
+            }
+            else if(appPreferences.getFidRole().equalsIgnoreCase("130")){
+                Menu.menuPemutusAm(getContext(),menu);
+            }
+            else if(appPreferences.getFidRole().equalsIgnoreCase("131")){
+                Menu.menuPemutusAmpm(getContext(),menu);
+            }
+            else{
+                Menu.mainMenuPemutusAmanah(getContext(),menu);
+            }
         }
         else{
 
             if(appPreferences.getFidRole().equals("84")){
                 Menu.mainMenuPusat(getContext(), menu);
+            }
+            else if(appPreferences.getFidRole().equalsIgnoreCase("130")){
+                Menu.menuPemutusAm(getContext(),menu);
+            }
+            else if(appPreferences.getFidRole().equalsIgnoreCase("131")){
+                Menu.menuPemutusAmpm(getContext(),menu);
             }
             else{
                 Menu.mainMenuPemutus(getContext(), menu);
@@ -796,8 +815,8 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                     startActivity(intent);
                 }
 
-                //pinca mmm dan mm melihat data seluruh kcp bawahan kcnya
-                else if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("72")||appPreferences.getFidRole().equalsIgnoreCase("77")){
+                //pinca mmm dan mm melihat data seluruh kcp bawahan kcnya, AM dan AMPM ???
+                else if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("72")||appPreferences.getFidRole().equalsIgnoreCase("77")||appPreferences.getFidRole().equalsIgnoreCase("130")||appPreferences.getFidRole().equalsIgnoreCase("131")){
 
                     if(indikatorSelesaiLoading==false&&!appPreferences.getFidRole().equalsIgnoreCase("76")){//ini untuk akses tombol setelah login khusus non pinca
                         Intent intent = new Intent(getContext(), MonitoringKcpActivity.class);

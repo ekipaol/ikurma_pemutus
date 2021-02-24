@@ -9,10 +9,13 @@ import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
 import com.application.bris.brisi_pemutus.api.model.request.id_aplikasi.ReqIdAplikasi;
 import com.application.bris.brisi_pemutus.model.detailHotprospek.DetailHotprospek;
 import com.application.bris.brisi_pemutus.model.detailHotprospek.DetailHotprospekKpr;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumenFlpp;
 import com.application.bris.brisi_pemutus.page_ao_silang.AoSilangActivity;
 import com.application.bris.brisi_pemutus.page_ao_silang.PilihAoSilang.KonsumerKPRPilihAoSilangActivity;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.data_finansial.DataFinansialFlppActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.data_finansial.DataFinansialKprActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.data_lengkap.DataLengkapKprActivity;
+import com.application.bris.brisi_pemutus.page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenFlppActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenKprActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.prescreening.PrescreeningKprActivity;
 import com.application.bris.brisi_pemutus.page_konsumer_kpr.scoring.ScoringKprActivity;
@@ -383,7 +386,12 @@ public class PutusanFrontMenuKpr extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent;
 
+                if(superData.getKodeGimmick().equalsIgnoreCase("222")){
+                    intent=new Intent(PutusanFrontMenuKpr.this, DataFinansialFlppActivity.class);
+                }
+                else{
                     intent=new Intent(PutusanFrontMenuKpr.this, DataFinansialKprActivity.class);
+                }
 
                     //pantekan testing purna
 //                    intent=new Intent(PutusanFrontMenuKmg.this, DataFinansialPurnaActivity.class);
@@ -469,9 +477,13 @@ public class PutusanFrontMenuKpr extends AppCompatActivity {
 
                 Intent intent;
 
-                //seleksi untuk kmg purna dan prapurna
-
+                //real data
+                if(superData.getKodeGimmick().equalsIgnoreCase("222")){
+                    intent = new Intent(PutusanFrontMenuKpr.this, KelengkapanDokumenFlppActivity.class);
+                }
+                else{
                     intent = new Intent(PutusanFrontMenuKpr.this, KelengkapanDokumenKprActivity.class);
+                }
 
                 //real data
                 intent.putExtra("idAplikasi", id_aplikasi.getText());
@@ -685,12 +697,12 @@ public class PutusanFrontMenuKpr extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent;
 
+                if(superData.getKodeGimmick().equalsIgnoreCase("222")){
+                    intent=new Intent(PutusanFrontMenuKpr.this, DataFinansialFlppActivity.class);
+                }
+                else{
                     intent=new Intent(PutusanFrontMenuKpr.this, DataFinansialKprActivity.class);
-
-                    //pantekan testing purna
-//                    intent=new Intent(PutusanFrontMenuKmg.this, DataFinansialPurnaActivity.class);
-//                    Toast.makeText(PutusanFrontMenuKmg.this, "Hardcode purna, PUTUSAN FRONT MENU KMG  425", Toast.LENGTH_SHORT).show();
-
+                }
 
                 //real data
                 intent.putExtra("cif", cif_syiar.getText());
@@ -737,7 +749,13 @@ public class PutusanFrontMenuKpr extends AppCompatActivity {
 
                 Intent intent;
 
+                //real data
+                if(superData.getKodeGimmick().equalsIgnoreCase("222")){
+                    intent = new Intent(PutusanFrontMenuKpr.this, KelengkapanDokumenFlppActivity.class);
+                }
+                else{
                     intent = new Intent(PutusanFrontMenuKpr.this, KelengkapanDokumenKprActivity.class);
+                }
 
 
                 //real data
@@ -1240,6 +1258,14 @@ public class PutusanFrontMenuKpr extends AppCompatActivity {
                             if(detailHotprospek!=null){
                               tujuan_penggunaan.setText(detailHotprospek.getNama_tujuan());
                               superData.setTujuanPembiayaan(detailHotprospek.getNama_tujuan());
+
+                              if(detailHotprospek.getIdProgram()!=null){
+                                  superData.setKodeGimmick(detailHotprospek.getIdProgram());
+                              }
+                              else{
+                                  superData.setKodeGimmick("");
+                              }
+
                                 produk.setText(detailHotprospek.getNama_produk());
                             }
 

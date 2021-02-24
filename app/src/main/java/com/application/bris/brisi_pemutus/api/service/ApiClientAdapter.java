@@ -183,7 +183,7 @@ public class ApiClientAdapter {
                                 AppUtil.logSecure("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
 //                            encryptedRequest=encryptor.decrypt(encryptedRequest);
-//                            Log.wtf("okhttp_decrypter_request",encryptedRequest);
+//                            Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
 
                                 //jangan lupa kalo bikin request body baru, stringnya diambil dalam bentuk bytes
@@ -201,10 +201,10 @@ public class ApiClientAdapter {
 
                         //comment dari sini jika tanpa enkripsi
 //
-//                        Request.Builder requestBuilder = request.newBuilder();
-//                        request = requestBuilder
-//                                .post(requestBody)
-//                                .build();
+                        Request.Builder requestBuilder = request.newBuilder();
+                        request = requestBuilder
+                                .post(requestBody)
+                                .build();
 
                         //end of comment
 

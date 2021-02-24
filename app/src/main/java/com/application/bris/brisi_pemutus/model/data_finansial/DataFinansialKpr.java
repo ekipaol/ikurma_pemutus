@@ -94,6 +94,17 @@ public class DataFinansialKpr {
     @Expose
     private String SUKU_MARGIN;
 
+    @SerializedName("JOINT_INCOME")
+    @Expose
+    private String JOINT_INCOME;
+
+    public String getJOINT_INCOME() {
+        return JOINT_INCOME;
+    }
+
+    public void setJOINT_INCOME(String JOINT_INCOME) {
+        this.JOINT_INCOME = JOINT_INCOME;
+    }
 
     public String getSUKU_MARGIN() {
         return SUKU_MARGIN;

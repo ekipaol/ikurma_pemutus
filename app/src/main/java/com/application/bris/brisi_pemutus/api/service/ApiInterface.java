@@ -417,11 +417,17 @@ public interface ApiInterface {
     @POST(UriApi.konsumerKpr.inquiryDataFinansialKpr)
     Call<ParseResponse> inquiryDataFinansialKpr (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
 
+    @POST(UriApi.flpp.inquiryDataFinansialKprFlpp)
+    Call<ParseResponse> inquiryDataFinansialKprFlpp (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
     @POST(UriApi.konsumerKpr.inquiryScoringKpr)
     Call<ParseResponse> updateScoringKpr (@Body ReqScoring ReqScoring);
 
     @POST(UriApi.konsumerKpr.inquiryKelengkapanDokumenKpr)
     Call<ParseResponse> inquiryKelengkapanDokumenKpr (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
+
+    @POST(UriApi.flpp.inquiryKelengkapanDokumenFlpp)
+    Call<ParseResponse> inquiryKelengkapanDokumenFlpp (@Body ReqKelengkapanDokumen ReqKelengkapanDokumen);
 
 
     @POST(UriApi.konsumerKpr.inquirySektorEkonomiKpr)
