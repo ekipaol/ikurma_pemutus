@@ -19,7 +19,7 @@
             android:layout_height="400dp"
             android:layout_centerHorizontal="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/ikurma_logo_cropped" />
+            android:src="@drawable/logo" />
     </RelativeLayout>
     <TextView
         android:id="@+id/tv_version"

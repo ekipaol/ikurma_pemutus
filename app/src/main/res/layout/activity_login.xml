@@ -39,7 +39,7 @@
 
 
             android:layout_centerInParent="true"
-            android:src="@drawable/ikurma_logo_cropped"/>
+            android:src="@drawable/logo"/>
 
         <ImageView
             android:visibility="invisible"
