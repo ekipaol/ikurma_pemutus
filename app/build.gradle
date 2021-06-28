@@ -9,13 +9,13 @@ android {
         applicationId "com.application.bris.brisi_pemutus"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 47
-        versionName "1.6.0"
+        versionCode 48
+        versionName "1.6.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("Boolean", "IS_PRODUCTION", "false")
-        buildConfigField ("Boolean","IS_BD", "true")
+        buildConfigField("Boolean", "IS_PRODUCTION", "true")
+        buildConfigField ("Boolean","IS_BD", "false")
         buildConfigField ("String","SECRET_KEY", "\"12131415\"")
         buildConfigField ("String","MAGIC_CRYPT_KEY", "\".:Pd4MAp1S3c12EtK3y:.\"")
 

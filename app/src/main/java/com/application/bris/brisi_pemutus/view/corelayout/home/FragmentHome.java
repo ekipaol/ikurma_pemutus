@@ -251,7 +251,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
         //ubah nilai versi notifikasi disini dengan nilai baru, jika ada notifikasi baru/update baru
         //update 1.4.8 versi notifikasi 2 ( ubah jadi 3 atau nilai lain di versi selanjutnya
-        String versiNotifikasi="6";
+        String versiNotifikasi="7";
         if(!appPreferences.getNotificationVersion().equalsIgnoreCase(versiNotifikasi)){
             appPreferences.setNotificationVersion(versiNotifikasi);
             appPreferences.setUpdateNotification("true");
@@ -263,10 +263,11 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             //MENAMPILKAN CHANGELOG UNTUK UPDATE TERBARU KORMA
             AppUtil.DialogUpdateInformation(getContext(),
                     "Fitur Terbaru i-Kurma Pemutus",
-                    "- Penambahan support untuk pembiayaan Ijarah dan MMQ\n\n" +
-                            "- Penambahan support untuk menerima notifikasi (pop up notification) cth : ketika menerima pengajuan pembiayaan dari AO/AOM untuk diputus\n\n"+
-                            "- Perbaikan agar user pemutus dapat melihat/klik foto rumah di halaman data lengkap pembiayaan purna/prapurna\n\n"+
-                            "- Penambahan kolom nomor siup di halaman kelengkapan dokumen pembiayaan mikro"
+                    "- Penambahan support untuk user Area Manager dan AMPM\n\n"
+                            //+
+//                            "- Penambahan support untuk menerima notifikasi (pop up notification) cth : ketika menerima pengajuan pembiayaan dari AO/AOM untuk diputus\n\n"+
+//                            "- Perbaikan agar user pemutus dapat melihat/klik foto rumah di halaman data lengkap pembiayaan purna/prapurna\n\n"+
+//                            "- Penambahan kolom nomor siup di halaman kelengkapan dokumen pembiayaan mikro"
 
 
             );
