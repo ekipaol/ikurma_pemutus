@@ -28,8 +28,9 @@ android {
     }
     buildTypes {
         release {
-//            minifyEnabled true
-//            shrinkResources true
+            minifyEnabled true
+            shrinkResources true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -158,6 +159,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //root detection
+    implementation 'com.scottyab:rootbeer-lib:0.1.0'
 
 
 }

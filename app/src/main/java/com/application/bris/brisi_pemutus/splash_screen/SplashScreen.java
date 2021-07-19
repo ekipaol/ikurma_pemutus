@@ -42,6 +42,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.scottyab.rootbeer.RootBeer;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -120,16 +121,47 @@ public class SplashScreen extends AppCompatActivity {
             e.printStackTrace();
         }
         tv_version.setText("Version " + packageInfo.versionName);
-        if (checkPermission()) {
 
-            if(BuildConfig.IS_PRODUCTION==false){
-                RouteApp router = new RouteApp(SplashScreen.this);
-                router.openActivityAndClearAllPrevious(LoginActivity.class);
-                Toast.makeText(this, "Skip QR SCAN", Toast.LENGTH_SHORT).show();
+
+
+
+
+        if (checkPermission()) {
+            //check root
+            if(deviceIsRooted()){
+                SweetAlertDialog dialog = new SweetAlertDialog(SplashScreen.this, SweetAlertDialog.WARNING_TYPE);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.setTitleText("Perangkat Root");
+                dialog.setContentText("Aplikasi tidak boleh dijalankan di perangkat yang di root\n");
+                dialog.setConfirmText("OK");
+                dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.dismissWithAnimation();
+                        finish();
+
+                    }
+                });
+                dialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                       finish();
+                    }
+                }, 5000);
             }
             else{
-                checkAvailableUpdate();
+
+                if(BuildConfig.IS_PRODUCTION==false){
+                    RouteApp router = new RouteApp(SplashScreen.this);
+                    router.openActivityAndClearAllPrevious(LoginActivity.class);
+                    Toast.makeText(this, "Skip QR SCAN", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    checkAvailableUpdate();
+                }
             }
+
 
 
         }
@@ -245,24 +277,24 @@ public class SplashScreen extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     AppUtil.showToastShort(SplashScreen.this, e.getMessage());
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            gotoNextActivity();
-                        }
-                    }, 1000);
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            gotoNextActivity();
+//                        }
+//                    }, 1000);
                 }
             }
 
             @Override
             public void onFailure(Call<ParseResponse> call, Throwable t) {
                 AppUtil.showToastShort(SplashScreen.this, getString(R.string.txt_connection_failure));
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        gotoNextActivity();
-                    }
-                }, 1000);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        gotoNextActivity();
+//                    }
+//                }, 1000);
             }
         });
     }
@@ -466,6 +498,16 @@ public class SplashScreen extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
             Log.d("notificationChannel", "ithas been made");
+        }
+    }
+
+    private boolean deviceIsRooted(){
+        RootBeer rootBeer = new RootBeer(SplashScreen.this);
+        if (rootBeer.isRooted()) {
+            return true;
+        } else {
+            return false;
+
         }
     }
 
