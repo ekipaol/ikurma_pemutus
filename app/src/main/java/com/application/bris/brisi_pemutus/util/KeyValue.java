@@ -632,6 +632,39 @@ public class KeyValue {
                         return key;
                     }
                 }
+            case "669" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio136.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+            case "670" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio141.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+            case "425" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio136.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
+
+            case "427" :
+                for (Map.Entry<String, String> e : mapTypeRpcRatio141.entrySet()){
+                    String key = e.getKey();
+                    String val = e.getValue();
+                    if (val.toString().equalsIgnoreCase(value)){
+                        return key;
+                    }
+                }
             default:
                 return null;
         }

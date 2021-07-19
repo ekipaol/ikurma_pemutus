@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.bris.brisi_pemutus.BuildConfig;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.request.brisnotif.ReqRegisterBrisnotif;
@@ -120,7 +121,16 @@ public class SplashScreen extends AppCompatActivity {
         }
         tv_version.setText("Version " + packageInfo.versionName);
         if (checkPermission()) {
-            checkAvailableUpdate();
+
+            if(BuildConfig.IS_PRODUCTION==false){
+                RouteApp router = new RouteApp(SplashScreen.this);
+                router.openActivityAndClearAllPrevious(LoginActivity.class);
+                Toast.makeText(this, "Skip QR SCAN", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                checkAvailableUpdate();
+            }
+
 
         }
 

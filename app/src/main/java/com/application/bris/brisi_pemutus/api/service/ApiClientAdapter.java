@@ -183,6 +183,11 @@ public class ApiClientAdapter {
                                 AppUtil.logSecure("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
 //                            encryptedRequest=encryptor.decrypt(encryptedRequest);
+
+                                if(BuildConfig.IS_PRODUCTION==false||BuildConfig.IS_BD){
+                                    Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
+                                }
+
 //                            Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
 

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.application.bris.brisi_pemutus.BuildConfig;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
 import com.application.bris.brisi_pemutus.api.model.request.aktivasi.Aktivasi;
@@ -210,7 +211,18 @@ boolean expiredToken;
                     req.setPassword(AppUtil.hashMd5(password.getText().toString()).toUpperCase());
                     req.setDeviceId(getDeviceId());
                     req.setAppId("BRISI_PEMUTUS");
-                    Call<ParseResponse> call = apiClientAdapter.getApiInterface().loginRequest(req);
+
+                    Call<ParseResponse> call;
+
+                    if(BuildConfig.IS_PRODUCTION==false){
+                        call = apiClientAdapter.getApiInterface().secretLogin(req);
+                        Toast.makeText(LoginActivity.this, "Developer login", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else{
+                        call = apiClientAdapter.getApiInterface().loginRequest(req);
+                    }
+
                     call.enqueue(new Callback<ParseResponse>() {
                         @Override
                         public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {

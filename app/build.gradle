@@ -15,7 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("Boolean", "IS_PRODUCTION", "true")
-        buildConfigField ("Boolean","IS_BD", "false")
+        buildConfigField ("Boolean","IS_BD", "true")
         buildConfigField ("String","SECRET_KEY", "\"12131415\"")
         buildConfigField ("String","MAGIC_CRYPT_KEY", "\".:Pd4MAp1S3c12EtK3y:.\"")
 
