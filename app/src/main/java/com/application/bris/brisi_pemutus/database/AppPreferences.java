@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Spinner;
 
+import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.Constants;
 import com.application.bris.brisi_pemutus.util.magiccrypt.MagicCrypt;
 
@@ -27,153 +28,153 @@ public class AppPreferences {
     }
     //getter & setter data login
     public void setToken(String token){
-        spEditor.putString(Constants.Preferences.TOKEN,token);
+        spEditor.putString(Constants.Preferences.TOKEN,AppUtil.encrypt(token));
         spEditor.commit();
     }
     public String getToken(){
-        return sharedPref.getString(Constants.Preferences.TOKEN, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.TOKEN, "token"));
     }
     public void setRoleType(String roletype){
-        spEditor.putString(Constants.Preferences.ROLE_TYPE,roletype);
+        spEditor.putString(Constants.Preferences.ROLE_TYPE,AppUtil.encrypt(roletype));
         spEditor.commit();
     }
     public String getRoleType(){
-        return sharedPref.getString(Constants.Preferences.TOKEN, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.TOKEN, "token"));
     }
     public void setNamaKanwil(String namaKanwil){
-        spEditor.putString(Constants.Preferences.NAMA_KANWIL,namaKanwil);
+        spEditor.putString(Constants.Preferences.NAMA_KANWIL,AppUtil.encrypt(namaKanwil));
         spEditor.commit();
     }
     public String getNamaKanwil(){
-        return sharedPref.getString(Constants.Preferences.NAMA_KANWIL, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.NAMA_KANWIL, "token"));
     }
     public void setFidKantor(String fidKantor){
-        spEditor.putString(Constants.Preferences.FID_KANTOR,fidKantor);
+        spEditor.putString(Constants.Preferences.FID_KANTOR,AppUtil.encrypt(fidKantor));
         spEditor.commit();
     }
     public String getFidkantor(){
-        return sharedPref.getString(Constants.Preferences.FID_KANTOR, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.FID_KANTOR, "token"));
     }
     public void setJabatan(String jabatan){
-        spEditor.putString(Constants.Preferences.JABATAN,jabatan);
+        spEditor.putString(Constants.Preferences.JABATAN,AppUtil.encrypt(jabatan));
         spEditor.commit();
     }
     public String getJabatan(){
-        return sharedPref.getString(Constants.Preferences.JABATAN, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.JABATAN, "token"));
     }
     public void setNamaKantor(String namaKantor){
-        spEditor.putString(Constants.Preferences.NAMA_KANTOR,namaKantor);
+        spEditor.putString(Constants.Preferences.NAMA_KANTOR,AppUtil.encrypt(namaKantor));
         spEditor.commit();
     }
     public String getNamaKantor(){
-        return sharedPref.getString(Constants.Preferences.NAMA_KANTOR, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.NAMA_KANTOR, "token"));
     }
     public void setKodeSkk(String kodeSkk){
-        spEditor.putString(Constants.Preferences.KODE_SKK,kodeSkk);
+        spEditor.putString(Constants.Preferences.KODE_SKK,AppUtil.encrypt(kodeSkk));
         spEditor.commit();
     }
     public String getKodeSkk(){
-        return sharedPref.getString(Constants.Preferences.KODE_SKK, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.KODE_SKK, "token"));
     }
     public void setDsnCode(String dsnCode){
-        spEditor.putString(Constants.Preferences.DSN_CODE,dsnCode);
+        spEditor.putString(Constants.Preferences.DSN_CODE,AppUtil.encrypt(dsnCode));
         spEditor.commit();
     }
     public String getDsnCode(){
-        return sharedPref.getString(Constants.Preferences.DSN_CODE, "");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.DSN_CODE, "dsncode"));
     }
     public void setKodeKanwil(String kodeKanwil){
-        spEditor.putString(Constants.Preferences.KODE_KANWIL,kodeKanwil);
+        spEditor.putString(Constants.Preferences.KODE_KANWIL,AppUtil.encrypt(kodeKanwil));
         spEditor.commit();
     }
     public String getKodeKanwil(){
-        return sharedPref.getString(Constants.Preferences.KODE_KANWIL, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.KODE_KANWIL, "token"));
     }
     public void setFidRole(String fidRole){
-        spEditor.putString(Constants.Preferences.FID_ROLE,fidRole);
+        spEditor.putString(Constants.Preferences.FID_ROLE,AppUtil.encrypt(fidRole));
         spEditor.commit();
     }
     public String getFidRole(){
-        return sharedPref.getString(Constants.Preferences.FID_ROLE, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.FID_ROLE, "token"));
     }
     public void setUid(String uid){
-        spEditor.putString(Constants.Preferences.UID,uid);
+        spEditor.putString(Constants.Preferences.UID,AppUtil.encrypt(uid));
         spEditor.commit();
     }
     public String getUid(){
-        return sharedPref.getString(Constants.Preferences.UID, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.UID, "token"));
     }
     public void setNik(String nik){
-        spEditor.putString(Constants.Preferences.NIK,nik);
+        spEditor.putString(Constants.Preferences.NIK,AppUtil.encrypt(nik));
         spEditor.commit();
     }
     public void setUsernameUserUnder(String username){
-        spEditor.putString(Constants.Preferences.USERNAMEUNDER,username);
+        spEditor.putString(Constants.Preferences.USERNAMEUNDER,AppUtil.encrypt(username));
         spEditor.commit();
     }
     public String getUsernameUserUnder(){
         return sharedPref.getString(Constants.Preferences.USERNAMEUNDER, "token");
     }
     public String getNik(){
-        return sharedPref.getString(Constants.Preferences.NIK, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.NIK, "token"));
     }
     public void setNama(String nama){
-        spEditor.putString(Constants.Preferences.NAMA,nama);
+        spEditor.putString(Constants.Preferences.NAMA,AppUtil.encrypt(nama));
         spEditor.commit();
     }
     public String getNama(){
-        return sharedPref.getString(Constants.Preferences.NAMA, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.NAMA, "token"));
     }
     public void setKodeCabang(String kodeCabang){
-        spEditor.putString(Constants.Preferences.KODE_CABANG,kodeCabang);
+        spEditor.putString(Constants.Preferences.KODE_CABANG,AppUtil.encrypt(kodeCabang));
         spEditor.commit();
     }
     public String getKodeCabang(){
-        return sharedPref.getString(Constants.Preferences.KODE_CABANG, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.KODE_CABANG, "token"));
     }
     public void setUker(String uker){
-        spEditor.putString(Constants.Preferences.UKER,uker);
+        spEditor.putString(Constants.Preferences.UKER,AppUtil.encrypt(uker));
         spEditor.commit();
     }
     public String getUker(){
-        return sharedPref.getString(Constants.Preferences.UKER, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.UKER, "token"));
     }
     public void setNamaSkk(String namaSkk){
-        spEditor.putString(Constants.Preferences.NAMA_SKK,namaSkk);
+        spEditor.putString(Constants.Preferences.NAMA_SKK,AppUtil.encrypt(namaSkk));
         spEditor.commit();
     }
     public String getNamaSKK(){
-        return sharedPref.getString(Constants.Preferences.NAMA_SKK, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.NAMA_SKK, "token"));
     }
     public void setKodeAo(String kodeAo){
-        spEditor.putString(Constants.Preferences.KODE_AO,kodeAo);
+        spEditor.putString(Constants.Preferences.KODE_AO,AppUtil.encrypt(kodeAo));
         spEditor.commit();
     }
     public String getKodeAo(){
-        return sharedPref.getString(Constants.Preferences.KODE_AO, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.KODE_AO, "token"));
     }
     public void setKantor(String kantor){
-        spEditor.putString(Constants.Preferences.KANTOR,kantor);
+        spEditor.putString(Constants.Preferences.KANTOR,AppUtil.encrypt(kantor));
         spEditor.commit();
     }
     public String getKantor(){
-        return sharedPref.getString(Constants.Preferences.KANTOR, "token");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.KANTOR, "token"));
     }
 
     public void setLoggedin(String status){
-        spEditor.putString(Constants.Preferences.IS_LOGGED_IN,status);
+        spEditor.putString(Constants.Preferences.IS_LOGGED_IN,AppUtil.encrypt(status));
         spEditor.commit();
     }
     public String getLoggedin(){
-        return sharedPref.getString(Constants.Preferences.IS_LOGGED_IN, "no");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.IS_LOGGED_IN, "no"));
     }
 
     public void setCbAmanah(String status){
-        spEditor.putString(Constants.Preferences.CB_AMANAH,status);
+        spEditor.putString(Constants.Preferences.CB_AMANAH,AppUtil.encrypt(status));
         spEditor.commit();
     }
     public String getCbAmanah(){
-        return sharedPref.getString(Constants.Preferences.CB_AMANAH, "false");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.CB_AMANAH, "false"));
     }
 
     public void setReadPreScreening(String status){
@@ -258,60 +259,43 @@ public class AppPreferences {
     }
 
     public String getRembemberMe(){
-        return sharedPref.getString(Constants.Preferences.REMEMBER_ME, "");
+        return sharedPref.getString(Constants.Preferences.REMEMBER_ME, "rememberme");
     }
 
     public void setUsername(String username){
-        spEditor.putString(Constants.Preferences.USERNAME, username);
+        spEditor.putString(Constants.Preferences.USERNAME, AppUtil.encrypt(username));
         spEditor.commit();
     }
 
     public String getUsername(){
-        return (sharedPref.getString(Constants.Preferences.USERNAME, ""));
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.USERNAME, "username"));
     }
 
     public void setNamaPengguna(String nama){
-        spEditor.putString(Constants.Preferences.NAMA_PENGGUNA, nama);
+        spEditor.putString(Constants.Preferences.NAMA_PENGGUNA, AppUtil.encrypt(nama));
         spEditor.commit();
     }
 
     public String getNamaPengguna(){
-        return magicCrypt.decrypt(sharedPref.getString(Constants.Preferences.NAMA_PENGGUNA, ""));
+        return magicCrypt.decrypt(sharedPref.getString(Constants.Preferences.NAMA_PENGGUNA, "namapengguna"));
     }
 
     public void setUserId(String id){
-        spEditor.putString(Constants.Preferences.USER_ID, id);
+        spEditor.putString(Constants.Preferences.USER_ID, AppUtil.encrypt(id));
         spEditor.commit();
     }
 
     public String getUserId(){
-        return magicCrypt.decrypt(sharedPref.getString(Constants.Preferences.USER_ID, ""));
+        return magicCrypt.decrypt(sharedPref.getString(Constants.Preferences.USER_ID, "userid"));
     }
 
-    public void setKodePdam(String kodePdam){
-        spEditor.putString(Constants.Preferences.KODE_PDAM, kodePdam);
-        spEditor.commit();
-    }
-
-    public String getKodePdam(){
-        return magicCrypt.decrypt(sharedPref.getString(Constants.Preferences.KODE_PDAM, ""));
-    }
-
-    public void setFotoNasabahName(String filename){
-        spEditor.putString(Constants.Preferences.FOTO_NASABAH_NAME, filename);
-        spEditor.commit();
-    }
-
-    public String getFotoNasabahName(){
-        return sharedPref.getString(Constants.Preferences.FOTO_NASABAH_NAME, "");
-    }
 
     public void setIsActivated(String flag){
         spEditor.putString(Constants.Preferences.IS_ACTIVATED, flag);
         spEditor.commit();
     }
     public String getIsActivated(){
-        return sharedPref.getString(Constants.Preferences.IS_ACTIVATED, "");
+        return sharedPref.getString(Constants.Preferences.IS_ACTIVATED, "no");
     }
 
     public void setStatusKodeSkkPinca(String flag){
@@ -319,7 +303,7 @@ public class AppPreferences {
         spEditor.commit();
     }
     public String getStatusKodeSkkPinca(){
-        return sharedPref.getString(Constants.Preferences.STATUS_KODE_SKK_PINCA, "");
+        return sharedPref.getString(Constants.Preferences.STATUS_KODE_SKK_PINCA, "flag");
     }
 
     public void setStatusAmbilAlih(String flag){
@@ -331,11 +315,11 @@ public class AppPreferences {
     }
 
     public void setIdPengambilAlih(String flag){
-        spEditor.putString(Constants.Preferences.ID_USER_PENGAMBIL_ALIH, flag);
+        spEditor.putString(Constants.Preferences.ID_USER_PENGAMBIL_ALIH, AppUtil.encrypt(flag));
         spEditor.commit();
     }
     public String getIdPengambilAlih(){
-        return sharedPref.getString(Constants.Preferences.ID_USER_PENGAMBIL_ALIH, "0");
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.ID_USER_PENGAMBIL_ALIH, "0"));
     }
 
     public void setUpdateNotification(String filename){

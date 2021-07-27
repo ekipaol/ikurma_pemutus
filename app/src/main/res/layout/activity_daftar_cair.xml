@@ -132,7 +132,7 @@
                             android:layout_width="wrap_content"
                             android:layout_gravity="center"
                             style="@style/Widget.AppCompat.Button.Colored"
-                            android:backgroundTint="@color/green_teal"
+                            android:backgroundTint="@color/colorGreenSuccess"
                             android:layout_marginTop="12dp"
                             android:layout_height="40dp"
                             android:layout_weight="5"
@@ -150,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
                     style="@style/Widget.AppCompat.Button.Colored"
-                    android:backgroundTint="@color/green_teal"
+                    android:backgroundTint="@color/colorGreenSuccess"
                     android:visibility="visible"
                     android:layout_height="40dp"
                     android:text="Filter"/>

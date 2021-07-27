@@ -15,6 +15,7 @@ import android.provider.Settings;
 
 import com.application.bris.brisi_pemutus.BuildConfig;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
+import com.application.bris.brisi_pemutus.util.service_encrypt.DESHelper;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -66,6 +67,7 @@ import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class AppUtil {
     public static MagicCrypt magicCrypt = new MagicCrypt();
+    public static DESHelper desHelper=new DESHelper();
     private Snackbar snackbar;
     private static AlertDialog alertDialog = null;
 
@@ -246,12 +248,32 @@ public class AppUtil {
     }
 
     public static String encrypt(String data){
-        if (data == null){
+        if (data == null||data.isEmpty()){
             return "";
         }
         else{
-            return magicCrypt.encrypt(data);
+            try {
+                return desHelper.encrypt(data);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
+            }
         }
+    }
+
+    public static String decrypt(String data){
+        if (data == null||data.isEmpty()){
+            return "";
+        }
+        else{
+            try {
+                return desHelper.decrypt(data);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
+            }
+        }
+
     }
 
     public static void logSecure( String tag,String message){

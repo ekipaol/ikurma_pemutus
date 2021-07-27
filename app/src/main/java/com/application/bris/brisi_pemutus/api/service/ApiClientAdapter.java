@@ -14,12 +14,14 @@ import com.application.bris.brisi_pemutus.page_login.view.LoginActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.NullOnEmptyConverterFactory;
 import com.application.bris.brisi_pemutus.util.service_encrypt.DESHelper;
+import com.application.bris.brisi_pemutus.util.service_encrypt.MagicCryptHelper;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.CertificatePinner;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -165,65 +167,69 @@ public class ApiClientAdapter {
             });
             //END OF INTERCEPTER LOGOUT
 
-            //Interceptor enkripsi
-            clientBuilder .addInterceptor(new Interceptor() {
-                @Override
-                public okhttp3.Response intercept(Chain chain) throws IOException {
-                    Request request = chain.request();
-                    RequestBody requestBody = request.body();
 
-                    DESHelper encryptor =new DESHelper();
+        }
 
-                    if(request.method().equalsIgnoreCase("POST")){
-                        String subtype = requestBody.contentType().subtype();
-                        if(subtype.contains("json")){
+        //Interceptor enkripsi
+        clientBuilder .addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                RequestBody requestBody = request.body();
 
-                            try{
-                                String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
-                                AppUtil.logSecure("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
+                MagicCryptHelper encryptor =new MagicCryptHelper();
+
+//                DESHelper encryptor =new DESHelper();
+
+                if(request.method().equalsIgnoreCase("POST")){
+                    String subtype = requestBody.contentType().subtype();
+                    if(subtype.contains("json")){
+
+                        try{
+                            String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
+                            AppUtil.logSecure("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
 //                            encryptedRequest=encryptor.decrypt(encryptedRequest);
 
-                                if(BuildConfig.IS_PRODUCTION==false||BuildConfig.IS_BD){
-                                    Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
-                                }
+                            if(BuildConfig.IS_PRODUCTION==false||BuildConfig.IS_BD){
+                                Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
+                            }
 
 //                            Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
 
-                                //jangan lupa kalo bikin request body baru, stringnya diambil dalam bentuk bytes
-                                requestBody =   RequestBody.create(MediaType.parse("application/json"), encryptedRequest.getBytes());
-                            }
-                            catch (Exception e){
-
-                                Log.d("okhttp-error",e.getMessage());
-                            }
+                            //jangan lupa kalo bikin request body baru, stringnya diambil dalam bentuk bytes
+                            requestBody =   RequestBody.create(MediaType.parse("application/json"), encryptedRequest.getBytes());
                         }
+                        catch (Exception e){
 
-                    }
-
-                    if(requestBody!=null){
-
-                        //comment dari sini jika tanpa enkripsi
-//
-                        Request.Builder requestBuilder = request.newBuilder();
-                        request = requestBuilder
-                                .post(requestBody)
-                                .build();
-
-                        //end of comment
-
-                        return chain.proceed(request);
-                    }
-                    else{
-                        return chain.proceed(request);
+                            Log.d("okhttp-error",e.getMessage());
+                        }
                     }
 
                 }
-            });
 
-            //END OF INTERCEPTOR ENKRIPSI
-        }
+                if(requestBody!=null){
+
+                    //comment dari sini jika tanpa enkripsi
+//
+                    Request.Builder requestBuilder = request.newBuilder();
+                    request = requestBuilder
+                            .post(requestBody)
+                            .build();
+
+                    //end of comment
+
+                    return chain.proceed(request);
+                }
+                else{
+                    return chain.proceed(request);
+                }
+
+            }
+        });
+
+        //END OF INTERCEPTOR ENKRIPSI
 
 
 
@@ -234,20 +240,43 @@ public class ApiClientAdapter {
 //        }
 
         //otomasi status Logging jika prod atau dev
-        if (!BuildConfig.IS_PRODUCTION) {
+
+        if(BuildConfig.SHOW_LOG){
             clientBuilder.addInterceptor(loggingInterceptor);
         }
-        else{
-            if(BuildConfig.IS_BD){
-                clientBuilder.addInterceptor(loggingInterceptor);
-            }
+
+//        if (!BuildConfig.IS_PRODUCTION) {
+//            clientBuilder.addInterceptor(loggingInterceptor);
+//        }
+//        else{
+//            if(BuildConfig.IS_BD){
+//                clientBuilder.addInterceptor(loggingInterceptor);
+//            }
+//        }
+
+        OkHttpClient httpClient;
+
+        if(BuildConfig.IS_PRODUCTION){
+            String hostname = "intel.brisyariah.co.id";
+            CertificatePinner certificatePinner = new CertificatePinner.Builder()
+                    .add(hostname, "sha256/KulbguoZjw2srzUzBvG+5oQnxaoWUqqbMExesRAXq9M=")
+                    .add(hostname, "sha256/5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=")
+                    .add(hostname, "sha256/r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E=")
+                    .build();
+
+            httpClient = clientBuilder
+                    .connectTimeout(timeOut, timeUnit)
+                    .certificatePinner(certificatePinner)
+                    .readTimeout(timeOut, timeUnit)
+                    .build();
         }
+        else{
 
-
-        OkHttpClient httpClient = clientBuilder
-                .connectTimeout(timeOut, timeUnit)
-                .readTimeout(timeOut, timeUnit)
-                .build();
+            httpClient = clientBuilder
+                    .connectTimeout(timeOut, timeUnit)
+                    .readTimeout(timeOut, timeUnit)
+                    .build();
+        }
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
