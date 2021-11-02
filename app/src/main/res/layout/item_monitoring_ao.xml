@@ -210,6 +210,160 @@
         </LinearLayout>
 
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:visibility="gone"
+            android:paddingRight="16dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/dash_line"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layerType="software"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pipeline :"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_total_pipeline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="{-}"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hotprospek :"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_total_hotprospek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="{-}"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:visibility="gone"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Approved"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_total_approved"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="{-}"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cair"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_total_cair"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="{-}"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorBlackHeader"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -224,17 +378,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_margin="6dp"
             android:paddingTop="5dp"
             >
+            <Button
+                android:id="@+id/bt_detil_monitoring_sales_ao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:backgroundTint="@color/colorSecondary"
+               android:layout_weight="1"
+                android:text="Lihat Sales"/>
+
             <Button
                 android:id="@+id/bt_detil_monitoring_pencairan_ao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_gravity="right"
-                android:text="Lihat Nasabah AO"/>
+                android:layout_weight="1"
+                android:text="Lihat Nasabah"/>
 
 
 

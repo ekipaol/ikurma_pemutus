@@ -64,7 +64,7 @@ boolean expiredToken;
 
 
 
-    private ApiClientAdapter apiClientAdapter= new ApiClientAdapter(LoginActivity.this,0);
+     ApiClientAdapter apiClientAdapter;
 
     //login untuk prod
 //private ApiClientAdapter apiClientAdapter= new ApiClientAdapter(LoginActivity.this,"https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/",0);
@@ -74,6 +74,7 @@ boolean expiredToken;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        apiClientAdapter = new ApiClientAdapter(LoginActivity.this,0);
 
 
       //  apiClientAdapter = new ApiClientAdapter(LoginActivity.this,0);
@@ -142,7 +143,7 @@ boolean expiredToken;
         }
 
         if(!apppref.getUsername().isEmpty()){
-                username.setText(apppref.getUsername());
+//                username.setText(apppref.getUsername());
                 password.requestFocus();
             //ubah warna icon di edittext
             Drawable mDrawable = getResources().getDrawable(R.drawable.ic_lock_black_24dp);
@@ -207,8 +208,8 @@ boolean expiredToken;
                     //start login
                     LoginRequest req = new LoginRequest();
                     req.setUsername(username.getText().toString());
-                    Log.d("pass md5",AppUtil.hashMd5(username.getText().toString()).toUpperCase());
-                    req.setPassword(AppUtil.hashMd5(password.getText().toString()).toUpperCase());
+//                    Log.d("pass md5",AppUtil.hashMd5(username.getText().toString()).toUpperCase());
+                    req.setPassword((AppUtil.hashMd5(password.getText().toString()).toUpperCase()));
                     req.setDeviceId(getDeviceId());
                     req.setAppId("BRISI_PEMUTUS");
 
@@ -500,7 +501,7 @@ boolean expiredToken;
         //start login
         LoginRequest req = new LoginRequest();
         req.setUsername(username.getText().toString());
-        Log.d("pass md5",AppUtil.hashMd5(username.getText().toString()).toUpperCase());
+//        Log.d("pass md5",AppUtil.hashMd5(username.getText().toString()).toUpperCase());
         req.setPassword(AppUtil.hashMd5(password.getText().toString()).toUpperCase());
         req.setDeviceId(getDeviceId());
         req.setAppId("BRISI_PEMUTUS");

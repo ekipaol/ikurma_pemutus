@@ -90,6 +90,11 @@ public class AdapterMonitoringAo extends RecyclerView.Adapter<AdapterMonitoringA
         holder.tv_kol_ao.setText(datas.getTOTAL_KOL2()+"%");
         holder.tv_npf_ao.setText(datas.getTOTAL_NPF()+"%");
 
+        holder.tv_total_pipeline.setText(datas.getTOTAL_PIPELINE());
+        holder.tv_total_hotprospek.setText(datas.getTOTAL_HOTPROSPEK());
+        holder.tv_total_approved.setText(datas.getTOTAL_APPROVED());
+        holder.tv_total_cair.setText(datas.getTOTAL_CAIR());
+
         if(datas.getFID_ROLE().equalsIgnoreCase("8")){
             holder.tv_jabatan.setText("Account Officer Mikro");
         }
@@ -156,6 +161,7 @@ public class AdapterMonitoringAo extends RecyclerView.Adapter<AdapterMonitoringA
     public class HotprospekViewHolder extends RecyclerView.ViewHolder {
         private Button bt_detail_ao;
         private TextView tv_nama_ao, tv_pencairan_ao, tv_outstanding_ao, tv_dpk_ao, tv_kol_ao,tv_npf_ao,tv_jabatan;
+        private TextView tv_total_pipeline, tv_total_hotprospek, tv_total_approved, tv_total_cair;
 
         public HotprospekViewHolder(View itemView) {
             super(itemView);
@@ -166,6 +172,10 @@ public class AdapterMonitoringAo extends RecyclerView.Adapter<AdapterMonitoringA
             tv_kol_ao = (TextView) itemView.findViewById(R.id.tv_kol_ao);
             tv_npf_ao= (TextView) itemView.findViewById(R.id.tv_npf_ao);
             tv_jabatan= (TextView) itemView.findViewById(R.id.tv_jabatan);
+            tv_total_pipeline= (TextView) itemView.findViewById(R.id.tv_total_pipeline);
+            tv_total_hotprospek= (TextView) itemView.findViewById(R.id.tv_total_hotprospek);
+            tv_total_approved= (TextView) itemView.findViewById(R.id.tv_total_approved);
+            tv_total_cair= (TextView) itemView.findViewById(R.id.tv_total_cair);
             bt_detail_ao = (Button) itemView.findViewById(R.id.bt_detil_monitoring_pencairan_ao);
 
         }

@@ -261,16 +261,16 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         if(appPreferences.isUpdateNotificationOn().equalsIgnoreCase("true")){
 
             //MENAMPILKAN CHANGELOG UNTUK UPDATE TERBARU KORMA
-            AppUtil.DialogUpdateInformation(getContext(),
-                    "Fitur Terbaru i-Kurma Pemutus",
-                    "- Penambahan support untuk user Area Manager dan AMPM\n\n"
+//            AppUtil.DialogUpdateInformation(getContext(),
+//                    "Fitur Terbaru i-Kurma Pemutus",
+//                    "- Penambahan support untuk user Area Manager dan AMPM\n\n"
                             //+
 //                            "- Penambahan support untuk menerima notifikasi (pop up notification) cth : ketika menerima pengajuan pembiayaan dari AO/AOM untuk diputus\n\n"+
 //                            "- Perbaikan agar user pemutus dapat melihat/klik foto rumah di halaman data lengkap pembiayaan purna/prapurna\n\n"+
 //                            "- Penambahan kolom nomor siup di halaman kelengkapan dokumen pembiayaan mikro"
 
 
-            );
+//            );
         }
 
 
@@ -803,28 +803,15 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
             //MENU MONITORING
 
-            //pcp dan UH hanya melihat unitnya saja
+            //bm,mmm,mm, dan UH hanya melihat unitnya saja
             else if(menu.equalsIgnoreCase("monitoring")){
-                if(appPreferences.getFidRole().equalsIgnoreCase("79")|appPreferences.getFidRole().equalsIgnoreCase("71")){
-                    Intent intent = new Intent(getContext(), MonitoringAoActivity.class);
-                    startActivity(intent);
-                }
-
-                //user KP masuk monitoring
-                else if(appPreferences.getFidRole().equalsIgnoreCase("84")){
-                    Intent intent = new Intent(getContext(), MonitoringKcActivity.class);
-                    startActivity(intent);
-                }
-
-                //pinca mmm dan mm melihat data seluruh kcp bawahan kcnya, AM dan AMPM ???
-                else if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("72")||appPreferences.getFidRole().equalsIgnoreCase("77")||appPreferences.getFidRole().equalsIgnoreCase("130")||appPreferences.getFidRole().equalsIgnoreCase("131")){
-
+                if(appPreferences.getFidRole().equalsIgnoreCase("76")||appPreferences.getFidRole().equalsIgnoreCase("72")||appPreferences.getFidRole().equalsIgnoreCase("77")||appPreferences.getFidRole().equalsIgnoreCase("71")){
                     if(indikatorSelesaiLoading==false&&!appPreferences.getFidRole().equalsIgnoreCase("76")){//ini untuk akses tombol setelah login khusus non pinca
-                        Intent intent = new Intent(getContext(), MonitoringKcpActivity.class);
+                        Intent intent = new Intent(getContext(), MonitoringAoActivity.class);
                         startActivity(intent);
                     }
                     else if(appPreferences.getStatusKodeSkkPinca().equalsIgnoreCase("berubah")){ //ini untuk akses tombol setelah akses menu menu lain, tapi kembali ke dashboard lagi untuk akses menu ambil alih khusus pinca
-                        Intent intent = new Intent(getContext(), MonitoringKcpActivity.class);
+                        Intent intent = new Intent(getContext(), MonitoringAoActivity.class);
                         startActivity(intent);
                     }
                     else if(indikatorSelesaiLoading==false&&appPreferences.getFidRole().equalsIgnoreCase("76")){//ini untuk akses tombol setelah login khusus pinca
@@ -834,7 +821,18 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                     else{
                         Toasty.info(getContext(),"Tunggu hingga loading selesai, sebelum mengakses menu monitoring",Toast.LENGTH_LONG).show();
                     }
+                }
 
+                //user KP masuk monitoring
+                else if(appPreferences.getFidRole().equalsIgnoreCase("84")){
+                    Intent intent = new Intent(getContext(), MonitoringKcActivity.class);
+                    startActivity(intent);
+                }
+
+                //pinca am dan ampm melihat data seluruh kcp bawahan kcnya
+                else if(appPreferences.getFidRole().equalsIgnoreCase("130")||appPreferences.getFidRole().equalsIgnoreCase("131")){
+                    Intent intent = new Intent(getContext(), MonitoringKcpActivity.class);
+                    startActivity(intent);
                 }
 
 //            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();

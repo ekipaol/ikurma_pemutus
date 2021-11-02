@@ -204,6 +204,14 @@ public class MonitoringKcpActivity extends AppCompatActivity implements SwipeRef
                         dataTotalMonitoring = gson.fromJson(listTotalString, type2);
 
 
+                        //kalau data summary kosong semua, hide bae summarynya
+                        if(dataTotalMonitoring.getTotalDpk().equalsIgnoreCase("0.00")&&dataTotalMonitoring.getTotalKol2().equalsIgnoreCase("0.00")&&dataTotalMonitoring.getTotalNpf().equalsIgnoreCase("0.00")&&dataTotalMonitoring.getTotalOs().equalsIgnoreCase("0.00")&&dataTotalMonitoring.getTotalPencairan().equalsIgnoreCase("0.00")){
+                            bt_tampil_summary.setVisibility(GONE);
+                            bt_sembunyi_summary.setVisibility(GONE);
+                            ll_summary_monitoring.setVisibility(GONE);
+                        }
+
+
                         adapterMonitoringKcp = new AdapterMonitoringKcp(MonitoringKcpActivity.this, dataCabang);
                         rv_list_monitoring_pencairan.setLayoutManager(new LinearLayoutManager(MonitoringKcpActivity.this));
                         rv_list_monitoring_pencairan.setItemAnimator(new DefaultItemAnimator());

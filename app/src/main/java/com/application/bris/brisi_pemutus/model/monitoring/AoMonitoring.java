@@ -23,8 +23,53 @@ public class AoMonitoring {
     @SerializedName("TOTAL_NPF")
     private String TOTAL_NPF;
 
+    @SerializedName("TOTAL_PIPELINE")
+    private String TOTAL_PIPELINE;
+
+    @SerializedName("TOTAL_HOTPROSPEK")
+    private String TOTAL_HOTPROSPEK;
+
+    @SerializedName("TOTAL_CAIR")
+    private String TOTAL_CAIR;
+
+    @SerializedName("TOTAL_APPROVED")
+    private String TOTAL_APPROVED;
+
+
     @SerializedName("FID_ROLE")
     private String FID_ROLE;
+
+    public String getTOTAL_PIPELINE() {
+        return TOTAL_PIPELINE;
+    }
+
+    public void setTOTAL_PIPELINE(String TOTAL_PIPELINE) {
+        this.TOTAL_PIPELINE = TOTAL_PIPELINE;
+    }
+
+    public String getTOTAL_HOTPROSPEK() {
+        return TOTAL_HOTPROSPEK;
+    }
+
+    public void setTOTAL_HOTPROSPEK(String TOTAL_HOTPROSPEK) {
+        this.TOTAL_HOTPROSPEK = TOTAL_HOTPROSPEK;
+    }
+
+    public String getTOTAL_CAIR() {
+        return TOTAL_CAIR;
+    }
+
+    public void setTOTAL_CAIR(String TOTAL_CAIR) {
+        this.TOTAL_CAIR = TOTAL_CAIR;
+    }
+
+    public String getTOTAL_APPROVED() {
+        return TOTAL_APPROVED;
+    }
+
+    public void setTOTAL_APPROVED(String TOTAL_APPROVED) {
+        this.TOTAL_APPROVED = TOTAL_APPROVED;
+    }
 
     public String getFID_ROLE() {
         return FID_ROLE;

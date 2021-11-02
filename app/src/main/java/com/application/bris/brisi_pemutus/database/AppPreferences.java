@@ -102,7 +102,7 @@ public class AppPreferences {
         spEditor.commit();
     }
     public String getUid(){
-        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.UID, "token"));
+        return AppUtil.decrypt(sharedPref.getString(Constants.Preferences.UID, "0"));
     }
     public void setNik(String nik){
         spEditor.putString(Constants.Preferences.NIK,AppUtil.encrypt(nik));

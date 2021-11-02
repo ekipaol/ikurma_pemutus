@@ -83,26 +83,26 @@ public class ApiClientAdapter {
 
 
     private void buildConnection(String baseUrl,int id, long timeOut, TimeUnit timeUnit) {
+        apppref=new AppPreferences(context);
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
         Interceptor headerAuth =null;
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         if(id==1){
-            apppref=new AppPreferences(context);
-             headerAuth = new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-//                    SharedPreferences sp= context.getSharedPreferences("token", Context.MODE_PRIVATE);
-//                    String value = sp.getString("token", "token");
-                    Request request = chain.request().newBuilder()
-                            .addHeader("Authorization", "Bearer "+apppref.getToken())
-                            .build();
-                    return chain.proceed(request);
 
-                }
-            };
-            clientBuilder.addInterceptor(headerAuth);
+//             headerAuth = new Interceptor() {
+//                @Override
+//                public Response intercept(Chain chain) throws IOException {
+////                    SharedPreferences sp= context.getSharedPreferences("token", Context.MODE_PRIVATE);
+////                    String value = sp.getString("token", "token");
+//                    Request request = chain.request().newBuilder()
+//                            .addHeader("Authorization", "Bearer "+apppref.getToken())
+//                            .build();
+//                    return chain.proceed(request);
+//
+//                }
+//            };
+//            clientBuilder.addInterceptor(headerAuth);
 
             //START INTERCEPTOR AUTO LOG OUT
 
@@ -186,16 +186,32 @@ public class ApiClientAdapter {
                     if(subtype.contains("json")){
 
                         try{
-                            String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
-                            AppUtil.logSecure("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
+                            String uidVerifier="";
 
-//                            encryptedRequest=encryptor.decrypt(encryptedRequest);
+                            //delimiter 5 kali underscore
+                            String delimiter="_____";
 
-                            if(BuildConfig.IS_PRODUCTION==false||BuildConfig.IS_BD){
-                                Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
+                            //salted encryptor, mencegah IDOR supaya request yang sama, tetap akan enkripsinya berbeda jika dilempar oleh user yang berbeda;
+                            if(apppref.getUid()!=null&&!apppref.getUid().isEmpty()&&!apppref.getUid().equalsIgnoreCase("0")){
+                                uidVerifier=String.valueOf(apppref.getUid())+delimiter;
+
+                            }
+                            else{
+                                uidVerifier=BuildConfig.UID_VERIFIER+delimiter;
                             }
 
-//                            Log.wtf("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
+                            //salted
+                            String encryptedRequest=encryptor.encrypt(uidVerifier+bodyToString(requestBody));
+
+
+                            //not salted
+//                            String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
+
+                            //no encryption
+//                            String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
+//                            encryptedRequest=encryptor.decrypt(encryptedRequest);
+
+                            AppUtil.logSecure("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
 
                             //jangan lupa kalo bikin request body baru, stringnya diambil dalam bentuk bytes
@@ -211,14 +227,19 @@ public class ApiClientAdapter {
 
                 if(requestBody!=null){
 
-                    //comment dari sini jika tanpa enkripsi
-//
                     Request.Builder requestBuilder = request.newBuilder();
-                    request = requestBuilder
-                            .post(requestBody)
-                            .build();
 
-                    //end of comment
+                    if(id==1){
+                        request = requestBuilder
+                                .addHeader("Authorization", "Bearer "+apppref.getToken())
+                                .post(requestBody)
+                                .build();
+                    }
+                    else{
+                        request = requestBuilder
+                                .post(requestBody)
+                                .build();
+                    }
 
                     return chain.proceed(request);
                 }
@@ -257,10 +278,10 @@ public class ApiClientAdapter {
         OkHttpClient httpClient;
 
         if(BuildConfig.IS_PRODUCTION){
-            String hostname = "intel.brisyariah.co.id";
+            String hostname = "ikurma.bankbsi.co.id";
             CertificatePinner certificatePinner = new CertificatePinner.Builder()
-                    .add(hostname, "sha256/KulbguoZjw2srzUzBvG+5oQnxaoWUqqbMExesRAXq9M=")
-                    .add(hostname, "sha256/5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=")
+                    .add(hostname, "sha256/b3VWDjU9K0Tp1lNzMSnQkM0zIMEnJxlQ/WmVMpUvV4w=")
+                    .add(hostname, "sha256/n5dIU+KFaI00Y/prmvaZhqXOquF72TlPANCLxCA9HE8=")
                     .add(hostname, "sha256/r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E=")
                     .build();
 

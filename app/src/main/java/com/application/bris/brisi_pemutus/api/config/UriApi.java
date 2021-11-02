@@ -5,9 +5,10 @@ import com.application.bris.brisi_pemutus.BuildConfig;
 public class UriApi {
 
     public static class Baseurl{
-        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-WILLY8/webresources/"; //DEV
+        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-PENTEST/webresources/"; //DEV
 //        public static final String URLDEV = "http://10.0.1.210:8080/MobileBRISIAPI/webresources/"; //DEV BSI
         public static final String URLPROD = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //PROD
+//        public static final String URLPROD = "https://ikurma.bankbsi.co.id/MobileBRISIAPI/webresources/"; //PROD
 
         public static String URL = (BuildConfig.IS_PRODUCTION) ? URLPROD : URLDEV ; //ENV BASED URI SELECTOR
 
@@ -349,7 +350,7 @@ public class UriApi {
     }
 
     public class monitoring {
-        public static final String listMonitoringNasabah = "generic/monitor/listNasabah";
+        public static final String listMonitoringNasabah = "generic/monitor/listNasabahBsi";
         public static final String listMonitoringAo = "generic/monitor/listTargetKCP";
         public static final String listMonitoringKcp = "generic/monitor/listTargetKC";
         public static final String listMonitoringKp = "generic/monitor/listKP";

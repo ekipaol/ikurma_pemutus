@@ -60,7 +60,7 @@ public class AdapterMonitoringKc extends RecyclerView.Adapter<AdapterMonitoringK
         holder.bt_detail_kc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,MonitoringKcpActivity.class);
+                Intent intent=new Intent(context,MonitoringAoActivity.class);
                 intent.putExtra("kodeSkk",datas.getKODE_SKK());
                 intent.putExtra("namaCabang",datas.getNAMA_CABANG());
                 context.startActivity(intent);

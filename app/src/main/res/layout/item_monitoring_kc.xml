@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_gravity="right"
-                android:text="Lihat KCP yang Disupervisi"/>
+                android:text="Lihat AO/AOM yang Disupervisi"/>
 
 
 

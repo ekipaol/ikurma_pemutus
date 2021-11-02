@@ -1,6 +1,7 @@
 package com.application.bris.brisi_pemutus.util;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -47,6 +48,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
@@ -219,6 +221,7 @@ public class AppUtil {
         return df.format(pencairan);
     }
 
+    @SuppressLint("MissingPermission")
     public static HashMap<String, String> getDeviceInfo(Context context) {
         HashMap<String, String> deviceInfo = new HashMap<>();
         String deviceId = "";
@@ -278,7 +281,7 @@ public class AppUtil {
 
     public static void logSecure( String tag,String message){
 
-        if(!BuildConfig.IS_PRODUCTION){
+        if(BuildConfig.SHOW_LOG){
             Log.d(tag,message);
         }
 
@@ -420,6 +423,28 @@ public class AppUtil {
         txtv.setCompoundDrawablePadding(30);
         txtv.setTextColor(ContextCompat.getColor(mcontex, R.color.colorInfo));
         txtv.setGravity(Gravity.CENTER_HORIZONTAL);
+    }
+
+    public static String hashSha256(String text){
+
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.reset();
+
+            byte[] byteData = digest.digest(text.getBytes(StandardCharsets.UTF_8));
+            StringBuffer sb = new StringBuffer();
+
+            for (int i = 0; i < byteData.length; i++){
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            return sb.toString();
+        }
+        catch(NoSuchAlgorithmException e){
+            logSecure("ALGO EXEPTION","no such algorithm");
+            return "";
+        }
+
+
     }
 
     public static String hashMd5(String data){

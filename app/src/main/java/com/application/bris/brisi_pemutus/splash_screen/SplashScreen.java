@@ -504,7 +504,12 @@ public class SplashScreen extends AppCompatActivity {
     private boolean deviceIsRooted(){
         RootBeer rootBeer = new RootBeer(SplashScreen.this);
         if (rootBeer.isRooted()) {
-            return true;
+            if(BuildConfig.ROOT_DETECTION){
+                return true;
+            }
+            else{
+                return false;
+            }
         } else {
             return false;
 

@@ -245,7 +245,7 @@ public class FragmentAgunan6Hasil extends Fragment implements Step {
 
 
 
-        et_luas_total.setText(Long.toString(Long.parseLong(dataLengkap.getLuasBangunan1())+Long.parseLong(dataLengkap.getLuasBangunan2())));
+        et_luas_total.setText(Double.toString(Double.parseDouble(dataLengkap.getLuasBangunan1())+Double.parseDouble(dataLengkap.getLuasBangunan2())));
 
         et_nilai_likudasi.addTextChangedListener(new NumberTextWatcherForThousand(et_nilai_likudasi));
         et_nilai_likudasi.setText(dataLengkap.getNLTanahBangunan());
