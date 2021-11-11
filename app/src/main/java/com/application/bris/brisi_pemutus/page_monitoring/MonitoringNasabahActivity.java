@@ -120,7 +120,8 @@ public class MonitoringNasabahActivity extends AppCompatActivity implements Swip
     ShimmerFrameLayout shimmer;
     ApiClientAdapter apiClientAdapter;
     
-    int uid,no_pegawai;
+    int uid;
+    String no_pegawai;
     String namaPegawai;
 
 
@@ -148,7 +149,7 @@ public class MonitoringNasabahActivity extends AppCompatActivity implements Swip
         apiClientAdapter = new ApiClientAdapter(this);
         
         uid=getIntent().getIntExtra("uid",0);
-        no_pegawai=getIntent().getIntExtra("noPegawai",0);
+        no_pegawai=getIntent().getStringExtra("noPegawai");
         namaPegawai=getIntent().getStringExtra("namaPegawai");
 
         AppUtil.toolbarRegular(this, "Nasabah "+namaPegawai.toUpperCase());

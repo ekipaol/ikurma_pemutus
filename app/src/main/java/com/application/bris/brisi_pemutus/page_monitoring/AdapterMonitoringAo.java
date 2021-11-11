@@ -107,7 +107,7 @@ public class AdapterMonitoringAo extends RecyclerView.Adapter<AdapterMonitoringA
             public void onClick(View v) {
                 Intent intent=new Intent(context,MonitoringNasabahActivity.class);
 //                intent.putExtra("uid",Integer.parseInt(datas.getFID_UID()));
-                intent.putExtra("noPegawai",Integer.parseInt(datas.getNO_PEGAWAI()));
+                intent.putExtra("noPegawai",(datas.getNO_PEGAWAI()));
                 intent.putExtra("namaPegawai",(datas.getNAMA_PEGAWAI()));
 
                 context.startActivity(intent);

@@ -7,7 +7,7 @@ public class ReqMonitoringNasabah {
     @SerializedName("uid")
     private int uid;
     @SerializedName("noPegawai")
-    private int noPegawai;
+    private String noPegawai;
 
     public int getUid() {
         return uid;
@@ -17,11 +17,11 @@ public class ReqMonitoringNasabah {
         this.uid = uid;
     }
 
-    public int getNoPegawai() {
+    public String getNoPegawai() {
         return noPegawai;
     }
 
-    public void setNoPegawai(int noPegawai) {
+    public void setNoPegawai(String noPegawai) {
         this.noPegawai = noPegawai;
     }
 }
