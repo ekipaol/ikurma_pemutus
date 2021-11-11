@@ -5,7 +5,7 @@ import com.application.bris.brisi_pemutus.BuildConfig;
 public class UriApi {
 
     public static class Baseurl{
-        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-PENTEST/webresources/"; //DEV
+        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN/webresources/"; //DEV
 //        public static final String URLDEV = "http://10.0.1.210:8080/MobileBRISIAPI/webresources/"; //DEV BSI
         public static final String URLPROD = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //PROD
 //        public static final String URLPROD = "https://ikurma.bankbsi.co.id/MobileBRISIAPI/webresources/"; //PROD
@@ -169,6 +169,7 @@ public class UriApi {
     }
     public class inquireLkn {
         public static final String inquireLkn= "generic/mikro/hotprospek/lkn/inquireLKN";
+        public static final String inquireDropdownProgramJNasabahGPeriod = "generic/mikro/pipeline/inquireProgramJNasabahGPeriod";
     }
     public class inquiryScoring {
         public static final String inquiryScoring = "generic/mikro/hotprospek/scoringtanpajaminan/inquireScoring";
@@ -197,6 +198,10 @@ public class UriApi {
 
     public class inquiryAgunanKendaraan {
         public static final String inquiryAgunanKendaraan = " generic/mikro/hotprospek/agunan/inquiryDataAgunan_Kendaraan";
+    }
+
+    public class inquiryAgunanMesin {
+        public static final String inquiryAgunanMesin = " generic/mikro/hotprospek/agunan/inquiryDataAgunan_Mesin";
     }
 
     public class cekUserMip {
@@ -281,6 +286,7 @@ public class UriApi {
 
     public class detailHotprospekMikro {
         public static final String detailHotprospekMikro = "generic/mikro/konsumer/kmg/hotprospek/inquireHotprospek";
+        public static final String detailHotprospekMikroNonKonsumer = "generic/mikro/hotprospek/inquireHotprospek";
     }
 
 

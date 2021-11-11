@@ -15,21 +15,37 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.application.bris.brisi_pemutus.R;
+import com.application.bris.brisi_pemutus.api.model.ParseResponse;
+import com.application.bris.brisi_pemutus.api.model.Error;
+import com.application.bris.brisi_pemutus.api.model.ParseResponseError;
+import com.application.bris.brisi_pemutus.api.model.request.EmptyRequest;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
+import com.application.bris.brisi_pemutus.model.MGenericModel;
 import com.application.bris.brisi_pemutus.model.lkn.DataLkn;
 import com.application.bris.brisi_pemutus.model.lkn.DataRekomendasiLkn;
+import com.application.bris.brisi_pemutus.model.lkn.GracePeriod;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.NumberTextWatcherCanNolForThousand;
 import com.application.bris.brisi_pemutus.util.NumberTextWatcherForThousand;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 /**
@@ -97,6 +113,11 @@ public class FragmentRekomendasiPembiayaan extends Fragment implements Step{
     @BindView(R.id.et_totaleksposur)
     EditText et_totaleksposur;
 
+    @BindView(R.id.tf_grace_period)
+    TextFieldBoxes tf_grace_period;
+    @BindView(R.id.et_grace_period)
+    EditText et_grace_period;
+
 
     @BindView(R.id.tf_margin)
     TextFieldBoxes tf_margin;
@@ -127,6 +148,7 @@ public class FragmentRekomendasiPembiayaan extends Fragment implements Step{
 
     private DataLkn data;
     private DataRekomendasiLkn dataRekomendasiLkn;
+    private List<MGenericModel> dropdownGracePeriod=new ArrayList<>();
 
     public static String val_modalKerja ="";
     public static String val_investasi ="";
@@ -189,6 +211,20 @@ public class FragmentRekomendasiPembiayaan extends Fragment implements Step{
         et_intervaljenisangsuran.setText("");
 
 //        setValue();
+
+        //cek apakah nasabah pertahsop MES atau bukan
+        if(data.getFID_JENIS_NASABAH()!=null){
+            if(data.getFID_JENIS_NASABAH().equalsIgnoreCase("1")||data.getFID_JENIS_NASABAH().equalsIgnoreCase("2")){
+                tf_grace_period.setVisibility(View.VISIBLE);
+                loadDropdownProgram();
+            }
+            else{
+                tf_grace_period.setVisibility(View.GONE);
+            }
+        }
+        else{
+            tf_grace_period.setVisibility(View.GONE);
+        }
 
 
         disableTextfield();
@@ -276,6 +312,62 @@ public class FragmentRekomendasiPembiayaan extends Fragment implements Step{
         et_margin.setFocusable(false);
         tv_rekomendasiangsuran.setInputType(InputType.TYPE_NULL);
         tv_rekomendasiangsuran.setFocusable(false);
+    }
+
+    private void loadDropdownProgram() {
+        loading.setVisibility(View.VISIBLE);
+        Call<ParseResponse> call = apiClientAdapter.getApiInterface().inquireDropdownProgramJNasabahGPeriod(EmptyRequest.INSTANCE);
+        call.enqueue(new Callback<ParseResponse>() {
+            @Override
+            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+                try {
+                    if (response.isSuccessful()) {
+                        loading.setVisibility(View.GONE);
+                        if (response.body().getStatus().equalsIgnoreCase("00")) {
+
+                            Gson gson = new Gson();
+
+                            String listGracePeriodString = response.body().getData().get("listGracePeriod").toString();
+                            Type type3 = new TypeToken<List<GracePeriod>>() {}.getType();
+
+                            List<GracePeriod> dropdownGracePeriodService = gson.fromJson(listGracePeriodString, type3);
+                            for (int i = 0; i <dropdownGracePeriodService.size() ; i++) {
+                                dropdownGracePeriod.add(new MGenericModel(dropdownGracePeriodService.get(i).getID_GRACE_PERIOD(),dropdownGracePeriodService.get(i).getDESC()));
+                            }
+
+                            if(data.getGRACE_PERIOD()!=null && !data.getGRACE_PERIOD().isEmpty()) {
+                                for (int i = 0; i < dropdownGracePeriod.size(); i++) {
+                                    if (data.getGRACE_PERIOD().equalsIgnoreCase(dropdownGracePeriod.get(i).getID())) {
+                                        et_grace_period.setText(dropdownGracePeriod.get(i).getDESC());
+                                        break;
+                                    }
+                                }
+                            }
+
+                        } else {
+//                            finish();
+                            AppUtil.notiferror(getContext(), getActivity().findViewById(android.R.id.content), response.body().getMessage());
+                        }
+                    } else {
+                        loading.setVisibility(View.GONE);
+//                        finish();
+                        Error error = ParseResponseError.confirmEror(response.errorBody());
+                        AppUtil.notiferror(getContext(), getActivity().findViewById(android.R.id.content), error.getMessage());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParseResponse> call, Throwable t) {
+                loading.setVisibility(View.GONE);
+//                finish();
+                t.printStackTrace();
+                Toast.makeText(getContext(), "Gagal Terhubung Ke Server", Toast.LENGTH_SHORT).show();
+                AppUtil.notiferror(getContext(), getActivity().findViewById(android.R.id.content), getString(R.string.txt_connection_failure));
+            }
+        });
     }
 
 

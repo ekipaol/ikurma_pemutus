@@ -25,6 +25,7 @@ import com.application.bris.brisi_pemutus.page_aom.info_agunan.SetPengikatanActi
 import com.application.bris.brisi_pemutus.page_putusan.agunan_deposito.AgunanDepositoActivity;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_kendaraan.AgunanKendaraanActivity;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_kios.AgunanKiosActivity;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_mesin.AgunanMesinActivity;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_retry.ActivityAgunanRetry;
 import com.application.bris.brisi_pemutus.page_putusan.agunan_tanah_kosong.ActivityAgunanTanahKosong;
 import com.application.bris.brisi_pemutus.util.AppUtil;
@@ -120,6 +121,9 @@ public class AgunanTerikatAdapater extends RecyclerView.Adapter<AgunanTerikatAda
                 }
                 else  if(  holder.tv_jenis.getText().toString().equalsIgnoreCase("kendaraan")){
                     onCLickStuff(holder.tv_id_agunan,32,AgunanKendaraanActivity.class,datas);
+                }
+                else  if(  holder.tv_jenis.getText().toString().equalsIgnoreCase("mesin")){
+                    onCLickStuff(holder.tv_id_agunan,8, AgunanMesinActivity.class,datas);
                 }
                 else if(datas.getFID_JENIS_AGUNAN().equalsIgnoreCase("35")){
                     Toasty.info(context,"Agunan SK Pegawai").show();

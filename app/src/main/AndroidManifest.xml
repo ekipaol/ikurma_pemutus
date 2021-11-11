@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:allowBackup">
-        <activity android:name=".page_konsumer_kpr.data_finansial.DataFinansialFlppActivity"></activity>
+        <activity android:name=".page_putusan.agunan_mesin.AgunanMesinActivity"></activity>
+        <activity android:name=".page_konsumer_kpr.data_finansial.DataFinansialFlppActivity" />
         <activity android:name=".page_flpp.DetailHasilPraujiActivity" />
         <activity android:name=".page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenFlppActivity" />
         <activity android:name=".page_flpp.HasilPraujiFlppActivity" />
@@ -161,14 +162,14 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 </manifest>

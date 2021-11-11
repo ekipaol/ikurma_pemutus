@@ -18,4 +18,5 @@ public class ParseResponseError {
         }
         return error;
     }
+
 }
