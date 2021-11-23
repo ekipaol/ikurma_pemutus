@@ -7,7 +7,8 @@ public class UriApi {
     public static class Baseurl{
         public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-EKI/webresources/"; //DEV
 //        public static final String URLDEV = "http://10.0.1.210:8080/MobileBRISIAPI/webresources/"; //DEV BSI
-        public static final String URLPROD = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //PROD
+//        public static final String URLPROD = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //PROD
+        public static final String URLPROD = "https://103.138.216.20:55056/MobileBRISIAPI/webresources/"; //PROD
 //        public static final String URLPROD = "https://ikurma.bankbsi.co.id/MobileBRISIAPI/webresources/"; //PROD
 
         public static String URL = (BuildConfig.IS_PRODUCTION) ? URLPROD : URLDEV ; //ENV BASED URI SELECTOR

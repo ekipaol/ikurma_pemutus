@@ -10,12 +10,12 @@ android {
         applicationId "com.application.bris.brisi_pemutus"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 51
-        versionName "1.7.2"
+        versionCode 52
+        versionName "1.7.3"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("Boolean", "IS_PRODUCTION", "false")
+        buildConfigField("Boolean", "IS_PRODUCTION", "true")
         buildConfigField ("Boolean","IS_BD", "true")
         buildConfigField ("Boolean","SHOW_LOG", "true")
         buildConfigField ("Boolean","ROOT_DETECTION", "true")
@@ -120,7 +120,12 @@ dependencies {
     implementation 'com.github.florent37:materialviewpager:1.2.3'
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
     implementation 'com.jpardogo.materialtabstrip:library:1.1.0'
+
+    //glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
 
     //timeline recycler view

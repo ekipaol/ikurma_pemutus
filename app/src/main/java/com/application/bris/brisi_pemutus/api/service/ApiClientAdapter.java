@@ -20,6 +20,9 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.CertificatePinner;
 import okhttp3.Interceptor;
@@ -285,10 +288,24 @@ public class ApiClientAdapter {
                     .add(hostname, "sha256/r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E=")
                     .build();
 
+//            httpClient = clientBuilder
+//                    .connectTimeout(timeOut, timeUnit)
+//                    .certificatePinner(certificatePinner)
+//                    .readTimeout(timeOut, timeUnit)
+//                    .build();
+
+
+            //BYPASS SSL, comment this when lewat prod dan sudah ada domain
             httpClient = clientBuilder
                     .connectTimeout(timeOut, timeUnit)
-                    .certificatePinner(certificatePinner)
                     .readTimeout(timeOut, timeUnit)
+                    // TODO: 19/04/21 comment this, uncomment above
+                    .hostnameVerifier(new HostnameVerifier() {
+                        @Override
+                        public boolean verify(String s, SSLSession sslSession) {
+                            return true;
+                        }
+                    })
                     .build();
         }
         else{
