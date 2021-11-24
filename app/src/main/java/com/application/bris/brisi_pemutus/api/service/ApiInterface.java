@@ -6,6 +6,7 @@ import com.application.bris.brisi_pemutus.api.model.ParseResponseArr;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseDataInstansi;
 import com.application.bris.brisi_pemutus.api.model.ParseResponseSaldo;
 import com.application.bris.brisi_pemutus.api.model.request.EmptyRequest;
+import com.application.bris.brisi_pemutus.api.model.request.ReqUidRole;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_global_idapl_agunan_cif.AgunanGlobal;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_set_pengikatan.ReqSetPengikatan;
 import com.application.bris.brisi_pemutus.api.model.request.agunan_tanah_kosong.ReqAgunanTanahKosong;
@@ -466,6 +467,9 @@ public interface ApiInterface {
 
     @POST(UriApi.flpp.listHasilPraujiFlpp)
     Call<ParseResponseArr> listHasilPraujiFlpp (@Body ReqUid ReqUid);
+
+    @POST(UriApi.eklaim.listReminderClaim)
+    Call<ParseResponse> listReminderClaim(@Body ReqUidRole ReqUidRole);
 
 
 

@@ -42,9 +42,11 @@ public class Menu {
   }
 
 
-        //seluruh pemutus kecuali UH dan MM bisa mengakses menu ambil alih
+        //seluruh pemutus kecuali UH dan MM bisa mengakses menu ambil alih dan eklaim
         if(!appPreferences.getFidRole().equalsIgnoreCase("71")&&!appPreferences.getFidRole().equalsIgnoreCase("77")){
             menu.add(new ListViewMenu(R.drawable.ic_ambil_alih_2, "Ambil Alih Putusan"));
+            //MENU EKLAIM
+            menu.add(new ListViewMenu(R.drawable.ic_eklaim, "e-Klaim"));
         }
 
         //halaman ao silang hanya bisa diakses pinca pincapem MM
@@ -54,6 +56,8 @@ public class Menu {
 
         //MENU MONITORING
         menu.add(new ListViewMenu(R.drawable.ic_business,"Monitoring"));
+
+
 
 
 
@@ -140,6 +144,10 @@ public class Menu {
         menu.add(new ListViewMenu(R.drawable.ic_business,"Monitoring"));
 
 
+        //MENU EKLAIM
+        menu.add(new ListViewMenu(R.drawable.ic_eklaim, "e-Klaim"));
+
+
 
         //ada tombol logout jika bukan ambil alih
         if(appPreferences.getStatusAmbilAlih().equalsIgnoreCase("tidak")){
@@ -180,6 +188,7 @@ public class Menu {
         menu.add(new ListViewMenu(R.drawable.ic_daftar_putusan, context.getString(R.string.menu_pengajuan)));
         menu.add(new ListViewMenu(R.drawable.ic_riwayat, "Riwayat"));
         menu.add(new ListViewMenu(R.drawable.ic_business,"Monitoring"));
+        menu.add(new ListViewMenu(R.drawable.ic_eklaim, "e-Klaim"));
         menu.add(new ListViewMenu(R.drawable.ic_logout_front, "Logout"));
 
 
@@ -189,6 +198,7 @@ public class Menu {
         menu.add(new ListViewMenu(R.drawable.ic_daftar_putusan, context.getString(R.string.menu_pengajuan)));
         menu.add(new ListViewMenu(R.drawable.ic_riwayat, "Riwayat"));
         menu.add(new ListViewMenu(R.drawable.ic_business,"Monitoring"));
+        menu.add(new ListViewMenu(R.drawable.ic_eklaim, "e-Klaim"));
         menu.add(new ListViewMenu(R.drawable.ic_logout_front, "Logout"));
 
 

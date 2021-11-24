@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.application.bris.brisi_pemutus.page_eklaim.MenuEklaimActivity;
 import com.application.bris.brisi_pemutus.page_monitoring.MonitoringAoActivity;
 import com.application.bris.brisi_pemutus.page_monitoring.MonitoringKcActivity;
 import com.application.bris.brisi_pemutus.page_monitoring.MonitoringKcpActivity;
@@ -835,15 +836,21 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                     startActivity(intent);
                 }
 
-//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
+
             //menu salam digital
 
             else if(menu.equalsIgnoreCase("Salam Digital")){
                 Intent intent = new Intent(getContext(), MonitoringSalamDigitalActivity.class);
                 startActivity(intent);
-//            Toast.makeText(getActivity(), "Fitur ini masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
+
+            //MENU EKLAIM
+            else if(menu.equalsIgnoreCase("e-Klaim")){
+                Intent intent = new Intent(getContext(), MenuEklaimActivity.class);
+                startActivity(intent);
+            }
+
             else{
                 AppUtil.showToastShort(getContext(), menu);
             }

@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:allowBackup">
-        <activity android:name=".page_konsumer_kpr.data_finansial.DataFinansialFlppActivity"></activity>
+        <activity android:name=".page_eklaim.ReminderKlaimActivity"/>
+        <activity android:name=".page_eklaim.DetilReminderKlaimActivity"/>
+        <activity android:name=".page_eklaim.MenuEklaimActivity"/>
+        <activity android:name=".page_konsumer_kpr.data_finansial.DataFinansialFlppActivity"/>
         <activity android:name=".page_flpp.DetailHasilPraujiActivity" />
         <activity android:name=".page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenFlppActivity" />
         <activity android:name=".page_flpp.HasilPraujiFlppActivity" />

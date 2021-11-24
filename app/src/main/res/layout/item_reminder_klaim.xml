@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="8dp"
+    android:paddingBottom="4dp"
+    app:cardElevation="3dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_nama_nasabah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="{Nama Nasabah}"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorBlackHeader"
+            android:background="@drawable/bordertextbox_primary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kol"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>/>
+
+            <TextView
+                android:id="@+id/tv_kol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{1}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cabang"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_cabang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{cabang}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Area"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>/>
+
+            <TextView
+                android:id="@+id/tv_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{Area}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Produk"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>/>
+
+            <TextView
+                android:id="@+id/tv_nama_produk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{1}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor LD"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>/>
+
+            <TextView
+                android:id="@+id/tv_nomor_ld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{LD}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Penjaminan"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_b"
+                android:textSize="14sp"/>/>
+
+            <TextView
+                android:id="@+id/tv_penjaminan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="{Penjaminan}"
+                android:textColor="@color/colorBlackHeader"
+                android:fontFamily="@font/muli_b"
+                android:layout_weight="1"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="6dp"
+            android:paddingTop="5dp"
+            >
+            <Button
+                android:id="@+id/bt_detil_reminder_klaim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_gravity="right"
+                android:text="Detail"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
