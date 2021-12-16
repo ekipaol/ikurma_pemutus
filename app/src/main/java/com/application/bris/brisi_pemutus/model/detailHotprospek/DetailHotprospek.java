@@ -63,7 +63,10 @@ public class DetailHotprospek {
 
     @SerializedName("LOAN_TYPE")
     private String LOAN_TYPE;
-
+    @SerializedName("DESC_KETERANGAN_PROGRAM")
+    private String descProgram;
+    @SerializedName("DESC_JENIS_NASABAH")
+    private String descJenisNasabah;
 
 
 
@@ -94,6 +97,22 @@ public class DetailHotprospek {
         this.flag_rpc = flag_rpc;
         this.nOAKAD = nOAKAD;
         this.flag_finansial=flag_finansial;
+    }
+
+    public String getDescProgram() {
+        return descProgram;
+    }
+
+    public void setDescProgram(String descProgram) {
+        this.descProgram = descProgram;
+    }
+
+    public String getDescJenisNasabah() {
+        return descJenisNasabah;
+    }
+
+    public void setDescJenisNasabah(String descJenisNasabah) {
+        this.descJenisNasabah = descJenisNasabah;
     }
 
     public String getLOAN_TYPE() {

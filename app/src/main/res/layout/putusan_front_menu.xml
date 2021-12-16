@@ -387,9 +387,70 @@
                         </LinearLayout>
 
 
+                    </RelativeLayout>
 
+                    <RelativeLayout
+                        android:id="@+id/rl_pertasop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_program"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:layout_weight="1"
+                                android:text="Program"/>
+
+                            <TextView
+                                android:id="@+id/tv_program"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginBottom="0dp"
+                                android:text="Program"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_jenis_nasabah"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_below="@id/ll_program"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:layout_weight="1"
+                                android:text="Jenis Nasabah"/>
+
+                            <TextView
+                                android:id="@+id/tv_jenis_nasabah"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:layout_marginBottom="0dp"
+                                android:text="Jenis Nasabah"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
 
                     </RelativeLayout>
+
 
                     <RelativeLayout
                         android:id="@+id/rl_no_akad_front"

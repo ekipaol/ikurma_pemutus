@@ -173,6 +173,13 @@ public class DataLkn {
     @SerializedName("FID_PHOTO_LINGKUNGAN")
     public String FID_PHOTO_LINGKUNGAN;
 
+    @SerializedName("GRACE_PERIOD")
+    public String GRACE_PERIOD;
+    @SerializedName("FID_JENIS_NASABAH")
+    public String FID_JENIS_NASABAH;
+    @SerializedName("FID_KETERANGAN_PROGRAM")
+    public String FID_KETERANGAN_PROGRAM;
+
 
 
 
@@ -259,6 +266,30 @@ public class DataLkn {
         this.FID_PHOTO_DALAM=FID_PHOTO_DALAM;
         this.FID_PHOTO_DEPAN=FID_PHOTO_DEPAN;
         this.FID_PHOTO_LINGKUNGAN=FID_PHOTO_LINGKUNGAN;
+    }
+
+    public String getGRACE_PERIOD() {
+        return GRACE_PERIOD;
+    }
+
+    public void setGRACE_PERIOD(String GRACE_PERIOD) {
+        this.GRACE_PERIOD = GRACE_PERIOD;
+    }
+
+    public String getFID_JENIS_NASABAH() {
+        return FID_JENIS_NASABAH;
+    }
+
+    public void setFID_JENIS_NASABAH(String FID_JENIS_NASABAH) {
+        this.FID_JENIS_NASABAH = FID_JENIS_NASABAH;
+    }
+
+    public String getFID_KETERANGAN_PROGRAM() {
+        return FID_KETERANGAN_PROGRAM;
+    }
+
+    public void setFID_KETERANGAN_PROGRAM(String FID_KETERANGAN_PROGRAM) {
+        this.FID_KETERANGAN_PROGRAM = FID_KETERANGAN_PROGRAM;
     }
 
     public String getFID_PHOTO_DEPAN() {

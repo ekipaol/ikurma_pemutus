@@ -268,11 +268,15 @@ public interface ApiInterface {
     @POST(UriApi.detailHotprospekMikro.detailHotprospekMikro)
     Call<ParseResponse> detailHotprospekMikro (@Body ReqIdAplikasi ReqIdAplikasi);
 
-
+    @POST(UriApi.detailHotprospekMikro.detailHotprospekMikroNonKonsumer)
+    Call<ParseResponse> detailHotprospekMikroNonKonsumer (@Body ReqIdAplikasi ReqIdAplikasi);
 
 
     @POST(UriApi.inquireLkn.inquireLkn)
     Call<ParseResponse> inquireLkn(@Body ReqLkn ReqLkn);
+
+    @POST(UriApi.inquireLkn.inquireDropdownProgramJNasabahGPeriod)
+    Call<ParseResponse> inquireDropdownProgramJNasabahGPeriod (@Body EmptyRequest emptyRequest);
 
     @POST(UriApi.inquiryScoring.inquiryScoring)
     Call<ParseResponse> inquiryScoring(@Body ReqScoring ReqScoring);
@@ -296,6 +300,9 @@ public interface ApiInterface {
 
     @POST(UriApi.inquiryAgunanKendaraan.inquiryAgunanKendaraan)
     Call<ParseResponse> inquiryAgunanKendaraan(@Body AgunanGlobal AgunanGlobal);
+
+    @POST(UriApi.inquiryAgunanMesin.inquiryAgunanMesin)
+    Call<ParseResponseArr> inquiryAgunanMesin(@Body AgunanGlobal AgunanGlobal);
 
 
     @POST(UriApi.saveTanahKosong.saveTanahKosong)

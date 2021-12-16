@@ -132,6 +132,15 @@ public class PutusanFrontMenu extends AppCompatActivity {
     @BindView(R.id.progressbar_loading)
     RelativeLayout loading;
 
+    @BindView(R.id.rl_pertasop)
+    RelativeLayout rl_pertasop;
+
+    @BindView(R.id.tv_program)
+    TextView tv_program;
+
+    @BindView(R.id.tv_jenis_nasabah)
+    TextView tv_jenis_nasabah;
+
     HotProspek datahotProspek;
     Putusan dataPutusan;
     PutusanAkad dataPutusanAkad;
@@ -139,6 +148,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
     List<CsModel> cekCs;
     String adaCs="belum";
     AppPreferences appPreferences;
+
 
 
     @Override
@@ -244,7 +254,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
             initializeDataFront();
             setSuperData();
             setDataPutusan(dataPutusan);
-//            loadDataHotprospek(Integer.parseInt(dataPutusan.getId_aplikasi()));
+            loadDataHotprospek(Integer.parseInt(dataPutusan.getId_aplikasi()));
 
             iv_foto_putusan_front.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -260,7 +270,7 @@ public class PutusanFrontMenu extends AppCompatActivity {
             initializeDataFrontAkad();
             setSuperDataAkad();
             setDataPutusanAkad(dataPutusanAkad);
-//            loadDataHotprospek(Integer.parseInt(dataPutusanAkad.getId_aplikasi()));
+            loadDataHotprospek(Integer.parseInt(dataPutusanAkad.getId_aplikasi()));
 
             cv_nomor_akad.setVisibility(View.VISIBLE);
             if(dataPutusanAkad.getNO_AKAD()==null){
@@ -1870,12 +1880,12 @@ public class PutusanFrontMenu extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         ReqIdAplikasi req = new ReqIdAplikasi();
         req.setIdAplikasi(idAplikasi);
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().detailHotprospek(req);
+        Call<ParseResponse> call = apiClientAdapter.getApiInterface().detailHotprospekMikroNonKonsumer(req);
         call.enqueue(new Callback<ParseResponse>() {
             @Override
             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
                 loading.setVisibility(View.GONE);
-                Log.d("palsukauwey","hoyyyy");
+//                Log.d("palsukauwey","hoyyyy");
                 try {
                     if (response.isSuccessful()){
                         if(response.body().getStatus().equalsIgnoreCase("00"))
@@ -1883,44 +1893,31 @@ public class PutusanFrontMenu extends AppCompatActivity {
                             Gson gson = new Gson();
                             String dataString = response.body().getData().get("aplikasi").toString();
                             detailHotprospek = gson.fromJson(dataString, DetailHotprospek.class);
-                            Log.d("palsukauwey","herroooo");
+//                            Log.d("palsukauwey","herroooo");
 
-                            //hanya inquiry untuk nama produk dulu ya, karena udah dapet banyak dari dari inquiry list
-                                produk.setText(detailHotprospek.getPROGRAM_NAME());
-//                                Log.d("detailhp",detailHotprospek.getPROGRAM_NAME());
+                         if(detailHotprospek.getDescJenisNasabah()!=null&&!detailHotprospek.getDescJenisNasabah().isEmpty()){
+                             rl_pertasop.setVisibility(View.VISIBLE);
+                             tv_program.setText(detailHotprospek.getDescProgram());
+                             tv_jenis_nasabah.setText(detailHotprospek.getDescJenisNasabah());
+                         }
+                         else{
+                             rl_pertasop.setVisibility(View.GONE);
+                         }
 
 
                         }
                         else {
-
-                            AppUtil.notiferror(PutusanFrontMenu.this, findViewById(android.R.id.content), response.body().getMessage());
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    finish();
-//                                }
-//                            }, 2000);
+                            AppUtil.notiferror(PutusanFrontMenu.this, findViewById(android.R.id.content), response.body().getMessage());;
                         }
                     }
                     else {
                         Error error = ParseResponseError.confirmEror(response.errorBody());
                         AppUtil.notiferror(PutusanFrontMenu.this, findViewById(android.R.id.content), error.getMessage());
-//                        new Handler().postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                finish();
-//                            }
-//                        }, 2000);
                     }
                 }
                 catch (Exception e){
                     e.printStackTrace();
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            finish();
-//                        }
-//                    }, 2000);
+
                 }
             }
 
