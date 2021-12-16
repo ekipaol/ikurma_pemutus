@@ -14,6 +14,7 @@ import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.databinding.ActivityDetilReminderKlaimBinding;
 import com.application.bris.brisi_pemutus.model.DataReminderKlaim;
+import com.application.bris.brisi_pemutus.util.AppUtil;
 
 
 public class DetilReminderKlaimActivity extends AppCompatActivity implements  View.OnClickListener {
@@ -48,6 +49,9 @@ public class DetilReminderKlaimActivity extends AppCompatActivity implements  Vi
         binding.tvNomorLd.setText(dataReminderKlaim.getNoLd());
         binding.tvArea.setText(dataReminderKlaim.getArea());
         binding.tvNamaCabang.setText(dataReminderKlaim.getUker());
+        binding.tvDayPastDue.setText(dataReminderKlaim.getDpd()+ " Hari");
+        binding.tvMargin.setText(dataReminderKlaim.getMargin());
+        binding.tvTanggalJatuhTempo.setText(AppUtil.parseTanggalGeneral(dataReminderKlaim.getTanggalJatuhTempo(),"ddMMyyyy","dd-MM-yyyy"));
 
     }
 

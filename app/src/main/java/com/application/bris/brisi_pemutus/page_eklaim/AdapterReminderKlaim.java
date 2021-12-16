@@ -67,13 +67,13 @@ public class AdapterReminderKlaim extends RecyclerView.Adapter<AdapterReminderKl
 
     }
 
-    private void onClicks(final int currentPosition, @NonNull MenuViewHolder holder) {
+    private void onClicks(int currentPosition, @NonNull MenuViewHolder holder) {
 //
         holder.btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetilReminderKlaimActivity.class);
-                intent.putExtra("data", data.get(currentPosition));
+                intent.putExtra("data", datafiltered.get(currentPosition));
                 context.startActivity(intent);
             }
         });

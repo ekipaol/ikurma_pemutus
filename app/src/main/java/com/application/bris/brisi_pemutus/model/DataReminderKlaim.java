@@ -42,6 +42,28 @@ public class DataReminderKlaim implements Serializable {
     @SerializedName("TANGGAL")
     @Expose
     private String tanggal;
+    @SerializedName("MARGIN")
+    @Expose
+    private String margin;
+    @SerializedName("TGL JATUH TEMPO")
+    @Expose
+    private String tanggalJatuhTempo;
+
+    public String getTanggalJatuhTempo() {
+        return tanggalJatuhTempo;
+    }
+
+    public void setTanggalJatuhTempo(String tanggalJatuhTempo) {
+        this.tanggalJatuhTempo = tanggalJatuhTempo;
+    }
+
+    public String getMargin() {
+        return margin;
+    }
+
+    public void setMargin(String margin) {
+        this.margin = margin;
+    }
 
     public String getNamaNasabah() {
         return namaNasabah;
