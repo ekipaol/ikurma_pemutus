@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -49,12 +50,12 @@ public class ActivityFotoKelengkapanDokumen extends AppCompatActivity {
         AppUtil.toolbarRegular(this, "Preview Foto");
 
 
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.banner_placeholder)
-                .error(R.drawable.banner_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
 
         int id_foto=(int)getIntent().getIntExtra("id_foto",0);
 
@@ -65,10 +66,11 @@ public class ActivityFotoKelengkapanDokumen extends AppCompatActivity {
             Toast.makeText(this, "Harap tunggu hingga foto selesai loading", Toast.LENGTH_SHORT).show();
         }
 
-        Glide.with(this)
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_foto)
-                .apply(options)
-                .into(iv_foto_kelengkapan);
+//        Glide.with(this)
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_foto)
+//                .apply(options)
+//                .into(iv_foto_kelengkapan);
+        AppUtil.setImageGlide(ActivityFotoKelengkapanDokumen.this,Integer.toString(id_foto),iv_foto_kelengkapan);
 
         //end load foto
 

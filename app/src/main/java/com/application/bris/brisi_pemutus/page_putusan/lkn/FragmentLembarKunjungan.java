@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.lkn.DataLkn;
+import com.application.bris.brisi_pemutus.page_konsumer_kmg.front_menu.PutusanFrontMenuKmg;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
@@ -177,47 +178,51 @@ public class FragmentLembarKunjungan extends Fragment implements Step{
 
         //glide for foto usaha
 
-        RequestOptions options = new RequestOptions();
+//        RequestOptions options = new RequestOptions();
 //                                .centerCrop()
 //                                .placeholder(R.mipmap.ico_img_for_upload)
 //                                .diskCacheStrategy(DiskCacheStrategy.ALL);
 
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_DEPAN())
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        iv_foto_usaha_1.setImageBitmap(resource);
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_DEPAN())
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        iv_foto_usaha_1.setImageBitmap(resource);
+//
+//                    }
+//                });
+        AppUtil.setImageGlide(getContext(),data.getFID_PHOTO_DEPAN(),iv_foto_usaha_1);
 
-                    }
-                });
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_DALAM())
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        iv_foto_usaha_2.setImageBitmap(resource);
+//
+//                    }
+//                });
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_DALAM())
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        iv_foto_usaha_2.setImageBitmap(resource);
+        AppUtil.setImageGlide(getContext(),data.getFID_PHOTO_DALAM(),iv_foto_usaha_2);
 
-                    }
-                });
-
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_LINGKUNGAN())
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        iv_foto_usaha_3.setImageBitmap(resource);
-
-                    }
-                });
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.getFID_PHOTO_LINGKUNGAN())
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        iv_foto_usaha_3.setImageBitmap(resource);
+//
+//                    }
+//                });
+        AppUtil.setImageGlide(getContext(),data.getFID_PHOTO_LINGKUNGAN(),iv_foto_usaha_3);
 
         //end of glide
 

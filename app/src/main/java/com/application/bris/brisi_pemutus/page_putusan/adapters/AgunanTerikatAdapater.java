@@ -68,25 +68,27 @@ public class AgunanTerikatAdapater extends RecyclerView.Adapter<AgunanTerikatAda
 
         Log.d("idfoto ekipaol",datas.getId_foto());
 
-        RequestOptions options = new RequestOptions();
-        options.error(R.mipmap.ico_img_for_upload);
-        options.placeholder(R.mipmap.ico_img_for_upload);
+//        RequestOptions options = new RequestOptions();
+//        options.error(R.mipmap.ico_img_for_upload);
+//        options.placeholder(R.mipmap.ico_img_for_upload);
 //                                .centerCrop()
 //                                .placeholder(R.mipmap.ico_img_for_upload)
 //                                .diskCacheStrategy(DiskCacheStrategy.ALL);
 
 
-        Glide.with(holder.tv_id_agunan.getContext())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+datas.getId_foto())
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        holder.iv_foto.setImageBitmap(resource);
+//        Glide.with(holder.tv_id_agunan.getContext())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+datas.getId_foto())
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        holder.iv_foto.setImageBitmap(resource);
+//
+//                    }
+//                });
 
-                    }
-                });
+         AppUtil.setImageGlide(context,datas.getId_foto(),holder.iv_foto);
 
 
 

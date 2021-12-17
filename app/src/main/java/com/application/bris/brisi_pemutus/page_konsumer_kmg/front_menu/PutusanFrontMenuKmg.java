@@ -644,19 +644,20 @@ public class PutusanFrontMenuKmg extends AppCompatActivity {
         status.setText(dataPutusan.getStatus_aplikasi());
 
         //glide options for photo
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.banner_placeholder)
-                .error(R.drawable.banner_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
-
-
-        //hidupkan kembali glide jika sudah ada fid photo di listputusan
-        Glide.with(PutusanFrontMenuKmg.this)
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
-                .apply(options)
-                .into(foto);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
+//
+//
+//        //hidupkan kembali glide jika sudah ada fid photo di listputusan
+//        Glide.with(PutusanFrontMenuKmg.this)
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
+//                .apply(options)
+//                .into(foto);
+        AppUtil.setImageGlide(PutusanFrontMenuKmg.this,dataPutusan.getFid_photo(),foto);
 
 
         ////////end of proses nerima broadcast intent
@@ -912,19 +913,20 @@ public class PutusanFrontMenuKmg extends AppCompatActivity {
         status.setText(dataPutusan.getStatus_aplikasi());
 
         //glide options for photo
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.banner_placeholder)
-                .error(R.drawable.banner_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
-
-
-        //hidupkan kembali glide jika sudah ada fid photo di listputusan
-        Glide.with(PutusanFrontMenuKmg.this)
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
-                .apply(options)
-                .into(foto);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
+//
+//
+//        //hidupkan kembali glide jika sudah ada fid photo di listputusan
+//        Glide.with(PutusanFrontMenuKmg.this)
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
+//                .apply(options)
+//                .into(foto);
+        AppUtil.setImageGlide(PutusanFrontMenuKmg.this,dataPutusan.getFid_photo(),foto);
 
 
     }

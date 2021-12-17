@@ -240,17 +240,19 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
             onClickLihatPdf(img_bpn2,dataLengkap.getIdPhotoTBbpn());
 
 
-            Glide.with(getActivity())
-                    .asBitmap()
-                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBPbb())
-                    .apply(options)
-                    .into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            img_pbb.setImageBitmap(resource);
+//            Glide.with(getActivity())
+//                    .asBitmap()
+//                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBPbb())
+//                    .apply(options)
+//                    .into(new SimpleTarget<Bitmap>() {
+//                        @Override
+//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                            img_pbb.setImageBitmap(resource);
+//
+//                        }
+//                    });
 
-                        }
-                    });
+            AppUtil.setImageGlideInt(getContext(),dataLengkap.getIdPhotoTBPbb(),img_pbb);
 
             img_pbb.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -261,17 +263,22 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
                 }
             });
 
-            Glide.with(getActivity())
-                    .asBitmap()
-                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBImb())
-                    .apply(options)
-                    .into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            img_imb.setImageBitmap(resource);
+//            Glide.with(getActivity())
+//                    .asBitmap()
+//                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBImb())
+//                    .apply(options)
+//                    .into(new SimpleTarget<Bitmap>() {
+//                        @Override
+//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                            img_imb.setImageBitmap(resource);
+//
+//                        }
+//                    });
 
-                        }
-                    });
+
+            AppUtil.setImageGlideInt(getContext(),dataLengkap.getIdPhotoTBImb(),img_imb);
+
+
 
             img_imb.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -283,17 +290,18 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
             });
         }
         else{
-            Glide.with(getActivity())
-                    .asBitmap()
-                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBbpn())
-                    .apply(options)
-                    .into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            img_bpn.setImageBitmap(resource);
-
-                        }
-                    });
+//            Glide.with(getActivity())
+//                    .asBitmap()
+//                    .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+dataLengkap.getIdPhotoTBbpn())
+//                    .apply(options)
+//                    .into(new SimpleTarget<Bitmap>() {
+//                        @Override
+//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                            img_bpn.setImageBitmap(resource);
+//
+//                        }
+//                    });
+            AppUtil.setImageGlideInt(getContext(),dataLengkap.getIdPhotoTBbpn(),img_bpn);
 
             img_bpn.setOnClickListener(new View.OnClickListener() {
                 @Override

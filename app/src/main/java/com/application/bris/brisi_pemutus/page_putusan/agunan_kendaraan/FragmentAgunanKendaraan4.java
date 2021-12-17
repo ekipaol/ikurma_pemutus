@@ -159,53 +159,59 @@ public class FragmentAgunanKendaraan4 extends Fragment implements Step{
         final int id_agunan_2 = dataAgunan.getIdPhotoKDInterior();
         final int id_agunan_3 = dataAgunan.getIdPhotoKDMesin();
 
-        String ImgTanah = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_agunan_1;
+//        String ImgTanah = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_agunan_1;
         val_ImgAgunan1 = String.valueOf(id_agunan_1);
-        Glide
-                .with(getContext())
-                .asBitmap()
-                .load(ImgTanah)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_agunan_1.setImageBitmap(resource);
-                        bitmapPhotoAgunan1 = resource;
-                        sudahUploadAgunan1 = "sudah";
-                    }
-                });
+//        Glide
+//                .with(getContext())
+//                .asBitmap()
+//                .load(ImgTanah)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_agunan_1.setImageBitmap(resource);
+//                        bitmapPhotoAgunan1 = resource;
+//                        sudahUploadAgunan1 = "sudah";
+//                    }
+//                });
+
+        AppUtil.setImageGlideInt(getContext(),id_agunan_1,img_agunan_1);
 
 
 
 
-        String ImgBatasUtara = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_agunan_2;
-        val_ImgAgunan2 = String.valueOf(id_agunan_2);
-        Glide
-                .with(getContext())
-                .asBitmap()
-                .load(ImgBatasUtara)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_agunan_2.setImageBitmap(resource);
-                        bitmapPhotoAgunan2 = resource;
-                        sudahUploadAgunan2 = "sudah";
-                    }
-                });
+//        String ImgBatasUtara = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_agunan_2;
+//        val_ImgAgunan2 = String.valueOf(id_agunan_2);
+//        Glide
+//                .with(getContext())
+//                .asBitmap()
+//                .load(ImgBatasUtara)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_agunan_2.setImageBitmap(resource);
+//                        bitmapPhotoAgunan2 = resource;
+//                        sudahUploadAgunan2 = "sudah";
+//                    }
+//                });
 
-        String ImgBatasSelatan = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_agunan_3;
-        val_ImgAgunan3 = String.valueOf(id_agunan_3);
-        Glide
-                .with(getContext())
-                .asBitmap()
-                .load(ImgBatasSelatan)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_agunan_3.setImageBitmap(resource);
-                        bitmapPhotoAgunan3 = resource;
-                        sudahUploadAgunan3 = "sudah";
-                    }
-                });
+        AppUtil.setImageGlideInt(getContext(),id_agunan_2,img_agunan_2);
+
+//        String ImgBatasSelatan = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_agunan_3;
+//        val_ImgAgunan3 = String.valueOf(id_agunan_3);
+//        Glide
+//                .with(getContext())
+//                .asBitmap()
+//                .load(ImgBatasSelatan)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_agunan_3.setImageBitmap(resource);
+//                        bitmapPhotoAgunan3 = resource;
+//                        sudahUploadAgunan3 = "sudah";
+//                    }
+//                });
+
+        AppUtil.setImageGlideInt(getContext(),id_agunan_3,img_agunan_3);
 
 
         img_agunan_1.setOnClickListener(new View.OnClickListener() {

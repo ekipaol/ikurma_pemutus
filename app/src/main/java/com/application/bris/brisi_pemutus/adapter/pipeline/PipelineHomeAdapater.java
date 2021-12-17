@@ -57,17 +57,18 @@ public class PipelineHomeAdapater extends RecyclerView.Adapter<PipelineHomeAdapa
     public void onBindViewHolder(@NonNull final PipelineViewHolder holder, final int position) {
 
 
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.banner_placeholder)
-                .error(R.drawable.banner_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
-
-        Glide.with(context)
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.get(position).getFid_photo())
-                .apply(options)
-                .into(holder.iv_foto);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
+//
+//        Glide.with(context)
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+data.get(position).getFid_photo())
+//                .apply(options)
+//                .into(holder.iv_foto);
+        AppUtil.setImageGlide(context,data.get(position).getFid_photo(),holder.iv_foto);
 
         //set nama atau tipe produk
         if(data.get(position).getNama_produk()==null){

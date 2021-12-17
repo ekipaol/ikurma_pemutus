@@ -86,19 +86,20 @@ public class AdapterAkad extends RecyclerView.Adapter<AdapterAkad.PipelineViewHo
 
 
         //glide options for photo
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.banner_placeholder)
-                .error(R.drawable.banner_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
-
-
-        //hidupkan kembali glide jika sudah ada fid photo di listputusan
-        Glide.with(context)
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+datas.getFid_photo())
-                .apply(options)
-                .into(holder.iv_foto);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
+//
+//
+//        //hidupkan kembali glide jika sudah ada fid photo di listputusan
+//        Glide.with(context)
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+datas.getFid_photo())
+//                .apply(options)
+//                .into(holder.iv_foto);
+        AppUtil.setImageGlide(context,data.get(position).getFid_photo(),holder.iv_foto);
 
         try{
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a", Locale.getDefault());

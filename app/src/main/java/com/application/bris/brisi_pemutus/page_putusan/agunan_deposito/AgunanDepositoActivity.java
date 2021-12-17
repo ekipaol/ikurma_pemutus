@@ -34,6 +34,7 @@ import com.application.bris.brisi_pemutus.api.model.request.agunan_global_idapl_
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.agunan_deposito.AgunanDeposito;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_kios.AgunanKiosActivity;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.NumberTextWatcherCanNolForThousand;
@@ -371,27 +372,29 @@ public class AgunanDepositoActivity extends AppCompatActivity implements  TextWa
 
 
     public Bitmap setLoadImage(final ImageView iv, final int idFoto){
-        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
-        Glide
-                .with(AgunanDepositoActivity.this)
-                .asBitmap()
-                .load(url_photo)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        iv.setImageBitmap(resource);
-                        iv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent=new Intent(AgunanDepositoActivity.this, ActivityFotoKelengkapanDokumen.class);
-                                intent.putExtra("id_foto",idFoto);
-                                startActivity(intent);
-                            }
-                        });
-                        loadedPicture = resource;
-                    }
-                });
-        return loadedPicture;
+//        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
+//        Glide
+//                .with(AgunanDepositoActivity.this)
+//                .asBitmap()
+//                .load(url_photo)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        iv.setImageBitmap(resource);
+//
+//                        loadedPicture = resource;
+//                    }
+//                });
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(AgunanDepositoActivity.this, ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",idFoto);
+                startActivity(intent);
+            }
+        });
+//        return loadedPicture;
+        return AppUtil.setImageGlideReturnBitmap(AgunanDepositoActivity.this,idFoto,iv);
     }
 private void editTextSetting(){
     et_tanggalpemeriksaan.setInputType(InputType.TYPE_NULL);

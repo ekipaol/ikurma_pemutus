@@ -654,19 +654,20 @@ public class PutusanFrontMenu extends AppCompatActivity {
         status.setText(dataPutusan.getStatus_aplikasi());
 
         //glide options for photo
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.banner_placeholder)
-                .error(R.drawable.banner_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
-
-
-        //hidupkan kembali glide jika sudah ada fid photo di listputusan
-        Glide.with(PutusanFrontMenu.this)
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
-                .apply(options)
-                .into(foto);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
+//
+//
+//        //hidupkan kembali glide jika sudah ada fid photo di listputusan
+//        Glide.with(PutusanFrontMenu.this)
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
+//                .apply(options)
+//                .into(foto);
+        AppUtil.setImageGlide(PutusanFrontMenu.this,dataPutusan.getFid_photo(),foto);
 
 
         ////////end of proses nerima broadcast intent
@@ -1166,19 +1167,21 @@ public class PutusanFrontMenu extends AppCompatActivity {
         status.setText(dataPutusan.getStatus_aplikasi());
 
         //glide options for photo
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.banner_placeholder)
-                .error(R.drawable.banner_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.banner_placeholder)
+//                .error(R.drawable.banner_placeholder)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .priority(Priority.HIGH);
+//
+//
+//        //hidupkan kembali glide jika sudah ada fid photo di listputusan
+//        Glide.with(PutusanFrontMenu.this)
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
+//                .apply(options)
+//                .into(foto);
 
-
-        //hidupkan kembali glide jika sudah ada fid photo di listputusan
-        Glide.with(PutusanFrontMenu.this)
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto + dataPutusan.getFid_photo())
-                .apply(options)
-                .into(foto);
+        AppUtil.setImageGlide(PutusanFrontMenu.this,dataPutusan.getFid_photo(),foto);
 
 
         ////////end of proses nerima broadcast intent

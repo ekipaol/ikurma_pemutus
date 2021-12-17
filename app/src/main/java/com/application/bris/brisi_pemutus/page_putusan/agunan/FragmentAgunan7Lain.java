@@ -35,6 +35,7 @@ import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.list_foto_agunan.ListFotoAgunan;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
+import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.BitmapImageViewRounded;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -188,65 +189,75 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
 //                                .diskCacheStrategy(DiskCacheStrategy.ALL);
 
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_bangunan)
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_agunan.setImageBitmap(resource);
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_bangunan)
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_agunan.setImageBitmap(resource);
+//
+//                    }
+//                });
 
-                    }
-                });
+        AppUtil.setImageGlideInt(getContext(),id_bangunan,img_agunan);
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_utara)
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_utara.setImageBitmap(resource);
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_utara)
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_utara.setImageBitmap(resource);
+//
+//                    }
+//                });
 
-                    }
-                });
+        AppUtil.setImageGlideInt(getContext(),id_utara,img_utara);
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_selatan)
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_selatan.setImageBitmap(resource);
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_selatan)
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_selatan.setImageBitmap(resource);
+//
+//                    }
+//                });
 
-                    }
-                });
+        AppUtil.setImageGlideInt(getContext(),id_selatan,img_selatan);
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_timur)
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_timur.setImageBitmap(resource);
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_timur)
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_timur.setImageBitmap(resource);
+//
+//                    }
+//                });
 
-                    }
-                });
+        AppUtil.setImageGlideInt(getContext(),id_timur,img_timur);
 
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_barat)
-                .apply(options)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_barat.setImageBitmap(resource);
+//        Glide.with(getActivity())
+//                .asBitmap()
+//                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+id_barat)
+//                .apply(options)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_barat.setImageBitmap(resource);
+//
+//                    }
+//                });
 
-                    }
-                });
+        AppUtil.setImageGlideInt(getContext(),id_barat,img_barat);
 
         img_agunan.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,6 +36,7 @@ import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.databinding.AgunanMesinActivityBinding;
 import com.application.bris.brisi_pemutus.model.MGenericModel;
 import com.application.bris.brisi_pemutus.model.agunan_mesin.AgunanMesin;
+import com.application.bris.brisi_pemutus.page_putusan.agunan_deposito.AgunanDepositoActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -223,19 +224,20 @@ public class AgunanMesinActivity extends AppCompatActivity  {
 
 
     public Bitmap setLoadImage(final ImageView iv, int idFoto){
-        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
-        Glide
-                .with(AgunanMesinActivity.this)
-                .asBitmap()
-                .load(url_photo)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        iv.setImageBitmap(resource);
-                        loadedPicture = resource;
-                    }
-                });
-        return loadedPicture;
+//        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
+//        Glide
+//                .with(AgunanMesinActivity.this)
+//                .asBitmap()
+//                .load(url_photo)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        iv.setImageBitmap(resource);
+//                        loadedPicture = resource;
+//                    }
+//                });
+//        return loadedPicture;
+        return AppUtil.setImageGlideReturnBitmap(AgunanMesinActivity.this,idFoto,iv);
     }
 
 

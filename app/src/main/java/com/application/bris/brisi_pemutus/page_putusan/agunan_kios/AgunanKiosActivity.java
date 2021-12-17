@@ -532,27 +532,29 @@ public class AgunanKiosActivity extends AppCompatActivity implements TextWatcher
 
 
     public Bitmap setLoadImage(final ImageView iv, final int idFoto){
-        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
-        Glide
-                .with(AgunanKiosActivity.this)
-                .asBitmap()
-                .load(url_photo)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        iv.setImageBitmap(resource);
-                        iv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent=new Intent(AgunanKiosActivity.this, ActivityFotoKelengkapanDokumen.class);
-                                intent.putExtra("id_foto",idFoto);
-                                startActivity(intent);
-                            }
-                        });
-                        loadedPicture = resource;
-                    }
-                });
-        return loadedPicture;
+//        String url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + idFoto;
+//        Glide
+//                .with(AgunanKiosActivity.this)
+//                .asBitmap()
+//                .load(url_photo)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        iv.setImageBitmap(resource);
+//                        loadedPicture = resource;
+//                    }
+//                });
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(AgunanKiosActivity.this, ActivityFotoKelengkapanDokumen.class);
+                intent.putExtra("id_foto",idFoto);
+                startActivity(intent);
+            }
+        });
+
+//        return loadedPicture;
+        return AppUtil.setImageGlideReturnBitmap(AgunanKiosActivity.this,idFoto,iv);
     }
 
 

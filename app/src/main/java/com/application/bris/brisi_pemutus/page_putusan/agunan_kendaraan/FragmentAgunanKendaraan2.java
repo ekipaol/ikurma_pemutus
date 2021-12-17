@@ -183,20 +183,22 @@ public class FragmentAgunanKendaraan2 extends Fragment implements Step{
         et_warna.setText(dataAgunan.getWarna());
         et_thn_pembuatan.setText(dataAgunan.getTahunPembuatan());
         final int id_bpn = dataAgunan.getIdPhotoKDBPKB();
-        String ImgBpn = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_bpn;
+//        String ImgBpn = UriApi.Baseurl.URL + UriApi.foto.urlFoto + id_bpn;
         val_ImgBpkb = String.valueOf(id_bpn);
-        Glide
-                .with(getContext())
-                .asBitmap()
-                .load(ImgBpn)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        img_bpkb.setImageBitmap(resource);
-                        bitmapPhotoBpkb = resource;
-                        sudahUploadBpkb = "sudah";
-                    }
-                });
+//        Glide
+//                .with(getContext())
+//                .asBitmap()
+//                .load(ImgBpn)
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                        img_bpkb.setImageBitmap(resource);
+//                        bitmapPhotoBpkb = resource;
+//                        sudahUploadBpkb = "sudah";
+//                    }
+//                });
+
+        AppUtil.setImageGlideInt(getContext(),id_bpn,img_bpkb);
 
         img_bpkb.setOnClickListener(new View.OnClickListener() {
             @Override

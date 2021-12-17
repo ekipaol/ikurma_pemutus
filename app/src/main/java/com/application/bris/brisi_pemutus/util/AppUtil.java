@@ -17,7 +17,13 @@ import android.provider.Settings;
 import com.application.bris.brisi_pemutus.BuildConfig;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.util.service_encrypt.DESHelper;
+import com.application.bris.brisi_pemutus.util.service_encrypt.MagicCryptHelper;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +53,9 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -72,6 +80,7 @@ public class AppUtil {
     public static DESHelper desHelper=new DESHelper();
     private Snackbar snackbar;
     private static AlertDialog alertDialog = null;
+    public static Bitmap bitmap;
 
     public static void showToastShort(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -219,6 +228,88 @@ public class AppUtil {
         Double pencairan=Double.parseDouble(string);
 
         return df.format(pencairan);
+    }
+
+    public static void setImageGlide(Context context,String fidPhoto,ImageView iv_foto){
+        MagicCryptHelper encryptor=new MagicCryptHelper();
+        AppPreferences appPreferences=new AppPreferences(context);
+
+        String imageUrlToEncode= encryptor.encrypt(appPreferences.getUid()+"_"+fidPhoto);
+
+        String url_photo = null;
+        try {
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.banner_placeholder)
+                .error(R.drawable.banner_placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH);
+
+        Glide.with(context)
+                .load(url_photo)
+                .apply(options)
+                .into(iv_foto);
+    }
+
+    public static void setImageGlideInt(Context context,int fidPhoto,ImageView iv_foto){
+        MagicCryptHelper encryptor=new MagicCryptHelper();
+        AppPreferences appPreferences=new AppPreferences(context);
+
+        String imageUrlToEncode= encryptor.encrypt(appPreferences.getUid()+"_"+fidPhoto);
+
+        String url_photo = null;
+        try {
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.banner_placeholder)
+                .error(R.drawable.banner_placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH);
+
+        Glide.with(context)
+                .load(url_photo)
+                .apply(options)
+                .into(iv_foto);
+    }
+
+    public static Bitmap setImageGlideReturnBitmap(Context context, int fidPhoto, final ImageView iv_foto){
+        MagicCryptHelper encryptor=new MagicCryptHelper();
+        AppPreferences appPreferences=new AppPreferences(context);
+        String imageUrlToEncode= encryptor.encrypt(appPreferences.getUid()+"_"+fidPhoto);
+
+        String url_photo = null;
+        try {
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        Glide
+                .with(context)
+                .asBitmap()
+                .load(url_photo)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        iv_foto.setImageBitmap(resource);
+                        bitmap=resource;
+                    }
+                });
+        logSecure("glideImage",url_photo);
+        logSecure("glideImageDecoded",appPreferences.getUid()+"_"+fidPhoto);
+        return bitmap;
     }
 
     @SuppressLint("MissingPermission")

@@ -1108,81 +1108,93 @@ catch(Exception e){
 //                                .diskCacheStrategy(DiskCacheStrategy.ALL);
 
 
-                        Glide.with(ActivityAgunanTanahKosong.this)
-                                .asBitmap()
-                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKutama()))
-                                .apply(options)
-                                .into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                        img_agunan.setImageBitmap(resource);
+//                        Glide.with(ActivityAgunanTanahKosong.this)
+//                                .asBitmap()
+//                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKutama()))
+//                                .apply(options)
+//                                .into(new SimpleTarget<Bitmap>() {
+//                                    @Override
+//                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                                        img_agunan.setImageBitmap(resource);
+//
+//                                    }
+//                                });
 
-                                    }
-                                });
+                        AppUtil.setImageGlide(ActivityAgunanTanahKosong.this,Long.toString(dataTanahKosong.getIdPhotoTKutama()),img_agunan);
 
 
 
-                        Glide.with(ActivityAgunanTanahKosong.this)
-                                .asBitmap()
-                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKselatan()))
-                                .apply(options)
-                                .into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                        img_selatan.setImageBitmap(resource);
+//                        Glide.with(ActivityAgunanTanahKosong.this)
+//                                .asBitmap()
+//                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKselatan()))
+//                                .apply(options)
+//                                .into(new SimpleTarget<Bitmap>() {
+//                                    @Override
+//                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                                        img_selatan.setImageBitmap(resource);
+//
+//                                    }
+//                                });
 
-                                    }
-                                });
+                        AppUtil.setImageGlide(ActivityAgunanTanahKosong.this,Long.toString(dataTanahKosong.getIdPhotoTKselatan()),img_selatan);
 
-                        Glide.with(ActivityAgunanTanahKosong.this)
-                                .asBitmap()
-                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKbarat()))
-                                .apply(options)
-                                .into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                        img_barat.setImageBitmap(resource);
+//                        Glide.with(ActivityAgunanTanahKosong.this)
+//                                .asBitmap()
+//                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKbarat()))
+//                                .apply(options)
+//                                .into(new SimpleTarget<Bitmap>() {
+//                                    @Override
+//                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                                        img_barat.setImageBitmap(resource);
+//
+//                                    }
+//                                });
 
-                                    }
-                                });
+                        AppUtil.setImageGlide(ActivityAgunanTanahKosong.this,Long.toString(dataTanahKosong.getIdPhotoTKbarat()),img_barat);
 
-                        Glide.with(ActivityAgunanTanahKosong.this)
-                                .asBitmap()
-                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKutara()))
-                                .apply(options)
-                                .into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                        img_utara.setImageBitmap(resource);
+//                        Glide.with(ActivityAgunanTanahKosong.this)
+//                                .asBitmap()
+//                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKutara()))
+//                                .apply(options)
+//                                .into(new SimpleTarget<Bitmap>() {
+//                                    @Override
+//                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                                        img_utara.setImageBitmap(resource);
+//
+//                                    }
+//                                });
 
-                                    }
-                                });
+                        AppUtil.setImageGlide(ActivityAgunanTanahKosong.this,Long.toString(dataTanahKosong.getIdPhotoTKutara()),img_utara);
 
-                        Glide.with(ActivityAgunanTanahKosong.this)
-                                .asBitmap()
-                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKtimur()))
-                                .apply(options)
-                                .into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                        img_timur.setImageBitmap(resource);
+//                        Glide.with(ActivityAgunanTanahKosong.this)
+//                                .asBitmap()
+//                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKtimur()))
+//                                .apply(options)
+//                                .into(new SimpleTarget<Bitmap>() {
+//                                    @Override
+//                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                                        img_timur.setImageBitmap(resource);
+//
+//                                    }
+//                                });
 
-                                    }
-                                });
+                        AppUtil.setImageGlide(ActivityAgunanTanahKosong.this,Long.toString(dataTanahKosong.getIdPhotoTKtimur()),img_timur);
 
                         //glide bpn
 
-                        Glide.with(ActivityAgunanTanahKosong.this)
-                                .asBitmap()
-                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKbpn()))
-                                .apply(options)
-                                .into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                        img_bpn_tanah_kosong.setImageBitmap(resource);
+//                        Glide.with(ActivityAgunanTanahKosong.this)
+//                                .asBitmap()
+//                                .load(UriApi.Baseurl.URL + UriApi.foto.urlFoto+Long.toString(dataTanahKosong.getIdPhotoTKbpn()))
+//                                .apply(options)
+//                                .into(new SimpleTarget<Bitmap>() {
+//                                    @Override
+//                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+//                                        img_bpn_tanah_kosong.setImageBitmap(resource);
+//
+//                                    }
+//                                });
 
-                                    }
-                                });
+                        AppUtil.setImageGlide(ActivityAgunanTanahKosong.this,Long.toString(dataTanahKosong.getIdPhotoTKbpn()),img_bpn_tanah_kosong);
 
                         img_agunan.setOnClickListener(new View.OnClickListener() {
                             @Override
