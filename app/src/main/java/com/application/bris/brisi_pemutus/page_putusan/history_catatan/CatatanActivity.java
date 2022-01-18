@@ -563,111 +563,116 @@ public class CatatanActivity extends AppCompatActivity {
                 apiClientAdapter = new ApiClientAdapter(CatatanActivity.this);
                 final SweetAlertDialog dialog1 = new SweetAlertDialog(CatatanActivity.this, SweetAlertDialog.NORMAL_TYPE);
 
-                if (statusPutusanInt >= 1) {
-                    Toasty.info(CatatanActivity.this,"Pembiayaan sudah diputus").show();
-                    RouteApp route=new RouteApp(CatatanActivity.this);
-                    route.openActivityAndClearAllPrevious(CoreLayoutActivity.class);
-                }
-                else{
-                    dialog1.setTitleText("Konfirmasi")
-                            .setContentText("Anda yakin akan mengembalikan pembiayaan ke AO?")
-                            .setConfirmText("Ya")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    if (statusPutusanInt > 0) {
-                                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                                        dialog1.setTitleText("GAGAL");
-                                        dialog1.setContentText("Pembiayaan sudah diputus");
-                                    } else if (statusPutusanInt <= 0) {
-                                        dialog1.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
-                                        dialog1.setTitleText("Memproses");
-                                        dialog1.setContentText("");
-                                        AppPreferences appPreferences = new AppPreferences(CatatanActivity.this);
-                                        ReqSetujuPutusan req = new ReqSetujuPutusan();
-                                        req.setRole_id(appPreferences.getFidRole());
-                                        req.setSt_aplikasid(fidStatus);
-                                        req.setFid_aplikasi(Integer.toString(idAplikasi));
-                                        req.setId_pemutus(appPreferences.getUid());
-                                        req.setCatatan_pemutus(extended_catatan.getText().toString());
-                                        req.setKode_dsn(appPreferences.getDsnCode());
+                if (extended_catatan.getText().toString().isEmpty()) {
+                    text_catatan.setError("Catatan Wajib Diisi", true);
+                } else {
+                    if (statusPutusanInt >= 1) {
+                        Toasty.info(CatatanActivity.this,"Pembiayaan sudah diputus").show();
+                        RouteApp route=new RouteApp(CatatanActivity.this);
+                        route.openActivityAndClearAllPrevious(CoreLayoutActivity.class);
+                    }
+                    else{
+                        dialog1.setTitleText("Konfirmasi")
+                                .setContentText("Anda yakin akan mengembalikan pembiayaan ke AO?")
+                                .setConfirmText("Ya")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        if (statusPutusanInt > 0) {
+                                            dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                            dialog1.setTitleText("GAGAL");
+                                            dialog1.setContentText("Pembiayaan sudah diputus");
+                                        } else if (statusPutusanInt <= 0) {
+                                            dialog1.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
+                                            dialog1.setTitleText("Memproses");
+                                            dialog1.setContentText("");
+                                            AppPreferences appPreferences = new AppPreferences(CatatanActivity.this);
+                                            ReqSetujuPutusan req = new ReqSetujuPutusan();
+                                            req.setRole_id(appPreferences.getFidRole());
+                                            req.setSt_aplikasid(fidStatus);
+                                            req.setFid_aplikasi(Integer.toString(idAplikasi));
+                                            req.setId_pemutus(appPreferences.getUid());
+                                            req.setCatatan_pemutus(extended_catatan.getText().toString());
+                                            req.setKode_dsn(appPreferences.getDsnCode());
 
-                                        Call<ParseResponse> call= apiClientAdapter.getApiInterface().pemutusKembalikan(req);
+                                            Call<ParseResponse> call= apiClientAdapter.getApiInterface().pemutusKembalikan(req);
 //                                        Log.d("superdete",superData.getJenisPembiayaan());
-                                        if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
-                                           call = apiClientAdapter.getApiInterface().pemutusKembalikanKmg(req);
-                                        }
-                                        else{
-                                           call = apiClientAdapter.getApiInterface().pemutusKembalikan(req);
-                                        }
+                                            if(superData.getJenisPembiayaan().equalsIgnoreCase("kmg")){
+                                                call = apiClientAdapter.getApiInterface().pemutusKembalikanKmg(req);
+                                            }
+                                            else{
+                                                call = apiClientAdapter.getApiInterface().pemutusKembalikan(req);
+                                            }
 
-                                        call.enqueue(new Callback<ParseResponse>() {
-                                            @Override
-                                            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+                                            call.enqueue(new Callback<ParseResponse>() {
+                                                @Override
+                                                public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
 
-                                                if (response.isSuccessful()) {
+                                                    if (response.isSuccessful()) {
 
-                                                    if (response.body().getStatus().equalsIgnoreCase("00")) {
-                                                        statusPutusanInt++;
-                                                        String listDataString = response.body().getData().toString();
-                                                        Gson gson = new Gson();
+                                                        if (response.body().getStatus().equalsIgnoreCase("00")) {
+                                                            statusPutusanInt++;
+                                                            String listDataString = response.body().getData().toString();
+                                                            Gson gson = new Gson();
 
 //                                                    Type type = new TypeToken<InfoCs>() {
 //                                                    }.getType();
 //                                                    dataCs= gson.fromJson(listDataString, type);
 
 
-                                                        statusPutusanInt=1;
+                                                            statusPutusanInt=1;
 
-                                                        dialog1.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                                                        dialog1.setTitleText("Putusan Berhasil");
+                                                            dialog1.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                                            dialog1.setTitleText("Putusan Berhasil");
 //                                                    if(dataCs.getNama_petugas().length()>0){
 //                                                        dialog1.setContentText("CS Pencairan : "+dataCs.getNama_petugas());
 //                                                    }
 //                                                    else{
 //                                                        dialog1.setContentText("Pembiayaan berhasil ditolak");
 //                                                    }
-                                                        dialog1.setContentText("Pembiayaan berhasil dikembalikan ke AO");
+                                                            dialog1.setContentText("Pembiayaan berhasil dikembalikan ke AO");
 
-                                                        dialog1.setConfirmText("OK");
-                                                        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                                            @Override
-                                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                                dialog1.dismissWithAnimation();
-                                                                RouteApp route=new RouteApp(CatatanActivity.this);
-                                                                route.openActivityAndClearAllPrevious(CoreLayoutActivity.class);
-                                                            }
-                                                        });
-                                                        dialog1.showCancelButton(false);
+                                                            dialog1.setConfirmText("OK");
+                                                            dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                                @Override
+                                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                                    dialog1.dismissWithAnimation();
+                                                                    RouteApp route=new RouteApp(CatatanActivity.this);
+                                                                    route.openActivityAndClearAllPrevious(CoreLayoutActivity.class);
+                                                                }
+                                                            });
+                                                            dialog1.showCancelButton(false);
 
 
-                                                    } else {
-                                                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                                                        dialog1.setTitle("Terjadi Kesalahan");
-                                                        dialog1.setContentText(response.body().getMessage());
-                                                        dialog1.setConfirmText("Coba lagi");
+                                                        } else {
+                                                            dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                                            dialog1.setTitle("Terjadi Kesalahan");
+                                                            dialog1.setContentText(response.body().getMessage());
+                                                            dialog1.setConfirmText("Coba lagi");
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                            @Override
-                                            public void onFailure(Call<ParseResponse> call, Throwable t) {
-                                                Log.d("LOG D", t.getMessage());
-                                                dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                                                dialog1.setTitle("Gagal");
-                                                dialog1.setContentText("Gagal terhubung ke server");
-                                                dialog1.setConfirmText("Ok");
+                                                @Override
+                                                public void onFailure(Call<ParseResponse> call, Throwable t) {
+                                                    Log.d("LOG D", t.getMessage());
+                                                    dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                                    dialog1.setTitle("Gagal");
+                                                    dialog1.setContentText("Gagal terhubung ke server");
+                                                    dialog1.setConfirmText("Ok");
 
-                                            }
-                                        });
+                                                }
+                                            });
+
+                                        }
+
 
                                     }
-
-
-                                }
-                            }).setCancelText("Batal")
-                            .show();
+                                }).setCancelText("Batal")
+                                .show();
+                    }
                 }
+
 
 
 
