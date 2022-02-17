@@ -647,7 +647,7 @@ public class CatatanActivity extends AppCompatActivity {
                                                         } else {
                                                             dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
                                                             dialog1.setTitle("Terjadi Kesalahan");
-                                                            dialog1.setContentText(response.body().getMessage());
+                                                            dialog1.setContentText(response.body().getMessage()+"\n\n");
                                                             dialog1.setConfirmText("Coba lagi");
                                                         }
                                                     }
@@ -995,7 +995,7 @@ public class CatatanActivity extends AppCompatActivity {
                                         } else {
                                             dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
                                             dialog1.setTitle("Terjadi Kesalahan");
-                                            dialog1.setContentText(response.body().getMessage());
+                                            dialog1.setContentText(response.body().getMessage()+"\n\n");
                                             dialog1.setConfirmText("Coba lagi");
                                         }
                                     }
