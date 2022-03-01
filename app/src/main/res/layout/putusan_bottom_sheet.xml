@@ -170,7 +170,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:textSize="15sp"
-                                    android:text="Kembalikan ke AO"
+                                    android:text="Kembalikan ke Pemrakarsa"
                                     android:textColor="@color/colorWhite"
                                     app:buttonColor="@color/fbutton_color_orange"
                                     >

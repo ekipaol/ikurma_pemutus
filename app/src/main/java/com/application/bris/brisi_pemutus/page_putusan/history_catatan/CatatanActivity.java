@@ -949,7 +949,7 @@ public class CatatanActivity extends AppCompatActivity {
 
                                                 //ngeliat dia dari KC apa KCP
                                                 if(appPreferences.getNamaSKK().substring(0,3).equalsIgnoreCase("KCP")){
-                                                    dialog1.setContentText("Dilanjutkan ke ADP/CS : " + dataCs.getNama_petugas()+"\n");
+                                                    dialog1.setContentText("Dilanjutkan ke BO/CS : " + dataCs.getNama_petugas()+"\n");
                                                     dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                                         @Override
                                                         public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -961,7 +961,7 @@ public class CatatanActivity extends AppCompatActivity {
                                                 //masih galau seleksi nentuin dia dari kc dan kcp
 //                                                else  if(appPreferences.getUker().equalsIgnoreCase("B")||appPreferences.getUker().equalsIgnoreCase("W")){
                                                      else  if(!appPreferences.getNamaSKK().substring(0,3).equalsIgnoreCase("KCP")){
-                                                    dialog1.setContentText("Dilanjutkan ke ADP/CS : " + dataCs.getNama_petugas()+"\n");
+                                                    dialog1.setContentText("Dilanjutkan ke BO/CS : " + dataCs.getNama_petugas()+"\n");
                                                     dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                                         @Override
                                                         public void onClick(SweetAlertDialog sweetAlertDialog) {

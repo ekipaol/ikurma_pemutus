@@ -6,7 +6,7 @@ public class UriApi {
 
     public static class Baseurl{
 //        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-WILLY/webresources/"; //DEV
-        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-BAYU/webresources/"; //DEV
+        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-WILLY/webresources/"; //DEV
 //        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN/webresources/"; //DEV
 //        public static final String URLDEV = "http://10.0.1.210:8080/MobileBRISIAPI/webresources/"; //DEV BSI
 //        public static final String URLPROD = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //PROD

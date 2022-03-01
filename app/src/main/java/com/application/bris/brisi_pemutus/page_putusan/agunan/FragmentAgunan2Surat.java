@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -27,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.text.InputType;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -37,14 +35,10 @@ import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.listeners.KeyValueListener;
 import com.application.bris.brisi_pemutus.model.agunan.Agunan;
 import com.application.bris.brisi_pemutus.model.keyvalue.keyvalue;
-import com.application.bris.brisi_pemutus.page_konsumer_kpr.kelengkapan_dokumen.KelengkapanDokumenKprActivity;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.BitmapImageViewRounded;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
@@ -54,7 +48,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import es.dmoral.toasty.Toasty;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
@@ -252,7 +245,7 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
 //                        }
 //                    });
 
-            AppUtil.setImageGlideInt(getContext(),dataLengkap.getIdPhotoTBPbb(),img_pbb);
+            AppUtil.setImageGlide(getContext(),dataLengkap.getIdPhotoTBPbb(),img_pbb);
 
             img_pbb.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -276,7 +269,7 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
 //                    });
 
 
-            AppUtil.setImageGlideInt(getContext(),dataLengkap.getIdPhotoTBImb(),img_imb);
+            AppUtil.setImageGlide(getContext(),dataLengkap.getIdPhotoTBImb(),img_imb);
 
 
 
@@ -301,7 +294,7 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
 //
 //                        }
 //                    });
-            AppUtil.setImageGlideInt(getContext(),dataLengkap.getIdPhotoTBbpn(),img_bpn);
+            AppUtil.setImageGlide(getContext(),dataLengkap.getIdPhotoTBbpn(),img_bpn);
 
             img_bpn.setOnClickListener(new View.OnClickListener() {
                 @Override

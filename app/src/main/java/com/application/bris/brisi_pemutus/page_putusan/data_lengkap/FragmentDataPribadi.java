@@ -1,6 +1,7 @@
 package com.application.bris.brisi_pemutus.page_putusan.data_lengkap;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,12 +20,16 @@ import androidx.annotation.Nullable;
 
 import android.text.InputType;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
+import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityPreviewFotoSecondary;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.KeyValue;
 import com.stepstone.stepper.Step;
@@ -138,6 +143,13 @@ public class FragmentDataPribadi extends Fragment implements Step {
     @BindView(R.id.et_gelar)
     EditText et_gelar;
 
+    @BindView(R.id.iv_foto_formulir)
+    ImageView iv_foto_formulir;
+    @BindView(R.id.tv_foto_formulir)
+    TextView tv_foto_formulir;
+    @BindView(R.id.rl_foto_formulir)
+    RelativeLayout rl_foto_formulir;
+
     @BindView(R.id.ll_pasangan)
     LinearLayout ll_pasangan;
 
@@ -192,6 +204,7 @@ public class FragmentDataPribadi extends Fragment implements Step {
         View view = inflater.inflate(R.layout.ao_fragment_datapribadi, container, false);
         ButterKnife.bind(this, view);
         setData();
+        allOnClicks();
 
         return view;
     }
@@ -323,6 +336,17 @@ public class FragmentDataPribadi extends Fragment implements Step {
         et_gelar.setInputType(InputType.TYPE_NULL);
         et_gelar.setKeyListener(null);
 
+        try{
+            AppUtil.setImageGlide(getContext(),dataLengkap.getIdFormulir(),iv_foto_formulir);
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            tv_foto_formulir.setVisibility(View.GONE);
+            rl_foto_formulir.setVisibility(View.GONE);
+        }
+
+
 
         if (dataLengkap.getStatusNikah().equalsIgnoreCase("2")){
             ll_pasangan.setVisibility(View.VISIBLE);
@@ -343,8 +367,20 @@ public class FragmentDataPribadi extends Fragment implements Step {
             et_tanggallahirpasangan.setFocusable(false);
             et_tanggallahirpasangan.setInputType(InputType.TYPE_NULL);
             et_tanggallahirpasangan.setKeyListener(null);
-
         }
+
+
+    }
+
+    private void allOnClicks(){
+        iv_foto_formulir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ActivityPreviewFotoSecondary.class);
+                intent.putExtra("id_foto",(dataLengkap.getIdFormulir()));
+                startActivity(intent);
+            }
+        });
     }
 
 

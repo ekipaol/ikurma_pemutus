@@ -9,10 +9,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
+
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,16 +20,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.application.bris.brisi_pemutus.R;
-import com.application.bris.brisi_pemutus.api.config.UriApi;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.agunan_kendaraan.AgunanKendaraan;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.BitmapImageViewRounded;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
@@ -198,7 +192,7 @@ public class FragmentAgunanKendaraan2 extends Fragment implements Step{
 //                    }
 //                });
 
-        AppUtil.setImageGlideInt(getContext(),id_bpn,img_bpkb);
+        AppUtil.setImageGlide(getContext(),id_bpn,img_bpkb);
 
         img_bpkb.setOnClickListener(new View.OnClickListener() {
             @Override

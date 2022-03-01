@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -37,10 +36,7 @@ import com.application.bris.brisi_pemutus.model.list_foto_agunan.ListFotoAgunan;
 import com.application.bris.brisi_pemutus.page_putusan.kelengkapan_dokumen.ActivityFotoKelengkapanDokumen;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.BitmapImageViewRounded;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
@@ -201,7 +197,7 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
 //                    }
 //                });
 
-        AppUtil.setImageGlideInt(getContext(),id_bangunan,img_agunan);
+        AppUtil.setImageGlide(getContext(),id_bangunan,img_agunan);
 
 //        Glide.with(getActivity())
 //                .asBitmap()
@@ -215,7 +211,7 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
 //                    }
 //                });
 
-        AppUtil.setImageGlideInt(getContext(),id_utara,img_utara);
+        AppUtil.setImageGlide(getContext(),id_utara,img_utara);
 
 //        Glide.with(getActivity())
 //                .asBitmap()
@@ -229,7 +225,7 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
 //                    }
 //                });
 
-        AppUtil.setImageGlideInt(getContext(),id_selatan,img_selatan);
+        AppUtil.setImageGlide(getContext(),id_selatan,img_selatan);
 
 //        Glide.with(getActivity())
 //                .asBitmap()
@@ -243,7 +239,7 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
 //                    }
 //                });
 
-        AppUtil.setImageGlideInt(getContext(),id_timur,img_timur);
+        AppUtil.setImageGlide(getContext(),id_timur,img_timur);
 
 //        Glide.with(getActivity())
 //                .asBitmap()
@@ -257,7 +253,7 @@ public class FragmentAgunan7Lain extends Fragment implements Step {
 //                    }
 //                });
 
-        AppUtil.setImageGlideInt(getContext(),id_barat,img_barat);
+        AppUtil.setImageGlide(getContext(),id_barat,img_barat);
 
         img_agunan.setOnClickListener(new View.OnClickListener() {
             @Override

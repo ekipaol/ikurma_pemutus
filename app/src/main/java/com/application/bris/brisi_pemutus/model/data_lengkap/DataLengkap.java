@@ -162,8 +162,17 @@ public class DataLengkap {
     
     private String jenkel;
     @SerializedName("provId")
-    
     private String provId;
+
+    private Integer idFormulir;
+
+    public Integer getIdFormulir() {
+        return idFormulir;
+    }
+
+    public void setIdFormulir(Integer idFormulir) {
+        this.idFormulir = idFormulir;
+    }
 
     public String getNamaAlias() {
         return namaAlias;

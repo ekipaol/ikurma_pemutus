@@ -238,8 +238,11 @@ public class AppUtil {
 
         String url_photo = null;
         try {
-            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException e) {
+//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+
+            //unsecure
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -256,7 +259,7 @@ public class AppUtil {
                 .into(iv_foto);
     }
 
-    public static void setImageGlideInt(Context context,int fidPhoto,ImageView iv_foto){
+    public static void setImageGlide(Context context, int fidPhoto, ImageView iv_foto){
         MagicCryptHelper encryptor=new MagicCryptHelper();
         AppPreferences appPreferences=new AppPreferences(context);
 
@@ -264,8 +267,12 @@ public class AppUtil {
 
         String url_photo = null;
         try {
-            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException e) {
+//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+
+            //unsecure
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -289,10 +296,16 @@ public class AppUtil {
 
         String url_photo = null;
         try {
-            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException e) {
+//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+
+            //unsecure
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+
 
         Glide
                 .with(context)

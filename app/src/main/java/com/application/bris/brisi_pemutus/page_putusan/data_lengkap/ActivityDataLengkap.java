@@ -15,6 +15,7 @@ import com.application.bris.brisi_pemutus.api.model.request.data_lengkap.ReqData
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.data_lengkap.DataLengkap;
+import com.application.bris.brisi_pemutus.model.kelengkapan_dokumen.KelengkapanDokumen;
 import com.application.bris.brisi_pemutus.model.super_data_front.AllDataFront;
 import com.application.bris.brisi_pemutus.page_putusan.PutusanFrontMenu;
 import com.application.bris.brisi_pemutus.page_putusan.adapters.SampleFragmentStepAdapter;
@@ -49,6 +50,7 @@ public class ActivityDataLengkap extends AppCompatActivity implements StepperLay
     private DataLengkap dataLengkap;
     private ReqDataLengkap dataLengkapReq;
     private int startingStepPosition;
+    private KelengkapanDokumen dataFormulir;
 
     //DATA PRIBADI
     public static String val_NamaAlias = "";
@@ -158,8 +160,22 @@ public class ActivityDataLengkap extends AppCompatActivity implements StepperLay
                     if (response.isSuccessful()) {
                         if (response.body().getStatus().equalsIgnoreCase("00")) {
                             Gson gson = new Gson();
-                            dataPribadiString = response.body().getData().get("nasabah").toString();
-                            dataLengkap = gson.fromJson(dataPribadiString, DataLengkap.class);
+//                            dataPribadiString = response.body().getData().get("nasabah").toString();
+//                            dataLengkap = gson.fromJson(dataPribadiString, DataLengkap.class);
+
+                            try{
+                                dataPribadiString = response.body().getData().get("nasabah").toString();
+                                String dataFormulirString=response.body().getData().get("kelengkapanDokumen").toString();
+                                dataFormulir=gson.fromJson(dataFormulirString, KelengkapanDokumen.class);
+                                dataLengkap = gson.fromJson(dataPribadiString, DataLengkap.class);
+                                dataLengkap.setIdFormulir(dataFormulir.getId_foto_dokumen_aplikasi());
+
+                            }
+                            catch (NullPointerException e){
+                                e.printStackTrace();
+                                dataPribadiString = response.body().getData().get("nasabah").toString();
+                                dataLengkap = gson.fromJson(dataPribadiString, DataLengkap.class);
+                            }
 
                             stepperlayout.setAdapter(new SampleFragmentStepAdapter(getSupportFragmentManager(), ActivityDataLengkap.this, dataLengkap, 1), startingStepPosition);
                             stepperlayout.setListener(ActivityDataLengkap.this);
