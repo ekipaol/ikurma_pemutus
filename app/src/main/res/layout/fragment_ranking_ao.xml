@@ -1415,6 +1415,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     app:cardCornerRadius="10dp"
+                    android:visibility="gone"
                     android:animateLayoutChanges="true">
 
                     <LinearLayout
@@ -1442,7 +1443,7 @@
                                 android:textSize="18sp"
                                 android:layout_marginTop="6dp"
                                 android:fontFamily="@font/jose_r"
-                                android:text="Top 10 AO"/>
+                                android:text="Top 10 MRM/MS/TAD"/>
 
 
                             <ImageView
@@ -1524,7 +1525,7 @@
                                 android:textSize="18sp"
                                 android:layout_marginTop="6dp"
                                 android:fontFamily="@font/jose_r"
-                                android:text="Top 10 AOM"/>
+                                android:text="Top 10 MRM/MS/TAD"/>
 
 
                             <ImageView
@@ -1578,6 +1579,7 @@
                     app:cardCornerRadius="10dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
+                    android:visibility="gone"
                     android:animateLayoutChanges="true">
 
                     <LinearLayout
@@ -1605,7 +1607,7 @@
                                 android:textSize="18sp"
                                 android:layout_marginTop="6dp"
                                 android:fontFamily="@font/jose_r"
-                                android:text="Bottom 10 AO"/>
+                                android:text="Bottom 10 MRM/MS/TAD"/>
 
 
                             <ImageView
@@ -1687,7 +1689,7 @@
                                 android:textSize="18sp"
                                 android:layout_marginTop="6dp"
                                 android:fontFamily="@font/jose_r"
-                                android:text="Bottom 10 AOM"/>
+                                android:text="Bottom 10 MRM/MS/TAD"/>
 
 
                             <ImageView
