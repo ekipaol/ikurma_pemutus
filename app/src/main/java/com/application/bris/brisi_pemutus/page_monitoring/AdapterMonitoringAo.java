@@ -96,10 +96,10 @@ public class AdapterMonitoringAo extends RecyclerView.Adapter<AdapterMonitoringA
         holder.tv_total_cair.setText(datas.getTOTAL_CAIR());
 
         if(datas.getFID_ROLE().equalsIgnoreCase("8")){
-            holder.tv_jabatan.setText("Account Officer Mikro");
+            holder.tv_jabatan.setText("MRM/MS/TAD");
         }
         else{
-            holder.tv_jabatan.setText("Account Officer");
+            holder.tv_jabatan.setText("Marketing");
         }
 
         holder.bt_detail_ao.setOnClickListener(new View.OnClickListener() {

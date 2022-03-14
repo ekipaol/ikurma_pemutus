@@ -346,7 +346,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="18sp"
-                            android:text="CIF Syiar"/>
+                            android:text="CIF"/>
                         <TextView
                             android:id="@+id/tv_cif_syiar"
                             android:layout_width="wrap_content"
