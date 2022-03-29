@@ -33,8 +33,17 @@ public class AgunanDeposito {
     public String keterangan;
     @SerializedName("NilaiNominal")
     public String nilaiNominal;
+    @SerializedName("NoRekening")
+    public String nomorRekening;
     @SerializedName("idPhoto")
     public Integer idPhoto;
+
+    public String getNomorRekening() {
+        return nomorRekening;
+    }
+    public void setNomorRekening(String nomorRekening) {
+        this.nomorRekening = nomorRekening;
+    }
 
     public String getJenisDeposito() {
         return jenisDeposito;

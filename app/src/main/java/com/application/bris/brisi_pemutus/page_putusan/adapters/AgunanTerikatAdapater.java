@@ -178,6 +178,13 @@ public class AgunanTerikatAdapater extends RecyclerView.Adapter<AgunanTerikatAda
                 intent.putExtra("idAgunan",textViewIdAgunan.getText().toString());
                 intent.putExtra("idAplikasi",datas.getID_APLIKASI());
                 intent.putExtra("cif",datas.getFID_CIF_LAS());
+
+                //pantekan
+//                Intent intent = new Intent(textViewIdAgunan.getContext(), AgunanDepositoActivity.class);
+//                intent.putExtra("idAgunan","301");
+//                intent.putExtra("idAplikasi","602051");
+//                intent.putExtra("cif","82501");
+
                 textViewIdAgunan.getContext().startActivity(intent);
             }
         });
