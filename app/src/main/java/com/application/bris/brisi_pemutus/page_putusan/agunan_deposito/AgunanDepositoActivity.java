@@ -94,6 +94,10 @@ public class AgunanDepositoActivity extends AppCompatActivity implements  TextWa
     TextFieldBoxes tf_tanggalpenerbitan;
     @BindView(R.id.et_tanggalpenerbitan)
     EditText et_tanggalpenerbitan;
+    @BindView(R.id.tf_nomor_rekening)
+    TextFieldBoxes tf_nomor_rekening;
+    @BindView(R.id.et_nomor_rekening)
+    EditText et_nomor_rekening;
     @BindView(R.id.tf_tanggaljatuhtempo)
     TextFieldBoxes tf_tanggaljatuhtempo;
     @BindView(R.id.et_tanggaljatuhtempo)
@@ -241,6 +245,7 @@ public class AgunanDepositoActivity extends AppCompatActivity implements  TextWa
                             et_alamatpemilik.setText(dataAgunan.getAlamatPemilik());
                             et_hubungandengannasabah.setText(dataAgunan.getHubungan());
                             et_nomorbilyet.setText(dataAgunan.getNoBilyet());
+                            et_nomor_rekening.setText(dataAgunan.getNomorRekening());
                             et_bankpenerbit.setText(dataAgunan.getBankPenerbit());
                             et_tanggalpenerbitan.setText(AppUtil.parseTanggalGeneral(dataAgunan.getTanggalPenerbitan(), "ddMMyyyy", "dd-MM-yyyy"));
                             et_tanggaljatuhtempo.setText(AppUtil.parseTanggalGeneral(dataAgunan.getTanggalJatuhTempo(), "ddMMyyyy", "dd-MM-yyyy"));
