@@ -238,10 +238,10 @@ public class AppUtil {
 
         String url_photo = null;
         try {
-//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
 
             //unsecure
-            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
+//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -267,10 +267,10 @@ public class AppUtil {
 
         String url_photo = null;
         try {
-//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
 
             //unsecure
-            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
+//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -296,10 +296,10 @@ public class AppUtil {
 
         String url_photo = null;
         try {
-//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
+            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlPhotoSecure + URLEncoder.encode(imageUrlToEncode, StandardCharsets.UTF_8.toString());
 
             //unsecure
-            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
+//            url_photo = UriApi.Baseurl.URL + UriApi.foto.urlFoto + fidPhoto ;
 
         } catch (Exception e) {
             e.printStackTrace();

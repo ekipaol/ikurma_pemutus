@@ -41,5 +41,12 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="AppTheme.TextJakarta" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/plus_jakarta_sans_regular</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textColor">@color/text_color</item>
+<!--        <item name="android:letterSpacing">1</item>-->
+    </style>
+
 
 </resources>

@@ -204,15 +204,15 @@ public class ApiClientAdapter {
                             }
 
                             //salted
-                            String encryptedRequest=encryptor.encrypt(uidVerifier+bodyToString(requestBody));
+//                            String encryptedRequest=encryptor.encrypt(uidVerifier+bodyToString(requestBody));
 
 
                             //not salted
 //                            String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
 
                             //no encryption
-//                            String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
-//                            encryptedRequest=encryptor.decrypt(encryptedRequest);
+                            String encryptedRequest=encryptor.encrypt(bodyToString(requestBody));
+                            encryptedRequest=encryptor.decrypt(encryptedRequest);
 
                             AppUtil.logSecure("okhttp_decrypter_request",encryptor.decrypt(encryptedRequest));
 
