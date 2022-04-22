@@ -130,7 +130,7 @@ public class ActivityAkad extends AppCompatActivity implements SwipeRefreshLayou
         ButterKnife.bind(this);
         setSupportActionBar(tb_regular);
         apiClientAdapter=new ApiClientAdapter(ActivityAkad.this);
-        AppUtil.toolbarRegular(this, "Daftar Pembiayaan Di ADP/CS");
+        AppUtil.toolbarRegular(this, "Daftar Pembiayaan Di CS/BO");
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setDistanceToTriggerSync(220);
     }

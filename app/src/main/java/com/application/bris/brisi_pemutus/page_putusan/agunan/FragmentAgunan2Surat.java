@@ -294,6 +294,7 @@ public class FragmentAgunan2Surat extends Fragment implements Step, KeyValueList
 //
 //                        }
 //                    });
+
             AppUtil.setImageGlide(getContext(),dataLengkap.getIdPhotoTBbpn(),img_bpn);
 
             img_bpn.setOnClickListener(new View.OnClickListener() {

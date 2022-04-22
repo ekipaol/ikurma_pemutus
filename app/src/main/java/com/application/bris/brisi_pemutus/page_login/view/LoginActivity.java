@@ -209,7 +209,15 @@ boolean expiredToken;
                     LoginRequest req = new LoginRequest();
                     req.setUsername(username.getText().toString());
 //                    Log.d("pass md5",AppUtil.hashMd5(username.getText().toString()).toUpperCase());
-                    req.setPassword((AppUtil.hashMd5(password.getText().toString()).toUpperCase()));
+
+                    if(BuildConfig.IS_PRODUCTION){
+                        req.setPassword((AppUtil.hashMd5(password.getText().toString()).toUpperCase()));
+                    }
+                    else{
+                        req.setPassword((AppUtil.hashSha256(password.getText().toString()).toUpperCase()));
+                    }
+
+
                     req.setDeviceId(getDeviceId());
                     req.setAppId("BRISI_PEMUTUS");
 
@@ -502,7 +510,14 @@ boolean expiredToken;
         LoginRequest req = new LoginRequest();
         req.setUsername(username.getText().toString());
 //        Log.d("pass md5",AppUtil.hashMd5(username.getText().toString()).toUpperCase());
-        req.setPassword(AppUtil.hashMd5(password.getText().toString()).toUpperCase());
+
+        if(BuildConfig.IS_PRODUCTION){
+            req.setPassword(AppUtil.hashMd5(password.getText().toString()).toUpperCase());
+        }
+        else{
+            req.setPassword(AppUtil.hashSha256(password.getText().toString()).toUpperCase());
+        }
+
         req.setDeviceId(getDeviceId());
         req.setAppId("BRISI_PEMUTUS");
         Call<ParseResponse> call = apiClientAdapter.getApiInterface().secretLogin(req);

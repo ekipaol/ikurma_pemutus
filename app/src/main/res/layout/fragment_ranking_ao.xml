@@ -1442,7 +1442,7 @@
                                 android:textSize="18sp"
                                 android:layout_marginTop="6dp"
                                 android:fontFamily="@font/jose_r"
-                                android:text="Top 10 AO"/>
+                                android:text="Top 10 MRM/MS/TAD"/>
 
 
                             <ImageView
@@ -1606,7 +1606,7 @@
                                 android:textSize="18sp"
                                 android:layout_marginTop="6dp"
                                 android:fontFamily="@font/jose_r"
-                                android:text="Bottom 10 AO"/>
+                                android:text="Bottom 10 MRM/MS/TAD"/>
 
 
                             <ImageView

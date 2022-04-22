@@ -923,9 +923,6 @@ public class CatatanActivity extends AppCompatActivity {
                                             Type type = new TypeToken<InfoCs>() {
                                             }.getType();
                                             dataCs = gson.fromJson(listDataString, type);
-
-
-
                                             dialog1.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                                             dialog1.setTitleText("Putusan Berhasil");
 
