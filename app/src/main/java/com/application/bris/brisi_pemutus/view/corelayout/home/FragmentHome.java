@@ -617,7 +617,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
 
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().listDisposisi(req);
+        Call<ParseResponse> call = apiClientAdapter.getApiInterface().listDisposisiOld(req);
         call.enqueue(new Callback<ParseResponse>() {
             @Override
             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {

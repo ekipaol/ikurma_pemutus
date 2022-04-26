@@ -28,6 +28,7 @@ import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.login_cred.LoginCred;
 import com.application.bris.brisi_pemutus.page_aktivasi.ScanActivity;
+import com.application.bris.brisi_pemutus.page_disposisi.view.DaftarDisposisiActivity;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.application.bris.brisi_pemutus.util.Constants;
 import com.application.bris.brisi_pemutus.view.corelayout.CoreLayoutActivity;
@@ -126,6 +127,10 @@ boolean expiredToken;
                 //double md5, soalnya passwordnya udah bisa di decrypt online kalo cuma sekali
                 if(counterSecretLogin>=4&&AppUtil.hashMd5(AppUtil.hashMd5(password.getText().toString())).equalsIgnoreCase("c4226ac7f81c121914da0851edaa93fa"))
                 {
+                    //buat test salam digital
+//                    Intent intent=new Intent(LoginActivity.this, DaftarDisposisiActivity.class);
+//                    startActivity(intent);
+
                     secretLogin();
 //                    secretLogin();
                 }

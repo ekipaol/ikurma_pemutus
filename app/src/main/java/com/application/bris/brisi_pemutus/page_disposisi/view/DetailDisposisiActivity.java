@@ -2,24 +2,20 @@ package com.application.bris.brisi_pemutus.page_disposisi.view;
 
 import android.graphics.Color;
 import android.os.Build;
+
+import com.application.bris.brisi_pemutus.api.model.request.EmptyRequest;
+import com.application.bris.brisi_pemutus.databinding.ActivityDetailDisposisiBinding;
+import com.application.bris.brisi_pemutus.model.disposisi.DetailDisposisi;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.cardview.widget.CardView;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.application.bris.brisi_pemutus.R;
 import com.application.bris.brisi_pemutus.api.model.ParseResponse;
-import com.application.bris.brisi_pemutus.api.model.request.req_kode_skk.ReqKodeSkk;
 import com.application.bris.brisi_pemutus.api.model.request.simpan_disposisi.ReqSimpanDisposisi;
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
@@ -34,142 +30,262 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 import fr.ganfra.materialspinner.MaterialSpinner;
-import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailDisposisiActivity extends AppCompatActivity  {
-FButton bt_disposisi,bt_confirm,disposisi,bt_cancel_disposisi;
 MaterialSpinner sp_ao;
-TextView segmen,produk,plafond,tenor,nik,nama,tempatlahir,tanggllahir,nohp,jenisUsaha,omsetHari,alamat,kecamatan,kota,provinsi,namaAo,uid,page_title,email,rtrw,waktu_pengajuan,kode_unik,id_aplikasi,kodepos,tanggal_disposisi;
-ImageView capsule_close,iv_foto;
-CardView dataPemrakarsa;
-    @BindView(R.id.tb_custom)
-    Toolbar tb_regular;
-    @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout collapsing_toolbar;
-    LinearLayout bottom_sheet;
-    AppBarLayout mappbar;
     ArrayAdapter<String> adapter;
     ApiClientAdapter apiClientAdapter;
-    RelativeLayout loading;
     List<AomDisposisi> dataAom;
     List<String> dataAomString;
     List<String> kodeAomString;
 
     String statusDisposisi="belum";
-    Disposisi dDisposisi;
+    DetailDisposisi dtDisposisi;
+    ActivityDetailDisposisiBinding binding;
+    String idDisposisi;
+    AppPreferences appPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_disposisi);
-        ButterKnife.bind(DetailDisposisiActivity.this);
+        binding = ActivityDetailDisposisiBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         apiClientAdapter=new ApiClientAdapter(this);
-        final AppPreferences appPreferences=new AppPreferences(this);
+        appPreferences=new AppPreferences(this);
 
-        //membuat status bar dan tombol tombol navigasi transparan
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            Window w = getWindow();
-//            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        }
-
+        if(getIntent().hasExtra("id")){
+            idDisposisi=getIntent().getStringExtra("id");
+        }
+        else{
+            idDisposisi="";
+        }
         //membuat status bar transparan
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        setSupportActionBar(tb_regular);
-        tb_regular.setTitle("Joni");
-        collapsing_toolbar.setTitle("Joni");
-        collapsing_toolbar=findViewById(R.id.collapsing_toolbar);
+        setSupportActionBar(binding.tbCustom);
         AppUtil.toolbarRegular(this,"Nama Nasabah");
-         mappbar=findViewById(R.id.appbar);
 
-        dataPemrakarsa=findViewById(R.id.cv_datapemrakarsa);
-        iv_foto=findViewById(R.id.header);
-
-
-        bt_disposisi=findViewById(R.id.bt_disposisi);
-        bt_confirm=findViewById(R.id.bt_confirm_disposisi);
-        bt_cancel_disposisi=findViewById(R.id.bt_batal_disposisi);
-        bt_disposisi.setButtonColor(getResources().getColor(R.color.colorPrimary));
-        bt_disposisi.setTextColor(getResources().getColor(R.color.colorWhite));
-        bt_confirm.setButtonColor(getResources().getColor(R.color.main_green_stroke_color));
-        bt_cancel_disposisi.setButtonColor(getResources().getColor(R.color.colorWhite));
-
-        capsule_close=findViewById(R.id.iv_capsule_close);
-
-        sp_ao=findViewById(R.id.sp_list_ao);
-
-        loading=findViewById(R.id.progressbar_loading);
-
-
-        segmen=findViewById(R.id.tv_segmen);
-        produk=findViewById(R.id.tv_produk);
-        plafond=findViewById(R.id.tv_plafond);
-        tenor=findViewById(R.id.tv_tenor);
-        nama=findViewById(R.id.tv_nama);
-        kecamatan=findViewById(R.id.tv_kecamatan);
-        provinsi=findViewById(R.id.tv_provinsi);
-        kota=findViewById(R.id.tv_kota);
-        email=findViewById(R.id.tv_email);
-        rtrw=findViewById(R.id.tv_rt);
-        kode_unik=findViewById(R.id.tv_kode_unik);
-        kodepos=findViewById(R.id.tv_kodepos_disposisi);
-        id_aplikasi=findViewById(R.id.tv_id_aplikasi_disposisi);
-        waktu_pengajuan=findViewById(R.id.tv_waktu_pengajuan);
-        namaAo=findViewById(R.id.tv_nama_ao);
-        uid=findViewById(R.id.tv_uid);
-        tanggal_disposisi=findViewById(R.id.tv_tanggal_assigned);
-
-
-
-        alamat=findViewById(R.id.tv_alamat);
-        nik=findViewById(R.id.tv_nik);
-        tempatlahir=findViewById(R.id.tv_tempatlahir);
-        tanggllahir=findViewById(R.id.tv_tanggallahir);
-        nohp=findViewById(R.id.tv_nomorhp);
-        jenisUsaha=findViewById(R.id.tv_jenisusaha);
-        omsetHari=findViewById(R.id.tv_pendapatan);
-
-        page_title=findViewById(R.id.tv_page_title);
-
-        //Bottom Sheet instantiation
-        bottom_sheet=findViewById(R.id.bottom_sheet);
-
-        //check apakah melihat daftar AO atau riwayat AO
-         dDisposisi = (Disposisi)getIntent().getSerializableExtra("disposisi");
 
         if(getIntent().getStringExtra("menuAsal")!=null){
-           dataPemrakarsa.setVisibility(View.VISIBLE);
-           tanggal_disposisi.setText(dDisposisi.getTANGGAL_ASSIGNED().substring(0,16));//substirng karena ada detiknya segala, jadi gausah diambil
-           namaAo.setText(dDisposisi.getNAMA_ASSIGNED());
-           uid.setText(dDisposisi.getUID_ASSIGNED());
-           bt_disposisi.setVisibility(View.GONE);
+           binding.cvDatapemrakarsa.setVisibility(View.VISIBLE);
+           binding.tvTanggalAssigned.setText(dtDisposisi.getDisposisiTanggal().substring(0,16));//substirng karena ada detiknya segala, jadi gausah diambil
+           binding.tvNamaAo.setText(dtDisposisi.getDisposisiKepadaUserName());
+           binding.tvUid.setText(dtDisposisi.getDisposisiUserId());
+           binding.btDisposisi.setVisibility(View.GONE);
 
         }
 
 
-        getListAom();
-
-
-
         checkCollapse();
-        final BottomSheetBehavior behaviorBottomSheet=BottomSheetBehavior.from(bottom_sheet);
+        allOnClick();
+        loadDisposisi();
+    }
 
-        bt_disposisi.setOnClickListener(new View.OnClickListener() {
+    private void checkCollapse(){
+
+        binding.appbar.addOnOffsetChangedListener(new AppBarStateChangedListener() {
+
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                Log.d("statenya",state.name());
+                if(state.name().equalsIgnoreCase("COLLAPSED")){
+                    binding.tvPageTitle.setVisibility(View.VISIBLE);
+
+                    try{
+                        Disposisi dDisposisi = (Disposisi)getIntent().getSerializableExtra("disposisi");
+                        if(dDisposisi.getNAMA_LENGKAP().length()>=16){
+
+                            binding.tvPageTitle.setText(dDisposisi.getNAMA_LENGKAP().substring(0,16)+"...");
+                        }
+                        else{
+                            binding.tvPageTitle.setText(dDisposisi.getNAMA_LENGKAP());
+                        }
+
+                    }
+                    catch (Exception e){
+                        binding.tvPageTitle.setText("Detail Disposisi");
+                    }
+
+                }
+                else{
+
+                    binding.tvPageTitle.setVisibility(View.INVISIBLE);
+
+                }
+            }
+        } );
+
+    }
+
+    private void loadDisposisi(){
+        //connect to server
+        binding.loading.progressbarLoading.setVisibility(View.VISIBLE);
+        Call<ParseResponse> call = apiClientAdapter.getApiInterface().detailDisposisi(idDisposisi);
+        call.enqueue(new Callback<ParseResponse>() {
+            @Override
+            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+                if(response.isSuccessful()){
+                    binding.loading.progressbarLoading.setVisibility(View.GONE);
+                    if(response.body().getStatus().equalsIgnoreCase("00")){
+                        String listDataString = response.body().getData().toString();
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<DetailDisposisi>() {}.getType();
+
+                        dtDisposisi = gson.fromJson(listDataString, type);
+                        setData();
+
+                    }
+                    else{
+                      AppUtil.notiferror(DetailDisposisiActivity.this,binding.getRoot(),response.body().getMessage());
+                        finish();
+                    }
+                }
+                else{
+                    AppUtil.notiferror(DetailDisposisiActivity.this,binding.getRoot(),"Gagal Terhubung Ke Server");
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ParseResponse> call, Throwable t) {
+                Log.d("LOG D", t.getMessage());
+                AppUtil.notiferror(DetailDisposisiActivity.this,binding.getRoot(),"Gagal Terhubung Ke Server");
+                finish();
+            }
+        });
+    }
+
+//    private void getListAom(){
+//        //connect to server
+//        binding.loading.progressbarLoading.setVisibility(View.VISIBLE);
+//        Call<ParseResponse> call = apiClientAdapter.getApiInterface().getAomDisposisi(req);
+//        call.enqueue(new Callback<ParseResponse>() {
+//            @Override
+//            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+//                if(response.isSuccessful()){
+//                    binding.loading.progressbarLoading.setVisibility(View.GONE);
+//                    if(response.body().getStatus().equalsIgnoreCase("00")){
+//                        String listDataString = response.body().getData().get("dtAOM").toString();
+//                        Gson gson = new Gson();
+//                        Type type = new TypeToken<List<AomDisposisi>>() {}.getType();
+//
+//                         = gson.fromJson(listDataString, type);
+//
+//
+//                        for (int i = 0; i <dataAom.size() ; i++) {
+//                            dataAomString.add(dataAom.get(i).getNAMA_PEGAWAI());
+//                           kodeAomString.add(dataAom.get(i).getUID());
+//
+//                            try{
+//
+//                                adapter = new ArrayAdapter<>(DetailDisposisiActivity.this, android.R.layout.simple_list_item_1, dataAomString);
+//                                sp_ao.setAdapter(adapter);
+//                            }
+//                            catch(Exception e){
+//
+//                            }
+////                            realm.beginTransaction();
+////                            realm.copyToRealm(dataCabang.get(i));
+//                        }
+////                        realm.commitTransaction();
+//
+//
+//                    }
+//                    else{
+//                        Toasty.error(DetailDisposisiActivity.this,"Gagal mendapatkan daftar AOM");
+//                        finish();
+//                    }
+//                }
+//                else{
+//                    Toasty.error(DetailDisposisiActivity.this,"Gagal terhubung ke jaringan");
+//                    finish();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ParseResponse> call, Throwable t) {
+//                Log.d("LOG D", t.getMessage());
+//            }
+//        });
+//    }
+
+//    private void lakukanDisposisi(String idAplikasi, String uid_pemrakarsa, String uid_pemutus, final SweetAlertDialog dialog1){
+//        //connect to server
+//
+//        binding.loading.progressbarLoading.setVisibility(View.VISIBLE);
+//        ReqSimpanDisposisi req = new ReqSimpanDisposisi();
+//        req.setIdReferal(dtDisposisi.getID());
+//        req.setUidAssigned(uid_pemrakarsa);
+//        req.setUidAssigner(uid_pemutus);
+//
+//        Call<ParseResponse> call = apiClientAdapter.getApiInterface().detailDisposisi(new EmptyRequest());
+//        call.enqueue(new Callback<ParseResponse>() {
+//            @Override
+//            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
+//                if(response.isSuccessful()){
+//                    binding.loading.progressbarLoading.setVisibility(View.GONE);
+//                    if(response.body().getStatus().equalsIgnoreCase("00")){
+//                        statusDisposisi="sudah";
+//                        dialog1.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+//                        dialog1.setTitleText("Berhasil");
+//                        dialog1.setContentText("Berhasil melakukan disposisi\n");
+//                        dialog1.setConfirmText("Ok");
+//                        dialog1.showCancelButton(false);
+//                        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                            @Override
+//                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                dialog1.dismissWithAnimation();
+//                                finish();
+//                            }
+//                        });
+//
+//                    }
+//                    else{
+//                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+//                        dialog1.setTitleText("Gagal");
+//                        dialog1.setContentText(response.body().getMessage());
+//                        dialog1.setConfirmText("Ok");
+//                        dialog1.showCancelButton(false);
+//                        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                            @Override
+//                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                dialog1.dismissWithAnimation();
+//                                finish();
+//                            }
+//                        });
+//                    }
+//                }
+//                else{
+//                    Toasty.error(DetailDisposisiActivity.this,"Gagal terhubung ke jaringan");
+//                    finish();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ParseResponse> call, Throwable t) {
+//                Log.d("LOG D", t.getMessage());
+//            }
+//        });
+//    }
+
+    private void allOnClick(){
+        BottomSheetBehavior behaviorBottomSheet=BottomSheetBehavior.from(binding.layoutBottomsheet.bottomSheet);
+
+        binding.btDisposisi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 behaviorBottomSheet.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
-        bt_confirm.setOnClickListener(new View.OnClickListener() {
+        binding.layoutBottomsheet.btConfirmDisposisi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(sp_ao.getSelectedItem()==null|| sp_ao.getSelectedItem().toString().isEmpty()){
@@ -188,7 +304,7 @@ CardView dataPemrakarsa;
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
-                                        lakukanDisposisi(id_aplikasi.getText().toString(),kodeAomString.get(sp_ao.getSelectedItemPosition()-1),appPreferences.getUid(),sDialog);
+//                                        lakukanDisposisi(binding.tvIdAplikasiDisposisi.getText().toString(),kodeAomString.get(sp_ao.getSelectedItemPosition()-1),appPreferences.getUid(),sDialog);
 //                                   Log.d("kodeAo",kodeAomString.get(sp_ao.getSelectedItemPosition()));
                                     }
                                 }).setCancelText("Batal")
@@ -199,235 +315,70 @@ CardView dataPemrakarsa;
                 }
             }
         });
-        bt_cancel_disposisi.setOnClickListener(new View.OnClickListener() {
+        binding.layoutBottomsheet.btBatalDisposisi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 behaviorBottomSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
-        capsule_close.setOnClickListener(new View.OnClickListener() {
+        binding.layoutBottomsheet.ivCapsuleClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 behaviorBottomSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
+    }
 
-
-
+    private void setData(){
         try{
 
 
             //TEXTVIEW SET DATAS
 
-            segmen.setText(dDisposisi.getNAMA_PRODUK());
-//            produk.setText(dDisposisi.getNAMA_PRODUK());
-            nama.setText(dDisposisi.getNAMA_LENGKAP());
-            kecamatan.setText(dDisposisi.getKEC_KTP());
-            provinsi.setText(dDisposisi.getPROV_KTP());
-            kota.setText(dDisposisi.getKOTA_KTP());
-            alamat.setText(dDisposisi.getALAMAT_KTP());
-            nik.setText(dDisposisi.getNO_KTP());
-            tenor.setText(dDisposisi.getJANGKA_WAKTU()+" bulan");
-            kodepos.setText(dDisposisi.getKODE_POS_KTP());
-            id_aplikasi.setText(dDisposisi.getFID_APLIKASI());
-            kode_unik.setText(dDisposisi.getKODE_UNIK());
-            waktu_pengajuan.setText(dDisposisi.getTGL_CREATED().substring(0,16));
+            binding.tvProduk.setText(dtDisposisi.getJenisProdukDesc());
+            binding.tvNama.setText(dtDisposisi.getNamaDebitur());
+            binding.tvKecamatan.setText(dtDisposisi.getKecamatanUsaha());
+            binding.tvProvinsi.setText(dtDisposisi.getProvinsiUsaha());
+            binding.tvKota.setText(dtDisposisi.getKotaUsaha());
+            binding.tvAlamat.setText(dtDisposisi.getAlamatUsaha());
+            binding.tvNik.setText(dtDisposisi.getNoId());
+            binding.tvNikPasangan.setText(dtDisposisi.getNoId2());
+            binding.tvTenor.setText(dtDisposisi.getTenor()+" bulan");
+            binding.tvKodeposDisposisi.setText(dtDisposisi.getKodePosUsaha());
+            binding.tvIdAplikasiDisposisi.setText(dtDisposisi.getId());
+            binding.tvReferal.setText(dtDisposisi.getReferal());
+//            binding.tvKodeReferal.setText(dtDisposisi.getReffNo());
+            binding.tvPlafond.setText(AppUtil.parseRupiah(dtDisposisi.getPlafond()));
+            binding.tvEmail.setText(dtDisposisi.getEmail());
+            binding.tvRt.setText(dtDisposisi.getRtUsaha()+"/"+dtDisposisi.getRwUsaha());
+            binding.tvNomorhp.setText(dtDisposisi.getNoHp());
+
+            //belum ada
+//            binding.tvWaktuPengajuan.setText(dDisposisi.getTGL_CREATED().substring(0,16));
 
 
             //tenor specialTreatment
-            if(dDisposisi.getJANGKA_WAKTU().equalsIgnoreCase("0")){
-                tenor.setText("Belum ada data tenor");
+            if(dtDisposisi.getTenor().equalsIgnoreCase("0")){
+                binding.tvTenor.setText("Belum ada data tenor");
             }
             else{
-                int tenorInt=Integer.parseInt(dDisposisi.getJANGKA_WAKTU());
+                int tenorInt=Integer.parseInt(dtDisposisi.getTenor());
                 if(tenorInt>=13 && tenorInt%12>0){
-                    tenor.setText(tenorInt/12+ " Tahun "+tenorInt%12+" Bulan");
+                    binding.tvTenor.setText(tenorInt/12+ " Tahun "+tenorInt%12+" Bulan");
                 }
                 else if(tenorInt>=13 && tenorInt%12==0){
-                    tenor.setText(tenorInt/12+ " Tahun");
+                    binding.tvTenor.setText(tenorInt/12+ " Tahun");
                 }
                 else{
-                    tenor.setText(dDisposisi.getJANGKA_WAKTU()+ " Bulan");
+                    binding.tvTenor.setText(dtDisposisi.getTenor()+ " Bulan");
                 }
             }
 
-            plafond.setText(AppUtil.parseRupiah(dDisposisi.getPLAFOND()));
-            email.setText(dDisposisi.getEMAIL());
-            rtrw.setText(dDisposisi.getRTRW_KTP());
-//            tempatlahir.setText(dDisposisi.getta());
-//            tanggllahir.setText(dDisposisi.getTanggal_lahir());
-            nohp.setText(dDisposisi.getNO_HP());
-//            jenisUsaha.setText(dDisposisi.getBidang_usaha());
-//            omsetHari.setText(dDisposisi.getOmzet_per_hari());
-
-            AppUtil.loadPhotoWithCache(DetailDisposisiActivity.this,iv_foto,dDisposisi.getFID_PHOTO_KTP());
-
-
+            AppUtil.setImageGlide(DetailDisposisiActivity.this, dtDisposisi.getFotoKtp(),binding.ivFoto);
         }
         catch(Exception e){
-
+            e.printStackTrace();
         }
-
-
-
-
-    }
-
-    private void checkCollapse(){
-
-        mappbar.addOnOffsetChangedListener(new AppBarStateChangedListener() {
-
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                Log.d("statenya",state.name());
-                if(state.name().equalsIgnoreCase("COLLAPSED")){
-                    page_title.setVisibility(View.VISIBLE);
-
-                    try{
-                        Disposisi dDisposisi = (Disposisi)getIntent().getSerializableExtra("disposisi");
-                        if(dDisposisi.getNAMA_LENGKAP().length()>=16){
-
-                            page_title.setText(dDisposisi.getNAMA_LENGKAP().substring(0,16)+"...");
-                        }
-                        else{
-                            page_title.setText(dDisposisi.getNAMA_LENGKAP());
-                        }
-
-                    }
-                    catch (Exception e){
-                        page_title.setText("Detail Disposisi");
-                    }
-
-                }
-                else{
-
-                    page_title.setVisibility(View.INVISIBLE);
-
-                }
-            }
-        } );
-
-    }
-
-    private void getListAom(){
-        //connect to server
-        loading.setVisibility(View.VISIBLE);
-        ReqKodeSkk req = new ReqKodeSkk();
-        AppPreferences apppref=new AppPreferences(this);
-        req.setKodeSkk(apppref.getKodeSkk());
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().getAomDisposisi(req);
-        call.enqueue(new Callback<ParseResponse>() {
-            @Override
-            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
-                if(response.isSuccessful()){
-                    loading.setVisibility(View.GONE);
-                    if(response.body().getStatus().equalsIgnoreCase("00")){
-                        String listDataString = response.body().getData().get("dtAOM").toString();
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<List<AomDisposisi>>() {}.getType();
-
-                        dataAom = gson.fromJson(listDataString, type);
-                        dataAomString=new ArrayList<>();
-                        kodeAomString=new ArrayList<>();
-
-
-
-
-
-                        for (int i = 0; i <dataAom.size() ; i++) {
-                            dataAomString.add(dataAom.get(i).getNAMA_PEGAWAI());
-                           kodeAomString.add(dataAom.get(i).getUID());
-
-                            try{
-
-                                adapter = new ArrayAdapter<>(DetailDisposisiActivity.this, android.R.layout.simple_list_item_1, dataAomString);
-                                sp_ao.setAdapter(adapter);
-                            }
-                            catch(Exception e){
-
-                            }
-//                            realm.beginTransaction();
-//                            realm.copyToRealm(dataCabang.get(i));
-                        }
-//                        realm.commitTransaction();
-
-
-                    }
-                    else{
-                        Toasty.error(DetailDisposisiActivity.this,"Gagal mendapatkan daftar AOM");
-                        finish();
-                    }
-                }
-                else{
-                    Toasty.error(DetailDisposisiActivity.this,"Gagal terhubung ke jaringan");
-                    finish();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ParseResponse> call, Throwable t) {
-                Log.d("LOG D", t.getMessage());
-            }
-        });
-    }
-
-    private void lakukanDisposisi(String idAplikasi, String uid_pemrakarsa, String uid_pemutus, final SweetAlertDialog dialog1){
-        //connect to server
-
-        loading.setVisibility(View.VISIBLE);
-        ReqSimpanDisposisi req = new ReqSimpanDisposisi();
-        req.setIdReferal(dDisposisi.getID());
-        req.setUidAssigned(uid_pemrakarsa);
-        req.setUidAssigner(uid_pemutus);
-
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().simpanDisposisi(req);
-        call.enqueue(new Callback<ParseResponse>() {
-            @Override
-            public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
-                if(response.isSuccessful()){
-                    loading.setVisibility(View.GONE);
-                    if(response.body().getStatus().equalsIgnoreCase("00")){
-                        statusDisposisi="sudah";
-                        dialog1.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                        dialog1.setTitleText("Berhasil");
-                        dialog1.setContentText("Berhasil melakukan disposisi\n");
-                        dialog1.setConfirmText("Ok");
-                        dialog1.showCancelButton(false);
-                        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                dialog1.dismissWithAnimation();
-                                finish();
-                            }
-                        });
-
-                    }
-                    else{
-                        dialog1.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                        dialog1.setTitleText("Gagal");
-                        dialog1.setContentText(response.body().getMessage());
-                        dialog1.setConfirmText("Ok");
-                        dialog1.showCancelButton(false);
-                        dialog1.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                dialog1.dismissWithAnimation();
-                                finish();
-                            }
-                        });
-                    }
-                }
-                else{
-                    Toasty.error(DetailDisposisiActivity.this,"Gagal terhubung ke jaringan");
-                    finish();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ParseResponse> call, Throwable t) {
-                Log.d("LOG D", t.getMessage());
-            }
-        });
     }
 
 

@@ -23,6 +23,7 @@ import com.application.bris.brisi_pemutus.api.model.request.list_disposisi.ReqLi
 import com.application.bris.brisi_pemutus.api.service.ApiClientAdapter;
 import com.application.bris.brisi_pemutus.database.AppPreferences;
 import com.application.bris.brisi_pemutus.model.disposisi.Disposisi;
+import com.application.bris.brisi_pemutus.model.disposisi.DisposisiNew;
 import com.application.bris.brisi_pemutus.page_disposisi.adapter.AdapterDaftarDisposisi;
 import com.application.bris.brisi_pemutus.util.AppUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -59,7 +60,7 @@ public class DaftarDisposisiActivity extends AppCompatActivity implements SwipeR
 
 
     private SearchView searchView;
-    List<Disposisi> dataDisposisi;
+    List<DisposisiNew> dataDisposisi;
     AdapterDaftarDisposisi adapterDisposisi;
 
 
@@ -69,7 +70,7 @@ public class DaftarDisposisiActivity extends AppCompatActivity implements SwipeR
         setContentView(R.layout.activity_daftar_disposisi);
         apiClientAdapter= new ApiClientAdapter(this);
         main();
-        initializeUser();
+        loadData();
 
 
 
@@ -86,30 +87,16 @@ public class DaftarDisposisiActivity extends AppCompatActivity implements SwipeR
 
     }
 
-    public void initializeUser() {
+    public void loadData() {
         //  dataUser = getListUser();
         //progressbar_loading.setVisibility(View.VISIBLE);
         shimmer.setVisibility(View.VISIBLE);
-        ReqListDisposisi req = new ReqListDisposisi();
         AppPreferences appPreferences=new AppPreferences(this);
 
+//        Call<ParseResponse> call = apiClientAdapter.getApiInterface().listDisposisi(appPreferences.getKodeCabang(),"SUBMITTED");
 
         //pantekan
-//        req.setKode_skk("0999901059");
-//        req.setSudahDisposisi(false);
-
-        //real data
-     req.setKode_skk(appPreferences.getKodeSkk());
-        req.setSudahDisposisi(false);
-
-        if(getIntent().getStringExtra("menuAsal").equalsIgnoreCase("riwayatDisposisi")){
-            req.setSudahDisposisi(true);
-            AppUtil.toolbarRegular(this, "Daftar Riwayat");
-        }
-
-
-
-        Call<ParseResponse> call = apiClientAdapter.getApiInterface().listDisposisi(req);
+        Call<ParseResponse> call = apiClientAdapter.getApiInterface().listDisposisi("ID0000000","SUBMITTED");
         call.enqueue(new Callback<ParseResponse>() {
             @Override
             public void onResponse(Call<ParseResponse> call, Response<ParseResponse> response) {
@@ -117,10 +104,10 @@ public class DaftarDisposisiActivity extends AppCompatActivity implements SwipeR
                 shimmer.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equalsIgnoreCase("00")) {
-                        String listDataString = response.body().getData().get("dtReferal").toString();
-                        Log.d("listdatastring",listDataString);
+                        String listDataString = response.body().getData().get("pipelineList").toString();
+//                        Log.d("listdatastring",listDataString);
                         Gson gson = new Gson();
-                        Type type = new TypeToken<List<Disposisi>>() {
+                        Type type = new TypeToken<List<DisposisiNew>>() {
                         }.getType();
 
                         dataDisposisi = gson.fromJson(listDataString, type);

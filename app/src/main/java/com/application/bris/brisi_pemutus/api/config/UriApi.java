@@ -5,10 +5,10 @@ import com.application.bris.brisi_pemutus.BuildConfig;
 public class UriApi {
 
     public static class Baseurl{
-        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN/webresources/"; //DEV
+//        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN/webresources/"; //DEV
 //        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-PENTEST/webresources/"; //DEV
 //        public static final String URLDEV = "http://10.1.25.55:8080/MobileBRISIAPI-FIRMAN/webresources/"; //DEV
-//        public static final String URLDEV = "http://10.0.1.210:8080/MobileBRISIAPI/webresources/"; //DEV BSI
+        public static final String URLDEV = "http://10.0.1.210:8080/MobileBRISIAPI/webresources/"; //DEV BSI
 //        public static final String URLPROD = "https://intel.brisyariah.co.id:55056/MobileBRISIAPI/webresources/"; //PROD
         public static final String URLPROD = "https://103.138.216.20:55056/MobileBRISIAPI/webresources/"; //PROD
 //        public static final String URLPROD = "https://ikurma.bankbsi.co.id/MobileBRISIAPI/webresources/"; //PROD
@@ -388,6 +388,15 @@ public class UriApi {
     //eklaim
     public class eklaim{
         public static final String listReminderClaim = "generic/klaimPenjaminan/ReminderKlaim/listData";
+
+    }
+
+    //salam digital
+    public class salamDigital{
+        public static final String listDisposisi = "generic/referal/salamdigital/pipelines";
+        public static final String detailDisposisi = "generic/referal/salamdigital/pipelines/{id}";
+
+        public static final String listAomSalamDigital = "generic/v2/users";
 
     }
 

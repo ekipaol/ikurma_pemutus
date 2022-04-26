@@ -58,9 +58,12 @@ import com.application.bris.brisi_pemutus.api.model.request.validasi_data_finans
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
     @POST(UriApi.pipeline.listPipeline)
@@ -152,7 +155,7 @@ public interface ApiInterface {
     Call<ParseResponseArr> listDeviasi(@Body ReqUid ReqUid);
 
     @POST(UriApi.listDisposisi.listDisposisi)
-    Call<ParseResponse> listDisposisi(@Body ReqListDisposisi ReqListDisposisi);
+    Call<ParseResponse> listDisposisiOld(@Body ReqListDisposisi ReqListDisposisi);
 
     @POST(UriApi.getAomDisposisi.dataAomDisposisi)
     Call<ParseResponse> getAomDisposisi(@Body ReqKodeSkk ReqKodeSkk);
@@ -477,6 +480,15 @@ public interface ApiInterface {
 
     @POST(UriApi.eklaim.listReminderClaim)
     Call<ParseResponse> listReminderClaim(@Body ReqUidRole ReqUidRole);
+
+    @GET(UriApi.salamDigital.listDisposisi)
+    Call<ParseResponse> listDisposisi(@Query("cabang_yang_dituju") String kodeCabang, @Query("status") String status);
+
+    @GET(UriApi.salamDigital.listAomSalamDigital)
+    Call<ParseResponse> listAomSalamDigital(@Query("FID_ROLE") String fidRole, @Query("KODE_CABANG") String kodeCabang, @Query("STATUS") String status);
+
+    @GET(UriApi.salamDigital.detailDisposisi)
+    Call<ParseResponse> detailDisposisi(@Path(value = "id", encoded = true) String id);
 
 
 

@@ -24,7 +24,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
-                android:id="@+id/header"
+                android:id="@+id/iv_foto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -99,7 +99,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_datapemrakarsa"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="3dp"
@@ -118,7 +118,7 @@
                         android:text="Data Pemrakarsa"
                         android:textSize="18dp"
                         android:paddingBottom="12dp"
-                        android:textColor="@color/colorSecondary"/>
+                        android:textColor="@color/colorPrimary"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -164,6 +164,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_identity_card"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -197,6 +198,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_date_blue"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -250,53 +252,21 @@
                         android:text="Data Pembiayaan"
                         android:textSize="18dp"
                         android:paddingBottom="12dp"
-                        android:textColor="@color/colorSecondary"/>
+                        android:textColor="@color/colorPrimary"/>
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
+
                         android:paddingRight="10dp"
                         android:paddingLeft="15dp">
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_segmen"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginRight="6dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Produk"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="30dp"/>
-
-                        <TextView
-                            android:id="@+id/tv_segmen"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="{Segmen}"
-                            android:gravity="right"
-                            android:layout_weight="1"
-                            android:textSize="@dimen/font_detail"
-                            android:textColor="@color/colorBlackHeader"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingRight="10dp"
-                        android:visibility="gone"
-                        android:paddingLeft="15dp">
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/ic_product"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -312,13 +282,14 @@
                             android:id="@+id/tv_produk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="{Produk}"
+                            android:text="{Segmen}"
                             android:gravity="right"
                             android:layout_weight="1"
                             android:textSize="@dimen/font_detail"
                             android:textColor="@color/colorBlackHeader"/>
 
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/ll_program"
@@ -332,6 +303,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_programs"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -365,6 +337,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_plafond"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -398,6 +371,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_tenor"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -431,6 +405,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_tenor"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -464,6 +439,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_identity_card"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -491,12 +467,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
+                        android:visibility="gone"
                         android:paddingRight="10dp"
                         android:paddingLeft="15dp">
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_lock_blue"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -510,6 +488,74 @@
 
                         <TextView
                             android:id="@+id/tv_kode_unik"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="{Kode unik}"
+                            android:gravity="right"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/font_detail"
+                            android:textColor="@color/colorBlackHeader"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="15dp">
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_lock_blue"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="6dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Referal"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="30dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_referal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="{Referal}"
+                            android:gravity="right"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/font_detail"
+                            android:textColor="@color/colorBlackHeader"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="15dp">
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_lock_blue"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="6dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kode Referal"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="30dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_kode_referal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="{Kode unik}"
@@ -545,7 +591,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="12dp"
                         android:text="Data Nasabah"
-                        android:textColor="@color/colorSecondary"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18dp" />
 
                     <LinearLayout
@@ -558,6 +604,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_identity_card"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -591,6 +638,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_name"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -625,6 +673,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_birthplace"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -659,6 +708,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_birthdate"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -692,6 +742,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_phone"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -725,6 +776,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_email_blue"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -749,6 +801,40 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="15dp">
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_identity_card"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="6dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NIK Pasangan"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="30dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_nik_pasangan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="{NIK Pasangan}"
+                            android:gravity="right"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/font_detail"
+                            android:textColor="@color/colorBlackHeader"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -759,6 +845,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_typejob"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -794,6 +881,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_salary"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -838,10 +926,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Data Alamat"
+                        android:text="Data Alamat Usaha"
                         android:textSize="18dp"
                         android:paddingBottom="12dp"
-                        android:textColor="@color/colorSecondary"/>
+                        android:textColor="@color/colorPrimary"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -853,6 +941,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_address_blue"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -860,7 +949,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Alamat"
+                            android:text="Alamat Usaha"
                             android:paddingLeft="10dp"
                             android:paddingRight="30dp"/>
 
@@ -886,6 +975,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_district"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -918,6 +1008,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_district"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -950,6 +1041,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_district"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -983,6 +1075,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_city"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -1016,6 +1109,7 @@
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_province"
+                            android:tint="@color/colorPrimary"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="6dp"/>
@@ -1064,6 +1158,6 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <include layout="@layout/disposisi_bottom_sheet"/>
-    <include layout="@layout/loading" />
+    <include android:id="@+id/layout_bottomsheet" layout="@layout/disposisi_bottom_sheet"/>
+    <include android:id="@+id/loading" layout="@layout/loading" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
